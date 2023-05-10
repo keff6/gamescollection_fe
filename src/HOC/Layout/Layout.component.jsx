@@ -5,14 +5,14 @@ import Content from '../Content/Content.component';
 import NavBar from '../../Navigation/NavBar/NavBar.component';
 
 const Layout = ({children}) => (
-  <div>
+  <>
     <NavBar />
-    <Outlet>
-      <Content>
+    <Content>
+      <Outlet>
         {children}
-      </Content>
-    </Outlet> 
-  </div>
+      </Outlet>
+    </Content>
+  </>
 );
 
 Layout.propTypes = {
