@@ -1,7 +1,8 @@
 import { Container } from 'react-bootstrap';
 import { useLoaderData } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import GenresTable from './GenresTable.component';
-// import classes from './Genres.module.css';
+import classes from './Genres.module.css';
 
 const dummyGenres = [
   { id: 1, name: 'RPG' },
@@ -11,11 +12,14 @@ const dummyGenres = [
 ]
 
 const Genres = () => {
-  const genres = useLoaderData();
+  // const genres = useLoaderData();
 
-  console.log(genres)
   return (
-    <Container>
+    <Container className={classes.container}>
+      <header className={classes.header}>
+        <h2>Genres</h2>
+        <Button>Add Genre</Button>
+      </header>
       <GenresTable genres={dummyGenres}/>
     </Container>
   )
