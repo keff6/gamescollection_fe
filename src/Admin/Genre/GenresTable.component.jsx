@@ -30,7 +30,7 @@ const GenresTable = ({ genres, setSelectedGenre, deleteGenre, isLoading }) => {
                     <Button
                       variant="light"
                       size="sm"
-                      onClick={() => deleteGenre(genre.id)}
+                      onClick={() => deleteGenre(genre)}
                     >
                       <Trash />
                     </Button>
@@ -50,6 +50,7 @@ GenresTable.propTypes = {
   genres: proptypes.array,
   isLoading: proptypes.bool,
   setSelectedGenre: proptypes.func,
+  deleteGenre: proptypes.func,
 }
 
 export default GenresTable;

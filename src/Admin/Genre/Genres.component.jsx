@@ -1,26 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Container } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import GenreService from '../../services/GenreService';
+import { AppContext } from '../../Config/Provider';
 import GenresTable from './GenresTable.component';
 import GenreForm from './GenreForm.component';
+import { deleteConfirm } from '../../Common/DeleteAlertModal/DeleteAlertModal';
 import classes from './Genres.module.css';
 
-const dummyGenres = [
-  { id: 1, name: 'RPG' },
-  { id: 2, name: 'Stealth' },
-  { id: 3, name: 'racing' },
-  { id: 4, name: 'platforms' },
-]
+// const dummyGenres = [
+//   { id: 1, name: 'RPG' },
+//   { id: 2, name: 'Stealth' },
+//   { id: 3, name: 'racing' },
+//   { id: 4, name: 'platforms' },
+// ]
 
 const Genres = () => {
+  const [state, setState] = useContext(AppContext);
+
   const [showForm, setShowForm] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState(null);
-  const [genresData, setGenresData] = useState([]);
   const [isLoading, setIsLoading] = useState(false)
 
-  console.log({genresData})
-  console.log({isLoading})
+  
+  console.warn({state})
 
   useEffect(() => {
     getAllGenres();
@@ -34,8 +37,7 @@ const Genres = () => {
     try {
       setIsLoading(true)
       const response = await GenreService.getAll();
-      setGenresData(response.data.genres);
-      // console.log(response.data);
+      setState(currentState => ({ ...currentState, genre: { ...currentState.genre, list: response.data.genres }}))
     }
     catch(e){
       console.log(e)
@@ -45,7 +47,7 @@ const Genres = () => {
     }
   }
 
-  const addNewGenre = async (genreName) => {
+  const handleAddNewGenre = async (genreName) => {
     try {
       setIsLoading(true)
       const response = await GenreService.add({name: genreName});
@@ -59,8 +61,13 @@ const Genres = () => {
     }
   }
 
-  const deleteGenre = async (genreId) => {
-    console.log('deleting '+genreId)
+  const handleDeleteGenre = async (selectedGenre) => {
+    setState(currentState => ({ ...currentState, genre: { ...currentState.genre, selected: selectedGenre }}))
+    if (await deleteConfirm()) {
+      console.log('Aceitado')
+    } else {
+      console.error('denegado!!')
+    }
   }
 
   return (
@@ -69,7 +76,7 @@ const Genres = () => {
         show={showForm}
         onHide={() => setShowForm(false)}
         genre={selectedGenre}
-        addNewGenre={addNewGenre}
+        addNewGenre={handleAddNewGenre}
       />
       <Container className={classes.container}>
         <header className={classes.header}>
@@ -77,10 +84,10 @@ const Genres = () => {
           <Button onClick={openFormModal}>Add Genre</Button>
         </header>
         <GenresTable
-          genres={genresData}
+          genres={state.genre.list}
           setSelectedGenre={setSelectedGenre}
           isLoading={isLoading}
-          deleteGenre={deleteGenre}
+          deleteGenre={handleDeleteGenre}
         />
       </Container>
     </>
