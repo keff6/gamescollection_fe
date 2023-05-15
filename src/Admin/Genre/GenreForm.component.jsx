@@ -1,17 +1,19 @@
 import { useState, useEffect, useContext } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
+import { Button, Modal, Form} from 'react-bootstrap';
 import proptypes from 'prop-types';
 import { AppContext } from '../../Config/Provider';
 
-const GenreForm = ({ onHide, show, addNewGenre, saveUpdatedChanges, isEdit, ...rest}) => {
+const GenreForm = ({
+  addNewGenre,
+  isEdit,
+  onHide,
+  saveUpdatedChanges,
+  show,
+  ...rest
+}) => {
   const [{genre: {selected}}, setState] = useContext(AppContext);
   const [genreName, setGenreName] = useState('');
   const [validated, setValidated] = useState(false);
-
-  // console.log("SEDECTED", state)
-  // console.log("isEdit", isEdit)
 
   useEffect(() => () => {
       setGenreName('')
@@ -19,9 +21,7 @@ const GenreForm = ({ onHide, show, addNewGenre, saveUpdatedChanges, isEdit, ...r
   },[show])
 
   useEffect(() => {
-    if(isEdit) {
-      setGenreName(selected.name)
-    }
+    if(isEdit) setGenreName(selected.name)
   },[isEdit])
 
   const handleGenreNameChange = (e) => {
@@ -47,15 +47,15 @@ const GenreForm = ({ onHide, show, addNewGenre, saveUpdatedChanges, isEdit, ...r
   }
 
   const closeForm = () => {
-    setState(currentState => ({ ...currentState, genre: { ...currentState.genre, selected: null }}))
     onHide()
+    setState(currentState => ({ ...currentState, genre: { ...currentState.genre, selected: null }}))
   }
 
   return (
     <Modal
       {...rest}
       show={show}
-      size="lg"
+      size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
@@ -90,11 +90,11 @@ const GenreForm = ({ onHide, show, addNewGenre, saveUpdatedChanges, isEdit, ...r
 }
 
 GenreForm.propTypes = {
-  onHide: proptypes.func,
   addNewGenre: proptypes.func,
-  show: proptypes.bool,
   isEdit: proptypes.bool,
-  saveUpdatedChanges: proptypes.func
+  onHide: proptypes.func,
+  saveUpdatedChanges: proptypes.func,
+  show: proptypes.bool,
 }
 
 export default GenreForm

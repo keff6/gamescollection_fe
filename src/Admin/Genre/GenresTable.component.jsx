@@ -3,10 +3,10 @@ import { Table, Button } from 'react-bootstrap';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
 import classes from './Genres.module.css';
 
-const GenresTable = ({ genres, deleteGenre, editGenre, isLoading }) => {
+const GenresTable = ({ genres, deleteGenre, editGenre }) => {
   return (
     <>
-      {(!isLoading && genres.length > 0) &&
+      {(genres.length > 0) &&
       <Table>
         <thead>
           <tr>
@@ -41,16 +41,15 @@ const GenresTable = ({ genres, deleteGenre, editGenre, isLoading }) => {
           )}
         </tbody>
       </Table>}
-      {(!isLoading && genres.length === 0) && <h3>Start adding genres</h3>}
+      {(genres.length === 0) && <h3>Start adding genres</h3>}
     </>
   )
 }
 
 GenresTable.propTypes = {
-  genres: proptypes.array,
-  isLoading: proptypes.bool,
   deleteGenre: proptypes.func,
   editGenre: proptypes.func,
+  genres: proptypes.array,
 }
 
 export default GenresTable;

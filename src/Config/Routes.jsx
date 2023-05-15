@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../Home/Dashboard.component";
 import Manufacturers from "../Admin/Manufacturer/Manufacturers.component";
-import Genres from "../Admin/Genre/Genres.component";
+import GenresContainer from "../Admin/Genre/Genres.container";
 import Layout from '../HOC/Layout/Layout.component';
 import ErrorBoundaryLayout from "../HOC/Layout/ErrorBoundaryLayout";
 
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/genres",
-            element: <Genres />,
+            element: <GenresContainer />,
           },
         ]
       }
