@@ -4,15 +4,16 @@ import proptypes from 'prop-types';
 import { confirmable, createConfirmation } from "react-confirm";
 
 // eslint-disable-next-line react-refresh/only-export-components
-const DeleteAlertModal = ({ show, proceed, ...rest}) => {
+const DeleteAlertModal = ({
+    show,
+    proceed = () => null,
+  }) => {
   return (
       <Modal
-        {...rest}
         show={show}
         size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        proceed
       >
         <Modal.Header closeButton>
           <Modal.Title>Confirm delete</Modal.Title>

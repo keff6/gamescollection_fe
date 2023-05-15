@@ -3,7 +3,7 @@ import { Table, Button } from 'react-bootstrap';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
 import classes from './Genres.module.css';
 
-const GenresTable = ({ genres, setSelectedGenre, deleteGenre, isLoading }) => {
+const GenresTable = ({ genres, deleteGenre, editGenre, isLoading }) => {
   return (
     <>
       {(!isLoading && genres.length > 0) &&
@@ -23,7 +23,7 @@ const GenresTable = ({ genres, setSelectedGenre, deleteGenre, isLoading }) => {
                     <Button
                       variant="light"
                       size="sm"
-                      onClick={() => setSelectedGenre(genre)}
+                      onClick={() => editGenre(genre)}
                     >
                       <PencilSquare />
                     </Button>
@@ -49,8 +49,8 @@ const GenresTable = ({ genres, setSelectedGenre, deleteGenre, isLoading }) => {
 GenresTable.propTypes = {
   genres: proptypes.array,
   isLoading: proptypes.bool,
-  setSelectedGenre: proptypes.func,
   deleteGenre: proptypes.func,
+  editGenre: proptypes.func,
 }
 
 export default GenresTable;

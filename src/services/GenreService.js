@@ -8,9 +8,19 @@ const add = data => {
   return axios.post("/genres/add", data);
 };
 
+const remove = id => {
+  return axios.delete(`/genres/remove/${id}`);
+};
+
+const update = (id, data) => {
+  return axios.put(`/genres/edit/${id}`, data);
+};
+
 const GenreService = {
   getAll,
-  add
+  add,
+  remove,
+  update
 };
 
 export default GenreService;

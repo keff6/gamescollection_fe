@@ -17,9 +17,9 @@ import classes from './Genres.module.css';
 
 const Genres = () => {
   const [state, setState] = useContext(AppContext);
-
   const [showForm, setShowForm] = useState(false);
-  const [selectedGenre, setSelectedGenre] = useState(null);
+  const [isEdit, setIsEdit] = useState(false);
+  // const [selectedGenre, setSelectedGenre] = useState(null);
   const [isLoading, setIsLoading] = useState(false)
 
   
@@ -64,19 +64,65 @@ const Genres = () => {
   const handleDeleteGenre = async (selectedGenre) => {
     setState(currentState => ({ ...currentState, genre: { ...currentState.genre, selected: selectedGenre }}))
     if (await deleteConfirm()) {
-      console.log('Aceitado')
-    } else {
-      console.error('denegado!!')
+      try {
+        setIsLoading(true)
+        const response = await GenreService.remove(selectedGenre.id);
+        console.log(response);
+      }
+      catch(e){
+        console.log(e)
+      }
+      finally {
+        getAllGenres()
+      }
     }
+  }
+
+  const handleEditGenre = (selectedGenre) => {
+    console.log(selectedGenre)
+    setState(currentState => ({ ...currentState, genre: { ...currentState.genre, selected: selectedGenre }}))
+    setIsEdit(true)
+    setShowForm(true)
+      // try {
+      //   setIsLoading(true)
+      //   const response = await GenreService.remove(selectedGenre.id);
+      //   console.log(response);
+      // }
+      // catch(e){
+      //   console.log(e)
+      // }
+      // finally {
+      //   getAllGenres()
+      // }
+  }
+
+  const saveUpdatedChanges = async (genreId, updatedName) => {
+    try {
+        setIsLoading(true)
+        const response = await GenreService.update(genreId, {updatedName});
+        console.log(response);
+      }
+      catch(e){
+        console.log(e)
+      }
+      finally {
+        getAllGenres()
+      }
+  }
+
+  const handleCloseFormModal = () => {
+    setIsEdit(false)
+    setShowForm(false)
   }
 
   return (
     <>
       <GenreForm
         show={showForm}
-        onHide={() => setShowForm(false)}
-        genre={selectedGenre}
+        onHide={handleCloseFormModal}
+        isEdit={isEdit}
         addNewGenre={handleAddNewGenre}
+        saveUpdatedChanges={saveUpdatedChanges}
       />
       <Container className={classes.container}>
         <header className={classes.header}>
@@ -85,9 +131,9 @@ const Genres = () => {
         </header>
         <GenresTable
           genres={state.genre.list}
-          setSelectedGenre={setSelectedGenre}
           isLoading={isLoading}
           deleteGenre={handleDeleteGenre}
+          editGenre={handleEditGenre}
         />
       </Container>
     </>

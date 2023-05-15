@@ -1,17 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import proptypes from 'prop-types';
+import { AppContext } from '../../Config/Provider';
 
-const GenreForm = ({ genre, onHide, show, addNewGenre, ...rest}) => {
+const GenreForm = ({ onHide, show, addNewGenre, saveUpdatedChanges, isEdit, ...rest}) => {
+  const [{genre: {selected}}, setState] = useContext(AppContext);
   const [genreName, setGenreName] = useState('');
   const [validated, setValidated] = useState(false);
 
+  // console.log("SEDECTED", state)
+  // console.log("isEdit", isEdit)
+
   useEffect(() => () => {
-    setGenreName('')
-    setValidated(false)
+      setGenreName('')
+      setValidated(false)
   },[show])
+
+  useEffect(() => {
+    if(isEdit) {
+      setGenreName(selected.name)
+    }
+  },[isEdit])
 
   const handleGenreNameChange = (e) => {
     setGenreName(e.target.value)
@@ -29,8 +40,14 @@ const GenreForm = ({ genre, onHide, show, addNewGenre, ...rest}) => {
     const form = e.currentTarget;
 
     if(validateForm(form)) {
-      await addNewGenre(genreName)
+      if(isEdit) await saveUpdatedChanges(selected.id, genreName)
+      else await addNewGenre(genreName)
     }
+    closeForm()
+  }
+
+  const closeForm = () => {
+    setState(currentState => ({ ...currentState, genre: { ...currentState.genre, selected: null }}))
     onHide()
   }
 
@@ -44,7 +61,7 @@ const GenreForm = ({ genre, onHide, show, addNewGenre, ...rest}) => {
     >
       <Modal.Header closeButton={false}>
         <Modal.Title id="contained-modal-title-vcenter">
-          {genre ? 'Edit' : 'Add'} Genre
+          {isEdit ? 'Edit' : 'Add'} Genre
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -65,7 +82,7 @@ const GenreForm = ({ genre, onHide, show, addNewGenre, ...rest}) => {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>Cancel</Button>
+        <Button variant="secondary" onClick={closeForm}>Cancel</Button>
         <Button variant="primary" form="genreForm" type="submit">Save changes</Button>
       </Modal.Footer>
     </Modal>
@@ -75,8 +92,9 @@ const GenreForm = ({ genre, onHide, show, addNewGenre, ...rest}) => {
 GenreForm.propTypes = {
   onHide: proptypes.func,
   addNewGenre: proptypes.func,
-  genre: proptypes.object,
   show: proptypes.bool,
+  isEdit: proptypes.bool,
+  saveUpdatedChanges: proptypes.func
 }
 
 export default GenreForm
