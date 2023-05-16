@@ -1,12 +1,10 @@
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { Button, Modal } from 'react-bootstrap';
 import proptypes from 'prop-types';
-import { confirmable, createConfirmation } from "react-confirm";
 
-// eslint-disable-next-line react-refresh/only-export-components
 const DeleteAlertModal = ({
     show,
-    proceed = () => null,
+    onConfirm,
+    onCancel,
   }) => {
   return (
       <Modal
@@ -24,22 +22,17 @@ const DeleteAlertModal = ({
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => proceed(false)}>Cancel</Button>
-          <Button variant="danger" onClick={() => proceed(true)}>Delete</Button>
+          <Button variant="secondary" onClick={onCancel}>Cancel</Button>
+          <Button variant="danger" onClick={onConfirm}>Delete</Button>
         </Modal.Footer>
       </Modal>
   );
 }
 
 DeleteAlertModal.propTypes = {
+  onCancel: proptypes.func,
+  onConfirm: proptypes.func,
   show: proptypes.bool,
-  proceed: proptypes.func,
 }
 
-export function deleteConfirm(
-  options = {}
-) {
-  return createConfirmation(confirmable(DeleteAlertModal))({
-    ...options
-  });
-}
+export default DeleteAlertModal;

@@ -1,0 +1,4 @@
+export const actionTypes = {
+  SET_SELECTED_GENRE: "SET_SELECTED_GENRE",
+  SET_GENRES_LIST: "SET_GENRES_LIST"
+};

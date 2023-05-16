@@ -1,15 +1,15 @@
 import { RouterProvider } from "react-router-dom";
 import routes from './Config/Routes';
-import Provider from './Config/Provider';
+import { AppStateProvider } from './store/provider';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 
 function App() {
 
   return (
-    <Provider>
+    <AppStateProvider>
       <RouterProvider router={routes} />
-    </Provider>
+    </AppStateProvider>
   )
 }
 
