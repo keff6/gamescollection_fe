@@ -1,0 +1,14 @@
+.container {
+  padding-top: 1rem;
+}
+
+.header {
+  display:flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.table-buttons-container {
+  text-align: right;
+}
