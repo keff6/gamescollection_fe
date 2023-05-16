@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Button, Modal, Form} from 'react-bootstrap';
 import proptypes from 'prop-types';
-import { AppContext } from '../../Config/Provider';
+import { AppState } from "../../store/state";
 
 const GenreForm = ({
   addNewGenre,
@@ -11,7 +11,7 @@ const GenreForm = ({
   show,
   ...rest
 }) => {
-  const [{genre: {selected}}, setState] = useContext(AppContext);
+  const { genre: {selected}, setSelectedGenre } = useContext(AppState);
   const [genreName, setGenreName] = useState('');
   const [validated, setValidated] = useState(false);
 
@@ -47,8 +47,8 @@ const GenreForm = ({
   }
 
   const closeForm = () => {
+    setSelectedGenre(null)
     onHide()
-    setState(currentState => ({ ...currentState, genre: { ...currentState.genre, selected: null }}))
   }
 
   return (

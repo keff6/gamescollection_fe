@@ -1,11 +1,10 @@
 import { useState, useContext } from 'react';
-import { Container } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 import proptypes from 'prop-types';
-import { AppContext } from '../../Config/Provider';
+import { AppState } from "../../store/state";
 import GenresTable from './GenresTable.component';
 import GenreForm from './GenreForm.component';
-import { deleteConfirm } from '../../Common/DeleteAlertModal/DeleteAlertModal';
+import DeleteAlertModal from '../../Common/DeleteAlertModal/DeleteAlertModal';
 import classes from './Genres.module.css';
 
 const Genres = ({
@@ -13,8 +12,9 @@ const Genres = ({
   deleteGenre,
   updateGenre,
 }) => {
-  const [state, setState] = useContext(AppContext);
+  const { genre, setSelectedGenre } = useContext(AppState);
   const [showForm, setShowForm] = useState(false);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
  
   const handleAddNewGenre = async (genreName) => {
@@ -22,14 +22,12 @@ const Genres = ({
   }
 
   const handleDeleteGenre = async (selectedGenre) => {
-    setState(currentState => ({ ...currentState, genre: { ...currentState.genre, selected: selectedGenre }}))
-    if (await deleteConfirm()) {
-      deleteGenre(selectedGenre)
-    }
+    setSelectedGenre({...selectedGenre})
+    setShowConfirmDelete(true)
   }
 
   const handleEditGenre = (selectedGenre) => {
-    setState(currentState => ({ ...currentState, genre: { ...currentState.genre, selected: selectedGenre }}))
+    setSelectedGenre({...selectedGenre})
     setIsEdit(true)
     setShowForm(true)
   }
@@ -41,6 +39,17 @@ const Genres = ({
   const handleCloseFormModal = () => {
     setIsEdit(false)
     setShowForm(false)
+  }
+
+  const handleCancelDelete = () => {
+    setSelectedGenre(null)
+    setShowConfirmDelete(false)
+  }
+
+  const handleConfirmDelete = () => {
+    deleteGenre(genre.selected)
+    setSelectedGenre(null)
+    setShowConfirmDelete(false)
   }
 
   return (
@@ -58,11 +67,16 @@ const Genres = ({
           <Button onClick={() => setShowForm(true)}>Add Genre</Button>
         </header>
         <GenresTable
-          genres={state.genre.list}
+          genres={genre.list}
           deleteGenre={handleDeleteGenre}
           editGenre={handleEditGenre}
         />
       </Container>
+      <DeleteAlertModal
+        show={showConfirmDelete}
+        onCancel={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
+      />
     </>
   )
 }
