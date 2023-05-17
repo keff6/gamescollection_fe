@@ -18,6 +18,24 @@ export const reducer = (state, action) => {
           list: action.payload.genres
         }
       };
+    case actions.OPEN_SNACKBAR:
+      return {
+        ...state,
+        snackbar: {
+          message: action.payload.message,
+          type: action.payload.type,
+          show: true
+        }
+      };
+    case actions.CLOSE_SNACKBAR:
+      return {
+        ...state,
+        snackbar: {
+          message: '',
+          type: '',
+          show: false
+        }
+      };
     default:
       return state;
   }

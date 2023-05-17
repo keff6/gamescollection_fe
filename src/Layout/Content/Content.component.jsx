@@ -8,10 +8,8 @@ const Content = ({children}) => {
   return (
       <main >
         <Container>
-          <Row>
-            <Col lg={2} />
+          <Row className="d-flex justify-content-center">
             <Col lg={8}>{children}</Col>
-            <Col lg={2} />
           </Row>
         </Container>
       </main>

@@ -8,6 +8,11 @@ const APP_STATE = {
   genre: {
     list: [],
     selected: null
+  },
+  snackbar: {
+    message: '',
+    type: '',
+    show: false,
   }
 };
 
@@ -29,6 +34,17 @@ export const AppStateProvider = ({ children }) => {
           payload: genresList
         });
       },
+      openSnackbar: ({message, type}) => {
+        dispatch({
+          type: actions.OPEN_SNACKBAR,
+          payload: { message, type }
+        })
+      },
+      closeSnackbar: () => {
+        dispatch({
+          type: actions.CLOSE_SNACKBAR,
+        })
+      }
     }),
     [state, dispatch]
   );
