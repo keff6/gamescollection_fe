@@ -3,7 +3,6 @@ import { actionTypes as actions } from "./actions";
 export const reducer = (state, action) => {
   switch (action.type) {
     case actions.SET_SELECTED_GENRE:
-      console.log(action)
       return {
         ...state,
         genre: {

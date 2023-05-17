@@ -21,14 +21,14 @@ const GenresTable = ({ genres, deleteGenre, editGenre }) => {
                 <td>
                   <div className={classes.tableButtonsContainer}>
                     <Button
-                      variant="light"
+                      variant="outline-dark"
                       size="sm"
                       onClick={() => editGenre(genre)}
                     >
                       <PencilSquare />
                     </Button>
                     <Button
-                      variant="light"
+                      variant="outline-danger"
                       size="sm"
                       onClick={() => deleteGenre(genre)}
                     >
