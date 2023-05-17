@@ -1,8 +1,7 @@
-// import * as React from 'react';
 import proptypes from 'prop-types';
 import { Outlet } from 'react-router-dom'
-import Content from '../Content/Content.component';
-import NavBar from '../../Navigation/NavBar/NavBar.component';
+import Content from './Content/Content.component';
+import NavBar from '../Navigation/NavBar/NavBar.component';
 
 const Layout = ({children}) => (
   <>

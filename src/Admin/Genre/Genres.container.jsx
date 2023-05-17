@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { AppState } from "../../store/state";
+import { AppState } from "../../Config/store/state";
 import GenreService from '../../services/GenreService';
 import Genres from "./Genres.component";
 import Spinner from "../../Common/Spinner/Spinner.component";
