@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Button, Modal, Form} from 'react-bootstrap';
 import proptypes from 'prop-types';
-import { AppState } from "../../store/state";
+import { AppState } from "../../Config/store/state";
 
 const GenreForm = ({
   addNewGenre,
@@ -14,6 +14,7 @@ const GenreForm = ({
   const { genre: {selected}, setSelectedGenre } = useContext(AppState);
   const [genreName, setGenreName] = useState('');
   const [validated, setValidated] = useState(false);
+  const hasValidChanges = genreName.length > 0 && (selected ? genreName !== selected.name : true);
 
   useEffect(() => () => {
       setGenreName('')
@@ -83,7 +84,7 @@ const GenreForm = ({
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={closeForm}>Cancel</Button>
-        <Button variant="primary" form="genreForm" type="submit">Save changes</Button>
+        <Button variant="primary" form="genreForm" type="submit" disabled={!hasValidChanges}>Save changes</Button>
       </Modal.Footer>
     </Modal>
   );

@@ -12,3 +12,7 @@
 .table-buttons-container {
   text-align: right;
 }
+
+.table-buttons-container button:first-of-type {
+  margin-right: 5px;
+}

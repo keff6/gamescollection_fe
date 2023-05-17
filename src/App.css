@@ -2,6 +2,10 @@ html, body, #app, #app>div, #root, .container, .row {
   height: 100%
 }
 
+body {
+  padding-top: 56px;
+}
+
 main {
   height: calc(100% - 56px)
 }

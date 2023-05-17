@@ -1,11 +1,12 @@
 import { useEffect, useState, useContext } from "react";
-import { AppState } from "../../store/state";
+import { AppState } from "../../Config/store/state";
 import GenreService from '../../services/GenreService';
 import Genres from "./Genres.component";
+import { OPERATION_OUTCOME } from "../../utils/constants";
 import Spinner from "../../Common/Spinner/Spinner.component";
 
 const GenresContainer = () => {
-  const { genre, setGenresList } = useContext(AppState);
+  const { genre, setGenresList, openSnackbar } = useContext(AppState);
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
@@ -20,6 +21,7 @@ const GenresContainer = () => {
     }
     catch(e){
       console.log(e)
+      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
       setIsLoading(false)
@@ -30,10 +32,11 @@ const GenresContainer = () => {
     try {
       setIsLoading(true)
       const response = await GenreService.add({name: genreName});
-      console.log(response);
+      openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
     }
     catch(e){
       console.log(e)
+      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
       getAllGenres()
@@ -44,10 +47,11 @@ const GenresContainer = () => {
     try {
       setIsLoading(true)
       const response = await GenreService.remove(selectedGenre.id);
-      console.log(response);
+      openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
     }
     catch(e){
       console.log(e)
+      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
       getAllGenres()
@@ -58,10 +62,11 @@ const GenresContainer = () => {
     try {
         setIsLoading(true)
         const response = await GenreService.update(genreId, {updatedName});
-        console.log(response);
+        openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
       }
       catch(e){
         console.log(e)
+        openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
       }
       finally {
         getAllGenres()
