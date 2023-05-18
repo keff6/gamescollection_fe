@@ -18,6 +18,22 @@ export const reducer = (state, action) => {
           list: action.payload.genres
         }
       };
+    case actions.SET_SELECTED_BRAND:
+      return {
+        ...state,
+        brand: {
+          ...state.brand,
+          selected: action.payload.selectedBrand
+        }
+      };
+    case actions.SET_BRANDS_LIST:
+      return {
+        ...state,
+        brand: {
+          ...state.brand,
+          list: action.payload.brands
+        }
+      };
     case actions.OPEN_SNACKBAR:
       return {
         ...state,

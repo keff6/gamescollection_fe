@@ -14,8 +14,8 @@ function NavBar() {
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <NavDropdown title="Admin" id="collasible-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/manufacturers">Manufacturer</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/genres">Genre</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/brands">Brands</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/genres">Genres</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
