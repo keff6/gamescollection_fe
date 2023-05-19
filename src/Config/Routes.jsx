@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../Home/Dashboard.component";
-import Manufacturers from "../Admin/Manufacturer/Manufacturers.component";
+import BrandsContainer from "../Admin/Brand/Brands.container";
 import GenresContainer from "../Admin/Genre/Genres.container";
 import Layout from '../Layout/Layout.component';
 import ErrorBoundaryLayout from "../Layout/ErrorBoundaryLayout";
@@ -19,8 +19,8 @@ const router = createBrowserRouter([
             element: <Dashboard />,
           },
           {
-            path: "/manufacturers",
-            element: <Manufacturers />,
+            path: "/brands",
+            element: <BrandsContainer />,
           },
           {
             path: "/genres",

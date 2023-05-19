@@ -9,6 +9,10 @@ const APP_STATE = {
     list: [],
     selected: null
   },
+  brand: {
+    list: [],
+    selected: null
+  },
   snackbar: {
     message: '',
     type: '',
@@ -32,6 +36,18 @@ export const AppStateProvider = ({ children }) => {
         dispatch({
           type: actions.SET_GENRES_LIST,
           payload: genresList
+        });
+      },
+      setSelectedBrand: (selectedBrand) => {
+        dispatch({
+          type: actions.SET_SELECTED_BRAND,
+          payload: {selectedBrand}
+        });
+      },
+      setBrandsList: (brandsList) => {
+        dispatch({
+          type: actions.SET_BRANDS_LIST,
+          payload: brandsList
         });
       },
       openSnackbar: ({message, type}) => {

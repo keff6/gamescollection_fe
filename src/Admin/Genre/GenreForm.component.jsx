@@ -43,8 +43,8 @@ const GenreForm = ({
     if(validateForm(form)) {
       if(isEdit) await saveUpdatedChanges(selected.id, genreName)
       else await addNewGenre(genreName)
+      closeForm()
     }
-    closeForm()
   }
 
   const closeForm = () => {
