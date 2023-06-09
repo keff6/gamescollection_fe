@@ -1,0 +1,18 @@
+.container {
+  padding-top: 1rem;
+}
+
+.mainDashboardContainer {
+  height: auto;
+}
+
+.header {
+  display:flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.custom-col {
+  margin-bottom: 16px;
+}

@@ -4,6 +4,7 @@ import BrandsContainer from "../Admin/Brand/Brands.container";
 import GenresContainer from "../Admin/Genre/Genres.container";
 import Layout from '../Layout/Layout.component';
 import ErrorBoundaryLayout from "../Layout/ErrorBoundaryLayout";
+import Brands from "../Brands/Brands.container";
 
 
 const router = createBrowserRouter([
@@ -17,6 +18,12 @@ const router = createBrowserRouter([
           {
             path: "/",
             element: <Dashboard />,
+            children: [
+              {
+                path: "/",
+                element: <Brands />,
+              }
+            ]
           },
           {
             path: "/brands",
