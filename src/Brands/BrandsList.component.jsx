@@ -9,7 +9,7 @@ const BrandsList = ({brands}) => (
         <Row className={`justify-content-md-center`} >
           {brands.map(b => (
             <Col key={b.id} lg={6} md={12} className={classes.customCol}>
-              <BrandCard brandName={b.name} brandLogoUrl={b.logourl} />
+              <BrandCard brandData={b} />
             </Col>
           ))}
         </Row>}

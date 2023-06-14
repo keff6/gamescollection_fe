@@ -34,6 +34,22 @@ export const reducer = (state, action) => {
           list: action.payload.brands
         }
       };
+    case actions.SET_SELECTED_CONSOLE:
+      return {
+        ...state,
+        console: {
+          ...state.console,
+          selected: action.payload.selectedConsole
+        }
+      };
+    case actions.SET_CONSOLES_LIST:
+      return {
+        ...state,
+        console: {
+          ...state.console,
+          list: action.payload.consoles
+        }
+      };
     case actions.OPEN_SNACKBAR:
       return {
         ...state,

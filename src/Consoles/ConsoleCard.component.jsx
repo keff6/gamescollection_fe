@@ -4,29 +4,29 @@ import { ArrowRight } from "react-bootstrap-icons";
 import { useNavigate } from 'react-router-dom';
 import proptypes from 'prop-types';
 import { AppState } from "../Config/store/state";
-import classes from './Brands.module.css';
+import classes from './Consoles.module.css';
 
 
-const BrandCard = ({brandData}) => {
-  const { setSelectedBrand } = useContext(AppState);
+const ConsoleCard = ({consoleData}) => {
+  const { setSelectedConsole } = useContext(AppState);
   const navigate = useNavigate();
 
-  const navigateToConsoleHandler = () => {
-    setSelectedBrand({...brandData})
-    navigate("/consoles")
+  const navigateToGamesHandler = () => {
+    setSelectedConsole({...consoleData})
+    navigate("/games")
   }
 
   return (
     <Card className={classes.card}>
       <Card.Body className={classes.cardBody}>
         <Card.Title>
-          {brandData.logoURL ?
-          <img className={classes.logoImg} src={brandData.logoURL} alt={brandData.name} />
-          : <span className={classes.brandText}>{brandData.name}</span>}
+          {consoleData.logoURL ?
+          <img className={classes.logoImg} src={consoleData.logoURL} alt={consoleData.name} />
+          : <span className={classes.brandText}>{consoleData.name}</span>}
         </Card.Title>
         <Button
           variant="primary"
-          onClick={navigateToConsoleHandler}
+          onClick={navigateToGamesHandler}
         >
           Go <ArrowRight />
         </Button>
@@ -35,8 +35,8 @@ const BrandCard = ({brandData}) => {
   ) 
 }
 
-BrandCard.propTypes = {
-  brandData: proptypes.object,
+ConsoleCard.propTypes = {
+  consoleData: proptypes.object,
 }
 
-export default BrandCard;
+export default ConsoleCard;
