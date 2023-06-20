@@ -25,7 +25,7 @@ const router = createBrowserRouter([
                 element: <Brands />,
               },
               {
-                path: "/consoles",
+                path: "/:brandId/consoles",
                 element: <Consoles />
               }
             ]

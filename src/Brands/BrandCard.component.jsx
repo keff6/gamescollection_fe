@@ -13,7 +13,7 @@ const BrandCard = ({brandData}) => {
 
   const navigateToConsoleHandler = () => {
     setSelectedBrand({...brandData})
-    navigate("/consoles")
+    navigate(`/${brandData.id}/consoles`)
   }
 
   return (
