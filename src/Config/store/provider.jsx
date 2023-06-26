@@ -13,6 +13,10 @@ const APP_STATE = {
     list: [],
     selected: null
   },
+  console: {
+    list: [],
+    selected: null,
+  },
   snackbar: {
     message: '',
     type: '',
@@ -48,6 +52,18 @@ export const AppStateProvider = ({ children }) => {
         dispatch({
           type: actions.SET_BRANDS_LIST,
           payload: brandsList
+        });
+      },
+      setSelectedConsole: (selectedConsole) => {
+        dispatch({
+          type: actions.SET_SELECTED_CONSOLE,
+          payload: {selectedConsole}
+        });
+      },
+      setConsolesList: (consolesList) => {
+        dispatch({
+          type: actions.SET_CONSOLES_LIST,
+          payload: consolesList
         });
       },
       openSnackbar: ({message, type}) => {

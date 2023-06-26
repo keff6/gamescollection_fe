@@ -5,6 +5,7 @@ import GenresContainer from "../Admin/Genre/Genres.container";
 import Layout from '../Layout/Layout.component';
 import ErrorBoundaryLayout from "../Layout/ErrorBoundaryLayout";
 import Brands from "../Brands/Brands.container";
+import Consoles from "../Consoles/Consoles.container";
 
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
               {
                 path: "/",
                 element: <Brands />,
+              },
+              {
+                path: "/:brandId/consoles",
+                element: <Consoles />
               }
             ]
           },
