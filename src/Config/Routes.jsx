@@ -4,8 +4,10 @@ import BrandsContainer from "../Admin/Brand/Brands.container";
 import GenresContainer from "../Admin/Genre/Genres.container";
 import Layout from '../Layout/Layout.component';
 import ErrorBoundaryLayout from "../Layout/ErrorBoundaryLayout";
+import { PageNotFound } from "../Common/ErrorPage";
 import Brands from "../Brands/Brands.container";
 import Consoles from "../Consoles/Consoles.container";
+import Games from "../Games/Games.component";
 
 
 const router = createBrowserRouter([
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
               {
                 path: "/:brandId/consoles",
                 element: <Consoles />
+              },
+              {
+                path: "/:consoleId/games",
+                element: <Games />
               }
             ]
           },
@@ -38,6 +44,11 @@ const router = createBrowserRouter([
             path: "/genres",
             element: <GenresContainer />,
           },
+          {
+            path: "*",
+            element: <PageNotFound />,
+          },
+    
         ]
       }
     ]
