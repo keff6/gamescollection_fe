@@ -1,8 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { AppState } from "../Config/store/state";
-import ConsoleService from '../services/ConsoleService';
-import BrandService from "../services/BrandService";
+import { ConsoleService, BrandService } from '../services';
 import Consoles from "./Consoles.component";
 import { OPERATION_OUTCOME } from "../utils/constants";
 import Spinner from "../Common/Spinner/Spinner.component";
@@ -19,10 +18,10 @@ const ConsolesContainer = () => {
   const getConsolesByBrand = async () => {
     try {
       setIsLoading(true)
-      const response = await ConsoleService.getByBrand(brandId);
+      const consolesResponse = await ConsoleService.getByBrand(brandId);
       const brandsResponse = await BrandService.getAll();
-      setBrandsList(brandsResponse.data)
-      setConsolesList(response.data)
+      setConsolesList(consolesResponse.data || []);
+      setBrandsList(brandsResponse.data || []);
     }
     catch(e){
       console.log(e)

@@ -4,7 +4,7 @@ import proptypes from 'prop-types';
 import { AppState } from "../../Config/store/state";
 import BrandsTable from './BrandsTable.component';
 import BrandForm from './BrandForm.component';
-import DeleteAlertModal from '../../Common/DeleteAlertModal/DeleteAlertModal';
+import DeleteAlertModal from '../../Common/DeleteAlertModal/DeleteAlertModal.component';
 import classes from './Brands.module.css';
 
 const Brands = ({
