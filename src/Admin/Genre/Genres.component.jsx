@@ -4,7 +4,7 @@ import proptypes from 'prop-types';
 import { AppState } from "../../Config/store/state";
 import GenresTable from './GenresTable.component';
 import GenreForm from './GenreForm.component';
-import DeleteAlertModal from '../../Common/DeleteAlertModal/DeleteAlertModal';
+import DeleteAlertModal from '../../Common/DeleteAlertModal/DeleteAlertModal.component';
 import classes from './Genres.module.css';
 
 const Genres = ({

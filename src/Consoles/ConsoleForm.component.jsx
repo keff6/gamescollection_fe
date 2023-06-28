@@ -24,7 +24,6 @@ const ConsoleForm = ({
   const { console: {selected}, setSelectedConsole, brand} = useContext(AppState);
   const [consoleObj, setConsoleObj] = useState(CONSOLE_DEFAULT);
   const [validated, setValidated] = useState(false);
-  // const hasValidChanges = consoleObj.name.length > 0 && (selected ? consoleObj.name.length !== selected.name : true);
 
   useEffect(() => () => {
     setConsoleObj(CONSOLE_DEFAULT)

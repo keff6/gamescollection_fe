@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { AppState } from "../../Config/store/state";
-import GenreService from '../../services/GenreService';
+import { GenreService } from '../../services';
 import Genres from "./Genres.component";
 import { OPERATION_OUTCOME } from "../../utils/constants";
 import Spinner from "../../Common/Spinner/Spinner.component";

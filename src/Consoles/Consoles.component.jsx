@@ -1,12 +1,16 @@
 import { useState, useContext } from 'react';
-import { Breadcrumb, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
 import { AppState } from "../Config/store/state";
 import ConsolesList from "./ConsolesList.component";
-import DeleteAlertModal from "../Common/DeleteAlertModal/DeleteAlertModal"
+import { DeleteAlertModal,Breadcrumb } from "../Common"
 import ConsoleForm from './ConsoleForm.component';
 import classes from './Consoles.module.css';
 
+const NavigationItems = [
+  { text: 'Brands', href:"/" },
+  { text: 'Consoles', href:"id:/consoles", active: true}
+];
 
 const Consoles = ({
   addConsole,
@@ -55,14 +59,9 @@ const Consoles = ({
 
   return (
     <>
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Brands</Breadcrumb.Item>
-        <Breadcrumb.Item active href="/consoles" >
-          Consoles
-        </Breadcrumb.Item>
-      </Breadcrumb>
+      <Breadcrumb items={NavigationItems} />
       <div>
-      <header className={classes.header}>
+        <header className={classes.header}>
           <h2>Consoles</h2>
           <Button onClick={() => setShowForm(true)}>Add Console</Button>
         </header>

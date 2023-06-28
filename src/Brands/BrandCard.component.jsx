@@ -6,7 +6,6 @@ import proptypes from 'prop-types';
 import { AppState } from "../Config/store/state";
 import classes from './Brands.module.css';
 
-
 const BrandCard = ({brandData}) => {
   const { setSelectedBrand } = useContext(AppState);
   const navigate = useNavigate();

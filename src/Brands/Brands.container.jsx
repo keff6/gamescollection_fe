@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { AppState } from "../Config/store/state";
-import BrandService from '../services/BrandService';
+import { BrandService } from '../services';
 import Brands from "./Brands.component";
 import { OPERATION_OUTCOME } from "../utils/constants";
 import Spinner from "../Common/Spinner/Spinner.component";

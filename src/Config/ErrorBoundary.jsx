@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import proptypes from 'prop-types';
-import ErrorPage from '../Common/ErrorPage/ErrorPage';
+import ErrorPage from '../Common/ErrorPage/ErrorPage.component';
 
 export class ErrorBoundary extends Component {
   state = { hasError: false };
