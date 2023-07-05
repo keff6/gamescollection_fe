@@ -1,21 +1,20 @@
-// import { useContext } from 'react';
+import { useContext } from 'react';
 import { Card, Button } from "react-bootstrap";
-// import { ArrowRight } from "react-bootstrap-icons";
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import proptypes from 'prop-types';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
-// import { AppState } from "../Config/store/state";
+import { AppState } from "../Config/store/state";
 import classes from './Consoles.module.css';
 
 
 const ConsoleCard = ({ consoleData, editConsole, deleteConsole }) => {
-  // const { setSelectedConsole } = useContext(AppState);
-  // const navigate = useNavigate();
+  const { setSelectedConsole } = useContext(AppState);
+  const navigate = useNavigate();
 
-  // const navigateToGamesHandler = () => {
-  //   setSelectedConsole({...consoleData})
-  //   navigate("/games")
-  // }
+  const navigateToGamesHandler = () => {
+    setSelectedConsole({...consoleData})
+    navigate(`/${consoleData.id}/games`)
+  }
 
   return (
     <Card className={classes.card}>
@@ -43,7 +42,13 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole }) => {
         </div>
         <div>
           <button type="button" className="btn btn-link">Details</button>
-          <button type="button" className="btn btn-link">Games</button>  
+          <button
+            type="button"
+            className="btn btn-link"
+            onClick={navigateToGamesHandler}
+          >
+            Games
+          </button>  
         </div>
       </Card.Body>
     </Card>

@@ -1,0 +1,82 @@
+.container {
+    padding-top: 1rem;
+  }
+  
+  .mainDashboardContainer {
+    height: auto;
+  }
+  
+  .header {
+    display:flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+  
+  .custom-col {
+    margin-bottom: 16px;
+  }
+  
+  .card {
+    min-height: 80px;
+  }
+  
+  .cardBody {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .logo-img {
+    height: 45px;
+  }
+  
+  .brand-text {
+    font-size: 40px
+  }
+
+  /* Options classes */
+  .options-container {
+    padding: 10px 0;
+  }
+
+  .letters-container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+   /* Forms */
+  .sagas-container {
+    border: 1px solid #9699a8;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  .sagas-list {
+    border: 1px solid #9699a8;
+    height: 100%;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    padding: 10px;
+  }
+
+  .badge {
+    margin-right: 8px;
+  }
+
+  .badge-text {
+    margin-right: 6px;
+  }
+
+  .badge-button {
+    cursor: pointer;
+    font-size: medium;
+  }
+
+  /*  table list  */
+  .table-buttons-container {
+    text-align: right;
+  }
+  
+  .table-buttons-container button:first-of-type {
+    margin-right: 5px;
+  }

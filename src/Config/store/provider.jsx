@@ -17,6 +17,10 @@ const APP_STATE = {
     list: [],
     selected: null,
   },
+  game: {
+    list: [],
+    selected: null,
+  },
   snackbar: {
     message: '',
     type: '',
@@ -64,6 +68,18 @@ export const AppStateProvider = ({ children }) => {
         dispatch({
           type: actions.SET_CONSOLES_LIST,
           payload: consolesList
+        });
+      },
+      setSelectedGame: (selectedGame) => {
+        dispatch({
+          type: actions.SET_SELECTED_GAME,
+          payload: {selectedGame}
+        });
+      },
+      setGamesList: (gamesList) => {
+        dispatch({
+          type: actions.SET_GAMES_LIST,
+          payload: gamesList
         });
       },
       openSnackbar: ({message, type}) => {
