@@ -33,3 +33,50 @@
   .brand-text {
     font-size: 40px
   }
+
+  /* Options classes */
+  .options-container {
+    padding: 10px 0;
+  }
+
+  .letters-container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+   /* Forms */
+  .sagas-container {
+    border: 1px solid #9699a8;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  .sagas-list {
+    border: 1px solid #9699a8;
+    height: 100%;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    padding: 10px;
+  }
+
+  .badge {
+    margin-right: 8px;
+  }
+
+  .badge-text {
+    margin-right: 6px;
+  }
+
+  .badge-button {
+    cursor: pointer;
+    font-size: medium;
+  }
+
+  /*  table list  */
+  .table-buttons-container {
+    text-align: right;
+  }
+  
+  .table-buttons-container button:first-of-type {
+    margin-right: 5px;
+  }

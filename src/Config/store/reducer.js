@@ -50,6 +50,22 @@ export const reducer = (state, action) => {
           list: action.payload.consoles
         }
       };
+    case actions.SET_SELECTED_GAME:
+      return {
+        ...state,
+        game: {
+          ...state.game,
+          selected: action.payload.selectedGame
+        }
+      };
+    case actions.SET_GAMES_LIST:
+      return {
+        ...state,
+        game: {
+          ...state.game,
+          list: action.payload.games
+        }
+      };
     case actions.OPEN_SNACKBAR:
       return {
         ...state,

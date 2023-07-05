@@ -2,10 +2,11 @@ import { useState, useContext } from 'react';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
 import { AppState } from "../Config/store/state";
-// import ConsolesList from "./ConsolesList.component";
 import { DeleteAlertModal,Breadcrumb } from "../Common"
-// import ConsoleForm from './ConsoleForm.component';
+import GamesListOptions from './GamesListOptions.component';
+import GamesList from './GamesList.component';
 import classes from './Games.module.css';
+import GameForm from './GameForm.component';
 
 const NavigationItems = (consoleId) => [
   { text: 'Brands', href:"/" },
@@ -18,34 +19,34 @@ const Games = ({
   deleteGame,
   updateGame,
 }) => {
-  const { game, setSelectedGame, brand } = useContext(AppState);
+  const { game, setSelectedGame, brand, console } = useContext(AppState);
   const [showForm, setShowForm] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
-  // const handleAddNewGame = async (gameObj) => {
-  //   addGame(gameObj)
-  // }
+  const handleAddNewGame = async (gameObj) => {
+    addGame(gameObj)
+  }
 
-  // const handleDeleteGame = async (selectedGame) => {
-  //   setSelectedGame({...selectedGame})
-  //   setShowConfirmDelete(true)
-  // }
+  const handleDeleteGame = async (selectedGame) => {
+    setSelectedGame({...selectedGame})
+    setShowConfirmDelete(true)
+  }
 
-  // const handleEditGame = (selectedGame) => {
-  //   setSelectedGame({...selectedGame})
-  //   setIsEdit(true)
-  //   setShowForm(true)
-  // }
+  const handleEditGame = (selectedGame) => {
+    setSelectedGame({...selectedGame})
+    setIsEdit(true)
+    setShowForm(true)
+  }
 
-  // const handleUpdateGame = async (gameId, updatedGameObj) => {
-  //   updateGame(gameId, updatedGameObj)
-  // }
+  const handleUpdateGame = async (gameId, updatedGameObj) => {
+    updateGame(gameId, updatedGameObj)
+  }
 
-  // const handleCloseFormModal = () => {
-  //   setIsEdit(false)
-  //   setShowForm(false)
-  // }
+  const handleCloseFormModal = () => {
+    setIsEdit(false)
+    setShowForm(false)
+  }
 
   const handleCancelDelete = () => {
     setSelectedGame(null)
@@ -67,19 +68,20 @@ const Games = ({
           <Button onClick={() => setShowForm(true)}>Add Game</Button>
         </header>
       </div>
-      <p>games list</p>
-      {/* <ConsolesList
-        consoles={console.list}
-        editConsole={handleEditConsole}
-        deleteConsole={handleDeleteConsole}
-      /> */}
-      {/* <ConsoleForm
+      <GamesListOptions />
+      <GamesList
+        games={game.list}
+        editGame={handleEditGame}
+        deleteGame={handleDeleteGame}
+      />
+      <GameForm
         show={showForm}
         onHide={handleCloseFormModal}
         isEdit={isEdit}
-        addNewConsole={handleAddNewConsole}
-        saveUpdatedChanges={handleUpdateConsole}
-      /> */}
+        addNewGame={handleAddNewGame}
+        saveUpdatedChanges={handleUpdateGame}
+        currentConsoleId={console?.selected?.id}
+      />
       <DeleteAlertModal
         show={showConfirmDelete}
         onCancel={handleCancelDelete}
@@ -90,9 +92,9 @@ const Games = ({
 }
 
 Games.propTypes = {
-  addConsole: proptypes.func,
-  deleteConsole: proptypes.func,
-  updateConsole: proptypes.func,
+  addGame: proptypes.func,
+  deleteGame: proptypes.func,
+  updateGame: proptypes.func,
 }
 
 export default Games;

@@ -7,7 +7,7 @@ import ErrorBoundaryLayout from "../Layout/ErrorBoundaryLayout";
 import { PageNotFound } from "../Common/ErrorPage";
 import Brands from "../Brands/Brands.container";
 import Consoles from "../Consoles/Consoles.container";
-import Games from "../Games/Games.component";
+import Games from "../Games/Games.container";
 
 
 const router = createBrowserRouter([

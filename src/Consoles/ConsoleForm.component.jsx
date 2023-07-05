@@ -50,7 +50,6 @@ const ConsoleForm = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.warn(consoleObj)
     const form = e.currentTarget;
 
     if(validateForm(form)) {
