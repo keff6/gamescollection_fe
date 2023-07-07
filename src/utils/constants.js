@@ -13,4 +13,10 @@ export const CONSOLE_GENERATIONS = [
   { value: 7, text: '7th (2004 - 2014)' },
   { value: 8, text: '8th (2011 - present)' },
   { value: 9, text: '9th (2020 - present)' },
-]
+];
+
+export const GAME_LIST_OPTIONS = {
+    ALPHABET: 'alpha',
+    WISHLIST: 'wish',
+    SEARCH: 'search',
+  };

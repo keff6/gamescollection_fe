@@ -4,8 +4,8 @@ const getAll = () => {
   return axios.get("/games");
 };
 
-const getByConsole = (consoleId) => {
-  return axios.get(`/games/console/${consoleId}`)
+const getWishlistByConsole = (consoleId) => {
+  return axios.get(`/games/wishlist/${consoleId}`)
 }
 
 const getByParams = (paramsObj) => {
@@ -32,7 +32,7 @@ const update = (id, data) => {
 
 const ConsoleService = {
   getAll,
-  getByConsole,
+  getWishlistByConsole,
   getByParams,
   add,
   remove,

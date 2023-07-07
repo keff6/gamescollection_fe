@@ -69,7 +69,6 @@ const GameForm = ({
     const form = e.currentTarget;
 
     if(validateForm(form)) {
-      window.console.warn('DESPUES',sanitizedGameObj)
       if(isEdit) await saveUpdatedChanges(selected.id, sanitizedGameObj)
       else await addNewGame(sanitizedGameObj)
       closeForm()
@@ -128,8 +127,6 @@ const GameForm = ({
       genres: genresArr,
     }) 
   }
-
-  window.console.log(gameObj)
 
   return (
     <Modal
