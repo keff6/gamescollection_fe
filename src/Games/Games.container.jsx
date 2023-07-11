@@ -1,53 +1,51 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { AppState } from "../Config/store/state";
 import { ConsoleService, GameService, GenreService } from '../services';
 import Games from "./Games.component";
 import { OPERATION_OUTCOME } from "../utils/constants";
-import Spinner from "../Common/Spinner/Spinner.component";
 
 const GamesContainer = () => {
-  const { game, setGamesList, openSnackbar, setConsolesList, setGenresList, setIsLoading } = useContext(AppState);
-  // const [isLoading, setIsLoading] = useState(false)
+  const { setGamesList, openSnackbar, setConsolesList, setGenresList, setIsLoading } = useContext(AppState);
   const { consoleId } = useParams()
 
-  // const getGamesByConsole = async () => {
-  //   try {
-  //     setIsLoading(true)
-  //     const gamesResponse = await GameService.getByParams({idConsole: consoleId});
-  //     const consolesResponse = await ConsoleService.getAll();
-  //     const genresResponse = await GenreService.getAll();
-  //     setGamesList(gamesResponse.data || []);
-  //     setConsolesList(consolesResponse.data || []);
-  //     setGenresList(genresResponse.data || []);
-  //   }
-  //   catch(e){
-  //     console.log(e)
-  //     openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-  //   }
-  //   finally {
-  //     setIsLoading(false)
-  //   }
-  // }
+  const getGamesByConsole = async () => {
+    try {
+      setIsLoading(true)
+      const gamesResponse = await GameService.getByParams({idConsole: consoleId});
+      const consolesResponse = await ConsoleService.getAll();
+      const genresResponse = await GenreService.getAll();
+      setGamesList(gamesResponse.data || []);
+      setConsolesList(consolesResponse.data || []);
+      setGenresList(genresResponse.data || []);
+    }
+    catch(e){
+      console.log(e)
+      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
+    }
+    finally {
+      setIsLoading(false)
+    }
+  }
 
-  // const getWishlistByConsole = async () => {
-  //   try {
-  //     setIsLoading(true)
-  //     const gamesResponse = await GameService.getWishlistByConsole(consoleId);
-  //     const consolesResponse = await ConsoleService.getAll();
-  //     const genresResponse = await GenreService.getAll();
-  //     setGamesList(gamesResponse.data || []);
-  //     setConsolesList(consolesResponse.data || []);
-  //     setGenresList(genresResponse.data || []);
-  //   }
-  //   catch(e){
-  //     console.log(e)
-  //     openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-  //   }
-  //   finally {
-  //     setIsLoading(false)
-  //   }
-  // }
+  const getWishlistByConsole = async () => {
+    try {
+      setIsLoading(true)
+      const gamesResponse = await GameService.getWishlistByConsole(consoleId);
+      const consolesResponse = await ConsoleService.getAll();
+      const genresResponse = await GenreService.getAll();
+      setGamesList(gamesResponse.data || []);
+      setConsolesList(consolesResponse.data || []);
+      setGenresList(genresResponse.data || []);
+    }
+    catch(e){
+      console.log(e)
+      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
+    }
+    finally {
+      setIsLoading(false)
+    }
+  }
 
   const addGame = async (gameObj) => {
     try {
@@ -60,7 +58,7 @@ const GamesContainer = () => {
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
-      // getGamesByConsole()
+      getGamesByConsole()
     }
   }
 
@@ -75,7 +73,7 @@ const GamesContainer = () => {
         openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
       }
       finally {
-        // getGamesByConsole()
+        getGamesByConsole()
       }
   }
 
@@ -90,7 +88,7 @@ const GamesContainer = () => {
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
-      // getGamesByConsole()
+      getGamesByConsole()
     }
   }
 
@@ -99,8 +97,8 @@ const GamesContainer = () => {
       addGame={addGame}
       updateGame={updateGame}
       deleteGame={deleteGame}
-      // getGamesByConsole={getGamesByConsole}
-      // getWishlistByConsole={getWishlistByConsole}
+      getGamesByConsole={getGamesByConsole}
+      getWishlistByConsole={getWishlistByConsole}
     />
     )
 }

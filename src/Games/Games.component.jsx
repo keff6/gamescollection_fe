@@ -1,4 +1,4 @@
-import { useState, useContext, Suspense } from 'react';
+import { useState, useContext } from 'react';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
 import { AppState } from "../Config/store/state";
@@ -75,8 +75,8 @@ const Games = ({
       <GamesList
         editGame={handleEditGame}
         deleteGame={handleDeleteGame}
-        // getGamesByConsole={getGamesByConsole}
-        // getWishlistByConsole={getWishlistByConsole}
+        getGamesByConsole={getGamesByConsole}
+        getWishlistByConsole={getWishlistByConsole}
       />
       <GameForm
         show={showForm}

@@ -4,7 +4,6 @@ import { PencilSquare, Trash } from "react-bootstrap-icons";
 import classes from '../Games.module.css';
 
 const GamesList = ({ games, deleteGame, editGame }) => {
-  console.warn({games})
   return (
     <>
       {(games?.length > 0) &&
