@@ -1,12 +1,13 @@
 import proptypes from 'prop-types';
 import { Table, Button } from 'react-bootstrap';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
-import classes from './Games.module.css';
+import classes from '../Games.module.css';
 
 const GamesList = ({ games, deleteGame, editGame }) => {
+  console.warn({games})
   return (
     <>
-      {(games.length > 0) &&
+      {(games?.length > 0) &&
       <Table>
         <thead>
           <tr>
@@ -17,7 +18,7 @@ const GamesList = ({ games, deleteGame, editGame }) => {
           </tr>
         </thead>
         <tbody>
-          {games.map(game => (
+          {games?.map(game => (
             <tr key={game.id}>
               <td>{game.title}</td>
               <td>{game.year}</td>
@@ -45,7 +46,7 @@ const GamesList = ({ games, deleteGame, editGame }) => {
           )}
         </tbody>
       </Table>}
-      {(games.length === 0) && <h3>Start adding games</h3>}
+      {(games?.length === 0) && <h3>Start adding games</h3>}
     </>
   )
 }

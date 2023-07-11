@@ -1,10 +1,10 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, Suspense } from 'react';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
 import { AppState } from "../Config/store/state";
 import { DeleteAlertModal,Breadcrumb } from "../Common"
-import GamesListOptions from './GamesListOptions.component';
-import GamesList from './GamesList.component';
+import GamesListOptions from './GamesList/GamesListOptions.component';
+import GamesList from './GamesList/GamesList.container';
 import classes from './Games.module.css';
 import GameForm from './GameForm.component';
 
@@ -18,6 +18,8 @@ const Games = ({
   addGame,
   deleteGame,
   updateGame,
+  getGamesByConsole,
+  getWishlistByConsole,
 }) => {
   const { game, setSelectedGame, brand, console } = useContext(AppState);
   const [showForm, setShowForm] = useState(false);
@@ -68,11 +70,13 @@ const Games = ({
           <Button onClick={() => setShowForm(true)}>Add Game</Button>
         </header>
       </div>
-      <GamesListOptions />
+      <GamesListOptions
+      />
       <GamesList
-        games={game.list}
         editGame={handleEditGame}
         deleteGame={handleDeleteGame}
+        // getGamesByConsole={getGamesByConsole}
+        // getWishlistByConsole={getWishlistByConsole}
       />
       <GameForm
         show={showForm}
@@ -94,6 +98,8 @@ const Games = ({
 Games.propTypes = {
   addGame: proptypes.func,
   deleteGame: proptypes.func,
+  getGamesByConsole: proptypes.func,
+  getWishlistByConsole: proptypes.func,
   updateGame: proptypes.func,
 }
 

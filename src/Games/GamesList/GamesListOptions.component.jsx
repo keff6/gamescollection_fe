@@ -1,13 +1,11 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { ButtonGroup, ToggleButton, Container } from "react-bootstrap";
-// import proptypes from 'prop-types';
-import classes from './Games.module.css';
-
-const ALPHABET = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
+import { AppState } from "../../Config/store/state";
+import { ALPHABET, GAME_LIST_OPTIONS } from '../../utils/constants';
+import classes from '../Games.module.css';
 
 const GamesListOptions = () => {
-  const [radioValue, setRadioValue] = useState('0');
+  const { game: { listOption }, setGamesListOption } = useContext(AppState);
 
   return (
     <div>
@@ -17,9 +15,10 @@ const GamesListOptions = () => {
           id="radio-alphabetic"
           type="radio"
           name="radio-alphabetic"
-          value="0"
-          checked={radioValue === "0"}
-          onChange={(e) => setRadioValue(e.currentTarget.value)}
+          variant="outline-primary"
+          value={GAME_LIST_OPTIONS.ALPHABET}
+          checked={listOption === GAME_LIST_OPTIONS.ALPHABET}
+          onChange={(e) => setGamesListOption(e.currentTarget.value)}
         >
           A-Z
         </ToggleButton>
@@ -28,9 +27,10 @@ const GamesListOptions = () => {
           id="radio-wishlist"
           type="radio"
           name="radio-wishlist"
-          value="1"
-          checked={radioValue === "1"}
-          onChange={(e) => setRadioValue(e.currentTarget.value)}
+          variant="outline-primary"
+          value={GAME_LIST_OPTIONS.WISHLIST}
+          checked={listOption === GAME_LIST_OPTIONS.WISHLIST}
+          onChange={(e) => setGamesListOption(e.currentTarget.value)}
         >
           Wishlist
         </ToggleButton>
@@ -39,24 +39,26 @@ const GamesListOptions = () => {
           id="radio-search"
           type="radio"
           name="radio-search"
-          value="2"
-          checked={radioValue === "2"}
-          onChange={(e) => setRadioValue(e.currentTarget.value)}
+          variant="outline-primary"
+          value={GAME_LIST_OPTIONS.SEARCH}
+          checked={listOption === GAME_LIST_OPTIONS.SEARCH}
+          onChange={(e) => setGamesListOption(e.currentTarget.value)}
         >
           Search
         </ToggleButton>
       </ButtonGroup>
       <br />
       <Container className={classes.optionsContainer}>
-        {radioValue === "0" ?
+        {listOption === GAME_LIST_OPTIONS.ALPHABET ?
           <div className={classes.lettersContainer}>
             {ALPHABET.split("").map(token => <span key={token}>{token}</span>)}
           </div>
-          :
+          : listOption === GAME_LIST_OPTIONS.SEARCH ?
           <div>
             <input type="text" />
             <p>search</p>
           </div>
+          : null
         }
       </Container>
     </div>

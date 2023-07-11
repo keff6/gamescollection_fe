@@ -2,6 +2,7 @@ import { useMemo, useReducer } from "react";
 import proptypes from 'prop-types';
 import { reducer } from "./reducer";
 import { actionTypes as actions } from "./actions";
+import { GAME_LIST_OPTIONS } from "../../utils/constants";
 import { AppState } from "./state";
 
 const APP_STATE = {
@@ -20,12 +21,16 @@ const APP_STATE = {
   game: {
     list: [],
     selected: null,
+    listOption: GAME_LIST_OPTIONS.ALPHABET,
+    initialLetter: '#',
+    search: '',
   },
   snackbar: {
     message: '',
     type: '',
     show: false,
-  }
+  },
+  isLoading: false,
 };
 
 export const AppStateProvider = ({ children }) => {
@@ -91,6 +96,30 @@ export const AppStateProvider = ({ children }) => {
       closeSnackbar: () => {
         dispatch({
           type: actions.CLOSE_SNACKBAR,
+        })
+      },
+      setGamesListOption: (option) => {
+        dispatch({
+          type: actions.SET_GAMES_LIST_OPTION,
+          payload: option,
+        })
+      },
+      setInitialLetter: (letter) => {
+        dispatch({
+          type: actions.SET_INITIAL_LETTER,
+          payload: letter,
+        })
+      },
+      setSearchTerm: (searchTerm) => {
+        dispatch({
+          type: actions.SET_SEARCH_TERM,
+          payload: searchTerm,
+        })
+      },
+      setIsLoading: (isLoading) => {
+        dispatch({
+          type: actions.SET_IS_LOADING,
+          payload: isLoading,
         })
       }
     }),

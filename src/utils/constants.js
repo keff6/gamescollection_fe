@@ -16,7 +16,9 @@ export const CONSOLE_GENERATIONS = [
 ];
 
 export const GAME_LIST_OPTIONS = {
-    ALPHABET: 'alpha',
-    WISHLIST: 'wish',
+    ALPHABET: 'alphabet',
+    WISHLIST: 'wishlist',
     SEARCH: 'search',
   };
+
+export const ALPHABET = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ';
