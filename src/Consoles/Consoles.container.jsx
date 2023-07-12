@@ -1,14 +1,12 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { AppState } from "../Config/store/state";
 import { ConsoleService, BrandService } from '../services';
 import Consoles from "./Consoles.component";
 import { OPERATION_OUTCOME } from "../utils/constants";
-import Spinner from "../Common/Spinner/Spinner.component";
 
 const ConsolesContainer = () => {
-  const { console, setConsolesList, openSnackbar, setBrandsList } = useContext(AppState);
-  const [isLoading, setIsLoading] = useState(false)
+  const { setConsolesList, openSnackbar, setBrandsList, setIsLoading } = useContext(AppState);
   const { brandId } = useParams()
 
   useEffect(() => {
@@ -77,14 +75,13 @@ const ConsolesContainer = () => {
     }
   }
 
-  return isLoading ? <Spinner />
-  : console.list && (
+  return (
     <Consoles
       addConsole={addConsole}
       updateConsole={updateConsole}
       deleteConsole={deleteConsole}
     />
-    )
+  )
 }
 
 export default ConsolesContainer

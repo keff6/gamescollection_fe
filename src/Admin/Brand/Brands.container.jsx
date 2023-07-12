@@ -1,13 +1,11 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { AppState } from "../../Config/store/state";
 import { BrandService } from '../../services';
 import Brands from "./Brands.component";
 import { OPERATION_OUTCOME } from "../../utils/constants";
-import Spinner from "../../Common/Spinner/Spinner.component";
 
 const BrandsContainer = () => {
-  const { brand, setBrandsList, openSnackbar } = useContext(AppState);
-  const [isLoading, setIsLoading] = useState(false)
+  const { setBrandsList, openSnackbar, setIsLoading } = useContext(AppState);
 
   useEffect(() => {
     getAllBrands();
@@ -73,14 +71,13 @@ const BrandsContainer = () => {
       }
   }
 
-  return isLoading ? <Spinner />
-  : brand.list && (
+  return (
     <Brands
       addBrand={addBrand}
       deleteBrand={deleteBrand}
       updateBrand={updateBrand}
     />
-    )
+  )
 }
 
 export default BrandsContainer

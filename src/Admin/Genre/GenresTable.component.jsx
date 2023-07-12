@@ -1,9 +1,16 @@
+import { useContext } from 'react';
 import proptypes from 'prop-types';
 import { Table, Button } from 'react-bootstrap';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
+import { AppState } from "../../Config/store/state";
+import Spinner from "../../Common/Spinner/Spinner.component";
 import classes from './Genres.module.css';
 
 const GenresTable = ({ genres, deleteGenre, editGenre }) => {
+  const { isLoading } = useContext(AppState);
+
+  if(isLoading) return <Spinner />
+
   return (
     <>
       {(genres.length > 0) &&
