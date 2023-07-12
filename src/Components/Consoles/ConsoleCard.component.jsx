@@ -3,7 +3,7 @@ import { Card, Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import proptypes from 'prop-types';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
-import { AppState } from "../Config/store/state";
+import { AppState } from "../../Config/store/state";
 import classes from './Consoles.module.css';
 
 

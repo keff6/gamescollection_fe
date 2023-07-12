@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { AppState } from "../Config/store/state";
-import { ConsoleService, GameService, GenreService } from '../services';
+import { AppState } from "../../Config/store/state";
+import { ConsoleService, GameService, GenreService } from '../../services';
 import Games from "./Games.component";
-import { OPERATION_OUTCOME } from "../utils/constants";
+import { OPERATION_OUTCOME } from "../../utils/constants";
 
 const GamesContainer = () => {
   const { setGamesList, openSnackbar, setConsolesList, setGenresList, setIsLoading } = useContext(AppState);

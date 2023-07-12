@@ -1,9 +1,9 @@
 import { useEffect, useContext } from "react";
 import proptypes from 'prop-types';
-import { AppState } from "../../Config/store/state";
+import { AppState } from "../../../Config/store/state";
 import GamesList from "./GamesList.component";
-import { GAME_LIST_OPTIONS } from "../../utils/constants";
-import Spinner from "../../Common/Spinner/Spinner.component";
+import { GAME_LIST_OPTIONS } from "../../../utils/constants";
+import Spinner from "../../../Common/Spinner/Spinner.component";
 
 
 const GamesListContainer = ({

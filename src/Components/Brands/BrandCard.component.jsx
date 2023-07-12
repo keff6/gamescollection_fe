@@ -3,7 +3,7 @@ import { Card, Button } from "react-bootstrap";
 import { ArrowRight } from "react-bootstrap-icons";
 import { useNavigate } from 'react-router-dom';
 import proptypes from 'prop-types';
-import { AppState } from "../Config/store/state";
+import { AppState } from "../../Config/store/state";
 import classes from './Brands.module.css';
 
 const BrandCard = ({brandData}) => {

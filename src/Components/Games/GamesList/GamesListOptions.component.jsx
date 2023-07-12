@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { ButtonGroup, ToggleButton, Container } from "react-bootstrap";
-import { AppState } from "../../Config/store/state";
-import { ALPHABET, GAME_LIST_OPTIONS } from '../../utils/constants';
+import { AppState } from "../../../Config/store/state";
+import { ALPHABET, GAME_LIST_OPTIONS } from '../../../utils/constants';
 import classes from '../Games.module.css';
 
 const GamesListOptions = () => {

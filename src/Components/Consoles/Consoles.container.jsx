@@ -1,9 +1,9 @@
 import { useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { AppState } from "../Config/store/state";
-import { ConsoleService, BrandService } from '../services';
+import { AppState } from "../../Config/store/state";
+import { ConsoleService, BrandService } from '../../services';
 import Consoles from "./Consoles.component";
-import { OPERATION_OUTCOME } from "../utils/constants";
+import { OPERATION_OUTCOME } from "../../utils/constants";
 
 const ConsolesContainer = () => {
   const { setConsolesList, openSnackbar, setBrandsList, setIsLoading } = useContext(AppState);

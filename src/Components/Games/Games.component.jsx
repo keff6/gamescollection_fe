@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
-import { AppState } from "../Config/store/state";
-import { DeleteAlertModal,Breadcrumb } from "../Common"
+import { AppState } from "../../Config/store/state";
+import { DeleteAlertModal,Breadcrumb } from "../../Common"
 import GamesListOptions from './GamesList/GamesListOptions.component';
 import GamesList from './GamesList/GamesList.container';
 import classes from './Games.module.css';

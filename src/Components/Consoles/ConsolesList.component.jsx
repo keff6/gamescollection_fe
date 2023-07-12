@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import proptypes from "prop-types";
-import { AppState } from "../Config/store/state";
+import { AppState } from "../../Config/store/state";
 import ConsoleCard from "./ConsoleCard.component";
-import { Spinner } from "../Common";
+import { Spinner } from "../../Common";
 import classes from './Consoles.module.css';
 
 const ConsolesList = ({consoles, editConsole, deleteConsole}) => {

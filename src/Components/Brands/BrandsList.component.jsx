@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import proptypes from "prop-types";
-import { AppState } from "../Config/store/state";
-import Spinner from "../Common/Spinner/Spinner.component";
+import { AppState } from "../../Config/store/state";
+import Spinner from "../../Common/Spinner/Spinner.component";
 import BrandCard from "./BrandCard.component";
 import classes from './Brands.module.css';
 
