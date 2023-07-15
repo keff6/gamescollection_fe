@@ -18,7 +18,7 @@ const Games = ({
   addGame,
   deleteGame,
   updateGame,
-  getGamesByConsole,
+  getGamesByConsoleAndLetter,
   getWishlistByConsole,
 }) => {
   const { game, setSelectedGame, brand, console } = useContext(AppState);
@@ -75,7 +75,7 @@ const Games = ({
       <GamesList
         editGame={handleEditGame}
         deleteGame={handleDeleteGame}
-        getGamesByConsole={getGamesByConsole}
+        getGamesByConsoleAndLetter={getGamesByConsoleAndLetter}
         getWishlistByConsole={getWishlistByConsole}
       />
       <GameForm
@@ -98,7 +98,7 @@ const Games = ({
 Games.propTypes = {
   addGame: proptypes.func,
   deleteGame: proptypes.func,
-  getGamesByConsole: proptypes.func,
+  getGamesByConsoleAndLetter: proptypes.func,
   getWishlistByConsole: proptypes.func,
   updateGame: proptypes.func,
 }

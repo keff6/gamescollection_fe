@@ -10,7 +10,7 @@ const GamesListContainer = ({
   editGame,
   deleteGame,
   getWishlistByConsole,
-  getGamesByConsole,
+  getGamesByConsoleAndLetter,
 }) => {
   const { game, isLoading } = useContext(AppState);
 
@@ -20,7 +20,7 @@ const GamesListContainer = ({
 
     switch(listOption) {
       case GAME_LIST_OPTIONS.ALPHABET:
-        getGamesByConsole();
+        getGamesByConsoleAndLetter();
         break;
       case GAME_LIST_OPTIONS.WISHLIST:
         getWishlistByConsole();
@@ -31,7 +31,7 @@ const GamesListContainer = ({
         break;
     }
     
-  }, [game.listOption]);
+  }, [game.listOption, game.initialLetter]);
 
   return (isLoading ? <Spinner /> :
     <GamesList
@@ -45,7 +45,7 @@ const GamesListContainer = ({
 GamesListContainer.propTypes ={
   editGame: proptypes.func,
   deleteGame: proptypes.func,
-  getGamesByConsole: proptypes.func,
+  getGamesByConsoleAndLetter: proptypes.func,
   getWishlistByConsole: proptypes.func,
 }
 

@@ -6,13 +6,13 @@ import Games from "./Games.component";
 import { OPERATION_OUTCOME } from "../../utils/constants";
 
 const GamesContainer = () => {
-  const { setGamesList, openSnackbar, setConsolesList, setGenresList, setIsLoading } = useContext(AppState);
+  const { setGamesList, openSnackbar, setConsolesList, setGenresList, setIsLoading, game: {initialLetter} } = useContext(AppState);
   const { consoleId } = useParams()
 
-  const getGamesByConsole = async () => {
+  const getGamesByConsoleAndLetter = async () => {
     try {
       setIsLoading(true)
-      const gamesResponse = await GameService.getByParams({idConsole: consoleId});
+      const gamesResponse = await GameService.getByParams({idConsole: consoleId, initialLetter});
       const consolesResponse = await ConsoleService.getAll();
       const genresResponse = await GenreService.getAll();
       setGamesList(gamesResponse.data || []);
@@ -58,7 +58,7 @@ const GamesContainer = () => {
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
-      getGamesByConsole()
+      getGamesByConsoleAndLetter()
     }
   }
 
@@ -73,7 +73,7 @@ const GamesContainer = () => {
         openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
       }
       finally {
-        getGamesByConsole()
+        getGamesByConsoleAndLetter()
       }
   }
 
@@ -88,7 +88,7 @@ const GamesContainer = () => {
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
-      getGamesByConsole()
+      getGamesByConsoleAndLetter()
     }
   }
 
@@ -97,7 +97,7 @@ const GamesContainer = () => {
       addGame={addGame}
       updateGame={updateGame}
       deleteGame={deleteGame}
-      getGamesByConsole={getGamesByConsole}
+      getGamesByConsoleAndLetter={getGamesByConsoleAndLetter}
       getWishlistByConsole={getWishlistByConsole}
     />
     )

@@ -44,6 +44,10 @@
     justify-content: space-around;
   }
 
+  .tabItem {
+    padding: 0.5rem 2px !important;
+  }
+
    /* Forms */
   .sagas-container {
     border: 1px solid #9699a8;

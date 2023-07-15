@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { ButtonGroup, ToggleButton, Container } from "react-bootstrap";
 import { AppState } from "../../../Config/store/state";
-import { ALPHABET, GAME_LIST_OPTIONS } from '../../../utils/constants';
+import { GAME_LIST_OPTIONS } from '../../../utils/constants';
+import AlphabetButtons from './AlphabetButtons.component';
 import classes from '../Games.module.css';
 
 const GamesListOptions = () => {
@@ -50,9 +51,7 @@ const GamesListOptions = () => {
       <br />
       <Container className={classes.optionsContainer}>
         {listOption === GAME_LIST_OPTIONS.ALPHABET ?
-          <div className={classes.lettersContainer}>
-            {ALPHABET.split("").map(token => <span key={token}>{token}</span>)}
-          </div>
+          <AlphabetButtons />
           : listOption === GAME_LIST_OPTIONS.SEARCH ?
           <div>
             <input type="text" />
