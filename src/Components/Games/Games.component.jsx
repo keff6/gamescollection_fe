@@ -8,9 +8,9 @@ import GamesList from './GamesList/GamesList.container';
 import classes from './Games.module.css';
 import GameForm from './GameForm.component';
 
-const NavigationItems = (consoleId) => [
+const NavigationItems = (brandId) => [
   { text: 'Brands', href:"/" },
-  { text: 'Consoles', href:`/${consoleId}/consoles` },
+  { text: 'Consoles', href:`/${brandId}/consoles` },
   { text: 'Games', href:"id:/games", active: true },
 ];
 
@@ -25,6 +25,7 @@ const Games = ({
   const [showForm, setShowForm] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const currentBrand = (brand?.selected) ? brand.selected : JSON.parse(sessionStorage.getItem('brandData')); 
 
   const handleAddNewGame = async (gameObj) => {
     addGame(gameObj)
@@ -63,7 +64,7 @@ const Games = ({
 
   return (
     <>
-      <Breadcrumb items={NavigationItems(brand?.selected?.id)} />
+      <Breadcrumb items={NavigationItems(currentBrand.id)} />
       <div>
         <header className={classes.header}>
           <h2>Games</h2>
