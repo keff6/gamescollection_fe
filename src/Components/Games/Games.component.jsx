@@ -1,16 +1,16 @@
 import { useState, useContext } from 'react';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
-import { AppState } from "../Config/store/state";
-import { DeleteAlertModal,Breadcrumb } from "../Common"
-import GamesListOptions from './GamesListOptions.component';
-import GamesList from './GamesList.component';
+import { AppState } from "../../Config/store/state";
+import { DeleteAlertModal,Breadcrumb } from "../../Common"
+import GamesListOptions from './GamesList/GamesListOptions.component';
+import GamesList from './GamesList/GamesList.container';
 import classes from './Games.module.css';
 import GameForm from './GameForm.component';
 
-const NavigationItems = (consoleId) => [
+const NavigationItems = (brandId) => [
   { text: 'Brands', href:"/" },
-  { text: 'Consoles', href:`/${consoleId}/consoles` },
+  { text: 'Consoles', href:`/${brandId}/consoles` },
   { text: 'Games', href:"id:/games", active: true },
 ];
 
@@ -18,11 +18,14 @@ const Games = ({
   addGame,
   deleteGame,
   updateGame,
+  getGamesByConsoleAndLetter,
+  getWishlistByConsole,
 }) => {
   const { game, setSelectedGame, brand, console } = useContext(AppState);
   const [showForm, setShowForm] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const currentBrand = (brand?.selected) ? brand.selected : JSON.parse(sessionStorage.getItem('brandData')); 
 
   const handleAddNewGame = async (gameObj) => {
     addGame(gameObj)
@@ -61,18 +64,20 @@ const Games = ({
 
   return (
     <>
-      <Breadcrumb items={NavigationItems(brand?.selected?.id)} />
+      <Breadcrumb items={NavigationItems(currentBrand.id)} />
       <div>
         <header className={classes.header}>
           <h2>Games</h2>
           <Button onClick={() => setShowForm(true)}>Add Game</Button>
         </header>
       </div>
-      <GamesListOptions />
+      <GamesListOptions
+      />
       <GamesList
-        games={game.list}
         editGame={handleEditGame}
         deleteGame={handleDeleteGame}
+        getGamesByConsoleAndLetter={getGamesByConsoleAndLetter}
+        getWishlistByConsole={getWishlistByConsole}
       />
       <GameForm
         show={showForm}
@@ -94,6 +99,8 @@ const Games = ({
 Games.propTypes = {
   addGame: proptypes.func,
   deleteGame: proptypes.func,
+  getGamesByConsoleAndLetter: proptypes.func,
+  getWishlistByConsole: proptypes.func,
   updateGame: proptypes.func,
 }
 

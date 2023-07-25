@@ -1,24 +1,37 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { AppState } from "../Config/store/state";
-import { ConsoleService, GameService, GenreService } from '../services';
+import { AppState } from "../../Config/store/state";
+import { ConsoleService, GameService, GenreService } from '../../services';
 import Games from "./Games.component";
-import { OPERATION_OUTCOME } from "../utils/constants";
-import Spinner from "../Common/Spinner/Spinner.component";
+import { OPERATION_OUTCOME } from "../../utils/constants";
 
 const GamesContainer = () => {
-  const { game, setGamesList, openSnackbar, setConsolesList, setGenresList } = useContext(AppState);
-  const [isLoading, setIsLoading] = useState(false)
+  const { setGamesList, openSnackbar, setConsolesList, setGenresList, setIsLoading, game: {initialLetter} } = useContext(AppState);
   const { consoleId } = useParams()
 
-  useEffect(() => {
-    getGamesByConsole()
-  }, []);
-
-  const getGamesByConsole = async () => {
+  const getGamesByConsoleAndLetter = async () => {
     try {
       setIsLoading(true)
-      const gamesResponse = await GameService.getByParams({idConsole: consoleId});
+      const gamesResponse = await GameService.getByParams({idConsole: consoleId, initialLetter});
+      const consolesResponse = await ConsoleService.getAll();
+      const genresResponse = await GenreService.getAll();
+      setGamesList(gamesResponse.data || []);
+      setConsolesList(consolesResponse.data || []);
+      setGenresList(genresResponse.data || []);
+    }
+    catch(e){
+      console.log(e)
+      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
+    }
+    finally {
+      setIsLoading(false)
+    }
+  }
+
+  const getWishlistByConsole = async () => {
+    try {
+      setIsLoading(true)
+      const gamesResponse = await GameService.getWishlistByConsole(consoleId);
       const consolesResponse = await ConsoleService.getAll();
       const genresResponse = await GenreService.getAll();
       setGamesList(gamesResponse.data || []);
@@ -45,7 +58,7 @@ const GamesContainer = () => {
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
-      getGamesByConsole()
+      getGamesByConsoleAndLetter()
     }
   }
 
@@ -60,7 +73,7 @@ const GamesContainer = () => {
         openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
       }
       finally {
-        getGamesByConsole()
+        getGamesByConsoleAndLetter()
       }
   }
 
@@ -75,16 +88,17 @@ const GamesContainer = () => {
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
-      getGamesByConsole()
+      getGamesByConsoleAndLetter()
     }
   }
 
-  return isLoading ? <Spinner />
-  : game.list && (
+  return (
     <Games
       addGame={addGame}
       updateGame={updateGame}
       deleteGame={deleteGame}
+      getGamesByConsoleAndLetter={getGamesByConsoleAndLetter}
+      getWishlistByConsole={getWishlistByConsole}
     />
     )
 }

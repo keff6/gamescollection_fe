@@ -21,9 +21,8 @@
   min-height: 80px;
 }
 
-.cardBody {
-  display: flex;
-  justify-content: space-between;
+.card-body {
+  padding: 5px;
 }
 
 .logo-img {
@@ -32,4 +31,8 @@
 
 .brand-text {
   font-size: 40px
+}
+
+.card-footer {
+  text-align: end;
 }

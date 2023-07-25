@@ -2,8 +2,8 @@ import { useState, useEffect, useContext } from 'react';
 import { Button, Modal, Form, Row, Col, InputGroup, Badge } from 'react-bootstrap';
 import proptypes from 'prop-types';
 import { XCircle } from "react-bootstrap-icons";
-import { AppState } from "../Config/store/state";
-import { gameObjectSanitizer } from '../utils/requestSanitizer';
+import { AppState } from "../../Config/store/state";
+import { gameObjectSanitizer } from '../../utils/requestSanitizer';
 import classes from './Games.module.css';
 
 const GAME_DEFAULT = {
@@ -69,7 +69,6 @@ const GameForm = ({
     const form = e.currentTarget;
 
     if(validateForm(form)) {
-      window.console.warn('DESPUES',sanitizedGameObj)
       if(isEdit) await saveUpdatedChanges(selected.id, sanitizedGameObj)
       else await addNewGame(sanitizedGameObj)
       closeForm()
@@ -128,8 +127,6 @@ const GameForm = ({
       genres: genresArr,
     }) 
   }
-
-  window.console.log(gameObj)
 
   return (
     <Modal

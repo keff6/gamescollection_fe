@@ -1,19 +1,26 @@
+import { useContext } from 'react';
 import proptypes from 'prop-types';
 import { Table, Button } from 'react-bootstrap';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
+import { AppState } from "../../Config/store/state";
+import Spinner from "../../Common/Spinner/Spinner.component";
 import classes from './Brands.module.css';
 
 const BrandsTable = ({ brands, deleteBrand, editBrand }) => {
+  const { isLoading } = useContext(AppState);
+
+  if(isLoading) return <Spinner />
+
   return (
     <>
       {(brands.length > 0) &&
-      <Table>
+      <Table className={classes.table}>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Origin</th>
+            <th className={classes.width25}>Name</th>
+            <th className={classes.width15}>Origin</th>
             <th>Logo URL</th>
-            <th></th>
+            <th className={classes.width15}></th>
           </tr>
         </thead>
         <tbody>
@@ -21,11 +28,11 @@ const BrandsTable = ({ brands, deleteBrand, editBrand }) => {
             <tr key={brand.id}>
               <td>{brand.name}</td>
               <td>{brand.origin}</td>
-              <td>{brand.logourl}</td>
+              <td className={classes.textOverflow}>{brand.logoUrl}</td>
               <td>
                 <div className={classes.tableButtonsContainer}>
                   <Button
-                    variant="outline-dark"
+                    variant="outline-light"
                     size="sm"
                     onClick={() => editBrand(brand)}
                   >

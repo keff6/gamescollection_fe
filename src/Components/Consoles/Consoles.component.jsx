@@ -1,9 +1,9 @@
 import { useState, useContext } from 'react';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
-import { AppState } from "../Config/store/state";
+import { AppState } from "../../Config/store/state";
 import ConsolesList from "./ConsolesList.component";
-import { DeleteAlertModal,Breadcrumb } from "../Common"
+import { DeleteAlertModal,Breadcrumb } from "../../Common"
 import ConsoleForm from './ConsoleForm.component';
 import classes from './Consoles.module.css';
 

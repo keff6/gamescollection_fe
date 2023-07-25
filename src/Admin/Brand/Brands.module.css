@@ -8,6 +8,22 @@
   margin-bottom: 20px;
   margin-top: 10px;
 }
+.table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.width15 {
+  width: 15%
+}
+
+.width20 {
+  width: 20%
+}
+
+.width25 {
+  width: 25%
+}
 
 .table-buttons-container {
   text-align: right;
@@ -15,4 +31,10 @@
 
 .table-buttons-container button:first-of-type {
   margin-right: 5px;
+}
+
+.text-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

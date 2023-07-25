@@ -1,13 +1,11 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { AppState } from "../../Config/store/state";
 import { GenreService } from '../../services';
 import Genres from "./Genres.component";
 import { OPERATION_OUTCOME } from "../../utils/constants";
-import Spinner from "../../Common/Spinner/Spinner.component";
 
 const GenresContainer = () => {
-  const { genre, setGenresList, openSnackbar } = useContext(AppState);
-  const [isLoading, setIsLoading] = useState(false)
+  const { setGenresList, openSnackbar, setIsLoading } = useContext(AppState);
 
   useEffect(() => {
     getAllGenres();
@@ -73,8 +71,7 @@ const GenresContainer = () => {
       }
   }
 
-  return isLoading ? <Spinner />
-  : genre.list && (
+  return (
     <Genres
       addGenre={addGenre}
       deleteGenre={deleteGenre}

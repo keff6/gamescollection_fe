@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { Button, Modal, Form, Row, Col } from 'react-bootstrap';
 import proptypes from 'prop-types';
-import { AppState } from "../Config/store/state";
-import { CONSOLE_GENERATIONS } from "../utils/constants";
+import { AppState } from "../../Config/store/state";
+import { CONSOLE_GENERATIONS } from "../../utils/constants";
 
 const CONSOLE_DEFAULT = {
   name: "",

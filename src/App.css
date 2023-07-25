@@ -8,4 +8,32 @@ body {
 
 main {
   height: 100%;
+  background-color: #252529;
+  color: white;
+}
+
+.table {
+  color: white;
+}
+
+/* Card global styles */
+.card {
+  border-color: #10aeaa;
+  border-radius: 5px;
+}
+
+.card-body {
+  border-radius: 4px;
+  background-color: rgb(96 118 139 / 84%);
+}
+
+/* Forms */
+.modal-header, .modal-footer {
+  background-color: #424a65;
+  color: white;
+}
+
+.modal-body {
+  background-color: rgb(66 66 71 / 90%);
+  color: white;
 }

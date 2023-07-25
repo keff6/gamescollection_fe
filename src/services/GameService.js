@@ -4,18 +4,19 @@ const getAll = () => {
   return axios.get("/games");
 };
 
-const getByConsole = (consoleId) => {
-  return axios.get(`/games/console/${consoleId}`)
+const getWishlistByConsole = (consoleId) => {
+  return axios.get(`/games/wishlist/${consoleId}`)
 }
 
 const getByParams = (paramsObj) => {
-  console.log({paramsObj})
   let paramsString = '?';
   const params = Object.keys(paramsObj)
   for(let param of params) {
-    paramsString += `${param}=${paramsObj[param]}`
+    paramsString += `${param}=${encodeURIComponent(paramsObj[param])}&`
   }
-  return axios.get(`/games/get${paramsString}`)
+  paramsString.slice(0, -1)
+  const sanitizedParams = paramsString.slice(0, -1)
+  return axios.get(`/games/get${sanitizedParams}`)
 }
 
 const add = data => {
@@ -32,7 +33,7 @@ const update = (id, data) => {
 
 const ConsoleService = {
   getAll,
-  getByConsole,
+  getWishlistByConsole,
   getByParams,
   add,
   remove,

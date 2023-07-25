@@ -1,5 +1,5 @@
 .spinner {
-  text-align: center;
-  height: 100%;
-  padding-top: 50%;
+  display: flex;
+  padding-top: 30px;
+  justify-content: center;
 }
