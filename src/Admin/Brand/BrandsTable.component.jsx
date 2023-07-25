@@ -14,13 +14,13 @@ const BrandsTable = ({ brands, deleteBrand, editBrand }) => {
   return (
     <>
       {(brands.length > 0) &&
-      <Table>
+      <Table className={classes.table}>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Origin</th>
+            <th className={classes.width25}>Name</th>
+            <th className={classes.width15}>Origin</th>
             <th>Logo URL</th>
-            <th></th>
+            <th className={classes.width15}></th>
           </tr>
         </thead>
         <tbody>
@@ -28,11 +28,11 @@ const BrandsTable = ({ brands, deleteBrand, editBrand }) => {
             <tr key={brand.id}>
               <td>{brand.name}</td>
               <td>{brand.origin}</td>
-              <td>{brand.logourl}</td>
+              <td className={classes.textOverflow}>{brand.logoUrl}</td>
               <td>
                 <div className={classes.tableButtonsContainer}>
                   <Button
-                    variant="outline-dark"
+                    variant="outline-light"
                     size="sm"
                     onClick={() => editBrand(brand)}
                   >

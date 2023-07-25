@@ -14,7 +14,7 @@ const BrandsList = ({brands}) => {
   return (
     <Container className={classes.mainDashboardContainer}>
         {(brands.length > 0) &&
-        <Row className={`justify-content-md-center`} >
+        <Row>
           {brands.map(b => (
             <Col key={b.id} lg={6} md={12} className={classes.customCol}>
               <BrandCard brandData={b} />

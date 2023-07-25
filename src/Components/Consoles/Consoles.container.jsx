@@ -6,11 +6,12 @@ import Consoles from "./Consoles.component";
 import { OPERATION_OUTCOME } from "../../utils/constants";
 
 const ConsolesContainer = () => {
-  const { setConsolesList, openSnackbar, setBrandsList, setIsLoading } = useContext(AppState);
+  const { setConsolesList, openSnackbar, setBrandsList, setIsLoading, setInitialLetter } = useContext(AppState);
   const { brandId } = useParams()
 
   useEffect(() => {
     getConsolesByBrand()
+    setInitialLetter('#')
   }, []);
 
   const getConsolesByBrand = async () => {

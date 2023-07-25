@@ -1,14 +1,20 @@
 import { useContext } from 'react';
 import { AppState } from "../../Config/store/state";
 import BrandsList from './BrandsList.component';
+// import classes from './Brands.module.css';
 
 const Brands = () => {
   const { brand } = useContext(AppState);
 
   return (
-    <BrandsList
-      brands={brand.list}
-    />
+    <>
+      <header>
+        <h4>Pick a brand</h4>
+      </header>
+      <BrandsList
+        brands={brand.list}
+      />
+    </>
   )
 }
 

@@ -33,3 +33,16 @@
   .brand-text {
     font-size: 40px
   }
+
+  .card-footer {
+    text-align: end;
+  }
+
+  .table-buttons-container button:first-of-type,
+  .nav-buttons button:first-of-type {
+    margin-right: 5px;
+  }
+
+  .nav-buttons {
+    margin-top: 8px;
+  }

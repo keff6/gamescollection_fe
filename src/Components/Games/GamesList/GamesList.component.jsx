@@ -7,25 +7,25 @@ const GamesList = ({ games, deleteGame, editGame }) => {
   return (
     <>
       {(games?.length > 0) &&
-      <Table>
+      <Table className={classes.table}>
         <thead>
           <tr>
             <th>Title</th>
-            <th>Year</th>
-            <th>Notes</th>
-            <th></th>
+            <th className={classes.width10}>Year</th>
+            <th className={classes.width35}>Notes</th>
+            <th className={classes.width15}></th>
           </tr>
         </thead>
         <tbody>
           {games?.map(game => (
             <tr key={game.id}>
-              <td>{game.title}</td>
+              <td className={classes.textOverflow}>{game.title}</td>
               <td>{game.year}</td>
-              <td>{game.notes}</td>
+              <td className={classes.textOverflow}>{game.notes}</td>
               <td>
                 <div className={classes.tableButtonsContainer}>
                   <Button
-                    variant="outline-dark"
+                    variant="outline-light"
                     size="sm"
                     onClick={() => editGame(game)}
                   >

@@ -15,20 +15,23 @@ const BrandCard = ({brandData}) => {
     navigate(`/${brandData.id}/consoles`)
   }
 
+  console.log(brandData.logoUrl)
   return (
     <Card className={classes.card}>
       <Card.Body className={classes.cardBody}>
         <Card.Title>
-          {brandData.logoURL ?
-          <img className={classes.logoImg} src={brandData.logoURL} alt={brandData.name} />
+          {brandData.logoUrl ?
+          <img className={classes.logoImg} src={brandData.logoUrl} alt={brandData.name} />
           : <span className={classes.brandText}>{brandData.name}</span>}
         </Card.Title>
-        <Button
-          variant="primary"
-          onClick={navigateToConsoleHandler}
-        >
-          Go <ArrowRight />
-        </Button>
+        <footer className={classes.cardFooter}>
+          <Button
+            variant="primary"
+            onClick={navigateToConsoleHandler}
+          >
+            Go <ArrowRight />
+          </Button>
+        </footer>
       </Card.Body>
     </Card>
   ) 

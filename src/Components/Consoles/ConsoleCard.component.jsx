@@ -20,36 +20,38 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole }) => {
     <Card className={classes.card}>
       <Card.Body className={classes.cardBody}>
         <Card.Title>
-          {consoleData.logoURL ?
-          <img className={classes.logoImg} src={consoleData.logoURL} alt={consoleData.name} />
+          {consoleData.logoUrl ?
+          <img className={classes.logoImg} src={consoleData.logoUrl} alt={consoleData.name} />
           : <span className={classes.brandText}>{consoleData.name}</span>}
         </Card.Title>
-        <div className={classes.tableButtonsContainer}>
-          <Button
-            variant="outline-dark"
-            size="sm"
-            onClick={() => editConsole(consoleData)}
-          >
-            <PencilSquare />
-          </Button>
-          <Button
-            variant="outline-danger"
-            size="sm"
-            onClick={() => deleteConsole(consoleData)}
-          >
-            <Trash />
-          </Button>
-        </div>
-        <div>
-          <button type="button" className="btn btn-link">Details</button>
-          <button
-            type="button"
-            className="btn btn-link"
-            onClick={navigateToGamesHandler}
-          >
-            Games
-          </button>  
-        </div>
+        <footer className={classes.cardFooter}>
+          <div className={classes.tableButtonsContainer}>
+            <Button
+              variant="outline-light"
+              size="sm"
+              onClick={() => editConsole(consoleData)}
+            >
+              <PencilSquare />
+            </Button>
+            <Button
+              variant="outline-danger"
+              size="sm"
+              onClick={() => deleteConsole(consoleData)}
+            >
+              <Trash />
+            </Button>
+          </div>
+          <div className={classes.navButtons}>
+            <Button type="button" variant="info">Details</Button>
+            <Button
+              type="button"
+              variant="primary"
+              onClick={navigateToGamesHandler}
+            >
+              Games
+            </Button>  
+          </div>
+        </footer>
       </Card.Body>
     </Card>
   ) 

@@ -77,10 +77,34 @@
   }
 
   /*  table list  */
+.table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.width10 {
+  width: 10%;
+}
+
+.width15 {
+  width: 15%;
+}
+
+.width35 {
+  width: 35%;
+}
+
+
   .table-buttons-container {
     text-align: right;
   }
   
   .table-buttons-container button:first-of-type {
     margin-right: 5px;
+  }
+
+  .text-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
