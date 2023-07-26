@@ -48,14 +48,29 @@
     padding: 0.5rem 2px !important;
   }
 
+  .options-buttons > label, 
+  .options-buttons > label:hover, 
+  .options-buttons > label:active {
+    border-color: #bf67e0 !important;
+    color: #bf67e0 !important;
+  }
+  
+
+  input:checked + .toggle-button {
+    border-color: #bf67e0 !important;
+    background-color: #6117ab !important;
+    color: white !important;
+  }
+
    /* Forms */
-  .sagas-container {
+  .custom-container {
     border: 1px solid #9699a8;
     border-radius: 5px;
     padding: 10px;
+    margin-bottom: 20px;
   }
 
-  .sagas-list {
+  .custom-list {
     border: 1px solid #9699a8;
     height: 100%;
     border-radius: 5px;
@@ -107,4 +122,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .custom-modal-body {
+    padding: 0 !important;
   }

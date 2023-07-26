@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { Button, Modal, Form, Row, Col, InputGroup, Badge } from 'react-bootstrap';
+import { Button, Modal, Form, Row, Col, InputGroup, Badge, Accordion } from 'react-bootstrap';
 import proptypes from 'prop-types';
 import { XCircle } from "react-bootstrap-icons";
 import { AppState } from "../../Config/store/state";
@@ -141,220 +141,232 @@ const GameForm = ({
           {isEdit ? 'Edit' : 'Add'} Game
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className={classes.customModalBody}>
         <Form id="gameForm" noValidate validated={validated} onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="title">
-            <Form.Label>Title</Form.Label>
-            <Form.Control
-              type="text"
-              name="title"
-              placeholder="Enter game title"
-              value={gameObj.title}
-              onChange={(e) => handleChange("title", e.target.value)}
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              Please enter a valid text.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Row>
-            <Col md={6}>
-              <Form.Group className="mb-3" controlId="consoleId">
-                <Form.Label>Console</Form.Label>
-                <Form.Select
-                  aria-label="consoleId"
-                  name="consoleId"
-                  value={gameObj.consoleId || currentConsoleId || ''}
-                  onChange={(e) => handleChange("consoleId", e.target.value)}
-                  required
-                >
-                  <option value=''>Select a console</option>
-                  {console?.list?.map(c =>
-                    <option key={c.id} value={c.id}>{c.name}</option>
-                  )}
-                </Form.Select>
-                <Form.Control.Feedback type="invalid">
-                  Please select a valid console.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-            <Col md={6}>
-            <Form.Group className="mb-3" controlId="year">
-              <Form.Label>Year</Form.Label>
-                <Form.Select
-                  aria-label="year"
-                  name="year"
-                  value={gameObj.year || ''}
-                  onChange={(e) => handleChange("year", e.target.value)}
-                >
-                  <option value=''>Enter console release year (America)</option>
-                  {renderYearsSelect()}
-                </Form.Select>
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={6}>
-              <Form.Group className="mb-3" controlId="developer">
-                <Form.Label>Developer</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="developer"
-                  placeholder="Enter game developer"
-                  value={gameObj.developer}
-                  onChange={(e) => handleChange("developer", e.target.value)}
-                />
-              </Form.Group>
-            </Col>
-            <Col md={6}>
-              <Form.Group className="mb-3" controlId="publisher">
-              <Form.Label>Publisher</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="publisher"
-                  placeholder="Enter game publisher"
-                  value={gameObj.publisher}
-                  onChange={(e) => handleChange("publisher", e.target.value)}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <div className="mb-3">
-            <Form.Check
-              inline
-              type="checkbox"
-              id="isNew"
-              name="isNew"
-              label="Is New"
-              checked={gameObj.isNew}
-              onChange={(e) => handleChange("isNew", e.target.checked)}
-            />
-            <Form.Check
-              inline
-              type="checkbox"
-              id="isComplete"
-              name="isComplete"
-              label="Is Complete"
-              checked={gameObj.isComplete}
-              onChange={(e) => handleChange("isComplete", e.target.checked)}
-            />
-            <Form.Check
-              inline
-              type="checkbox"
-              id="isDigital"
-              name="isDigital"
-              label="Is Digital"
-              checked={gameObj.isDigital}
-              onChange={(e) => handleChange("isDigital", e.target.checked)}
-            />
-          </div>
-          <Row className={classes.sagasContainer}>
-            <Col md={4}>
-              <Form.Group className="mb-3" controlId="sagaText">
-                <Form.Label>Saga</Form.Label>
-                <InputGroup className="mb-3">
+          <Accordion defaultActiveKey="0">
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Game Data</Accordion.Header>
+              <Accordion.Body>
+                <Form.Group className="mb-3" controlId="title">
+                  <Form.Label>Title</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Add a saga"
-                    name="sagaText"
-                    value={gameObj.sagaText || ""}
-                    onChange={(e) => handleChange("sagaText", e.target.value)}
+                    name="title"
+                    placeholder="Enter game title"
+                    value={gameObj.title}
+                    onChange={(e) => handleChange("title", e.target.value)}
+                    required
                   />
-                  <Button
-                    variant="secondary"
-                    onClick={handleAddSaga}
-                    disabled={gameObj.sagaText?.length === 0}
-                  >
-                    Add
-                  </Button>
-                </InputGroup>
-              </Form.Group>
-              
-            </Col>
-            <Col md={8}>
-              <div className={classes.sagasList}>
-                {gameObj?.saga?.length > 0 &&
-                  gameObj?.saga?.map(s => 
-                    <Badge key={s} pill bg="secondary" className={classes.badge}>
-                      <span className={classes.badgeText}>{s}</span>
-                      <XCircle
-                        className={classes.badgeButton}
-                        onClick={() => handleRemoveSaga(s)}
+                  <Form.Control.Feedback type="invalid">
+                    Please enter a valid text.
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Row>
+                  <Col md={6}>
+                    <Form.Group className="mb-3" controlId="consoleId">
+                      <Form.Label>Console</Form.Label>
+                      <Form.Select
+                        aria-label="consoleId"
+                        name="consoleId"
+                        value={gameObj.consoleId || currentConsoleId || ''}
+                        onChange={(e) => handleChange("consoleId", e.target.value)}
+                        required
+                      >
+                        <option value=''>Select a console</option>
+                        {console?.list?.map(c =>
+                          <option key={c.id} value={c.id}>{c.name}</option>
+                        )}
+                      </Form.Select>
+                      <Form.Control.Feedback type="invalid">
+                        Please select a valid console.
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                  </Col>
+                  <Col md={6}>
+                  <Form.Group className="mb-3" controlId="year">
+                    <Form.Label>Year</Form.Label>
+                      <Form.Select
+                        aria-label="year"
+                        name="year"
+                        value={gameObj.year || ''}
+                        onChange={(e) => handleChange("year", e.target.value)}
+                      >
+                        <option value=''>Enter console release year (America)</option>
+                        {renderYearsSelect()}
+                      </Form.Select>
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={6}>
+                    <Form.Group className="mb-3" controlId="developer">
+                      <Form.Label>Developer</Form.Label>
+                      <Form.Control
+                        type="text"
+                        name="developer"
+                        placeholder="Enter game developer"
+                        value={gameObj.developer}
+                        onChange={(e) => handleChange("developer", e.target.value)}
                       />
-                    </Badge>
-                  )
-                }
-              </div>
-            </Col>
-          </Row>
-
-          <Row className={classes.sagasContainer}>
-            <Col md={4}>
-              <Form.Group className="mb-3" controlId="selectedGenre">
-                <Form.Label>Genre</Form.Label>
-                <InputGroup className="mb-3">
-                  <Form.Select
-                    aria-label="selectedGenre"
-                    name="selectedGenre"
-                    value={gameObj.selectedGenre || ""}
-                    onChange={(e) => handleChange("selectedGenre", e.target.value)}
-                  >
-                    <option value=''>Add a genre</option>
-                    {genre?.list.map(g =>
-                      <option key={g.id} value={g.id}>{g.name}</option>
-                    )}
-                  </Form.Select>
-                  <Button
-                    variant="secondary"
-                    onClick={handleAddGenre}
-                    disabled={gameObj.selectedGenre === ''}
-                  >
-                    Add
-                  </Button>
-                </InputGroup>
-              </Form.Group>
-              
-            </Col>
-            <Col md={8}>
-              <div className={classes.sagasList}>
-                {gameObj?.genres?.length > 0 &&
-                  gameObj.genres.map(s => 
-                    <Badge key={s} pill bg="secondary" className={classes.badge}>
-                      <span className={classes.badgeText}>
-                        {genreDictionary[s]}
-                      </span>
-                      <XCircle
-                        className={classes.badgeButton}
-                        onClick={() => handleRemoveGenre(s)}
+                    </Form.Group>
+                  </Col>
+                  <Col md={6}>
+                    <Form.Group className="mb-3" controlId="publisher">
+                    <Form.Label>Publisher</Form.Label>
+                      <Form.Control
+                        type="text"
+                        name="publisher"
+                        placeholder="Enter game publisher"
+                        value={gameObj.publisher}
+                        onChange={(e) => handleChange("publisher", e.target.value)}
                       />
-                    </Badge>
-                  )
-                }
-              </div>
-            </Col>
-          </Row>
+                    </Form.Group>
+                  </Col>
+                </Row>
 
-          <Form.Group className="mb-3" controlId="coverUrl">
-            <Form.Label>Cover URL</Form.Label>
-            <Form.Control
-              type="text"
-              name="coverUrl"
-              placeholder="Enter cover url"
-              value={gameObj.coverUrl}
-              onChange={(e) => handleChange("coverUrl", e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="notes">
-            <Form.Label>Notes</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={2}
-              name="notes"
-              value={gameObj.notes}
-              onChange={(e) => handleChange("notes", e.target.value)}
-            />
-          </Form.Group>
+                <div className="mb-3">
+                  <Form.Check
+                    inline
+                    type="checkbox"
+                    id="isNew"
+                    name="isNew"
+                    label="Is New"
+                    checked={gameObj.isNew}
+                    onChange={(e) => handleChange("isNew", e.target.checked)}
+                  />
+                  <Form.Check
+                    inline
+                    type="checkbox"
+                    id="isComplete"
+                    name="isComplete"
+                    label="Is Complete"
+                    checked={gameObj.isComplete}
+                    onChange={(e) => handleChange("isComplete", e.target.checked)}
+                  />
+                  <Form.Check
+                    inline
+                    type="checkbox"
+                    id="isDigital"
+                    name="isDigital"
+                    label="Is Digital"
+                    checked={gameObj.isDigital}
+                    onChange={(e) => handleChange("isDigital", e.target.checked)}
+                  />
+                </div>
+                <Form.Group className="mb-3" controlId="coverUrl">
+                <Form.Label>Cover URL</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="coverUrl"
+                  placeholder="Enter cover url"
+                  value={gameObj.coverUrl}
+                  onChange={(e) => handleChange("coverUrl", e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="notes">
+                <Form.Label>Notes</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={2}
+                  name="notes"
+                  value={gameObj.notes}
+                  onChange={(e) => handleChange("notes", e.target.value)}
+                />
+              </Form.Group>
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="1">
+              <Accordion.Header>Sagas and Genres</Accordion.Header>
+              <Accordion.Body>
+                <Row className={classes.customContainer}>
+                  <Col md={4}>
+                    <Form.Group className="mb-3" controlId="sagaText">
+                      <Form.Label>Saga</Form.Label>
+                      <InputGroup className="mb-3">
+                        <Form.Control
+                          type="text"
+                          placeholder="Add a saga"
+                          name="sagaText"
+                          value={gameObj.sagaText || ""}
+                          onChange={(e) => handleChange("sagaText", e.target.value)}
+                        />
+                        <Button
+                          variant="secondary"
+                          onClick={handleAddSaga}
+                          disabled={gameObj.sagaText?.length === 0}
+                        >
+                          Add
+                        </Button>
+                      </InputGroup>
+                    </Form.Group>
+                    
+                  </Col>
+                  <Col md={8}>
+                    <div className={classes.customList}>
+                      {gameObj?.saga?.length > 0 &&
+                        gameObj?.saga?.map(s => 
+                          <Badge key={s} pill bg="secondary" className={classes.badge}>
+                            <span className={classes.badgeText}>{s}</span>
+                            <XCircle
+                              className={classes.badgeButton}
+                              onClick={() => handleRemoveSaga(s)}
+                            />
+                          </Badge>
+                        )
+                      }
+                    </div>
+                  </Col>
+                </Row>
+                <Row className={classes.customContainer}>
+                  <Col md={4}>
+                    <Form.Group className="mb-3" controlId="selectedGenre">
+                      <Form.Label>Genre</Form.Label>
+                      <InputGroup className="mb-3">
+                        <Form.Select
+                          aria-label="selectedGenre"
+                          name="selectedGenre"
+                          value={gameObj.selectedGenre || ""}
+                          onChange={(e) => handleChange("selectedGenre", e.target.value)}
+                        >
+                          <option value=''>Add a genre</option>
+                          {genre?.list.map(g =>
+                            <option key={g.id} value={g.id}>{g.name}</option>
+                          )}
+                        </Form.Select>
+                        <Button
+                          variant="secondary"
+                          onClick={handleAddGenre}
+                          disabled={gameObj.selectedGenre === ''}
+                        >
+                          Add
+                        </Button>
+                      </InputGroup>
+                    </Form.Group>
+                    
+                  </Col>
+                  <Col md={8}>
+                    <div className={classes.customList}>
+                      {gameObj?.genres?.length > 0 &&
+                        gameObj.genres.map(s => 
+                          <Badge key={s} pill bg="secondary" className={classes.badge}>
+                            <span className={classes.badgeText}>
+                              {genreDictionary[s]}
+                            </span>
+                            <XCircle
+                              className={classes.badgeButton}
+                              onClick={() => handleRemoveGenre(s)}
+                            />
+                          </Badge>
+                        )
+                      }
+                    </div>
+                  </Col>
+                </Row>
+              </Accordion.Body>
+            </Accordion.Item>
+            
+          </Accordion>
+          
         </Form>
       </Modal.Body>
       <Modal.Footer>

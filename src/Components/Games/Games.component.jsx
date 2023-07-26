@@ -64,7 +64,7 @@ const Games = ({
 
   return (
     <>
-      <Breadcrumb items={NavigationItems(currentBrand.id)} />
+      <Breadcrumb items={NavigationItems(currentBrand?.id)} />
       <div>
         <header className={classes.header}>
           <h2>Games</h2>

@@ -10,8 +10,9 @@ const GamesListOptions = () => {
 
   return (
     <div>
-      <ButtonGroup>
+      <ButtonGroup className={classes.optionsButtons}>
         <ToggleButton
+          className={classes.toggleButton}
           key="alphabetic"
           id="radio-alphabetic"
           type="radio"
@@ -24,6 +25,7 @@ const GamesListOptions = () => {
           A-Z
         </ToggleButton>
         <ToggleButton
+          className={classes.toggleButton} 
           key="wishlist"
           id="radio-wishlist"
           type="radio"
@@ -36,6 +38,7 @@ const GamesListOptions = () => {
           Wishlist
         </ToggleButton>
         <ToggleButton
+          className={classes.toggleButton}
           key="search"
           id="radio-search"
           type="radio"

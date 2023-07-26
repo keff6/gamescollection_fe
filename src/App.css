@@ -12,14 +12,23 @@ main {
   color: white;
 }
 
+main a {
+  color: teal !important;
+  text-decoration: none !important;
+}
+
 .table {
   color: white;
 }
 
 /* Card global styles */
 .card {
-  border-color: #10aeaa;
+  border-color: #324879;
   border-radius: 5px;
+}
+
+.card-title {
+  color: #182545;
 }
 
 .card-body {
@@ -31,9 +40,49 @@ main {
 .modal-header, .modal-footer {
   background-color: #424a65;
   color: white;
+  border-color: #324879;
 }
 
-.modal-body {
-  background-color: rgb(66 66 71 / 90%);
+.modal-body, .accordion-body {
+  background-color: rgb(43 66 109 / 73%);
   color: white;
 }
+
+/* Accordion */
+
+.accordion-item:first-of-type,
+.accordion-item:last-of-type,
+.accordion-item:first-of-type .accordion-button,
+.accordion-item:last-of-type .accordion-button {
+  border: none;
+  border-radius: 0%;
+}
+
+.accordion-button, .accordion-item {
+  background-color: rgb(165, 188, 209);
+  color: #0f244f;
+  border: none;
+  border-radius: 0%;
+}
+.accordion-button:not(.collapsed) {
+  background-color: #3a73e8;
+  color: white;
+  border: none;
+  border-radius: 0%;
+}
+
+
+/* Buttons */
+.btn-primary {
+  background-color: #844bec;
+  border-color: #844bec;
+}
+
+.btn-primary:focus,
+.btn-primary:hover,
+.btn-primary:active {
+  background-color: #52278a !important;
+  border-color: #844bec !important;
+}
+
+
