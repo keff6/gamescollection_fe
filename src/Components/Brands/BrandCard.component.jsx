@@ -24,14 +24,12 @@ const BrandCard = ({brandData}) => {
           <img className={classes.logoImg} src={brandData.logoUrl} alt={brandData.name} />
           : <span className={classes.brandText}>{brandData.name}</span>}
         </Card.Title>
-        <footer className={classes.cardFooter}>
-          <Button
-            variant="primary"
-            onClick={navigateToConsoleHandler}
-          >
-            Go <ArrowRight />
-          </Button>
-        </footer>
+        <Button
+          variant="primary"
+          onClick={navigateToConsoleHandler}
+        >
+          Go <ArrowRight />
+        </Button>
       </Card.Body>
     </Card>
   ) 

@@ -26,6 +26,7 @@ const Games = ({
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = (brand?.selected) ? brand.selected : JSON.parse(sessionStorage.getItem('brandData')); 
+  const currentConsole = (console?.selected) ? console.selected : JSON.parse(sessionStorage.getItem('consoleData')); 
 
   const handleAddNewGame = async (gameObj) => {
     addGame(gameObj)
@@ -67,12 +68,14 @@ const Games = ({
       <Breadcrumb items={NavigationItems(currentBrand?.id)} />
       <div>
         <header className={classes.header}>
-          <h2>Games</h2>
+          <div className={classes.gamesHeader}>
+            <h2>{currentConsole?.name}</h2>
+            <h6>{currentBrand?.name}</h6>
+          </div>
           <Button onClick={() => setShowForm(true)}>Add Game</Button>
         </header>
       </div>
-      <GamesListOptions
-      />
+      <GamesListOptions />
       <GamesList
         editGame={handleEditGame}
         deleteGame={handleDeleteGame}

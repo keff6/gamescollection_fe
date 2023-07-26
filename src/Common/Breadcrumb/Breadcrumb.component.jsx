@@ -1,9 +1,10 @@
 import { Breadcrumb as BootstrapBreadcrumb } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import proptypes from 'prop-types';
+import classes from './Breadcrumb.module.css';
 
 const Breadcrumb = ({ items }) =>
-  <BootstrapBreadcrumb>
+  <BootstrapBreadcrumb className={classes.breadcrumbContainer}>
     {items.map((item, idx) =>
       <BootstrapBreadcrumb.Item
         key={idx}

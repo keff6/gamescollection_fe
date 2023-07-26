@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { ButtonGroup, ToggleButton, Container } from "react-bootstrap";
+import { ButtonGroup, ToggleButton, Container, InputGroup, Form, Button } from "react-bootstrap";
+import { Search } from "react-bootstrap-icons";
 import { AppState } from "../../../Config/store/state";
 import { GAME_LIST_OPTIONS } from '../../../utils/constants';
 import AlphabetButtons from './AlphabetButtons.component';
@@ -57,8 +58,16 @@ const GamesListOptions = () => {
           <AlphabetButtons />
           : listOption === GAME_LIST_OPTIONS.SEARCH ?
           <div>
-            <input type="text" />
-            <p>search</p>
+            <InputGroup className="mb-3">
+              <Form.Control
+                placeholder="Game title"
+                aria-label="Game title"
+                aria-describedby="basic-addon2"
+              />
+              <Button variant="primary" id="button-addon2">
+                <Search />
+              </Button>
+            </InputGroup>
           </div>
           : null
         }

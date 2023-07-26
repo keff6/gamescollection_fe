@@ -44,8 +44,16 @@
     justify-content: space-around;
   }
 
-  .tabItem {
+  .custom-nav-link {
     padding: 0.5rem 2px !important;
+  }
+
+  .custom-nav-link-active {
+    padding: 0.5rem 4px !important;
+    background-color: black !important;
+    border-color: darkgrey !important;
+    font-weight: 900 !important;
+    color: rgb(53, 234, 234) !important;
   }
 
   .options-buttons > label, 
@@ -126,4 +134,19 @@
 
   .custom-modal-body {
     padding: 0 !important;
+  }
+
+  .games-header > * {
+    margin: 0;
+  }
+
+  .games-header h6 {
+    color: #7a7f7f;
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  .empty-list-text {
+    text-align: center;
+    color: #7a7f7f;
   }

@@ -17,10 +17,11 @@ const Consoles = ({
   deleteConsole,
   updateConsole,
 }) => {
-  const { console, setSelectedConsole } = useContext(AppState);
+  const { console, setSelectedConsole, brand: { selected: selectedBrand } } = useContext(AppState);
   const [showForm, setShowForm] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const currentBrand = selectedBrand ? selectedBrand : JSON.parse(sessionStorage.getItem('brandData'));
 
   const handleAddNewConsole = async (consoleObj) => {
     addConsole(consoleObj)
@@ -62,7 +63,9 @@ const Consoles = ({
       <Breadcrumb items={NavigationItems} />
       <div>
         <header className={classes.header}>
-          <h2>Consoles</h2>
+          <div className={classes.consolesHeader}>
+            <h2>{currentBrand.name}</h2>
+          </div>
           <Button onClick={() => setShowForm(true)}>Add Console</Button>
         </header>
       </div>

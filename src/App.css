@@ -1,3 +1,6 @@
+/***************************************************/
+/* GENERAL STYLES                                  */
+/***************************************************/
 html, body, #app, #app>div, #root, .container {
   height: 100%
 }
@@ -17,11 +20,18 @@ main a {
   text-decoration: none !important;
 }
 
+main a:hover,
+main a:active {
+  color: rgb(53, 234, 234) !important;
+}
+
 .table {
   color: white;
 }
 
-/* Card global styles */
+/***************************************************/
+/* CARD STYLES                                     */
+/***************************************************/
 .card {
   border-color: #324879;
   border-radius: 5px;
@@ -36,7 +46,9 @@ main a {
   background-color: rgb(96 118 139 / 84%);
 }
 
-/* Forms */
+/***************************************************/
+/* FORM STYLES                                  */
+/***************************************************/
 .modal-header, .modal-footer {
   background-color: #424a65;
   color: white;
@@ -48,7 +60,9 @@ main a {
   color: white;
 }
 
-/* Accordion */
+/***************************************************/
+/* ACCORDION STYLES                                  */
+/***************************************************/
 
 .accordion-item:first-of-type,
 .accordion-item:last-of-type,
@@ -72,7 +86,12 @@ main a {
 }
 
 
-/* Buttons */
+/***************************************************/
+/* BUTTON STYLES                                  */
+/***************************************************/
+.btn {
+  max-height: 38px;
+}
 .btn-primary {
   background-color: #844bec;
   border-color: #844bec;

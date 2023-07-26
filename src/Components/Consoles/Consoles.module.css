@@ -46,3 +46,7 @@
   .nav-buttons {
     margin-top: 8px;
   }
+
+  .consoles-header > * {
+    margin: 0;
+  }

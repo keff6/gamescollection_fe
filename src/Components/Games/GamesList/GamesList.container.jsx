@@ -16,7 +16,6 @@ const GamesListContainer = ({
 
   useEffect(() => {
     const { listOption } = game;
-    console.log({listOption})
 
     switch(listOption) {
       case GAME_LIST_OPTIONS.ALPHABET:
@@ -38,6 +37,7 @@ const GamesListContainer = ({
       games={game.list}
       editGame={editGame}
       deleteGame={deleteGame}
+      listOption={game.listOption}
     />
     )
 }
