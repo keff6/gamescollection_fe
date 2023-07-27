@@ -22,3 +22,5 @@ export const GAME_LIST_OPTIONS = {
   };
 
 export const ALPHABET = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+export const NO_DATA = 'N/A';

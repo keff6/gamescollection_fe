@@ -6,7 +6,7 @@ import ConsoleCard from "./ConsoleCard.component";
 import { Spinner } from "../../Common";
 import classes from './Consoles.module.css';
 
-const ConsolesList = ({consoles, editConsole, deleteConsole}) => {
+const ConsolesList = ({consoles, editConsole, deleteConsole, viewDetails}) => {
   const { isLoading } = useContext(AppState);
 
   if(isLoading) return <Spinner />
@@ -17,7 +17,12 @@ const ConsolesList = ({consoles, editConsole, deleteConsole}) => {
       <Row className={`justify-content-md-center`} >
         {consoles.map(c => (
           <Col key={c.id} lg={12} className={classes.customCol}>
-            <ConsoleCard consoleData={c} editConsole={editConsole} deleteConsole={deleteConsole} />
+            <ConsoleCard
+              consoleData={c}
+              editConsole={editConsole}
+              deleteConsole={deleteConsole}
+              viewDetails={viewDetails}
+            />
           </Col>
         ))}
       </Row>}
@@ -30,6 +35,7 @@ ConsolesList.propTypes = {
   consoles: proptypes.array,
   deleteConsole: proptypes.func,
   editConsole: proptypes.func,
+  viewDetails: proptypes.func,
 }
 
 export default ConsolesList;

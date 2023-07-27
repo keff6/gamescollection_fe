@@ -50,3 +50,21 @@
   .consoles-header > * {
     margin: 0;
   }
+
+/***************************************************/
+/* VIEW DETAILS                                    */
+/***************************************************/
+
+.data-row {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.data-label {
+  color: lightgrey;
+  margin-right: 16px;
+}
+
+.data-text {
+  color: #05112c;
+}

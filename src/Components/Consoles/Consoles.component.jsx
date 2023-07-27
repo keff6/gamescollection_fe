@@ -6,6 +6,7 @@ import { AppState } from "../../Config/store/state";
 import ConsolesList from "./ConsolesList.component";
 import { DeleteAlertModal,Breadcrumb } from "../../Common"
 import ConsoleForm from './ConsoleForm.component';
+import ConsoleDetails from './ConsoleDetails.component';
 import classes from './Consoles.module.css';
 
 const NavigationItems = [
@@ -21,6 +22,7 @@ const Consoles = ({
   const navigate = useNavigate();
   const { console, setSelectedConsole, brand: { selected: selectedBrand } } = useContext(AppState);
   const [showForm, setShowForm] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = selectedBrand ? selectedBrand : JSON.parse(sessionStorage.getItem('brandData'));
@@ -44,6 +46,11 @@ const Consoles = ({
     setShowForm(true)
   }
 
+  const handleViewDetails = (selectedConsole) => {
+    setSelectedConsole({...selectedConsole})
+    setShowDetails(true)
+  }
+
   const handleUpdateConsole = async (consoleId, updatedConsoleObj) => {
     updateConsole(consoleId, updatedConsoleObj)
   }
@@ -51,6 +58,10 @@ const Consoles = ({
   const handleCloseFormModal = () => {
     setIsEdit(false)
     setShowForm(false)
+  }
+
+  const handleCloseDetailsModal = () => {
+    setShowDetails(false)
   }
 
   const handleCancelDelete = () => {
@@ -79,6 +90,7 @@ const Consoles = ({
         consoles={console.list}
         editConsole={handleEditConsole}
         deleteConsole={handleDeleteConsole}
+        viewDetails={handleViewDetails}
       />
       <ConsoleForm
         show={showForm}
@@ -91,6 +103,10 @@ const Consoles = ({
         show={showConfirmDelete}
         onCancel={handleCancelDelete}
         onConfirm={handleConfirmDelete}
+      />
+      <ConsoleDetails
+        show={showDetails}
+        onHide={handleCloseDetailsModal}
       />
     </>
   )
