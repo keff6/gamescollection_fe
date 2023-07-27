@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
 import { AppState } from "../../Config/store/state";
@@ -17,11 +18,16 @@ const Consoles = ({
   deleteConsole,
   updateConsole,
 }) => {
+  const navigate = useNavigate();
   const { console, setSelectedConsole, brand: { selected: selectedBrand } } = useContext(AppState);
   const [showForm, setShowForm] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = selectedBrand ? selectedBrand : JSON.parse(sessionStorage.getItem('brandData'));
+
+  if(!currentBrand) {
+    navigate('/', { replace: true });
+  }
 
   const handleAddNewConsole = async (consoleObj) => {
     addConsole(consoleObj)
@@ -64,7 +70,7 @@ const Consoles = ({
       <div>
         <header className={classes.header}>
           <div className={classes.consolesHeader}>
-            <h2>{currentBrand.name}</h2>
+            <h2>{currentBrand?.name}</h2>
           </div>
           <Button onClick={() => setShowForm(true)}>Add Console</Button>
         </header>

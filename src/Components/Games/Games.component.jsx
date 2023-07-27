@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
 import { AppState } from "../../Config/store/state";
@@ -21,12 +22,17 @@ const Games = ({
   getGamesByConsoleAndLetter,
   getWishlistByConsole,
 }) => {
+  const navigate = useNavigate();
   const { game, setSelectedGame, brand, console } = useContext(AppState);
   const [showForm, setShowForm] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = (brand?.selected) ? brand.selected : JSON.parse(sessionStorage.getItem('brandData')); 
   const currentConsole = (console?.selected) ? console.selected : JSON.parse(sessionStorage.getItem('consoleData')); 
+
+  if(!currentBrand || !currentConsole) {
+    navigate('/', { replace: true });
+  }
 
   const handleAddNewGame = async (gameObj) => {
     addGame(gameObj)
