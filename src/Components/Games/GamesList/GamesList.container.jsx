@@ -12,7 +12,7 @@ const GamesListContainer = ({
   getWishlistByConsole,
   getGamesByConsoleAndLetter,
 }) => {
-  const { game, isLoading } = useContext(AppState);
+  const { game, isLoading, setGamesList } = useContext(AppState);
 
   useEffect(() => {
     const { listOption } = game;
@@ -25,6 +25,7 @@ const GamesListContainer = ({
         getWishlistByConsole();
         break;
       case GAME_LIST_OPTIONS.SEARCH:
+        setGamesList([]);
         break;
       default:
         break;

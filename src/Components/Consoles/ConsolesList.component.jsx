@@ -21,7 +21,7 @@ const ConsolesList = ({consoles, editConsole, deleteConsole}) => {
           </Col>
         ))}
       </Row>}
-      {(consoles.length === 0) && <h3>There are no consoles yet!</h3>}
+      {(consoles.length === 0) && <h3 className="empty-list-text">There are no consoles yet!</h3>}
     </Container>
   )
 }

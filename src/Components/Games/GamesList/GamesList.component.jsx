@@ -49,7 +49,7 @@ const GamesList = ({ games, deleteGame, editGame, listOption }) => {
         </tbody>
       </Table>}
       {(games?.length === 0) &&
-        <h3 className={classes.emptyListText}>
+        <h3 className="empty-list-text">
           {emptyListMessage}
         </h3>}
     </>

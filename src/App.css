@@ -29,6 +29,22 @@ main a:active {
   color: white;
 }
 
+th {
+  background-color: #27489230 !important;
+  color: #8ca3f3;
+  letter-spacing: 1px;
+}
+
+tbody {
+  border-color: #353639;
+}
+
+.empty-list-text {
+  text-align: center;
+  color: #7a7f7f;
+  padding-top: 30px;
+}
+
 /***************************************************/
 /* CARD STYLES                                     */
 /***************************************************/
