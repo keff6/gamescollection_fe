@@ -23,6 +23,12 @@
 
 .card-body {
   padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-body button{
+  align-self: flex-end;
 }
 
 .logo-img {
@@ -31,8 +37,4 @@
 
 .brand-text {
   font-size: 40px
-}
-
-.card-footer {
-  text-align: end;
 }

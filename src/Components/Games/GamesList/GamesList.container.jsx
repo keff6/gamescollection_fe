@@ -11,12 +11,12 @@ const GamesListContainer = ({
   deleteGame,
   getWishlistByConsole,
   getGamesByConsoleAndLetter,
+  viewDetails,
 }) => {
-  const { game, isLoading } = useContext(AppState);
+  const { game, isLoading, setGamesList } = useContext(AppState);
 
   useEffect(() => {
     const { listOption } = game;
-    console.log({listOption})
 
     switch(listOption) {
       case GAME_LIST_OPTIONS.ALPHABET:
@@ -26,6 +26,7 @@ const GamesListContainer = ({
         getWishlistByConsole();
         break;
       case GAME_LIST_OPTIONS.SEARCH:
+        setGamesList([]);
         break;
       default:
         break;
@@ -38,6 +39,8 @@ const GamesListContainer = ({
       games={game.list}
       editGame={editGame}
       deleteGame={deleteGame}
+      listOption={game.listOption}
+      viewDetails={viewDetails}
     />
     )
 }
@@ -47,6 +50,7 @@ GamesListContainer.propTypes ={
   deleteGame: proptypes.func,
   getGamesByConsoleAndLetter: proptypes.func,
   getWishlistByConsole: proptypes.func,
+  viewDetails: proptypes.func,
 }
 
 export default GamesListContainer

@@ -1,17 +1,25 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ButtonGroup, ToggleButton, Container } from "react-bootstrap";
+import proptypes from 'prop-types';
 import { AppState } from "../../../Config/store/state";
 import { GAME_LIST_OPTIONS } from '../../../utils/constants';
 import AlphabetButtons from './AlphabetButtons.component';
+import SearchGames from './SearchGames.component';
 import classes from '../Games.module.css';
 
-const GamesListOptions = () => {
-  const { game: { listOption }, setGamesListOption } = useContext(AppState);
+const GamesListOptions = ({ searchGames }) => {
+  const { game: { listOption }, setGamesListOption, setInitialLetter } = useContext(AppState);
+
+  useEffect(() => () => {
+    setGamesListOption(GAME_LIST_OPTIONS.ALPHABET);
+    setInitialLetter('#');
+  },[])
 
   return (
     <div>
-      <ButtonGroup>
+      <ButtonGroup className={classes.optionsButtons}>
         <ToggleButton
+          className={classes.toggleButton}
           key="alphabetic"
           id="radio-alphabetic"
           type="radio"
@@ -24,6 +32,7 @@ const GamesListOptions = () => {
           A-Z
         </ToggleButton>
         <ToggleButton
+          className={classes.toggleButton} 
           key="wishlist"
           id="radio-wishlist"
           type="radio"
@@ -36,6 +45,7 @@ const GamesListOptions = () => {
           Wishlist
         </ToggleButton>
         <ToggleButton
+          className={classes.toggleButton}
           key="search"
           id="radio-search"
           type="radio"
@@ -53,10 +63,7 @@ const GamesListOptions = () => {
         {listOption === GAME_LIST_OPTIONS.ALPHABET ?
           <AlphabetButtons />
           : listOption === GAME_LIST_OPTIONS.SEARCH ?
-          <div>
-            <input type="text" />
-            <p>search</p>
-          </div>
+          <SearchGames searchGames={searchGames}/>
           : null
         }
       </Container>
@@ -64,5 +71,8 @@ const GamesListOptions = () => {
   )
 }
 
+GamesListOptions.propTypes = {
+  searchGames: proptypes.func,
+}
 
 export default GamesListOptions;

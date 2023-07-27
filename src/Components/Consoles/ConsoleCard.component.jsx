@@ -7,12 +7,13 @@ import { AppState } from "../../Config/store/state";
 import classes from './Consoles.module.css';
 
 
-const ConsoleCard = ({ consoleData, editConsole, deleteConsole }) => {
+const ConsoleCard = ({ consoleData, editConsole, deleteConsole, viewDetails }) => {
   const { setSelectedConsole } = useContext(AppState);
   const navigate = useNavigate();
 
   const navigateToGamesHandler = () => {
     setSelectedConsole({...consoleData})
+    sessionStorage.setItem("consoleData", JSON.stringify(consoleData))
     navigate(`/${consoleData.id}/games`)
   }
 
@@ -42,7 +43,13 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole }) => {
             </Button>
           </div>
           <div className={classes.navButtons}>
-            <Button type="button" variant="info">Details</Button>
+            <Button
+              type="button"
+              variant="info"
+              onClick={() => viewDetails(consoleData)}
+            >
+              Details
+            </Button>
             <Button
               type="button"
               variant="primary"
@@ -61,6 +68,7 @@ ConsoleCard.propTypes = {
   consoleData: proptypes.object,
   deleteConsole: proptypes.func,
   editConsole: proptypes.func,
+  viewDetails: proptypes.func,
 }
 
 export default ConsoleCard;

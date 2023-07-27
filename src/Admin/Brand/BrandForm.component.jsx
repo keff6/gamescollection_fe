@@ -6,7 +6,7 @@ import { AppState } from "../../Config/store/state";
 const BRAND_DEFAULT = {
   name: "",
   origin: "",
-  logourl: "",
+  logoUrl: "",
 };
 
 const BrandForm = ({
@@ -104,8 +104,8 @@ const BrandForm = ({
             <Form.Control
               type="text"
               placeholder="Enter logo url"
-              value={brandObj.logourl}
-              onChange={(e) => handleChange("logourl", e.target.value)}
+              value={brandObj.logoUrl}
+              onChange={(e) => handleChange("logoUrl", e.target.value)}
             />
           </Form.Group>
         </Form>

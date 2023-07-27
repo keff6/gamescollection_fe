@@ -12,9 +12,20 @@ const AlphabetButtons = () => {
   }
 
   return (
-    <Nav variant="tabs" activeKey={initialLetter} onSelect={handleSelection} justify>
-      {ALPHABET.split("").map(letter => <Nav.Item key={letter} >
-        <Nav.Link eventKey={letter} className={classes.tabItem}>{letter}</Nav.Link>
+    <Nav
+      className={classes.alphabetNav}
+      variant="tabs"
+      activeKey={initialLetter}
+      onSelect={handleSelection}
+      justify
+    >
+      {ALPHABET.split("").map(letter => <Nav.Item key={letter} className={classes.customTabItem} >
+        <Nav.Link
+          eventKey={letter}
+          className={letter === initialLetter ? classes.customNavLinkActive : classes.customNavLink}
+        >
+          {letter}
+        </Nav.Link>
       </Nav.Item>)}
     </Nav>
   )

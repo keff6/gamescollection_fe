@@ -1,3 +1,6 @@
+/***************************************************/
+/* GENERAL STYLES                                  */
+/***************************************************/
 html, body, #app, #app>div, #root, .container {
   height: 100%
 }
@@ -12,28 +15,109 @@ main {
   color: white;
 }
 
+main a {
+  color: teal !important;
+  text-decoration: none !important;
+}
+
+main a:hover,
+main a:active {
+  color: rgb(53, 234, 234) !important;
+}
+
 .table {
   color: white;
 }
 
-/* Card global styles */
+th {
+  background-color: #27489230 !important;
+  color: #8ca3f3;
+  letter-spacing: 1px;
+}
+
+tbody {
+  border-color: #353639;
+}
+
+.empty-list-text {
+  text-align: center;
+  color: #7a7f7f;
+  padding-top: 30px;
+}
+
+/***************************************************/
+/* CARD STYLES                                     */
+/***************************************************/
 .card {
-  border-color: #10aeaa;
+  border-color: #324879;
   border-radius: 5px;
+}
+
+.card-title {
+  color: white;
 }
 
 .card-body {
   border-radius: 4px;
-  background-color: rgb(96 118 139 / 84%);
+  background-color: rgb(25 38 51 / 84%);
 }
 
-/* Forms */
+/***************************************************/
+/* FORM STYLES                                  */
+/***************************************************/
 .modal-header, .modal-footer {
   background-color: #424a65;
   color: white;
+  border-color: #324879;
 }
 
-.modal-body {
-  background-color: rgb(66 66 71 / 90%);
+.modal-body, .accordion-body {
+  background-color: rgb(43 66 109 / 73%);
   color: white;
 }
+
+/***************************************************/
+/* ACCORDION STYLES                                  */
+/***************************************************/
+
+.accordion-item:first-of-type,
+.accordion-item:last-of-type,
+.accordion-item:first-of-type .accordion-button,
+.accordion-item:last-of-type .accordion-button {
+  border: none;
+  border-radius: 0%;
+}
+
+.accordion-button, .accordion-item {
+  background-color: rgb(165, 188, 209);
+  color: #0f244f;
+  border: none;
+  border-radius: 0%;
+}
+.accordion-button:not(.collapsed) {
+  background-color: #3a73e8;
+  color: white;
+  border: none;
+  border-radius: 0%;
+}
+
+
+/***************************************************/
+/* BUTTON STYLES                                  */
+/***************************************************/
+.btn {
+  max-height: 38px;
+}
+.btn-primary {
+  background-color: #844bec;
+  border-color: #844bec;
+}
+
+.btn-primary:focus,
+.btn-primary:hover,
+.btn-primary:active {
+  background-color: #52278a !important;
+  border-color: #844bec !important;
+}
+
+

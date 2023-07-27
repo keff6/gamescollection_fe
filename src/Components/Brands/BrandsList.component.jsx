@@ -21,7 +21,7 @@ const BrandsList = ({brands}) => {
             </Col>
           ))}
         </Row>}
-        {(brands.length === 0) && <h3>There are no brands yet!</h3>}
+        {(brands.length === 0) && <h3 className="empty-list-text">There are no brands yet!</h3>}
       </Container>
 )
           }

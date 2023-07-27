@@ -48,7 +48,7 @@ const GenresTable = ({ genres, deleteGenre, editGenre }) => {
           )}
         </tbody>
       </Table>}
-      {(genres.length === 0) && <h3>Start adding genres</h3>}
+      {(genres.length === 0) && <h3 className="empty-list-text">Start adding genres</h3>}
     </>
   )
 }

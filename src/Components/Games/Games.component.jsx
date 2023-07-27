@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
 import { AppState } from "../../Config/store/state";
@@ -7,6 +8,7 @@ import GamesListOptions from './GamesList/GamesListOptions.component';
 import GamesList from './GamesList/GamesList.container';
 import classes from './Games.module.css';
 import GameForm from './GameForm.component';
+import GameDetails from './GameDetails.component';
 
 const NavigationItems = (brandId) => [
   { text: 'Brands', href:"/" },
@@ -20,12 +22,20 @@ const Games = ({
   updateGame,
   getGamesByConsoleAndLetter,
   getWishlistByConsole,
+  searchGames,
 }) => {
+  const navigate = useNavigate();
   const { game, setSelectedGame, brand, console } = useContext(AppState);
   const [showForm, setShowForm] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = (brand?.selected) ? brand.selected : JSON.parse(sessionStorage.getItem('brandData')); 
+  const currentConsole = (console?.selected) ? console.selected : JSON.parse(sessionStorage.getItem('consoleData')); 
+
+  if(!currentBrand || !currentConsole) {
+    navigate('/', { replace: true });
+  }
 
   const handleAddNewGame = async (gameObj) => {
     addGame(gameObj)
@@ -42,6 +52,11 @@ const Games = ({
     setShowForm(true)
   }
 
+  const handleViewDetails = (selectedGame) => {
+    setSelectedGame({...selectedGame})
+    setShowDetails(true)
+  }
+
   const handleUpdateGame = async (gameId, updatedGameObj) => {
     updateGame(gameId, updatedGameObj)
   }
@@ -49,6 +64,10 @@ const Games = ({
   const handleCloseFormModal = () => {
     setIsEdit(false)
     setShowForm(false)
+  }
+
+  const handleCloseDetailsModal = () => {
+    setShowDetails(false)
   }
 
   const handleCancelDelete = () => {
@@ -64,20 +83,23 @@ const Games = ({
 
   return (
     <>
-      <Breadcrumb items={NavigationItems(currentBrand.id)} />
+      <Breadcrumb items={NavigationItems(currentBrand?.id)} />
       <div>
         <header className={classes.header}>
-          <h2>Games</h2>
+          <div className={classes.gamesHeader}>
+            <h2>{currentConsole?.name}</h2>
+            <h6>{currentBrand?.name}</h6>
+          </div>
           <Button onClick={() => setShowForm(true)}>Add Game</Button>
         </header>
       </div>
-      <GamesListOptions
-      />
+      <GamesListOptions searchGames={searchGames}/>
       <GamesList
         editGame={handleEditGame}
         deleteGame={handleDeleteGame}
         getGamesByConsoleAndLetter={getGamesByConsoleAndLetter}
         getWishlistByConsole={getWishlistByConsole}
+        viewDetails={handleViewDetails}
       />
       <GameForm
         show={showForm}
@@ -92,6 +114,10 @@ const Games = ({
         onCancel={handleCancelDelete}
         onConfirm={handleConfirmDelete}
       />
+      <GameDetails
+        show={showDetails}
+        onHide={handleCloseDetailsModal}
+      />
     </>
   )
 }
@@ -101,6 +127,7 @@ Games.propTypes = {
   deleteGame: proptypes.func,
   getGamesByConsoleAndLetter: proptypes.func,
   getWishlistByConsole: proptypes.func,
+  searchGames: proptypes.func,
   updateGame: proptypes.func,
 }
 
