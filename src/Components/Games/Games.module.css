@@ -113,6 +113,10 @@
   width: 15%;
 }
 
+.width20 {
+  width: 20%;
+}
+
 .width35 {
   width: 35%;
 }
@@ -122,8 +126,12 @@
     text-align: right;
   }
   
-  .table-buttons-container button:first-of-type {
+  .table-buttons-container button {
     margin-right: 5px;
+  }
+
+  .table-buttons-container button:last-of-type {
+    margin-right: 0;
   }
 
   .text-overflow {
@@ -145,3 +153,21 @@
     font-style: italic;
     font-weight: 700;
   }
+
+/***************************************************/
+/* VIEW DETAILS                                    */
+/***************************************************/
+
+.data-row {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.data-label {
+  color: lightgrey;
+  margin-right: 16px;
+}
+
+.data-text {
+  color: #05112c;
+}

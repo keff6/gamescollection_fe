@@ -8,6 +8,7 @@ import GamesListOptions from './GamesList/GamesListOptions.component';
 import GamesList from './GamesList/GamesList.container';
 import classes from './Games.module.css';
 import GameForm from './GameForm.component';
+import GameDetails from './GameDetails.component';
 
 const NavigationItems = (brandId) => [
   { text: 'Brands', href:"/" },
@@ -25,6 +26,7 @@ const Games = ({
   const navigate = useNavigate();
   const { game, setSelectedGame, brand, console } = useContext(AppState);
   const [showForm, setShowForm] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = (brand?.selected) ? brand.selected : JSON.parse(sessionStorage.getItem('brandData')); 
@@ -49,6 +51,11 @@ const Games = ({
     setShowForm(true)
   }
 
+  const handleViewDetails = (selectedGame) => {
+    setSelectedGame({...selectedGame})
+    setShowDetails(true)
+  }
+
   const handleUpdateGame = async (gameId, updatedGameObj) => {
     updateGame(gameId, updatedGameObj)
   }
@@ -56,6 +63,10 @@ const Games = ({
   const handleCloseFormModal = () => {
     setIsEdit(false)
     setShowForm(false)
+  }
+
+  const handleCloseDetailsModal = () => {
+    setShowDetails(false)
   }
 
   const handleCancelDelete = () => {
@@ -87,6 +98,7 @@ const Games = ({
         deleteGame={handleDeleteGame}
         getGamesByConsoleAndLetter={getGamesByConsoleAndLetter}
         getWishlistByConsole={getWishlistByConsole}
+        viewDetails={handleViewDetails}
       />
       <GameForm
         show={showForm}
@@ -100,6 +112,10 @@ const Games = ({
         show={showConfirmDelete}
         onCancel={handleCancelDelete}
         onConfirm={handleConfirmDelete}
+      />
+      <GameDetails
+        show={showDetails}
+        onHide={handleCloseDetailsModal}
       />
     </>
   )

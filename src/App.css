@@ -54,12 +54,12 @@ tbody {
 }
 
 .card-title {
-  color: #182545;
+  color: white;
 }
 
 .card-body {
   border-radius: 4px;
-  background-color: rgb(96 118 139 / 84%);
+  background-color: rgb(25 38 51 / 84%);
 }
 
 /***************************************************/

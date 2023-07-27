@@ -11,6 +11,7 @@ const GamesListContainer = ({
   deleteGame,
   getWishlistByConsole,
   getGamesByConsoleAndLetter,
+  viewDetails,
 }) => {
   const { game, isLoading, setGamesList } = useContext(AppState);
 
@@ -39,6 +40,7 @@ const GamesListContainer = ({
       editGame={editGame}
       deleteGame={deleteGame}
       listOption={game.listOption}
+      viewDetails={viewDetails}
     />
     )
 }
@@ -48,6 +50,7 @@ GamesListContainer.propTypes ={
   deleteGame: proptypes.func,
   getGamesByConsoleAndLetter: proptypes.func,
   getWishlistByConsole: proptypes.func,
+  viewDetails: proptypes.func,
 }
 
 export default GamesListContainer
