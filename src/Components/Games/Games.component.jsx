@@ -22,6 +22,7 @@ const Games = ({
   updateGame,
   getGamesByConsoleAndLetter,
   getWishlistByConsole,
+  searchGames,
 }) => {
   const navigate = useNavigate();
   const { game, setSelectedGame, brand, console } = useContext(AppState);
@@ -92,7 +93,7 @@ const Games = ({
           <Button onClick={() => setShowForm(true)}>Add Game</Button>
         </header>
       </div>
-      <GamesListOptions />
+      <GamesListOptions searchGames={searchGames}/>
       <GamesList
         editGame={handleEditGame}
         deleteGame={handleDeleteGame}
@@ -126,6 +127,7 @@ Games.propTypes = {
   deleteGame: proptypes.func,
   getGamesByConsoleAndLetter: proptypes.func,
   getWishlistByConsole: proptypes.func,
+  searchGames: proptypes.func,
   updateGame: proptypes.func,
 }
 

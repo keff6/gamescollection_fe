@@ -18,12 +18,12 @@ const GameDetails = ({
   } = useContext(AppState);
   const currentConsole = selectedConsole ? selectedConsole : JSON.parse(sessionStorage.getItem('consoleData'));
   const consoleLabel = currentConsole ? currentConsole.name : NO_DATA;
-  const selectedGenres = genresList.filter(g => selected?.genres.includes(g.id));
+  const selectedGenres = genresList.filter(g => selected?.genres?.includes(g.id));
   const genresLabel = selectedGenres.length > 0 ? selectedGenres.map(g => g.name).join(', ') : NO_DATA;
 
   const closeForm = () => {
-    setSelectedGame(null)
     onHide()
+    setSelectedGame(null)
   }
 
   return (

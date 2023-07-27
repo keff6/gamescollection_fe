@@ -6,7 +6,7 @@ import Games from "./Games.component";
 import { OPERATION_OUTCOME } from "../../utils/constants";
 
 const GamesContainer = () => {
-  const { setGamesList, openSnackbar, setConsolesList, setGenresList, setIsLoading, game: {initialLetter} } = useContext(AppState);
+  const { setGamesList, openSnackbar, setConsolesList, setGenresList, setIsLoading, game: {initialLetter, searchTerm} } = useContext(AppState);
   const { consoleId } = useParams()
 
   const getGamesByConsoleAndLetter = async () => {
@@ -37,6 +37,21 @@ const GamesContainer = () => {
       setGamesList(gamesResponse.data || []);
       setConsolesList(consolesResponse.data || []);
       setGenresList(genresResponse.data || []);
+    }
+    catch(e){
+      console.log(e)
+      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
+    }
+    finally {
+      setIsLoading(false)
+    }
+  }
+
+  const searchGames = async () => {
+    try {
+      setIsLoading(true)
+      const gamesResponse = await GameService.search(searchTerm, consoleId);
+      setGamesList(gamesResponse.data || []);
     }
     catch(e){
       console.log(e)
@@ -99,6 +114,7 @@ const GamesContainer = () => {
       deleteGame={deleteGame}
       getGamesByConsoleAndLetter={getGamesByConsoleAndLetter}
       getWishlistByConsole={getWishlistByConsole}
+      searchGames={searchGames}
     />
     )
 }

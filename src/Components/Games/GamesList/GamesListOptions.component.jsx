@@ -1,13 +1,19 @@
-import { useContext } from 'react';
-import { ButtonGroup, ToggleButton, Container, InputGroup, Form, Button } from "react-bootstrap";
-import { Search } from "react-bootstrap-icons";
+import { useContext, useEffect } from 'react';
+import { ButtonGroup, ToggleButton, Container } from "react-bootstrap";
+import proptypes from 'prop-types';
 import { AppState } from "../../../Config/store/state";
 import { GAME_LIST_OPTIONS } from '../../../utils/constants';
 import AlphabetButtons from './AlphabetButtons.component';
+import SearchGames from './SearchGames.component';
 import classes from '../Games.module.css';
 
-const GamesListOptions = () => {
-  const { game: { listOption }, setGamesListOption } = useContext(AppState);
+const GamesListOptions = ({ searchGames }) => {
+  const { game: { listOption }, setGamesListOption, setInitialLetter } = useContext(AppState);
+
+  useEffect(() => () => {
+    setGamesListOption(GAME_LIST_OPTIONS.ALPHABET);
+    setInitialLetter('#');
+  },[])
 
   return (
     <div>
@@ -57,18 +63,7 @@ const GamesListOptions = () => {
         {listOption === GAME_LIST_OPTIONS.ALPHABET ?
           <AlphabetButtons />
           : listOption === GAME_LIST_OPTIONS.SEARCH ?
-          <div>
-            <InputGroup className="mb-3">
-              <Form.Control
-                placeholder="Game title"
-                aria-label="Game title"
-                aria-describedby="basic-addon2"
-              />
-              <Button variant="primary" id="button-addon2">
-                <Search />
-              </Button>
-            </InputGroup>
-          </div>
+          <SearchGames searchGames={searchGames}/>
           : null
         }
       </Container>
@@ -76,5 +71,8 @@ const GamesListOptions = () => {
   )
 }
 
+GamesListOptions.propTypes = {
+  searchGames: proptypes.func,
+}
 
 export default GamesListOptions;

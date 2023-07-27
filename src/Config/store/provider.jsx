@@ -23,7 +23,7 @@ const APP_STATE = {
     selected: null,
     listOption: GAME_LIST_OPTIONS.ALPHABET,
     initialLetter: '#',
-    search: '',
+    searchTerm: '',
   },
   snackbar: {
     message: '',

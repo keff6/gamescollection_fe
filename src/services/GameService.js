@@ -31,13 +31,18 @@ const update = (id, data) => {
   return axios.put(`/games/edit/${id}`, data);
 };
 
+const search = (searchTerm, consoleId) => {
+  return axios.post("/games/search", {searchTerm, consoleId})
+}
+
 const ConsoleService = {
   getAll,
   getWishlistByConsole,
   getByParams,
   add,
   remove,
-  update
+  update,
+  search,
 };
 
 export default ConsoleService;
