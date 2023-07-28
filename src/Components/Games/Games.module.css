@@ -1,105 +1,111 @@
 .container {
-    padding-top: 1rem;
-  }
-  
-  .mainDashboardContainer {
-    height: auto;
-  }
-  
-  .header {
-    display:flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    margin-top: 10px;
-  }
-  
-  .custom-col {
-    margin-bottom: 16px;
-  }
-  
-  .card {
-    min-height: 80px;
-  }
-  
-  .cardBody {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .logo-img {
-    height: 45px;
-  }
-  
-  .brand-text {
-    font-size: 40px
-  }
+  padding-top: 1rem;
+}
 
-  /* Options classes */
-  .options-container {
-    padding: 10px 0;
-  }
+.mainDashboardContainer {
+  height: auto;
+}
 
-  .letters-container {
-    display: flex;
-    justify-content: space-around;
-  }
+.header {
+  display:flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
 
-  .custom-nav-link {
-    padding: 0.5rem 2px !important;
-  }
+.custom-col {
+  margin-bottom: 16px;
+}
 
-  .custom-nav-link-active {
-    padding: 0.5rem 4px !important;
-    background-color: black !important;
-    border-color: darkgrey !important;
-    font-weight: 900 !important;
-    color: rgb(53, 234, 234) !important;
-  }
+.card {
+  min-height: 80px;
+}
 
-  .options-buttons > label, 
-  .options-buttons > label:hover, 
-  .options-buttons > label:active {
-    border-color: #bf67e0 !important;
-    color: #bf67e0 !important;
-  }
-  
+.cardBody {
+  display: flex;
+  justify-content: space-between;
+}
 
-  input:checked + .toggle-button {
-    border-color: #bf67e0 !important;
-    background-color: #6117ab !important;
-    color: white !important;
-  }
+.logo-img {
+  height: 45px;
+}
 
-   /* Forms */
-  .custom-container {
-    border: 1px solid #9699a8;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 20px;
-  }
+.brand-text {
+  font-size: 40px
+}
 
-  .custom-list {
-    border: 1px solid #9699a8;
-    height: 100%;
-    border-radius: 5px;
-    background-color: whitesmoke;
-    padding: 10px;
-  }
+/***************************************************/
+/* OPTIONS CLASSES                                    */
+/***************************************************/
+.options-container {
+  padding: 10px 0;
+}
 
-  .badge {
-    margin-right: 8px;
-  }
+.letters-container {
+  display: flex;
+  justify-content: space-around;
+}
 
-  .badge-text {
-    margin-right: 6px;
-  }
+.custom-nav-link {
+  padding: 0.5rem 2px !important;
+}
 
-  .badge-button {
-    cursor: pointer;
-    font-size: medium;
-  }
+.custom-nav-link-active {
+  padding: 0.5rem 4px !important;
+  background-color: black !important;
+  border-color: darkgrey !important;
+  font-weight: 900 !important;
+  color: rgb(53, 234, 234) !important;
+}
 
-  /*  table list  */
+.options-buttons > label, 
+.options-buttons > label:hover, 
+.options-buttons > label:active {
+  border-color: #bf67e0 !important;
+  color: #bf67e0 !important;
+}
+
+
+input:checked + .toggle-button {
+  border-color: #bf67e0 !important;
+  background-color: #6117ab !important;
+  color: white !important;
+}
+
+/***************************************************/
+/* FORMS                                   */
+/***************************************************/
+.custom-container {
+  border: 1px solid #9699a8;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.custom-list {
+  border: 1px solid #9699a8;
+  height: 100%;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  padding: 10px;
+}
+
+.badge {
+  margin-right: 8px;
+}
+
+.badge-text {
+  margin-right: 6px;
+}
+
+.badge-button {
+  cursor: pointer;
+  font-size: medium;
+}
+
+/***************************************************/
+/* TABLE LIST                                 */
+/***************************************************/
 .table {
   width: 100%;
   table-layout: fixed;
@@ -121,38 +127,37 @@
   width: 35%;
 }
 
+.table-buttons-container {
+  text-align: right;
+}
 
-  .table-buttons-container {
-    text-align: right;
-  }
-  
-  .table-buttons-container button {
-    margin-right: 5px;
-  }
+.table-buttons-container button {
+  margin-right: 5px;
+}
 
-  .table-buttons-container button:last-of-type {
-    margin-right: 0;
-  }
+.table-buttons-container button:last-of-type {
+  margin-right: 0;
+}
 
-  .text-overflow {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+.text-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-  .custom-modal-body {
-    padding: 0 !important;
-  }
+.custom-modal-body {
+  padding: 0 !important;
+}
 
-  .games-header > * {
-    margin: 0;
-  }
+.games-header > * {
+  margin: 0;
+}
 
-  .games-header h6 {
-    color: #7a7f7f;
-    font-style: italic;
-    font-weight: 700;
-  }
+.games-header h6 {
+  color: #7a7f7f;
+  font-style: italic;
+  font-weight: 700;
+}
 
 /***************************************************/
 /* VIEW DETAILS                                    */
@@ -170,4 +175,31 @@
 
 .data-text {
   color: #05112c;
+}
+
+/***************************************************/
+/* LETTERS DROPDOWN                                   */
+/***************************************************/
+.letters-dropdown-container {
+  display:flex;
+}
+
+.letters-dropdown-container label {
+  margin-right: 10px;
+  align-self: center;
+}
+
+.letters-dropdown button,
+.letters-dropdown button:hover,
+.letters-dropdown button:active,
+.letters-dropdown button:focus {
+  background-color: black !important;
+  border-color: darkgrey !important;
+  font-weight: 900 !important;
+  color: rgb(53, 234, 234) !important;
+  width: 50px;
+}
+
+.letters-dropdown button::after {
+  margin-left: 10px;
 }
