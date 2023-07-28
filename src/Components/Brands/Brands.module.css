@@ -3,7 +3,7 @@
 }
 
 .grey-text {
-  color: #7a7f7f;
+  color: var(--sirocco);
 }
 
 .mainDashboardContainer {

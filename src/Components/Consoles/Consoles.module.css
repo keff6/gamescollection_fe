@@ -56,10 +56,10 @@ font-weight: bold;
 }
 
 .data-label {
-color: lightgrey;
+color: var(--white);
 margin-right: 16px;
 }
 
 .data-text {
-color: #05112c;
+color: var(--blue-bayoux);
 }
