@@ -161,7 +161,7 @@ const GameForm = ({
                     Please enter a valid text.
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Row>
+                <Row className="form-row">
                   <Col md={6}>
                     <Form.Group className="mb-3" controlId="consoleId">
                       <Form.Label>Console</Form.Label>
@@ -197,7 +197,7 @@ const GameForm = ({
                     </Form.Group>
                   </Col>
                 </Row>
-                <Row>
+                <Row className="form-row">
                   <Col md={6}>
                     <Form.Group className="mb-3" controlId="developer">
                       <Form.Label>Developer</Form.Label>

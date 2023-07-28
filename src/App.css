@@ -66,7 +66,7 @@ tbody {
 /* MEDIA QUERIES FOR SM AND XS                     */
 /***************************************************/
 @media (max-width: 768px) {
-  .row>* {
+  .row>*:not(:where(.col)) {
     padding: 0;
   }
 }
@@ -83,6 +83,10 @@ tbody {
 .modal-body, .accordion-body {
   background-color: rgb(43 66 109 / 73%);
   color: white;
+}
+
+.form-row {
+  padding: 0 calc(var(--bs-gutter-x) * .5);
 }
 
 /***************************************************/
