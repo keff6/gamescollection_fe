@@ -64,7 +64,8 @@ const Genres = ({
       <Container className={classes.container}>
         <header className={classes.header}>
           <h2>Genres</h2>
-          <Button onClick={() => setShowForm(true)}>Add Genre</Button>
+          <Button className="d-none d-md-block" onClick={() => setShowForm(true)}>Add Genre</Button>
+          <Button className="d-block d-md-none" onClick={() => setShowForm(true)}>Add+</Button>
         </header>
         <GenresTable
           genres={genre.list}
