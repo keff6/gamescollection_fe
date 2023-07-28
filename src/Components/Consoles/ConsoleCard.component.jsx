@@ -19,7 +19,7 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole, viewDetails }) =
 
   return (
     <Card className={classes.card}>
-      <Card.Body className={classes.cardBody}>
+      <Card.Body className="card-body-console">
         <Card.Title>
           {consoleData.logoUrl ?
           <img className={classes.logoImg} src={consoleData.logoUrl} alt={consoleData.name} />
