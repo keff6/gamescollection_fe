@@ -18,17 +18,17 @@ const BrandsTable = ({ brands, deleteBrand, editBrand }) => {
         <thead>
           <tr>
             <th className={classes.width25}>Name</th>
-            <th className={classes.width15}>Origin</th>
-            <th>Logo URL</th>
+            <th className={`${classes.width15} d-none d-md-table-cell`}>Origin</th>
+            <th className="d-none d-md-table-cell">Logo URL</th>
             <th className={classes.width15}></th>
           </tr>
         </thead>
         <tbody>
           {brands.map(brand => (
             <tr key={brand.id}>
-              <td>{brand.name}</td>
-              <td>{brand.origin}</td>
-              <td className={classes.textOverflow}>{brand.logoUrl}</td>
+              <td className={classes.textOverflow}>{brand.name}</td>
+              <td className="d-none d-md-table-cell">{brand.origin}</td>
+              <td className={`${classes.textOverflow} d-none d-md-table-cell`}>{brand.logoUrl}</td>
               <td>
                 <div className={classes.tableButtonsContainer}>
                   <Button

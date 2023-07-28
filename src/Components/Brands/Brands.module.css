@@ -2,6 +2,10 @@
   padding-top: 1rem;
 }
 
+.grey-text {
+  color: #7a7f7f;
+}
+
 .mainDashboardContainer {
   height: auto;
 }
