@@ -18,6 +18,78 @@ export const reducer = (state, action) => {
           list: action.payload.genres
         }
       };
+    case actions.SET_SELECTED_BRAND:
+      return {
+        ...state,
+        brand: {
+          ...state.brand,
+          selected: action.payload.selectedBrand
+        }
+      };
+    case actions.SET_BRANDS_LIST:
+      return {
+        ...state,
+        brand: {
+          ...state.brand,
+          list: action.payload.brands
+        }
+      };
+    case actions.SET_SELECTED_CONSOLE:
+      return {
+        ...state,
+        console: {
+          ...state.console,
+          selected: action.payload.selectedConsole
+        }
+      };
+    case actions.SET_CONSOLES_LIST:
+      return {
+        ...state,
+        console: {
+          ...state.console,
+          list: action.payload.consoles
+        }
+      };
+    case actions.SET_SELECTED_GAME:
+      return {
+        ...state,
+        game: {
+          ...state.game,
+          selected: action.payload.selectedGame
+        }
+      };
+    case actions.SET_GAMES_LIST:
+      return {
+        ...state,
+        game: {
+          ...state.game,
+          list: action.payload.games
+        }
+      };
+    case actions.SET_GAMES_LIST_OPTION:
+      return {
+        ...state,
+        game: {
+          ...state.game,
+          listOption: action.payload,
+        }
+      };
+    case actions.SET_INITIAL_LETTER:
+      return {
+        ...state,
+        game: {
+          ...state.game,
+          initialLetter: action.payload,
+        }
+      };
+    case actions.SET_SEARCH_TERM:
+      return {
+        ...state,
+        game: {
+          ...state.game,
+          searchTerm: action.payload,
+        }
+      };
     case actions.OPEN_SNACKBAR:
       return {
         ...state,
@@ -36,6 +108,11 @@ export const reducer = (state, action) => {
           show: false
         }
       };
+    case actions.SET_IS_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
+      }
     default:
       return state;
   }

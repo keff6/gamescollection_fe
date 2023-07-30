@@ -1,0 +1,44 @@
+.container {
+  padding-top: 1rem;
+}
+
+.grey-text {
+  color: var(--sirocco);
+}
+
+.mainDashboardContainer {
+  height: auto;
+}
+
+.header {
+  display:flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.custom-col {
+  margin-bottom: 16px;
+}
+
+.card {
+  min-height: 80px;
+}
+
+.card-body {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-body button{
+  align-self: flex-end;
+}
+
+.logo-img {
+  height: 45px;
+}
+
+.brand-text {
+  font-size: 40px
+}

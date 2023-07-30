@@ -9,7 +9,7 @@ const Content = ({children}) => {
       <main >
         <Container>
           <Row className="d-flex justify-content-center">
-            <Col lg={8}>{children}</Col>
+            <Col lg={10}>{children}</Col>
           </Row>
         </Container>
       </main>

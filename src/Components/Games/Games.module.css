@@ -1,0 +1,212 @@
+.container {
+  padding-top: 1rem;
+}
+
+.mainDashboardContainer {
+  height: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.custom-col {
+  margin-bottom: 16px;
+}
+
+.card {
+  min-height: 80px;
+}
+
+.cardBody {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-img {
+  height: 45px;
+}
+
+.brand-text {
+  font-size: 40px
+}
+
+/***************************************************/
+/* OPTIONS CLASSES                                    */
+/***************************************************/
+.options-container {
+  padding: 10px 0;
+}
+
+.letters-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.custom-nav-link {
+  padding: 0.5rem 2px !important;
+}
+
+.custom-nav-link-active {
+  padding: 0.5rem 4px !important;
+  background-color: var(--black) !important;
+  border-color: var(--regent-grey) !important;
+  font-weight: 900 !important;
+  color: var(--picton-blue) !important;
+}
+
+.options-buttons > label, 
+.options-buttons > label:hover, 
+.options-buttons > label:active {
+  border-color: var(--medium-purple) !important;
+  color: var(--medium-purple) !important;
+}
+
+
+input:checked + .toggle-button {
+  border-color: var(--medium-purple) !important;
+  background-color: var(--daisy-bush) !important;
+  color: var(--white) !important;
+}
+
+/***************************************************/
+/* FORMS                                   */
+/***************************************************/
+.custom-container {
+  border: 1px solid var(--sirocco);
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.custom-list {
+  border: 1px solid var(--sirocco);
+  height: 100%;
+  border-radius: 5px;
+  background-color: var(--white);
+  padding: 10px;
+}
+
+.badge {
+  margin-right: 8px;
+}
+
+.badge-text {
+  margin-right: 6px;
+}
+
+.badge-button {
+  cursor: pointer;
+  font-size: medium;
+}
+
+/***************************************************/
+/* TABLE LIST                                 */
+/***************************************************/
+.table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.width10 {
+  width: 10%;
+}
+
+.width15 {
+  width: 15%;
+}
+
+.width20 {
+  width: 20%;
+}
+
+.width35 {
+  width: 35%;
+}
+
+.table-buttons-container {
+  display: flex;
+  justify-content: end;
+  text-align: right;
+}
+
+.table-buttons-container button {
+  margin-right: 10px;
+}
+
+.text-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.custom-modal-body {
+  padding: 0 !important;
+}
+
+.games-header > * {
+  margin: 0;
+}
+
+.games-header h6 {
+  color: var(--sirocco);
+  font-style: italic;
+  font-weight: 700;
+}
+
+a.danger-link {
+  color: var(--monza) !important;
+}
+
+.danger-link:hover {
+  background-color: var(--falu-red) !important;
+  color: var(--white) !important;
+}
+
+/***************************************************/
+/* VIEW DETAILS                                    */
+/***************************************************/
+
+.data-row {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.data-label {
+  color: var(--white);
+  margin-right: 16px;
+}
+
+.data-text {
+  color: var(--blue-bayoux);
+}
+
+/***************************************************/
+/* LETTERS DROPDOWN                                   */
+/***************************************************/
+.letters-dropdown-container {
+  display:flex;
+}
+
+.letters-dropdown-container label {
+  margin-right: 10px;
+  align-self: center;
+}
+
+.letters-dropdown button,
+.letters-dropdown button:hover,
+.letters-dropdown button:active,
+.letters-dropdown button:focus {
+  background-color: var(--black) !important;
+  border-color: var(--edward) !important;
+  font-weight: 900 !important;
+  color: var(--picton-blue) !important;
+  width: 50px;
+}
+
+.letters-dropdown button::after {
+  margin-left: 10px;
+}

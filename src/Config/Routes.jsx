@@ -1,9 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import Dashboard from "../Home/Dashboard.component";
-import Manufacturers from "../Admin/Manufacturer/Manufacturers.component";
+import Dashboard from "../Components/Home/Dashboard.component";
+import BrandsContainer from "../Admin/Brand/Brands.container";
 import GenresContainer from "../Admin/Genre/Genres.container";
 import Layout from '../Layout/Layout.component';
 import ErrorBoundaryLayout from "../Layout/ErrorBoundaryLayout";
+import { PageNotFound } from "../Common/ErrorPage";
+import Brands from "../Components/Brands/Brands.container";
+import Consoles from "../Components/Consoles/Consoles.container";
+import Games from "../Components/Games/Games.container";
 
 
 const router = createBrowserRouter([
@@ -17,15 +21,34 @@ const router = createBrowserRouter([
           {
             path: "/",
             element: <Dashboard />,
+            children: [
+              {
+                path: "/",
+                element: <Brands />,
+              },
+              {
+                path: "/:brandId/consoles",
+                element: <Consoles />
+              },
+              {
+                path: "/:consoleId/games",
+                element: <Games />
+              }
+            ]
           },
           {
-            path: "/manufacturers",
-            element: <Manufacturers />,
+            path: "/brands",
+            element: <BrandsContainer />,
           },
           {
             path: "/genres",
             element: <GenresContainer />,
           },
+          {
+            path: "*",
+            element: <PageNotFound />,
+          },
+    
         ]
       }
     ]

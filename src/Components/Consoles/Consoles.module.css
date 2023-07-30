@@ -1,0 +1,74 @@
+.container {
+  padding-top: 1rem;
+}
+
+.mainDashboardContainer {
+  height: auto;
+}
+
+.header {
+  display:flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.custom-col {
+  margin-bottom: 16px;
+}
+
+.card {
+  min-height: 80px;
+}
+
+.logo-img {
+  height: 45px;
+}
+
+.brand-text {
+  font-size: 40px
+}
+
+.card-footer {
+  text-align: end;
+}
+
+.table-buttons-container button:first-of-type,
+.nav-buttons button:first-of-type {
+  margin-right: 5px;
+}
+
+.nav-buttons {
+  margin-top: 8px;
+}
+
+.consoles-header > * {
+  margin: 0;
+}
+
+a.danger-link {
+  color: var(--monza) !important;
+}
+
+.danger-link:hover {
+  background-color: var(--falu-red) !important;
+  color: var(--white) !important;
+}
+
+/***************************************************/
+/* VIEW DETAILS                                    */
+/***************************************************/
+
+.data-row {
+margin-bottom: 10px;
+font-weight: bold;
+}
+
+.data-label {
+color: var(--white);
+margin-right: 16px;
+}
+
+.data-text {
+color: var(--blue-bayoux);
+}
