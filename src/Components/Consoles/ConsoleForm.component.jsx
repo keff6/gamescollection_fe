@@ -78,6 +78,7 @@ const ConsoleForm = ({
       show={show}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
+      fullscreen="md-down"
       centered
     >
       <Modal.Header closeButton={false}>
@@ -118,7 +119,7 @@ const ConsoleForm = ({
               Please select a valid brand.
             </Form.Control.Feedback>
           </Form.Group>
-          <Row>
+          <Row className="form-row">
             <Col md={6}>
               <Form.Group className="mb-3" controlId="consoleYear">
                 <Form.Label>Year</Form.Label>

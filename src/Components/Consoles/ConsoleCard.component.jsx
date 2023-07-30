@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Dropdown } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import proptypes from 'prop-types';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
 import { AppState } from "../../Config/store/state";
+import { MoreButton, Tooltip } from '../../Common';
 import classes from './Consoles.module.css';
 
 
@@ -19,7 +20,7 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole, viewDetails }) =
 
   return (
     <Card className={classes.card}>
-      <Card.Body className={classes.cardBody}>
+      <Card.Body className="card-body-console">
         <Card.Title>
           {consoleData.logoUrl ?
           <img className={classes.logoImg} src={consoleData.logoUrl} alt={consoleData.name} />
@@ -27,20 +28,20 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole, viewDetails }) =
         </Card.Title>
         <footer className={classes.cardFooter}>
           <div className={classes.tableButtonsContainer}>
-            <Button
-              variant="outline-light"
-              size="sm"
-              onClick={() => editConsole(consoleData)}
-            >
-              <PencilSquare />
-            </Button>
-            <Button
-              variant="outline-danger"
-              size="sm"
-              onClick={() => deleteConsole(consoleData)}
-            >
-              <Trash />
-            </Button>
+            <Tooltip text="See more options">
+              <Dropdown>
+                <Dropdown.Toggle as={MoreButton} />
+                <Dropdown.Menu size="sm" title="">
+                  <Dropdown.Item onClick={() => editConsole(consoleData)}><PencilSquare />Edit</Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={() => deleteConsole(consoleData)}
+                    className={classes.dangerLink}
+                  >
+                    <Trash />Delete
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Tooltip>
           </div>
           <div className={classes.navButtons}>
             <Button

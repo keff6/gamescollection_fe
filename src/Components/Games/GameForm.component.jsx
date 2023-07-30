@@ -2,6 +2,8 @@ import { useState, useEffect, useContext } from 'react';
 import { Button, Modal, Form, Row, Col, InputGroup, Badge, Accordion } from 'react-bootstrap';
 import proptypes from 'prop-types';
 import { XCircle } from "react-bootstrap-icons";
+import { InfoTooltip } from '../../Common';
+import { GAME_LIST_OPTIONS } from '../../utils/constants';
 import { AppState } from "../../Config/store/state";
 import { gameObjectSanitizer } from '../../utils/requestSanitizer';
 import classes from './Games.module.css';
@@ -33,14 +35,22 @@ const GameForm = ({
   show,
   ...rest
 }) => {
-  const { game: {selected}, setSelectedGame, console, genre } = useContext(AppState);
+  const { game: {selected, listOption}, setSelectedGame, console, genre } = useContext(AppState);
   const [gameObj, setGameObj] = useState(GAME_DEFAULT);
   const [validated, setValidated] = useState(false);
   const genreDictionary = genre?.list.reduce((acc, curr) => ({ ...acc, [curr.id]: curr.name }),{})
 
-  useEffect(() => () => {
-    setGameObj({...GAME_DEFAULT, saga: [], genres: []})
-    setValidated(false)
+  useEffect(() => {
+    if(listOption === GAME_LIST_OPTIONS.WISHLIST) {
+      setGameObj({
+        ...gameObj,
+        isWishlist: true
+      }) 
+    }
+    return () => {
+      setGameObj({...GAME_DEFAULT, saga: [], genres: []})
+      setValidated(false)
+    }
   },[show])
 
   useEffect(() => {
@@ -52,6 +62,29 @@ const GameForm = ({
       ...gameObj,
       [field]: value
     }) 
+  }
+
+  const handleCheckBoxChange = (field, value) => {
+    if(field === 'isNew' && value) {
+      setGameObj({
+        ...gameObj,
+        isNew: value,
+        isComplete: value,
+      }) 
+    } else if(field === 'isWishlist' && value) {
+      setGameObj({
+        ...gameObj,
+        isWishlist: value,
+        isNew: !value,
+        isComplete: !value,
+        isDigital: !value,
+      }) 
+    } else {
+      setGameObj({
+        ...gameObj,
+        [field]: value
+      }) 
+    }
   }
 
   const validateForm = (formValues) => {
@@ -134,6 +167,7 @@ const GameForm = ({
       show={show}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
+      fullscreen="md-down"
       centered
     >
       <Modal.Header closeButton={false}>
@@ -161,7 +195,7 @@ const GameForm = ({
                     Please enter a valid text.
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Row>
+                <Row className="form-row">
                   <Col md={6}>
                     <Form.Group className="mb-3" controlId="consoleId">
                       <Form.Label>Console</Form.Label>
@@ -197,7 +231,7 @@ const GameForm = ({
                     </Form.Group>
                   </Col>
                 </Row>
-                <Row>
+                <Row className="form-row">
                   <Col md={6}>
                     <Form.Group className="mb-3" controlId="developer">
                       <Form.Label>Developer</Form.Label>
@@ -226,31 +260,43 @@ const GameForm = ({
 
                 <div className="mb-3">
                   <Form.Check
-                    inline
                     type="checkbox"
                     id="isNew"
                     name="isNew"
                     label="Is New"
                     checked={gameObj.isNew}
-                    onChange={(e) => handleChange("isNew", e.target.checked)}
+                    disabled={gameObj.isWishlist}
+                    onChange={(e) => handleCheckBoxChange("isNew", e.target.checked)}
                   />
+                  <div>
+                    <Form.Check
+                      inline
+                      type="checkbox"
+                      id="isComplete"
+                      name="isComplete"
+                      label="Is Complete"
+                      checked={gameObj.isComplete}
+                      disabled={gameObj.isWishlist}
+                      onChange={(e) => handleCheckBoxChange("isComplete", e.target.checked)}
+                    />
+                    <InfoTooltip infoText='If a game contains box and manual is considered complete' />
+                  </div>
                   <Form.Check
-                    inline
-                    type="checkbox"
-                    id="isComplete"
-                    name="isComplete"
-                    label="Is Complete"
-                    checked={gameObj.isComplete}
-                    onChange={(e) => handleChange("isComplete", e.target.checked)}
-                  />
-                  <Form.Check
-                    inline
                     type="checkbox"
                     id="isDigital"
                     name="isDigital"
                     label="Is Digital"
                     checked={gameObj.isDigital}
-                    onChange={(e) => handleChange("isDigital", e.target.checked)}
+                    disabled={gameObj.isWishlist}
+                    onChange={(e) => handleCheckBoxChange("isDigital", e.target.checked)}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    id="isWishlist"
+                    name="isWishlist"
+                    label="Is Wishlist"
+                    checked={gameObj.isWishlist}
+                    onChange={(e) => handleCheckBoxChange("isWishlist", e.target.checked)}
                   />
                 </div>
                 <Form.Group className="mb-3" controlId="coverUrl">
@@ -291,7 +337,7 @@ const GameForm = ({
                           onChange={(e) => handleChange("sagaText", e.target.value)}
                         />
                         <Button
-                          variant="secondary"
+                          variant="primary"
                           onClick={handleAddSaga}
                           disabled={gameObj.sagaText?.length === 0}
                         >
@@ -334,7 +380,7 @@ const GameForm = ({
                           )}
                         </Form.Select>
                         <Button
-                          variant="secondary"
+                          variant="primary"
                           onClick={handleAddGenre}
                           disabled={gameObj.selectedGenre === ''}
                         >

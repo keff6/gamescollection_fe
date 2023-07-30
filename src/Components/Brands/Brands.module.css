@@ -2,6 +2,10 @@
   padding-top: 1rem;
 }
 
+.grey-text {
+  color: var(--sirocco);
+}
+
 .mainDashboardContainer {
   height: auto;
 }

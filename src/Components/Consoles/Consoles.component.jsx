@@ -83,7 +83,8 @@ const Consoles = ({
           <div className={classes.consolesHeader}>
             <h2>{currentBrand?.name}</h2>
           </div>
-          <Button onClick={() => setShowForm(true)}>Add Console</Button>
+          <Button className="d-none d-md-block" onClick={() => setShowForm(true)}>Add Console</Button>
+          <Button className="d-block d-md-none" onClick={() => setShowForm(true)}>Add+</Button>
         </header>
       </div>
       <ConsolesList
