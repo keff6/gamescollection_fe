@@ -1,6 +1,6 @@
 import proptypes from 'prop-types';
 import { Table, Button, Dropdown } from 'react-bootstrap';
-import { PencilSquare, Trash, List } from "react-bootstrap-icons";
+import { PencilSquare, Trash, ListStars } from "react-bootstrap-icons";
 import { MoreButton, Tooltip } from '../../../Common';
 import { GAME_LIST_OPTIONS } from '../../../utils/constants';
 import classes from '../Games.module.css';
@@ -28,13 +28,13 @@ const GamesList = ({ games, deleteGame, editGame, listOption, viewDetails }) => 
               <td className={`${classes.textOverflow} d-none d-md-table-cell`}>{game.notes}</td>
               <td>
                 <div className={classes.tableButtonsContainer}>
-                  <Tooltip text="View Details">
+                  <Tooltip text="View details">
                     <Button
-                      variant="outline-light"
+                      variant="info"
                       size="sm"
                       onClick={() => viewDetails(game)}
                     >
-                      <List />
+                      <ListStars />
                     </Button>
                   </Tooltip>
                   <Tooltip text="See more options">

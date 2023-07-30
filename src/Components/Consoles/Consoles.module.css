@@ -46,6 +46,15 @@
   margin: 0;
 }
 
+a.danger-link {
+  color: var(--monza) !important;
+}
+
+.danger-link:hover {
+  background-color: var(--falu-red) !important;
+  color: var(--white) !important;
+}
+
 /***************************************************/
 /* VIEW DETAILS                                    */
 /***************************************************/

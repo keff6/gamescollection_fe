@@ -119,9 +119,6 @@ tbody {
   border-color: var(--fiord);
 }
 
-.form-row {
-  padding: 0 calc(var(--bs-gutter-x) * .5);
-}
 
 /***************************************************/
 /* ACCORDION STYLES                                  */
@@ -186,6 +183,11 @@ tbody {
   color: var(--white) !important;
 }
 
+.btn:disabled {
+  background-color: var(--sirocco);
+  border-color: var(--sirocco);
+}
+
 /***************************************************/
 /* MEDIA QUERIES FOR SM AND XS                     */
 /***************************************************/
@@ -193,6 +195,11 @@ tbody {
   .row>*:not(:where(.col)) {
     padding: 0;
   }
+
+  .form-row {
+    padding: 0 calc(var(--bs-gutter-x) * .5);
+  }
+
   .card-body-console {
     display:block;
   }

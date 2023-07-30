@@ -78,6 +78,7 @@ const ConsoleForm = ({
       show={show}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
+      fullscreen="md-down"
       centered
     >
       <Modal.Header closeButton={false}>
