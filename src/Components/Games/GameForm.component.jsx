@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Button, Modal, Form, Row, Col, InputGroup, Badge, Accordion } from 'react-bootstrap';
 import proptypes from 'prop-types';
 import { XCircle } from "react-bootstrap-icons";
+import { InfoTooltip } from '../../Common';
 import { GAME_LIST_OPTIONS } from '../../utils/constants';
 import { AppState } from "../../Config/store/state";
 import { gameObjectSanitizer } from '../../utils/requestSanitizer';
@@ -259,7 +260,6 @@ const GameForm = ({
 
                 <div className="mb-3">
                   <Form.Check
-                    inline
                     type="checkbox"
                     id="isNew"
                     name="isNew"
@@ -268,18 +268,20 @@ const GameForm = ({
                     disabled={gameObj.isWishlist}
                     onChange={(e) => handleCheckBoxChange("isNew", e.target.checked)}
                   />
+                  <div>
+                    <Form.Check
+                      inline
+                      type="checkbox"
+                      id="isComplete"
+                      name="isComplete"
+                      label="Is Complete"
+                      checked={gameObj.isComplete}
+                      disabled={gameObj.isWishlist}
+                      onChange={(e) => handleCheckBoxChange("isComplete", e.target.checked)}
+                    />
+                    <InfoTooltip infoText='If a game contains box and manual is considered complete' />
+                  </div>
                   <Form.Check
-                    inline
-                    type="checkbox"
-                    id="isComplete"
-                    name="isComplete"
-                    label="Is Complete"
-                    checked={gameObj.isComplete}
-                    disabled={gameObj.isWishlist}
-                    onChange={(e) => handleCheckBoxChange("isComplete", e.target.checked)}
-                  />
-                  <Form.Check
-                    inline
                     type="checkbox"
                     id="isDigital"
                     name="isDigital"
@@ -289,7 +291,6 @@ const GameForm = ({
                     onChange={(e) => handleCheckBoxChange("isDigital", e.target.checked)}
                   />
                   <Form.Check
-                    inline
                     type="checkbox"
                     id="isWishlist"
                     name="isWishlist"

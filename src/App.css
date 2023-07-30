@@ -89,6 +89,24 @@ tbody {
   background-color: var(--black-pearl);
 }
 
+.form-check-input {
+  height: 16px;
+  width: 16px;
+}
+
+.form-check-input:checked {
+  background-color: var(--black-pearl);
+  border-color: var(--black-pearl);
+}
+
+.form-check-inline {
+  margin-right: 0.4rem;
+}
+
+.tooltip-inner {
+  text-align: left!important;
+}
+
 /***************************************************/
 /* CARD STYLES                                     */
 /***************************************************/
