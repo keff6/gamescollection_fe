@@ -1,7 +1,7 @@
 import proptypes from 'prop-types';
 import { Table, Button, Dropdown } from 'react-bootstrap';
 import { PencilSquare, Trash, List } from "react-bootstrap-icons";
-import { MoreButton } from '../../../Common';
+import { MoreButton, Tooltip } from '../../../Common';
 import { GAME_LIST_OPTIONS } from '../../../utils/constants';
 import classes from '../Games.module.css';
 
@@ -28,26 +28,29 @@ const GamesList = ({ games, deleteGame, editGame, listOption, viewDetails }) => 
               <td className={`${classes.textOverflow} d-none d-md-table-cell`}>{game.notes}</td>
               <td>
                 <div className={classes.tableButtonsContainer}>
-                  <Button
-                    variant="outline-light"
-                    size="sm"
-                    onClick={() => viewDetails(game)}
-                  >
-                    <List />
-                  </Button>
-                  <Dropdown>
-                    <Dropdown.Toggle as={MoreButton} />
-                    <Dropdown.Menu size="sm" title="">
-                      <Dropdown.Header>Options</Dropdown.Header>
-                      <Dropdown.Item onClick={() => editGame(game)}><PencilSquare />Edit</Dropdown.Item>
-                      <Dropdown.Item
-                        onClick={() => deleteGame(game)}
-                        className={classes.dangerLink}
-                      >
-                        <Trash />Delete
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
+                  <Tooltip text="View Details">
+                    <Button
+                      variant="outline-light"
+                      size="sm"
+                      onClick={() => viewDetails(game)}
+                    >
+                      <List />
+                    </Button>
+                  </Tooltip>
+                  <Tooltip text="See more options">
+                    <Dropdown>
+                      <Dropdown.Toggle as={MoreButton} />
+                      <Dropdown.Menu size="sm" title="">
+                        <Dropdown.Item onClick={() => editGame(game)}><PencilSquare />Edit</Dropdown.Item>
+                        <Dropdown.Item
+                          onClick={() => deleteGame(game)}
+                          className={classes.dangerLink}
+                        >
+                          <Trash />Delete
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </Tooltip>
                 </div>
               </td>
             </tr>
