@@ -22,9 +22,12 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole, viewDetails }) =
     <Card className={classes.card}>
       <Card.Body className="card-body-console">
         <Card.Title>
-          {consoleData.logoUrl ?
-          <img className={classes.logoImg} src={consoleData.logoUrl} alt={consoleData.name} />
-          : <span className={classes.brandText}>{consoleData.name}</span>}
+          <div>
+            {consoleData.logoUrl ?
+            <img className={classes.logoImg} src={consoleData.logoUrl} alt={consoleData.name} />
+            : <span className={classes.brandText}>{consoleData.name}</span>}
+            <p className={classes.consoleYearLabel}>{consoleData?.year || ""}</p>
+          </div>
         </Card.Title>
         <footer className={classes.cardFooter}>
           <div className={classes.tableButtonsContainer}>
