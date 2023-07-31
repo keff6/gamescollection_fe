@@ -10,16 +10,18 @@ const Login = () => {
 
   return (
     <div className={classes.loginContainer}>
-        <div className={classes.half}>
+        <div className={`${classes.leftHalf} d-none d-md-block`}>
           <div className={classes.outerImage}>
             <img src={ControllerImage} alt="Img" />
             <div className={classes.overlay}></div>
           </div>
         </div>
-        <div className={classes.half}>
+        <div className={classes.rightHalf}>
           <div className={classes.loginFormContainer}>
-            <h3>Games Collection</h3>
-            <h6>Sign in to your account</h6>
+            <header>
+              <h3>Games Collection</h3>
+              <h6>Sign in to your account</h6>
+            </header>
             <Form id="loginForm" noValidate onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="username">
                 <Form.Label>Username</Form.Label>
