@@ -19,6 +19,9 @@ function NavBar() {
               <NavDropdown.Item as={Link} to="/genres">Genres</NavDropdown.Item>
             </NavDropdown>
           </Nav>
+          <Nav>
+            <Nav.Link as={Link} to="/login">Log In</Nav.Link>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

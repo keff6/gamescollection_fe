@@ -1,0 +1,44 @@
+.login-container {
+  background-color: var(--black);
+  border-color: var(--black-pearl);
+  border-style: solid;
+  display: flex;
+  margin-top: 50px;
+  height: 330px;
+  box-sizing: content-box;
+}
+
+.login-container .half{
+  width: 50%;
+}
+
+.login-container img {
+  height: 330px;
+  width: 100%;
+}
+
+.outer-image {
+  position:relative;
+}
+
+.overlay {
+  content: " ";
+  z-index: 10;
+  display: block;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgb(6 32 70 / 32%);;
+}
+
+.login-form-container {
+  padding: 1rem 1.3rem;
+  box-sizing: border-box;
+}
+
+.login-form-container form button {
+  width: 100%;
+}
+
