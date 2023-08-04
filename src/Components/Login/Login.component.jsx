@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import proptypes from 'prop-types';
 import ControllerImage from '../../images/controller.png'
-
 import classes from "./Login.module.css";
 
 const USER_DEFAULT = {

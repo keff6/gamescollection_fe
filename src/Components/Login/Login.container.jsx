@@ -1,20 +1,21 @@
-import { useContext } from "react";
-import { AppState } from "../../Config/store/state";
+import { useNavigate } from 'react-router-dom';
+import useAppState from '../../hooks/useAppState';
 import { AuthService } from '../../services';
 import { OPERATION_OUTCOME } from "../../utils/constants";
 import Login from "./Login.component";
 
 const LoginContainer = () => {
-  const { openSnackbar, setIsLoading } = useContext(AppState);
-
+  const { openSnackbar, setIsLoading, setAuthUser } = useAppState();
+  const navigate = useNavigate();
 
 
   const authenticateUser = async (user) => {
     try {
       setIsLoading(true)
       const response = await AuthService.authenticate(user);
-      // setBrandsList(response.data)
       console.warn(response)
+      setAuthUser(response?.data)
+      navigate('/')
     }
     catch(e){
       console.log(e)

@@ -4,11 +4,12 @@ import BrandsContainer from "../Admin/Brand/Brands.container";
 import GenresContainer from "../Admin/Genre/Genres.container";
 import Layout from '../Layout/Layout.component';
 import ErrorBoundaryLayout from "../Layout/ErrorBoundaryLayout";
-import { PageNotFound } from "../Common/ErrorPage";
+import { PageNotFound, Unauthorized } from "../Common/ErrorPage";
 import Brands from "../Components/Brands/Brands.container";
 import Consoles from "../Components/Consoles/Consoles.container";
 import Games from "../Components/Games/Games.container";
 import Login from "../Components/Login/Login.container";
+import RequireAuth from "../Layout/RequireAuth";
 
 
 const router = createBrowserRouter([
@@ -38,16 +39,25 @@ const router = createBrowserRouter([
             ]
           },
           {
-            path: "/brands",
-            element: <BrandsContainer />,
-          },
-          {
-            path: "/genres",
-            element: <GenresContainer />,
+            element: <RequireAuth />,
+            children: [
+              {
+                path: "/brands",
+                element: <BrandsContainer />,
+              },
+              {
+                path: "/genres",
+                element: <GenresContainer />,
+              },
+            ]
           },
           {
             path: "/login",
             element: <Login />
+          },
+          {
+            path: "/unauthorized",
+            element: <Unauthorized />
           },
           {
             path: "*",
