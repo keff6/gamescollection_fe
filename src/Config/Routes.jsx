@@ -8,7 +8,7 @@ import { PageNotFound } from "../Common/ErrorPage";
 import Brands from "../Components/Brands/Brands.container";
 import Consoles from "../Components/Consoles/Consoles.container";
 import Games from "../Components/Games/Games.container";
-import Login from "../Components/Login/Login.component";
+import Login from "../Components/Login/Login.container";
 
 
 const router = createBrowserRouter([

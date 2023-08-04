@@ -1,11 +1,43 @@
+import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import proptypes from 'prop-types';
 import ControllerImage from '../../images/controller.png'
 
 import classes from "./Login.module.css";
 
-const Login = () => {
-  const handleSubmit = () => {
-    console.log('Submitted')
+const USER_DEFAULT = {
+  username: '',
+  password: ''
+}
+
+const Login = ({authenticateUser}) => {
+  const [userObj, setUserObj] = useState(USER_DEFAULT);
+  const [validated, setValidated] = useState(false);
+
+
+  const handleChange = ({target}) => {
+    const {name, value} = target;
+    setUserObj({
+      ...userObj,
+      [name]: value,
+    })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+
+    if(validateForm(form)) {
+      console.warn("Valida data submitted")
+      authenticateUser(userObj)
+    }  
+  }
+
+  const validateForm = (formValues) => {
+    let isValid = false;
+    if (formValues.checkValidity()) isValid = true
+    setValidated(true)
+    return isValid;
   }
 
   return (
@@ -22,15 +54,15 @@ const Login = () => {
               <h3>Games Collection</h3>
               <h6>Sign in to your account</h6>
             </header>
-            <Form id="loginForm" noValidate onSubmit={handleSubmit}>
+            <Form id="loginForm" validated={validated} noValidate onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="username">
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   type="text"
                   name="username"
                   placeholder="Enter username"
-                  // value={consoleObj.name}
-                  // onChange={(e) => handleChange("name", e.target.value)}
+                  value={userObj.username}
+                  onChange={handleChange}
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -43,8 +75,8 @@ const Login = () => {
                   type="password"
                   name="password"
                   placeholder="Enter password"
-                  // value={consoleObj.name}
-                  // onChange={(e) => handleChange("name", e.target.value)}
+                  value={userObj.password}
+                  onChange={handleChange}
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -58,6 +90,10 @@ const Login = () => {
 
     </div>
   )
+}
+
+Login.propTypes = {
+  authenticateUser: proptypes.func,
 }
 
 export default Login;

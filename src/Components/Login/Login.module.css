@@ -4,9 +4,9 @@
   border-style: solid;
   display: flex;
   margin: 50px auto;
-  height: 330px;
+  height: 370px;
   box-sizing: content-box;
-  max-width: 700px;
+  max-width: 780px;
 }
 
 .login-container .left-half,
@@ -15,7 +15,7 @@
 }
 
 .login-container img {
-  height: 330px;
+  height: 370px;
   width: 100%;
 }
 
@@ -32,7 +32,7 @@
   top: 0;
   left: 0;
   right: 0;
-  background: rgb(6 32 70 / 32%);;
+  background: var(--deep-cove)
 }
 
 .login-form-container {
