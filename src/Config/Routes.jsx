@@ -10,6 +10,7 @@ import Consoles from "../Components/Consoles/Consoles.container";
 import Games from "../Components/Games/Games.container";
 import Login from "../Components/Login/Login.container";
 import RequireAuth from "../Layout/RequireAuth";
+import PersistLogin from "../Components/Login/PersistLogin";
 
 
 const router = createBrowserRouter([
@@ -17,53 +18,58 @@ const router = createBrowserRouter([
     element: <ErrorBoundaryLayout />,
     children: [
       {
-        path: '/',
-        element: <Layout />,
+        element: <PersistLogin />,
         children: [
           {
-            path: "/",
-            element: <Dashboard />,
+            path: '/',
+            element: <Layout />,
             children: [
               {
                 path: "/",
-                element: <Brands />,
+                element: <Dashboard />,
+                children: [
+                  {
+                    path: "/",
+                    element: <Brands />,
+                  },
+                  {
+                    path: "/:brandId/consoles",
+                    element: <Consoles />
+                  },
+                  {
+                    path: "/:consoleId/games",
+                    element: <Games />
+                  }
+                ]
               },
               {
-                path: "/:brandId/consoles",
-                element: <Consoles />
+                element: <RequireAuth />,
+                children: [
+                  {
+                    path: "/brands",
+                    element: <BrandsContainer />,
+                  },
+                  {
+                    path: "/genres",
+                    element: <GenresContainer />,
+                  },
+                ],
               },
               {
-                path: "/:consoleId/games",
-                element: <Games />
-              }
+                path: "/login",
+                element: <Login />
+              },
+              {
+                path: "/unauthorized",
+                element: <Unauthorized />
+              },
+              {
+                path: "*",
+                element: <PageNotFound />,
+              },
+        
             ]
-          },
-          {
-            element: <RequireAuth />,
-            children: [
-              {
-                path: "/brands",
-                element: <BrandsContainer />,
-              },
-              {
-                path: "/genres",
-                element: <GenresContainer />,
-              },
-            ]
-          },
-          {
-            path: "/login",
-            element: <Login />
-          },
-          {
-            path: "/unauthorized",
-            element: <Unauthorized />
-          },
-          {
-            path: "*",
-            element: <PageNotFound />,
-          },
-    
+          }
         ]
       }
     ]

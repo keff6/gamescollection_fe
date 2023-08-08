@@ -116,7 +116,7 @@ export const reducer = (state, action) => {
     case actions.SET_AUTH_USER:
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
       }
     default:
       return state;

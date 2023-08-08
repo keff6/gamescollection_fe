@@ -1,3 +1,50 @@
 .bg-dark {
   background-color: var(--fiord);
 }
+
+.circle {
+  display: inline-block;
+    background-color: var(--blue-bayoux);
+    border-radius: 50%;
+}
+
+.circle-inner {
+  color: white;
+  display: table-cell;
+  vertical-align: middle; 
+  text-align: center;
+  text-decoration: none;
+  height: 35px;
+  width: 35px;  
+  font-size: 18px;
+}
+
+.user-drop-down a:first-of-type {
+  padding: 0;
+}
+
+.user-drop-down a::after {
+  content: none;
+}
+
+.user-drop-down > div {
+  left: -75px !important;
+  width: 180px;
+}
+
+.user-drop-down .userSigned {
+  padding: 8px;
+  display: block;
+  background-color: var(--edward);
+  color: var(--shark)
+}
+
+.user-drop-down .userSigned .label-container {
+  padding: 8px;
+  display: inline-block;
+}
+
+.user-drop-down .userSigned .signed-label {
+  font-size: 11px;
+  display:block;
+}

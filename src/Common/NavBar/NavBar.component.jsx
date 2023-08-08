@@ -1,11 +1,20 @@
 import { Link } from "react-router-dom";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import proptypes from "prop-types";
+import useAppState from '../../hooks/useAppState';
 import classes from './NavBar.module.css';
 
-function NavBar() {
+const NavBar = ({ logOut }) =>{
+  const { user } = useAppState();
+
+  const getInitialsCircle = () => (
+    <div className={classes.circle}>
+      <p className={classes.circleInner}>{
+        `${user?.name?.charAt(0).toUpperCase()}${user?.lastName?.charAt(0).toUpperCase()}`
+      }</p>
+    </div>
+  )
+
   return (
     <Navbar collapseOnSelect expand="lg"  variant="dark" className={`fixed-top ${classes.bgDark}`}>
       <Container>
@@ -20,12 +29,37 @@ function NavBar() {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link as={Link} to="/login">Log In</Nav.Link>
+            {user ?
+                <NavDropdown
+                  title={getInitialsCircle()}
+                  id="user-logged-dropdown"
+                  className={classes.userDropDown}
+
+                >
+                  <NavDropdown.Item>
+                    <div className={classes.userSigned}>
+                      {getInitialsCircle()}
+                      <div className={classes.labelContainer}>
+                        <span className={classes.signedLabel}>Welcome!</span>
+                        <span className={classes.userName}>{`${user?.name} ${user?.lastName}`}</span>
+                      </div>
+                    </div>
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={logOut}>Log out</NavDropdown.Item>
+                </NavDropdown>
+              :
+              <Nav.Link as={Link} to="/login">Log In</Nav.Link>
+            }
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
+}
+
+NavBar.propTypes = {
+  logOut: proptypes.func,
 }
 
 export default NavBar;

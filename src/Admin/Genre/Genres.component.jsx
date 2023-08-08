@@ -16,7 +16,7 @@ const Genres = ({
   const [showForm, setShowForm] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
- 
+
   const handleAddNewGenre = async (genreName) => {
     addGenre(genreName)
   }
@@ -32,8 +32,8 @@ const Genres = ({
     setShowForm(true)
   }
 
-  const handleUpdateGenre = async (genreId, updatedName) => {
-    updateGenre(genreId, updatedName)
+  const handleUpdateGenre = async (genreId, name) => {
+    updateGenre(genreId, name)
   }
 
   const handleCloseFormModal = () => {
