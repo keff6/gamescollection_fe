@@ -19,10 +19,6 @@
   font-size: 18px;
 }
 
-.user-drop-down a:first-of-type {
-  padding: 0;
-}
-
 .user-drop-down a::after {
   content: none;
 }
@@ -35,8 +31,8 @@
 .user-drop-down .userSigned {
   padding: 8px;
   display: block;
-  background-color: var(--edward);
   color: var(--shark)
+  
 }
 
 .user-drop-down .userSigned .label-container {
@@ -47,4 +43,22 @@
 .user-drop-down .userSigned .signed-label {
   font-size: 11px;
   display:block;
+}
+
+.user-drop-down > a:first-of-type {
+  padding: 0;
+}
+
+
+@media (max-width: 992px) {
+  .user-drop-down > div {
+    width: auto;
+  }
+  .divider {
+    border-bottom: 1px solid var(--sirocco);
+    margin: 30px 0;
+  }
+  .user-drop-down > a:last-of-type {
+    margin-bottom: 10px;
+  }
 }

@@ -78,12 +78,13 @@ tbody {
 }
 
 .dropdown-menu.show {
-  background-color: var(--fiord);
+  background-color: var(--regent-grey);
 }
 
 .dropdown-item {
-  color: var(--edward) !important;
+  color: var(--black-pearl) !important;
 }
+
 .dropdown-item:hover,
 .dropdown-item:active {
   color: var(--white) !important;

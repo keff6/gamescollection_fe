@@ -28,6 +28,7 @@ const NavBar = ({ logOut }) =>{
               <NavDropdown.Item as={Link} to="/genres">Genres</NavDropdown.Item>
             </NavDropdown>}
           </Nav>
+          <div className={`${classes.divider} d-block d-md-none`} />
           <Nav>
             {user ?
                 <NavDropdown
@@ -36,15 +37,13 @@ const NavBar = ({ logOut }) =>{
                   className={classes.userDropDown}
 
                 >
-                  <NavDropdown.Item>
-                    <div className={classes.userSigned}>
-                      {getInitialsCircle()}
-                      <div className={classes.labelContainer}>
-                        <span className={classes.signedLabel}>Welcome!</span>
-                        <span className={classes.userName}>{`${user?.name} ${user?.lastName}`}</span>
-                      </div>
+                  <div className={classes.userSigned}>
+                    {getInitialsCircle()}
+                    <div className={classes.labelContainer}>
+                      <span className={classes.signedLabel}>Welcome!</span>
+                      <span className={classes.userName}>{`${user?.name} ${user?.lastName}`}</span>
                     </div>
-                  </NavDropdown.Item>
+                  </div>
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={logOut}>Log out</NavDropdown.Item>
                 </NavDropdown>
