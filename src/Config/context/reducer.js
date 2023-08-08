@@ -112,6 +112,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isLoading: action.payload,
+      };
+    case actions.SET_AUTH_USER:
+      return {
+        ...state,
+        user: action.payload,
       }
     default:
       return state;

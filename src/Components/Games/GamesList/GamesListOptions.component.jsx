@@ -1,14 +1,14 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { ButtonGroup, ToggleButton, Container } from "react-bootstrap";
 import proptypes from 'prop-types';
-import { AppState } from "../../../Config/store/state";
+import useAppState from '../../../hooks/useAppState';
 import { GAME_LIST_OPTIONS } from '../../../utils/constants';
 import AlphabetButtons from './AlphabetButtons.component';
 import SearchGames from './SearchGames.component';
 import classes from '../Games.module.css';
 
 const GamesListOptions = ({ searchGames }) => {
-  const { game: { listOption }, setGamesListOption, setInitialLetter } = useContext(AppState);
+  const { game: { listOption }, setGamesListOption, setInitialLetter } = useAppState();
 
   useEffect(() => () => {
     setGamesListOption(GAME_LIST_OPTIONS.ALPHABET);

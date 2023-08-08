@@ -1,7 +1,6 @@
-import { useContext } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import proptypes from 'prop-types';
-import { AppState } from "../../Config/store/state";
+import useAppState from '../../hooks/useAppState';
 import classes from './Games.module.css';
 import { NO_DATA } from "../../utils/constants";
 
@@ -15,7 +14,7 @@ const GameDetails = ({
     game: {selected}, setSelectedGame, 
     console: {selected : selectedConsole},
     genre: { list: genresList }
-  } = useContext(AppState);
+  } = useAppState();
   const currentConsole = selectedConsole ? selectedConsole : JSON.parse(sessionStorage.getItem('consoleData'));
   const consoleLabel = currentConsole ? currentConsole.name : NO_DATA;
   const selectedGenres = genresList.filter(g => selected?.genres?.includes(g.id));

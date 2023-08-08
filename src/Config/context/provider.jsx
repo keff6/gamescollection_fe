@@ -31,6 +31,7 @@ const APP_STATE = {
     show: false,
   },
   isLoading: false,
+  user: null,
 };
 
 export const AppStateProvider = ({ children }) => {
@@ -120,6 +121,12 @@ export const AppStateProvider = ({ children }) => {
         dispatch({
           type: actions.SET_IS_LOADING,
           payload: isLoading,
+        })
+      },
+      setAuthUser: (userData) => {
+        dispatch({
+          type: actions.SET_AUTH_USER,
+          payload: userData,
         })
       }
     }),

@@ -17,6 +17,7 @@
   --waikawa-grey: #2b426dba;
   --regent-grey: #7d8d9d;
   --blue-bayoux: #192633d6;
+  --deep-cove: #06204652;
   --white: #fff;
   --fiord: #424a65;
   --falu-red: #771717;
@@ -77,12 +78,13 @@ tbody {
 }
 
 .dropdown-menu.show {
-  background-color: var(--fiord);
+  background-color: var(--regent-grey);
 }
 
 .dropdown-item {
-  color: var(--edward) !important;
+  color: var(--black-pearl) !important;
 }
+
 .dropdown-item:hover,
 .dropdown-item:active {
   color: var(--white) !important;

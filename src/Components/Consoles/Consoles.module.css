@@ -31,6 +31,7 @@
 
 .card-footer {
   text-align: end;
+  align-self: end;
 }
 
 .table-buttons-container button:first-of-type,
@@ -53,6 +54,12 @@ a.danger-link {
 .danger-link:hover {
   background-color: var(--falu-red) !important;
   color: var(--white) !important;
+}
+
+.console-year-label {
+  color: var(--regent-grey);
+  margin: 0;
+  padding: 0;
 }
 
 /***************************************************/

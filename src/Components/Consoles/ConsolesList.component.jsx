@@ -1,13 +1,12 @@
-import { useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import proptypes from "prop-types";
-import { AppState } from "../../Config/store/state";
+import useAppState from "../../hooks/useAppState";
 import ConsoleCard from "./ConsoleCard.component";
 import { Spinner } from "../../Common";
 import classes from './Consoles.module.css';
 
 const ConsolesList = ({consoles, editConsole, deleteConsole, viewDetails}) => {
-  const { isLoading } = useContext(AppState);
+  const { isLoading } = useAppState();
 
   if(isLoading) return <Spinner />
 

@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Modal, Form} from 'react-bootstrap';
 import proptypes from 'prop-types';
-import { AppState } from "../../Config/store/state";
+import useAppState from '../../hooks/useAppState';
 
 const GenreForm = ({
   addNewGenre,
@@ -11,7 +11,7 @@ const GenreForm = ({
   show,
   ...rest
 }) => {
-  const { genre: {selected}, setSelectedGenre } = useContext(AppState);
+  const { genre: {selected}, setSelectedGenre } = useAppState();
   const [genreName, setGenreName] = useState('');
   const [validated, setValidated] = useState(false);
   const hasValidChanges = genreName.length > 0 && (selected ? genreName !== selected.name : true);

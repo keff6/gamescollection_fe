@@ -1,9 +1,9 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
-import { AppState } from "../../Config/store/state";
-import { DeleteAlertModal,Breadcrumb } from "../../Common"
+import useAppState from '../../hooks/useAppState';
+import { DeleteAlertModal, Breadcrumb } from "../../Common"
 import GamesListOptions from './GamesList/GamesListOptions.component';
 import GamesList from './GamesList/GamesList.container';
 import classes from './Games.module.css';
@@ -25,7 +25,7 @@ const Games = ({
   searchGames,
 }) => {
   const navigate = useNavigate();
-  const { game, setSelectedGame, brand, console } = useContext(AppState);
+  const { game, setSelectedGame, brand, console, user } = useAppState();
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
@@ -90,8 +90,11 @@ const Games = ({
             <h2>{currentConsole?.name}</h2>
             <h6>{currentBrand?.name}</h6>
           </div>
-          <Button className="d-none d-md-block" onClick={() => setShowForm(true)}>Add Game</Button>
-          <Button className="d-block d-md-none" onClick={() => setShowForm(true)}>Add+</Button>
+          {user &&
+          <>
+            <Button className="d-none d-md-block" onClick={() => setShowForm(true)}>Add Game</Button>
+            <Button className="d-block d-md-none" onClick={() => setShowForm(true)}>Add+</Button>
+          </>}
         </header>
       </div>
       <GamesListOptions searchGames={searchGames}/>
