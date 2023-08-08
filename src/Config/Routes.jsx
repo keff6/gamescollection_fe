@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../Components/Home/Dashboard.component";
-import BrandsContainer from "../Admin/Brand/Brands.container";
-import GenresContainer from "../Admin/Genre/Genres.container";
+import BrandsContainer from "../Components/Brands/Brand/Brands.container";
+import GenresContainer from "../Components/Genres/Genres.container";
 import Layout from '../Layout/Layout.component';
 import ErrorBoundaryLayout from "../Layout/ErrorBoundaryLayout";
 import { PageNotFound, Unauthorized } from "../Common/ErrorPage";

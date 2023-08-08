@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import proptypes from 'prop-types';
 import { Table, Button } from 'react-bootstrap';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
-import { AppState } from "../../Config/store/state";
-import Spinner from "../../Common/Spinner/Spinner.component";
+import { AppState } from "../../../Config/store/state";
+import Spinner from "../../../Common/Spinner/Spinner.component";
 import classes from './Brands.module.css';
 
 const BrandsTable = ({ brands, deleteBrand, editBrand }) => {

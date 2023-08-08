@@ -1,10 +1,10 @@
 import { useState, useContext } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import proptypes from 'prop-types';
-import { AppState } from "../../Config/store/state";
+import { AppState } from "../../../Config/store/state";
 import BrandsTable from './BrandsTable.component';
 import BrandForm from './BrandForm.component';
-import DeleteAlertModal from '../../Common/DeleteAlertModal/DeleteAlertModal.component';
+import DeleteAlertModal from '../../../Common/DeleteAlertModal/DeleteAlertModal.component';
 import classes from './Brands.module.css';
 
 const Brands = ({

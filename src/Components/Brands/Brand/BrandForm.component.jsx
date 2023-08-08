@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Button, Modal, Form} from 'react-bootstrap';
 import proptypes from 'prop-types';
-import { AppState } from "../../Config/store/state";
+import { AppState } from "../../../Config/store/state";
 
 const BRAND_DEFAULT = {
   name: "",
