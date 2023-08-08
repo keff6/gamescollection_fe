@@ -20,7 +20,7 @@ const Consoles = ({
   updateConsole,
 }) => {
   const navigate = useNavigate();
-  const { console, setSelectedConsole, brand: { selected: selectedBrand } } = useAppState();
+  const { console, setSelectedConsole, brand: { selected: selectedBrand }, user } = useAppState();
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
@@ -83,8 +83,11 @@ const Consoles = ({
           <div className={classes.consolesHeader}>
             <h2>{currentBrand?.name}</h2>
           </div>
-          <Button className="d-none d-md-block" onClick={() => setShowForm(true)}>Add Console</Button>
-          <Button className="d-block d-md-none" onClick={() => setShowForm(true)}>Add+</Button>
+          {user &&
+          <>
+            <Button className="d-none d-md-block" onClick={() => setShowForm(true)}>Add Console</Button>
+            <Button className="d-block d-md-none" onClick={() => setShowForm(true)}>Add+</Button>
+          </>}
         </header>
       </div>
       <ConsolesList

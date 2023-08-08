@@ -3,9 +3,11 @@ import { Table, Button, Dropdown } from 'react-bootstrap';
 import { PencilSquare, Trash, ListStars } from "react-bootstrap-icons";
 import { MoreButton, Tooltip } from '../../../Common';
 import { GAME_LIST_OPTIONS } from '../../../utils/constants';
+import useAppState from '../../../hooks/useAppState';
 import classes from '../Games.module.css';
 
 const GamesList = ({ games, deleteGame, editGame, listOption, viewDetails }) => {
+  const { user } = useAppState();
   const emptyListMessage = (listOption === GAME_LIST_OPTIONS.SEARCH) ? 'No results found' : 'Start adding games!';
 
   return (
@@ -37,6 +39,7 @@ const GamesList = ({ games, deleteGame, editGame, listOption, viewDetails }) => 
                       <ListStars />
                     </Button>
                   </Tooltip>
+                  {user &&
                   <Tooltip text="See more options">
                     <Dropdown>
                       <Dropdown.Toggle as={MoreButton} />
@@ -50,7 +53,7 @@ const GamesList = ({ games, deleteGame, editGame, listOption, viewDetails }) => 
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
-                  </Tooltip>
+                  </Tooltip>}
                 </div>
               </td>
             </tr>

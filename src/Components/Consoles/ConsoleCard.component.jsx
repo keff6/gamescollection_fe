@@ -8,7 +8,7 @@ import classes from './Consoles.module.css';
 
 
 const ConsoleCard = ({ consoleData, editConsole, deleteConsole, viewDetails }) => {
-  const { setSelectedConsole } = useAppState();
+  const { setSelectedConsole, user } = useAppState();
   const navigate = useNavigate();
 
   const navigateToGamesHandler = () => {
@@ -29,6 +29,7 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole, viewDetails }) =
           </div>
         </Card.Title>
         <footer className={classes.cardFooter}>
+          {user &&
           <div className={classes.tableButtonsContainer}>
             <Tooltip text="See more options">
               <Dropdown>
@@ -44,7 +45,7 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole, viewDetails }) =
                 </Dropdown.Menu>
               </Dropdown>
             </Tooltip>
-          </div>
+          </div>}
           <div className={classes.navButtons}>
             <Button
               type="button"
