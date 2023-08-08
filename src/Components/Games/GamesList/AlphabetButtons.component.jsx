@@ -1,11 +1,10 @@
-import { useContext } from 'react';
 import { Nav, Dropdown, DropdownButton } from 'react-bootstrap';
-import { AppState } from "../../../Config/store/state";
+import useAppState from '../../../hooks/useAppState'
 import { ALPHABET } from '../../../utils/constants';
 import classes from '../Games.module.css';
 
 const AlphabetButtons = () => {
-  const { game: { initialLetter }, setInitialLetter } = useContext(AppState);
+  const { game: { initialLetter }, setInitialLetter } = useAppState();
 
   const handleSelection = eventKey => {
     setInitialLetter(eventKey)

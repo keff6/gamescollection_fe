@@ -1,7 +1,6 @@
-import { useContext } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import proptypes from 'prop-types';
-import { AppState } from "../../Config/store/state";
+import useAppState from '../../hooks/useAppState';
 import classes from './Consoles.module.css';
 import { CONSOLE_GENERATIONS, NO_DATA } from "../../utils/constants";
 
@@ -11,7 +10,7 @@ const ConsoleDetails = ({
   show,
   ...rest
 }) => {
-  const { console: {selected}, setSelectedConsole, brand: {selected : selectedBrand}} = useContext(AppState);
+  const { console: {selected}, setSelectedConsole, brand: {selected : selectedBrand}} = useAppState();
   const selectedGeneration = CONSOLE_GENERATIONS.find(c => c.value.toString() === selected?.generation);
   const generationLabel = selectedGeneration ? selectedGeneration.text : NO_DATA;
   const currentBrand = selectedBrand ? selectedBrand : JSON.parse(sessionStorage.getItem('brandData'));

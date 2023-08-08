@@ -1,9 +1,8 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import { useContext } from "react";
-import { AppState } from "../Config/store/state";
+import useAppState from "../hooks/useAppState";
 
 const RequireAuth = () => {
-  const { user } = useContext(AppState);
+  const { user } = useAppState();
   const location = useLocation();
 
   return (

@@ -1,12 +1,12 @@
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { AppState } from "../../Config/store/state";
+import useAppState from "../../hooks/useAppState";
 import { useConsolesAPI, useBrandsAPI } from "../../hooks/api";
 import Consoles from "./Consoles.component";
 import { OPERATION_OUTCOME } from "../../utils/constants";
 
 const ConsolesContainer = () => {
-  const { setConsolesList, openSnackbar, setBrandsList, setIsLoading, setInitialLetter } = useContext(AppState);
+  const { setConsolesList, openSnackbar, setBrandsList, setIsLoading, setInitialLetter } = useAppState();
   const { brandId } = useParams()
   const consolesAPI = useConsolesAPI()
   const brandsAPI = useBrandsAPI()

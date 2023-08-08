@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Modal, Form, Row, Col } from 'react-bootstrap';
 import proptypes from 'prop-types';
-import { AppState } from "../../Config/store/state";
+import useAppState from '../../hooks/useAppState';
 import { CONSOLE_GENERATIONS } from "../../utils/constants";
 
 const CONSOLE_DEFAULT = {
@@ -21,7 +21,7 @@ const ConsoleForm = ({
   show,
   ...rest
 }) => {
-  const { console: {selected}, setSelectedConsole, brand} = useContext(AppState);
+  const { console: {selected}, setSelectedConsole, brand} = useAppState();
   const [consoleObj, setConsoleObj] = useState(CONSOLE_DEFAULT);
   const [validated, setValidated] = useState(false);
 

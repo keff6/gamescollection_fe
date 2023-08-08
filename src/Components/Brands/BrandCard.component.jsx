@@ -1,13 +1,12 @@
-import { useContext } from 'react';
 import { Card, Button } from "react-bootstrap";
 import { ArrowRight } from "react-bootstrap-icons";
 import { useNavigate } from 'react-router-dom';
 import proptypes from 'prop-types';
-import { AppState } from "../../Config/store/state";
+import useAppState from '../../hooks/useAppState';
 import classes from './Brands.module.css';
 
 const BrandCard = ({brandData}) => {
-  const { setSelectedBrand } = useContext(AppState);
+  const { setSelectedBrand } = useAppState();
   const navigate = useNavigate();
 
   const navigateToConsoleHandler = () => {

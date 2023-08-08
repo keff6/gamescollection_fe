@@ -1,12 +1,11 @@
-import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { AppState } from "../../Config/store/state";
+import useAppState from "../../hooks/useAppState";
 import { useGamesAPI, useConsolesAPI, useGenresAPI } from "../../hooks/api";
 import Games from "./Games.component";
 import { OPERATION_OUTCOME } from "../../utils/constants";
 
 const GamesContainer = () => {
-  const { setGamesList, openSnackbar, setConsolesList, setGenresList, setIsLoading, game: {initialLetter, searchTerm} } = useContext(AppState);
+  const { setGamesList, openSnackbar, setConsolesList, setGenresList, setIsLoading, game: {initialLetter, searchTerm} } = useAppState();
   const { consoleId } = useParams()
   const gamesAPI = useGamesAPI()
   const consolesAPI = useConsolesAPI()

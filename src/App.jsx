@@ -1,6 +1,6 @@
 import { RouterProvider } from "react-router-dom";
 import routes from './Config/Routes';
-import { AppStateProvider } from './Config/store/provider';
+import { AppStateProvider } from './Config/context/provider';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 

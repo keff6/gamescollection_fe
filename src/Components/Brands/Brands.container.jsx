@@ -1,11 +1,11 @@
-import { useEffect, useContext } from "react";
-import { AppState } from "../../Config/store/state";
+import { useEffect } from "react";
+import useAppState from "../../hooks/useAppState";
 import { useBrandsAPI } from "../../hooks/api";
 import { OPERATION_OUTCOME } from "../../utils/constants";
 import Brands from "./Brands.component";
 
 const BrandsContainer = () => {
-  const { setBrandsList, openSnackbar, setIsLoading } = useContext(AppState);
+  const { setBrandsList, openSnackbar, setIsLoading } = useAppState();
   const brandsAPI = useBrandsAPI()
 
   useEffect(() => {

@@ -1,6 +1,6 @@
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import proptypes from 'prop-types';
-import { AppState } from "../../../Config/store/state";
+import useAppState from "../../../hooks/useAppState";
 import GamesList from "./GamesList.component";
 import { GAME_LIST_OPTIONS } from "../../../utils/constants";
 import Spinner from "../../../Common/Spinner/Spinner.component";
@@ -13,7 +13,7 @@ const GamesListContainer = ({
   getGamesByConsoleAndLetter,
   viewDetails,
 }) => {
-  const { game, isLoading, setGamesList } = useContext(AppState);
+  const { game, isLoading, setGamesList } = useAppState();
 
   useEffect(() => {
     const { listOption } = game;

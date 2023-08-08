@@ -1,10 +1,10 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Modal, Form, Row, Col, InputGroup, Badge, Accordion } from 'react-bootstrap';
 import proptypes from 'prop-types';
 import { XCircle } from "react-bootstrap-icons";
 import { InfoTooltip } from '../../Common';
 import { GAME_LIST_OPTIONS } from '../../utils/constants';
-import { AppState } from "../../Config/store/state";
+import useAppState from '../../hooks/useAppState';
 import { gameObjectSanitizer } from '../../utils/requestSanitizer';
 import classes from './Games.module.css';
 
@@ -35,7 +35,7 @@ const GameForm = ({
   show,
   ...rest
 }) => {
-  const { game: {selected, listOption}, setSelectedGame, console, genre } = useContext(AppState);
+  const { game: {selected, listOption}, setSelectedGame, console, genre } = useAppState();
   const [gameObj, setGameObj] = useState(GAME_DEFAULT);
   const [validated, setValidated] = useState(false);
   const genreDictionary = genre?.list.reduce((acc, curr) => ({ ...acc, [curr.id]: curr.name }),{})

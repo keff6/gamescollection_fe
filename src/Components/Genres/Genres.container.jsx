@@ -1,12 +1,12 @@
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { AppState } from "../../Config/store/state";
+import useAppState from "../../hooks/useAppState";
 import Genres from "./Genres.component";
 import {useGenresAPI} from "../../hooks/api";
 import { OPERATION_OUTCOME } from "../../utils/constants";
 
 const GenresContainer = () => {
-  const { setGenresList, openSnackbar, setIsLoading } = useContext(AppState);
+  const { setGenresList, openSnackbar, setIsLoading } = useAppState();
   const genresAPI = useGenresAPI()
 
   const navigate = useNavigate();

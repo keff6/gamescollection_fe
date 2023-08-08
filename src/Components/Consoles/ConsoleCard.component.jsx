@@ -1,15 +1,14 @@
-import { useContext } from 'react';
 import { Card, Button, Dropdown } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import proptypes from 'prop-types';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
-import { AppState } from "../../Config/store/state";
+import useAppState from '../../hooks/useAppState';
 import { MoreButton, Tooltip } from '../../Common';
 import classes from './Consoles.module.css';
 
 
 const ConsoleCard = ({ consoleData, editConsole, deleteConsole, viewDetails }) => {
-  const { setSelectedConsole } = useContext(AppState);
+  const { setSelectedConsole } = useAppState();
   const navigate = useNavigate();
 
   const navigateToGamesHandler = () => {

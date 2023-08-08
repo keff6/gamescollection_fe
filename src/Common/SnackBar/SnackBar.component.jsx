@@ -1,10 +1,9 @@
-import { useContext } from "react";
-import { AppState } from "../../Config/store/state";
-import {Toast, ToastContainer } from 'react-bootstrap';
+import { Toast, ToastContainer } from 'react-bootstrap';
 import proptypes from 'prop-types';
+import useAppState from "../../hooks/useAppState";
 
 const SnackBar = () => {
-  const { snackbar: { show, message, type }, closeSnackbar } = useContext(AppState);
+  const { snackbar: { show, message, type }, closeSnackbar } = useAppState();
 
   return (
     <ToastContainer

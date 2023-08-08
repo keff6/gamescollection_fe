@@ -1,7 +1,7 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import proptypes from 'prop-types';
-import { AppState } from "../../Config/store/state";
+import useAppState from '../../hooks/useAppState';
 import GenresTable from './GenresTable.component';
 import GenreForm from './GenreForm.component';
 import DeleteAlertModal from '../../Common/DeleteAlertModal/DeleteAlertModal.component';
@@ -12,7 +12,7 @@ const Genres = ({
   deleteGenre,
   updateGenre,
 }) => {
-  const { genre, setSelectedGenre } = useContext(AppState);
+  const { genre, setSelectedGenre } = useAppState();
   const [showForm, setShowForm] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);

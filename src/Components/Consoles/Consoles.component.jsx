@@ -1,8 +1,8 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
-import { AppState } from "../../Config/store/state";
+import useAppState from '../../hooks/useAppState';
 import ConsolesList from "./ConsolesList.component";
 import { DeleteAlertModal,Breadcrumb } from "../../Common"
 import ConsoleForm from './ConsoleForm.component';
@@ -20,7 +20,7 @@ const Consoles = ({
   updateConsole,
 }) => {
   const navigate = useNavigate();
-  const { console, setSelectedConsole, brand: { selected: selectedBrand } } = useContext(AppState);
+  const { console, setSelectedConsole, brand: { selected: selectedBrand } } = useAppState();
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
