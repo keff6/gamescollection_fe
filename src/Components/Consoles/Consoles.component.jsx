@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
@@ -26,10 +26,13 @@ const Consoles = ({
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = selectedBrand ? selectedBrand : JSON.parse(sessionStorage.getItem('brandData'));
+  const totalConsoles = currentBrand?.totalConsoles || 0;
 
-  if(!currentBrand) {
-    navigate('/', { replace: true });
-  }
+  useEffect(() => {
+    if(!currentBrand) {
+      navigate('/', { replace: true });
+    }
+  },[]);
 
   const handleAddNewConsole = async (consoleObj) => {
     addConsole(consoleObj)
@@ -82,6 +85,7 @@ const Consoles = ({
         <header className={classes.header}>
           <div className={classes.consolesHeader}>
             <h2>{currentBrand?.name}</h2>
+            <h5>{totalConsoles} {totalConsoles === 1 ? 'console' : 'consoles'}</h5>
           </div>
           {user &&
           <>

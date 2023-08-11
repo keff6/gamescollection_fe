@@ -12,7 +12,7 @@ const SearchGames = ({ searchGames }) => {
 
   const handleSearchInputChange = (event) => {
     setSearchTerm(event.target.value)
-    if(searchTerm.length > 2) setIsValid(true)
+    if(searchTerm.length > 0) setIsValid(true)
     else setIsValid(false)
   }
 

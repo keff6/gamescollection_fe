@@ -39,6 +39,11 @@ body {
   padding-top: 56px;
 }
 
+h5 {
+  font-weight: 200;
+  font-size: 1rem;
+}
+
 main {
   height: 100vh;
   background-color: var(--shark);

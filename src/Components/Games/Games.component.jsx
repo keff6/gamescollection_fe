@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
@@ -32,10 +32,13 @@ const Games = ({
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = (brand?.selected) ? brand.selected : JSON.parse(sessionStorage.getItem('brandData')); 
   const currentConsole = (console?.selected) ? console.selected : JSON.parse(sessionStorage.getItem('consoleData')); 
+  const totalGames = currentConsole?.totalGames || 0;
 
-  if(!currentBrand || !currentConsole) {
-    navigate('/', { replace: true });
-  }
+  useEffect(() => {
+    if(!currentBrand || !currentConsole) {
+      navigate('/', { replace: true });
+    }
+  }, []);
 
   const handleAddNewGame = async (gameObj) => {
     addGame(gameObj)
@@ -89,6 +92,7 @@ const Games = ({
           <div className={classes.gamesHeader}>
             <h2>{currentConsole?.name}</h2>
             <h6>{currentBrand?.name}</h6>
+            <h5>{totalGames} {totalGames === 1 ? 'game' : 'games'}</h5>
           </div>
           {user &&
           <>
