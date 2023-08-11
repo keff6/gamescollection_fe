@@ -37,16 +37,14 @@ const ConsoleDetails = ({
       </Modal.Header>
       <Modal.Body>
         <div className={classes.detailsContainer}>
-          <div className={classes.dataRow}>
+          <div className={classes.leftLabels}>
             <span className={classes.dataLabel}>Brand:</span>
-            <span className={classes.dataText}>{brandLabel}</span>
-          </div>
-          <div className={classes.dataRow}>
             <span className={classes.dataLabel}>Year:</span>
-            <span className={classes.dataText}>{selected?.year || NO_DATA}</span>
-          </div>
-          <div className={classes.dataRow}> 
             <span className={classes.dataLabel}>Generation:</span>
+          </div>
+          <div className={classes.rightLabels}>
+            <span className={classes.dataText}>{brandLabel}</span>
+            <span className={classes.dataText}>{selected?.year || NO_DATA}</span>
             <span className={classes.dataText}>{generationLabel}</span>
           </div>
         </div>

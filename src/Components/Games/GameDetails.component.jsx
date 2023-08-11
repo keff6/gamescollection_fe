@@ -40,28 +40,20 @@ const GameDetails = ({
       </Modal.Header>
       <Modal.Body>
         <div className={classes.detailsContainer}>
-          <div className={classes.dataRow}>
+          <div className={classes.leftLabels}>
             <span className={classes.dataLabel}>Console:</span>
-            <span className={classes.dataText}>{consoleLabel}</span>
-          </div>
-          <div className={classes.dataRow}>
             <span className={classes.dataLabel}>Year:</span>
-            <span className={classes.dataText}>{selected?.year || NO_DATA}</span>
-          </div>
-          <div className={classes.dataRow}>
             <span className={classes.dataLabel}>Genre(s):</span>
-            <span className={classes.dataText}>{genresLabel}</span>
-          </div>
-          <div className={classes.dataRow}> 
             <span className={classes.dataLabel}>Developer:</span>
-            <span className={classes.dataText}>{selected?.developer || NO_DATA}</span>
-          </div>
-          <div className={classes.dataRow}> 
             <span className={classes.dataLabel}>Publisher:</span>
-            <span className={classes.dataText}>{selected?.publisher || NO_DATA}</span>
-          </div>
-          <div className={classes.dataRow}> 
             <span className={classes.dataLabel}>Is New:</span>
+          </div>
+          <div className={classes.rightLabels}>
+            <span className={classes.dataText}>{consoleLabel}</span>
+            <span className={classes.dataText}>{selected?.year || NO_DATA}</span>
+            <span className={classes.dataText}>{genresLabel}</span>
+            <span className={classes.dataText}>{selected?.developer || NO_DATA}</span>
+            <span className={classes.dataText}>{selected?.publisher || NO_DATA}</span>
             <span className={classes.dataText}>{selected?.isNew || NO_DATA}</span>
           </div>
         </div>

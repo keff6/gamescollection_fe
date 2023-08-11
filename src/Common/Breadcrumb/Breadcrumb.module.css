@@ -1,3 +1,23 @@
 .breadcrumb-container > ol {
   margin-bottom: 5px;
 }
+
+.breadcrumb-extended {
+  display: inline-flex;
+  align-items: center;
+}
+
+.breadcrumb-extended button {
+  padding: 0 8px 0 0;
+}
+
+.breadcrumb-extended svg {
+  display: flex;
+  color: var(--edward)
+}
+
+.breadcrumb-extended svg:hover {
+  display: flex;
+  color: var(--white)
+}
+

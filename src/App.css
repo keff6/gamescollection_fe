@@ -14,9 +14,12 @@
   --tuna: #353639;
   --sirocco: #7a7f7f;
   --edward: #a2a9a9;
+  --silver-sand: #bac2c2;
   --waikawa-grey: #2b426dba;
   --regent-grey: #7d8d9d;
+  --lynch: #5D7389;
   --blue-bayoux: #192633d6;
+  --mirage: #1e2637;
   --deep-cove: #06204652;
   --white: #fff;
   --fiord: #424a65;
@@ -28,7 +31,7 @@
 /***************************************************/
 /* GENERAL STYLES                                  */
 /***************************************************/
-html, body, #app, #app>div, #root, .container {
+html, body, #app, #app>div {
   height: 100%
 }
 
@@ -37,7 +40,7 @@ body {
 }
 
 main {
-  height: 100%;
+  height: 100vh;
   background-color: var(--shark);
   color: var(--white);
 }
@@ -79,6 +82,8 @@ tbody {
 
 .dropdown-menu.show {
   background-color: var(--regent-grey);
+  max-height: 250px;
+  overflow-y: hidden;
 }
 
 .dropdown-item {
@@ -134,9 +139,9 @@ tbody {
 /* FORM STYLES                                  */
 /***************************************************/
 .modal-header, .modal-footer {
-  background-color: var(--fiord);
+  background-color: var(--mirage);
   color: var(--white);
-  border-color: var(--fiord);
+  border-color: var(--mirage);
 }
 
 
@@ -159,14 +164,19 @@ tbody {
   border-radius: 0%;
 }
 .accordion-button:not(.collapsed) {
-  background-color: var(--black-pearl);
+  background-color: var(--lynch);
   color: var(--white);
   border: none;
   border-radius: 0%;
+  box-shadow: none;
+}
+
+.accordion-button:not(.collapsed):after {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
 }
 
 .modal-body, .accordion-body {
-  background-color: var(--waikawa-grey);
+  background-color: var(--fiord);
   color: var(--white);
 }
 

@@ -48,7 +48,7 @@
 }
 
 a.danger-link {
-  color: var(--monza) !important;
+  color: var(--falu-red) !important;
 }
 
 .danger-link:hover {
@@ -66,16 +66,21 @@ a.danger-link {
 /* VIEW DETAILS                                    */
 /***************************************************/
 
-.data-row {
-margin-bottom: 10px;
-font-weight: bold;
+.details-container {
+  display: flex;
+}
+
+.left-labels, .right-labels {
+  display: grid;
 }
 
 .data-label {
-color: var(--white);
-margin-right: 16px;
+  color: var(--silver-sand);
+  margin-right: 16px;
+  font-weight: bold;
 }
 
 .data-text {
-color: var(--blue-bayoux);
+  color: var(--regent-grey);
+  font-weight: bold;
 }

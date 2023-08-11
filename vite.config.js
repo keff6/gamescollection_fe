@@ -9,5 +9,8 @@ export default defineConfig({
       localsConvention: "camelCase",
       scopeBehaviour: 'local',
     }
+  },
+  server: {
+    host: true
   }
 })
