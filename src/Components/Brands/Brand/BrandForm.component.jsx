@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Modal, Form} from 'react-bootstrap';
 import proptypes from 'prop-types';
-import { AppState } from "../../Config/store/state";
+import useAppState from '../../../hooks/useAppState';
 
 const BRAND_DEFAULT = {
   name: "",
@@ -17,7 +17,7 @@ const BrandForm = ({
   show,
   ...rest
 }) => {
-  const { brand: {selected}, setSelectedBrand} = useContext(AppState);
+  const { brand: {selected}, setSelectedBrand} = useAppState();
   const [brandObj, setBrandObj] = useState(BRAND_DEFAULT);
   const [validated, setValidated] = useState(false);
   const hasValidChanges = brandObj.name.length > 0 && (selected ? brandObj.name.length !== selected.name : true);

@@ -1,13 +1,12 @@
-import { useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import proptypes from "prop-types";
-import { AppState } from "../../Config/store/state";
+import useAppState from "../../hooks/useAppState";
 import Spinner from "../../Common/Spinner/Spinner.component";
 import BrandCard from "./BrandCard.component";
 import classes from './Brands.module.css';
 
 const BrandsList = ({brands}) => {
-  const { isLoading } = useContext(AppState);
+  const { isLoading } = useAppState();
 
   if(isLoading) return <Spinner />
 

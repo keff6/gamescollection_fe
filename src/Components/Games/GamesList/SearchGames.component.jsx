@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 import { InputGroup, Form, Button } from "react-bootstrap";
 import { Search } from "react-bootstrap-icons";
-import { useContext } from "react";
 import proptypes from "prop-types";
-import { AppState } from "../../../Config/store/state";
+import useAppState from "../../../hooks/useAppState";
 
 const SearchGames = ({ searchGames }) => {
-  const { game: { searchTerm }, setSearchTerm } = useContext(AppState);
+  const { game: { searchTerm }, setSearchTerm } = useAppState();
   const [isValid, setIsValid] = useState(false)
 
   useEffect(() => () => {setSearchTerm('')},[])
 
   const handleSearchInputChange = (event) => {
     setSearchTerm(event.target.value)
-    if(searchTerm.length > 2) setIsValid(true)
+    if(searchTerm.length > 0) setIsValid(true)
     else setIsValid(false)
   }
 

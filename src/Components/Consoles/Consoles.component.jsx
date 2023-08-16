@@ -1,8 +1,8 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
-import { AppState } from "../../Config/store/state";
+import useAppState from '../../hooks/useAppState';
 import ConsolesList from "./ConsolesList.component";
 import { DeleteAlertModal,Breadcrumb } from "../../Common"
 import ConsoleForm from './ConsoleForm.component';
@@ -20,16 +20,19 @@ const Consoles = ({
   updateConsole,
 }) => {
   const navigate = useNavigate();
-  const { console, setSelectedConsole, brand: { selected: selectedBrand } } = useContext(AppState);
+  const { console, setSelectedConsole, brand: { selected: selectedBrand }, user } = useAppState();
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = selectedBrand ? selectedBrand : JSON.parse(sessionStorage.getItem('brandData'));
+  const totalConsoles = console?.total || 0;
 
-  if(!currentBrand) {
-    navigate('/', { replace: true });
-  }
+  useEffect(() => {
+    if(!currentBrand) {
+      navigate('/', { replace: true });
+    }
+  },[]);
 
   const handleAddNewConsole = async (consoleObj) => {
     addConsole(consoleObj)
@@ -82,9 +85,13 @@ const Consoles = ({
         <header className={classes.header}>
           <div className={classes.consolesHeader}>
             <h2>{currentBrand?.name}</h2>
+            <h5>{totalConsoles} {totalConsoles === 1 ? 'console' : 'consoles'}</h5>
           </div>
-          <Button className="d-none d-md-block" onClick={() => setShowForm(true)}>Add Console</Button>
-          <Button className="d-block d-md-none" onClick={() => setShowForm(true)}>Add+</Button>
+          {user &&
+          <>
+            <Button className="d-none d-md-block" onClick={() => setShowForm(true)}>Add Console</Button>
+            <Button className="d-block d-md-none" onClick={() => setShowForm(true)}>Add+</Button>
+          </>}
         </header>
       </div>
       <ConsolesList
@@ -99,6 +106,7 @@ const Consoles = ({
         isEdit={isEdit}
         addNewConsole={handleAddNewConsole}
         saveUpdatedChanges={handleUpdateConsole}
+        currentBrandId={currentBrand?.id}
       />
       <DeleteAlertModal
         show={showConfirmDelete}

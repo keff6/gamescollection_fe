@@ -47,7 +47,8 @@ export const reducer = (state, action) => {
         ...state,
         console: {
           ...state.console,
-          list: action.payload.consoles
+          list: action.payload.consoles,
+          total: action.payload.total,
         }
       };
     case actions.SET_SELECTED_GAME:
@@ -63,7 +64,8 @@ export const reducer = (state, action) => {
         ...state,
         game: {
           ...state.game,
-          list: action.payload.games
+          list: action.payload.games,
+          total: action.payload.total
         }
       };
     case actions.SET_GAMES_LIST_OPTION:
@@ -112,6 +114,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isLoading: action.payload,
+      };
+    case actions.SET_AUTH_USER:
+      return {
+        ...state,
+        user: action.payload,
       }
     default:
       return state;

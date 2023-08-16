@@ -88,6 +88,7 @@ input:checked + .toggle-button {
   border-radius: 5px;
   background-color: var(--white);
   padding: 10px;
+  min-height: 50px;
 }
 
 .badge {
@@ -158,7 +159,7 @@ input:checked + .toggle-button {
 }
 
 a.danger-link {
-  color: var(--monza) !important;
+  color: var(--falu-red) !important;
 }
 
 .danger-link:hover {
@@ -170,18 +171,23 @@ a.danger-link {
 /* VIEW DETAILS                                    */
 /***************************************************/
 
-.data-row {
-  margin-bottom: 10px;
-  font-weight: bold;
+.details-container {
+  display: flex;
+}
+
+.left-labels, .right-labels {
+  display: grid;
 }
 
 .data-label {
-  color: var(--white);
+  color: var(--silver-sand);
   margin-right: 16px;
+  font-weight: bold;
 }
 
 .data-text {
-  color: var(--blue-bayoux);
+  color: var(--regent-grey);
+  font-weight: bold;
 }
 
 /***************************************************/
@@ -209,4 +215,9 @@ a.danger-link {
 
 .letters-dropdown button::after {
   margin-left: 10px;
+}
+
+.letters-dropdown > div:first-of-type{
+  max-height: 250px;
+  overflow-y: scroll;
 }

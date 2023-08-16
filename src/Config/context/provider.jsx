@@ -16,10 +16,12 @@ const APP_STATE = {
   },
   console: {
     list: [],
+    total: 0,
     selected: null,
   },
   game: {
     list: [],
+    total: 0,
     selected: null,
     listOption: GAME_LIST_OPTIONS.ALPHABET,
     initialLetter: '#',
@@ -31,6 +33,7 @@ const APP_STATE = {
     show: false,
   },
   isLoading: false,
+  user: null,
 };
 
 export const AppStateProvider = ({ children }) => {
@@ -72,7 +75,7 @@ export const AppStateProvider = ({ children }) => {
       setConsolesList: (consolesList) => {
         dispatch({
           type: actions.SET_CONSOLES_LIST,
-          payload: consolesList
+          payload: consolesList,
         });
       },
       setSelectedGame: (selectedGame) => {
@@ -120,6 +123,12 @@ export const AppStateProvider = ({ children }) => {
         dispatch({
           type: actions.SET_IS_LOADING,
           payload: isLoading,
+        })
+      },
+      setAuthUser: (userData) => {
+        dispatch({
+          type: actions.SET_AUTH_USER,
+          payload: userData,
         })
       }
     }),

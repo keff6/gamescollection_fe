@@ -1,9 +1,9 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
-import { AppState } from "../../Config/store/state";
-import { DeleteAlertModal,Breadcrumb } from "../../Common"
+import useAppState from '../../hooks/useAppState';
+import { DeleteAlertModal, Breadcrumb } from "../../Common"
 import GamesListOptions from './GamesList/GamesListOptions.component';
 import GamesList from './GamesList/GamesList.container';
 import classes from './Games.module.css';
@@ -23,19 +23,23 @@ const Games = ({
   getGamesByConsoleAndLetter,
   getWishlistByConsole,
   searchGames,
+  validateTitle,
 }) => {
   const navigate = useNavigate();
-  const { game, setSelectedGame, brand, console } = useContext(AppState);
+  const { game, setSelectedGame, brand, console, user } = useAppState();
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = (brand?.selected) ? brand.selected : JSON.parse(sessionStorage.getItem('brandData')); 
   const currentConsole = (console?.selected) ? console.selected : JSON.parse(sessionStorage.getItem('consoleData')); 
+  const totalGames = game?.total || 0;
 
-  if(!currentBrand || !currentConsole) {
-    navigate('/', { replace: true });
-  }
+  useEffect(() => {
+    if(!currentBrand || !currentConsole) {
+      navigate('/', { replace: true });
+    }
+  }, []);
 
   const handleAddNewGame = async (gameObj) => {
     addGame(gameObj)
@@ -89,9 +93,13 @@ const Games = ({
           <div className={classes.gamesHeader}>
             <h2>{currentConsole?.name}</h2>
             <h6>{currentBrand?.name}</h6>
+            <h5>{totalGames} {totalGames === 1 ? 'game' : 'games'}</h5>
           </div>
-          <Button className="d-none d-md-block" onClick={() => setShowForm(true)}>Add Game</Button>
-          <Button className="d-block d-md-none" onClick={() => setShowForm(true)}>Add+</Button>
+          {user &&
+          <>
+            <Button className="d-none d-md-block" onClick={() => setShowForm(true)}>Add Game</Button>
+            <Button className="d-block d-md-none" onClick={() => setShowForm(true)}>Add+</Button>
+          </>}
         </header>
       </div>
       <GamesListOptions searchGames={searchGames}/>
@@ -108,7 +116,8 @@ const Games = ({
         isEdit={isEdit}
         addNewGame={handleAddNewGame}
         saveUpdatedChanges={handleUpdateGame}
-        currentConsoleId={console?.selected?.id}
+        currentConsoleId={currentConsole?.id}
+        validateTitle={validateTitle}
       />
       <DeleteAlertModal
         show={showConfirmDelete}
@@ -130,6 +139,7 @@ Games.propTypes = {
   getWishlistByConsole: proptypes.func,
   searchGames: proptypes.func,
   updateGame: proptypes.func,
+  validateTitle: proptypes.func,
 }
 
 export default Games;

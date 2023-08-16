@@ -1,10 +1,10 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Modal, Form, Row, Col, InputGroup, Badge, Accordion } from 'react-bootstrap';
 import proptypes from 'prop-types';
 import { XCircle } from "react-bootstrap-icons";
 import { InfoTooltip } from '../../Common';
 import { GAME_LIST_OPTIONS } from '../../utils/constants';
-import { AppState } from "../../Config/store/state";
+import useAppState from '../../hooks/useAppState';
 import { gameObjectSanitizer } from '../../utils/requestSanitizer';
 import classes from './Games.module.css';
 
@@ -33,20 +33,24 @@ const GameForm = ({
   onHide,
   saveUpdatedChanges,
   show,
+  validateTitle,
   ...rest
 }) => {
-  const { game: {selected, listOption}, setSelectedGame, console, genre } = useContext(AppState);
+  const { game: {selected, listOption}, setSelectedGame, console, genre } = useAppState();
   const [gameObj, setGameObj] = useState(GAME_DEFAULT);
   const [validated, setValidated] = useState(false);
+  const [isValidTitle, setIsValidTitle] = useState(true);
   const genreDictionary = genre?.list.reduce((acc, curr) => ({ ...acc, [curr.id]: curr.name }),{})
 
   useEffect(() => {
-    if(listOption === GAME_LIST_OPTIONS.WISHLIST) {
-      setGameObj({
-        ...gameObj,
-        isWishlist: true
-      }) 
-    }
+    let isWishlist = false;
+    if(listOption === GAME_LIST_OPTIONS.WISHLIST) isWishlist = true
+
+    setGameObj({
+      ...gameObj,
+      isWishlist,
+      ...(currentConsoleId && {consoleId: currentConsoleId})
+    }) 
     return () => {
       setGameObj({...GAME_DEFAULT, saga: [], genres: []})
       setValidated(false)
@@ -89,7 +93,7 @@ const GameForm = ({
 
   const validateForm = (formValues) => {
     let isValid = false;
-    if (formValues.checkValidity()) isValid = true
+    if (isValidTitle && formValues.checkValidity()) isValid = true
     setValidated(true)
     return isValid;
   }
@@ -98,7 +102,6 @@ const GameForm = ({
     e.preventDefault()
     const sanitizedGameObj = gameObjectSanitizer({...gameObj})
     
-
     const form = e.currentTarget;
 
     if(validateForm(form)) {
@@ -161,6 +164,13 @@ const GameForm = ({
     }) 
   }
 
+  const handleValidateTitle = async (e) => {
+    e.preventDefault();
+    const { data: isValid} = await validateTitle(gameObj.title)
+    window.console.log('Validating title..', isValid)
+    setIsValidTitle(isValid)
+  }
+
   return (
     <Modal
       {...rest}
@@ -189,10 +199,15 @@ const GameForm = ({
                     placeholder="Enter game title"
                     value={gameObj.title}
                     onChange={(e) => handleChange("title", e.target.value)}
+                    onBlur={handleValidateTitle}
+                    isInvalid={!isValidTitle}
                     required
                   />
                   <Form.Control.Feedback type="invalid">
-                    Please enter a valid text.
+                    {!isValidTitle ? 
+                      'This game already exist on the database.' :
+                      'Please enter a valid text.'
+                    }
                   </Form.Control.Feedback>
                 </Form.Group>
                 <Row className="form-row">
@@ -202,8 +217,9 @@ const GameForm = ({
                       <Form.Select
                         aria-label="consoleId"
                         name="consoleId"
-                        value={gameObj.consoleId || currentConsoleId || ''}
+                        value={gameObj.consoleId || ''}
                         onChange={(e) => handleChange("consoleId", e.target.value)}
+                        disabled={gameObj.consoleId}
                         required
                       >
                         <option value=''>Select a console</option>
@@ -430,6 +446,7 @@ GameForm.propTypes = {
   onHide: proptypes.func,
   saveUpdatedChanges: proptypes.func,
   show: proptypes.bool,
+  validateTitle: proptypes.func,
 }
 
 export default GameForm

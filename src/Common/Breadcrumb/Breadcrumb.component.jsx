@@ -1,9 +1,21 @@
-import { Breadcrumb as BootstrapBreadcrumb } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Breadcrumb as BootstrapBreadcrumb, Button } from "react-bootstrap";
+import { ArrowLeftCircle } from "react-bootstrap-icons";
+import { Link, useNavigate } from "react-router-dom";
 import proptypes from 'prop-types';
+import ToolTip from '../Tooltip/Tooltip.component'
 import classes from './Breadcrumb.module.css';
 
-const Breadcrumb = ({ items }) =>
+const Breadcrumb = ({ items, backButton = true }) => {
+  const navigate = useNavigate();
+
+  return (
+  <div className={classes.breadcrumbExtended}>
+    {backButton &&
+    <ToolTip text="Go Back">
+      <Button variant="link" className={classes.backButton} onClick={() => navigate(-1)}>
+        <ArrowLeftCircle />
+      </Button>
+    </ToolTip>}
   <BootstrapBreadcrumb className={classes.breadcrumbContainer}>
     {items.map((item, idx) =>
       <BootstrapBreadcrumb.Item
@@ -15,8 +27,12 @@ const Breadcrumb = ({ items }) =>
       </BootstrapBreadcrumb.Item>  
     )}
   </BootstrapBreadcrumb>
+  </div>
+  )
+}
 
 Breadcrumb.propTypes = {
+  backButton: proptypes.bool,
   items: proptypes.array,
 }
 

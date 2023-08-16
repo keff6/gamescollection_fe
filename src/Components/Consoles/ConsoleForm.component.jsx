@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Modal, Form, Row, Col } from 'react-bootstrap';
 import proptypes from 'prop-types';
-import { AppState } from "../../Config/store/state";
+import useAppState from '../../hooks/useAppState';
 import { CONSOLE_GENERATIONS } from "../../utils/constants";
 
 const CONSOLE_DEFAULT = {
@@ -19,15 +19,22 @@ const ConsoleForm = ({
   onHide,
   saveUpdatedChanges,
   show,
+  currentBrandId,
   ...rest
 }) => {
-  const { console: {selected}, setSelectedConsole, brand} = useContext(AppState);
+  const { console: {selected}, setSelectedConsole, brand} = useAppState();
   const [consoleObj, setConsoleObj] = useState(CONSOLE_DEFAULT);
   const [validated, setValidated] = useState(false);
 
-  useEffect(() => () => {
-    setConsoleObj(CONSOLE_DEFAULT)
-    setValidated(false)
+  useEffect(() => {
+    setConsoleObj({
+      ...CONSOLE_DEFAULT,
+      ...(currentBrandId && { brandId: currentBrandId }),
+    });
+    return () => {
+      setConsoleObj(CONSOLE_DEFAULT)
+      setValidated(false)
+    }
   },[show])
 
   useEffect(() => {
@@ -108,6 +115,7 @@ const ConsoleForm = ({
               aria-label="brand"
               value={consoleObj.brandId || ''}
               onChange={(e) => handleChange("brandId", e.target.value)}
+              disabled={consoleObj.brandId}
               required
             >
               <option value=''>Select a brand</option>
@@ -179,6 +187,7 @@ const ConsoleForm = ({
 
 ConsoleForm.propTypes = {
   addNewConsole: proptypes.func,
+  currentBrandId: proptypes.string,
   isEdit: proptypes.bool,
   onHide: proptypes.func,
   saveUpdatedChanges: proptypes.func,

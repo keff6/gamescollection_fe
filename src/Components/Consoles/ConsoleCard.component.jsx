@@ -1,15 +1,14 @@
-import { useContext } from 'react';
 import { Card, Button, Dropdown } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import proptypes from 'prop-types';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
-import { AppState } from "../../Config/store/state";
+import useAppState from '../../hooks/useAppState';
 import { MoreButton, Tooltip } from '../../Common';
 import classes from './Consoles.module.css';
 
 
 const ConsoleCard = ({ consoleData, editConsole, deleteConsole, viewDetails }) => {
-  const { setSelectedConsole } = useContext(AppState);
+  const { setSelectedConsole, user } = useAppState();
   const navigate = useNavigate();
 
   const navigateToGamesHandler = () => {
@@ -22,11 +21,15 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole, viewDetails }) =
     <Card className={classes.card}>
       <Card.Body className="card-body-console">
         <Card.Title>
-          {consoleData.logoUrl ?
-          <img className={classes.logoImg} src={consoleData.logoUrl} alt={consoleData.name} />
-          : <span className={classes.brandText}>{consoleData.name}</span>}
+          <div>
+            {consoleData.logoUrl ?
+            <img className={classes.logoImg} src={consoleData.logoUrl} alt={consoleData.name} />
+            : <span className={classes.brandText}>{consoleData.name}</span>}
+            <p className={classes.consoleYearLabel}>{consoleData?.year || ""}</p>
+          </div>
         </Card.Title>
         <footer className={classes.cardFooter}>
+          {user &&
           <div className={classes.tableButtonsContainer}>
             <Tooltip text="See more options">
               <Dropdown>
@@ -42,7 +45,7 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole, viewDetails }) =
                 </Dropdown.Menu>
               </Dropdown>
             </Tooltip>
-          </div>
+          </div>}
           <div className={classes.navButtons}>
             <Button
               type="button"

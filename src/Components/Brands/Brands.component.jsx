@@ -1,10 +1,9 @@
-import { useContext } from 'react';
-import { AppState } from "../../Config/store/state";
+import useAppState from '../../hooks/useAppState';
 import BrandsList from './BrandsList.component';
 import classes from './Brands.module.css';
 
 const Brands = () => {
-  const { brand } = useContext(AppState);
+  const { brand } = useAppState();
 
   return (
     <>
