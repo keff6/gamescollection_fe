@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { Joystick } from 'react-bootstrap-icons';
 import proptypes from 'prop-types';
 import ControllerImage from '../../images/controller.png'
 import classes from "./Login.module.css";
@@ -50,7 +51,7 @@ const Login = ({authenticateUser}) => {
         <div className={classes.rightHalf}>
           <div className={classes.loginFormContainer}>
             <header>
-              <h3>Games Collection</h3>
+              <h3><Joystick /><span>Games Collection</span></h3>
               <h6>Sign in to your account</h6>
             </header>
             <Form id="loginForm" validated={validated} noValidate onSubmit={handleSubmit}>
@@ -85,6 +86,7 @@ const Login = ({authenticateUser}) => {
               <Button variant="primary" form="loginForm" type="submit">Log In</Button>
             </Form>
           </div>
+          <p className={classes.version}>{`ver. ${import.meta.env.PACKAGE_VERSION}`}</p>
         </div>
 
     </div>

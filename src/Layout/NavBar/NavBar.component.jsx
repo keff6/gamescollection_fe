@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Joystick } from "react-bootstrap-icons";
 import proptypes from "prop-types";
 import useAppState from '../../hooks/useAppState';
 import classes from './NavBar.module.css';
@@ -19,7 +20,12 @@ const NavBar = ({ logOut }) =>{
   return (
     <Navbar collapseOnSelect expand="lg"  variant="dark" className={`fixed-top ${classes.bgDark}`}>
       <Container>
-        <Navbar.Brand as={Link} to="/">Games Collection</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          
+          <div className={classes.logoContainer}>
+          <Joystick /><span>Games Collection</span>
+          </div>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
