@@ -39,6 +39,10 @@ const useGamesAPI = () => {
     return axios.post("/games/search", {searchTerm, consoleId})
   }
 
+  const validateTitle = (title, consoleId) => {
+    return axiosPrivate.post(`/games/validate`, { title, consoleId })
+  }
+
   return {
     getAll,
     getWishlistByConsole,
@@ -47,6 +51,7 @@ const useGamesAPI = () => {
     remove,
     update,
     search,
+    validateTitle,
   }
 }
 

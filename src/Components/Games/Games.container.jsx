@@ -109,6 +109,18 @@ const GamesContainer = () => {
     }
   }
 
+  const validateTitle = async (title) => {
+    try {
+        setIsLoading(true)
+        const response = await gamesAPI.validateTitle(title, consoleId);
+        return response
+      }
+      catch(e){
+        console.log(e)
+        openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
+      }
+  }
+
   return (
     <Games
       addGame={addGame}
@@ -117,6 +129,7 @@ const GamesContainer = () => {
       getGamesByConsoleAndLetter={getGamesByConsoleAndLetter}
       getWishlistByConsole={getWishlistByConsole}
       searchGames={searchGames}
+      validateTitle={validateTitle}
     />
     )
 }

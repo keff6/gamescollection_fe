@@ -26,7 +26,7 @@ const Consoles = ({
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = selectedBrand ? selectedBrand : JSON.parse(sessionStorage.getItem('brandData'));
-  const totalConsoles = currentBrand?.totalConsoles || 0;
+  const totalConsoles = console?.total || 0;
 
   useEffect(() => {
     if(!currentBrand) {
@@ -106,6 +106,7 @@ const Consoles = ({
         isEdit={isEdit}
         addNewConsole={handleAddNewConsole}
         saveUpdatedChanges={handleUpdateConsole}
+        currentBrandId={currentBrand?.id}
       />
       <DeleteAlertModal
         show={showConfirmDelete}

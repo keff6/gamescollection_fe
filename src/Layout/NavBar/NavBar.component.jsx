@@ -10,7 +10,8 @@ const NavBar = ({ logOut }) =>{
   const getInitialsCircle = () => (
     <div className={classes.circle}>
       <p className={classes.circleInner}>{
-        `${user?.name?.charAt(0).toUpperCase()}${user?.lastName?.charAt(0).toUpperCase()}`
+        `${user?.name?.charAt(0).toUpperCase() || ''
+        }${user?.lastName?.charAt(0).toUpperCase() || ''}`
       }</p>
     </div>
   )

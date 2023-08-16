@@ -23,6 +23,7 @@ const Games = ({
   getGamesByConsoleAndLetter,
   getWishlistByConsole,
   searchGames,
+  validateTitle,
 }) => {
   const navigate = useNavigate();
   const { game, setSelectedGame, brand, console, user } = useAppState();
@@ -32,7 +33,7 @@ const Games = ({
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = (brand?.selected) ? brand.selected : JSON.parse(sessionStorage.getItem('brandData')); 
   const currentConsole = (console?.selected) ? console.selected : JSON.parse(sessionStorage.getItem('consoleData')); 
-  const totalGames = currentConsole?.totalGames || 0;
+  const totalGames = game?.total || 0;
 
   useEffect(() => {
     if(!currentBrand || !currentConsole) {
@@ -115,7 +116,8 @@ const Games = ({
         isEdit={isEdit}
         addNewGame={handleAddNewGame}
         saveUpdatedChanges={handleUpdateGame}
-        currentConsoleId={console?.selected?.id}
+        currentConsoleId={currentConsole?.id}
+        validateTitle={validateTitle}
       />
       <DeleteAlertModal
         show={showConfirmDelete}
@@ -137,6 +139,7 @@ Games.propTypes = {
   getWishlistByConsole: proptypes.func,
   searchGames: proptypes.func,
   updateGame: proptypes.func,
+  validateTitle: proptypes.func,
 }
 
 export default Games;

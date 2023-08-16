@@ -16,10 +16,12 @@ const APP_STATE = {
   },
   console: {
     list: [],
+    total: 0,
     selected: null,
   },
   game: {
     list: [],
+    total: 0,
     selected: null,
     listOption: GAME_LIST_OPTIONS.ALPHABET,
     initialLetter: '#',
@@ -73,7 +75,7 @@ export const AppStateProvider = ({ children }) => {
       setConsolesList: (consolesList) => {
         dispatch({
           type: actions.SET_CONSOLES_LIST,
-          payload: consolesList
+          payload: consolesList,
         });
       },
       setSelectedGame: (selectedGame) => {
