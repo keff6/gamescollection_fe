@@ -31,7 +31,7 @@
 /***************************************************/
 /* GENERAL STYLES                                  */
 /***************************************************/
-html, body, #app, #app>div {
+html, body, #app, #app>div, root {
   height: 100%
 }
 
@@ -45,7 +45,7 @@ h5 {
 }
 
 main {
-  height: 100vh;
+  min-height: calc(100vh - 56px);
   background-color: var(--shark);
   color: var(--white);
 }
@@ -227,6 +227,10 @@ tbody {
 /* MEDIA QUERIES FOR SM AND XS                     */
 /***************************************************/
 @media (max-width: 768px) {
+  main {
+    height: 100%;
+  }
+
   .row>*:not(:where(.col)) {
     padding: 0;
   }
