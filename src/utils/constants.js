@@ -19,6 +19,7 @@ export const GAME_LIST_OPTIONS = {
     ALPHABET: 'alphabet',
     WISHLIST: 'wishlist',
     SEARCH: 'search',
+    ALL: 'all'
   };
 
 export const ALPHABET = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ';

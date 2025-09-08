@@ -30,6 +30,25 @@ const GamesContainer = () => {
     }
   }
 
+  const getGamesByConsole = async () => {
+    try {
+      setIsLoading(true)
+      const gamesResponse = await gamesAPI.getByParams({idConsole: consoleId});
+      const consolesResponse = await consolesAPI.getAll();
+      const genresResponse = await genresAPI.getAll();
+      setGamesList(gamesResponse.data || []);
+      setConsolesList(consolesResponse.data || []);
+      setGenresList(genresResponse.data || []);
+    }
+    catch(e){
+      console.log(e)
+      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
+    }
+    finally {
+      setIsLoading(false)
+    }
+  }
+
   const getWishlistByConsole = async () => {
     try {
       setIsLoading(true)
@@ -127,6 +146,7 @@ const GamesContainer = () => {
       updateGame={updateGame}
       deleteGame={deleteGame}
       getGamesByConsoleAndLetter={getGamesByConsoleAndLetter}
+      getGamesByConsole={getGamesByConsole}
       getWishlistByConsole={getWishlistByConsole}
       searchGames={searchGames}
       validateTitle={validateTitle}

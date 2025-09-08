@@ -21,6 +21,7 @@ const Games = ({
   deleteGame,
   updateGame,
   getGamesByConsoleAndLetter,
+  getGamesByConsole,
   getWishlistByConsole,
   searchGames,
   validateTitle,
@@ -33,7 +34,7 @@ const Games = ({
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = (brand?.selected) ? brand.selected : JSON.parse(sessionStorage.getItem('brandData')); 
   const currentConsole = (console?.selected) ? console.selected : JSON.parse(sessionStorage.getItem('consoleData')); 
-  const totalGames = game?.total || 0;
+  const totalGames = currentConsole?.totalGames || 0;
 
   useEffect(() => {
     if(!currentBrand || !currentConsole) {
@@ -107,6 +108,7 @@ const Games = ({
         editGame={handleEditGame}
         deleteGame={handleDeleteGame}
         getGamesByConsoleAndLetter={getGamesByConsoleAndLetter}
+        getGamesByConsole={getGamesByConsole}
         getWishlistByConsole={getWishlistByConsole}
         viewDetails={handleViewDetails}
       />
@@ -136,6 +138,7 @@ Games.propTypes = {
   addGame: proptypes.func,
   deleteGame: proptypes.func,
   getGamesByConsoleAndLetter: proptypes.func,
+  getGamesByConsole: proptypes.func,
   getWishlistByConsole: proptypes.func,
   searchGames: proptypes.func,
   updateGame: proptypes.func,

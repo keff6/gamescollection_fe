@@ -11,6 +11,7 @@ const GamesListContainer = ({
   deleteGame,
   getWishlistByConsole,
   getGamesByConsoleAndLetter,
+  getGamesByConsole,
   viewDetails,
 }) => {
   const { game, isLoading, setGamesList } = useAppState();
@@ -21,6 +22,9 @@ const GamesListContainer = ({
     switch(listOption) {
       case GAME_LIST_OPTIONS.ALPHABET:
         getGamesByConsoleAndLetter();
+        break;
+      case GAME_LIST_OPTIONS.ALL:
+        getGamesByConsole();
         break;
       case GAME_LIST_OPTIONS.WISHLIST:
         getWishlistByConsole();
@@ -49,6 +53,7 @@ GamesListContainer.propTypes ={
   editGame: proptypes.func,
   deleteGame: proptypes.func,
   getGamesByConsoleAndLetter: proptypes.func,
+  getGamesByConsole: proptypes.func,
   getWishlistByConsole: proptypes.func,
   viewDetails: proptypes.func,
 }

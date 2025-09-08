@@ -45,6 +45,19 @@ const GamesListOptions = ({ searchGames }) => {
           Wishlist
         </ToggleButton>
         <ToggleButton
+          className={classes.toggleButton} 
+          key="all"
+          id="radio-all"
+          type="radio"
+          name="radio-all"
+          variant="outline-primary"
+          value={GAME_LIST_OPTIONS.ALL}
+          checked={listOption === GAME_LIST_OPTIONS.ALL}
+          onChange={(e) => setGamesListOption(e.currentTarget.value)}
+        >
+          All
+        </ToggleButton>
+        <ToggleButton
           className={classes.toggleButton}
           key="search"
           id="radio-search"
