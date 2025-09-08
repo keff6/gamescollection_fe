@@ -43,6 +43,13 @@ const GameForm = ({
   const genreDictionary = genre?.list.reduce((acc, curr) => ({ ...acc, [curr.id]: curr.name }),{})
 
   useEffect(() => {
+    return () => {
+      setGameObj({...GAME_DEFAULT, saga: [], genres: []})
+      setValidated(false)
+    }
+  },[])
+
+  useEffect(() => {
     let isWishlist = false;
     if(listOption === GAME_LIST_OPTIONS.WISHLIST) isWishlist = true
 
@@ -58,7 +65,7 @@ const GameForm = ({
   },[show])
 
   useEffect(() => {
-    if(isEdit) setGameObj(selected)
+    setGameObj(isEdit ? selected : {...GAME_DEFAULT, saga: [], genres: []}) 
   },[isEdit])
 
   const handleChange = (field, value) => {
@@ -109,10 +116,13 @@ const GameForm = ({
       else await addNewGame(sanitizedGameObj)
       closeForm()
     }
+    
   }
 
   const closeForm = () => {
     setSelectedGame(null)
+    setGameObj({...GAME_DEFAULT, saga: [], genres: []})
+    setValidated(false)
     onHide()
   }
 
@@ -241,7 +251,7 @@ const GameForm = ({
                         value={gameObj.year || ''}
                         onChange={(e) => handleChange("year", e.target.value)}
                       >
-                        <option value=''>Enter console release year (America)</option>
+                        <option value=''>Enter release year (America)</option>
                         {renderYearsSelect()}
                       </Form.Select>
                     </Form.Group>
