@@ -17,15 +17,15 @@ const GamesList = ({ games, deleteGame, editGame, listOption, viewDetails }) => 
         <thead>
           <tr>
             <th>Title</th>
-            <th className={classes.width15}>Year</th>
+            <th className={classes.width10}>Year</th>
             <th className={`${classes.width35} d-none d-md-table-cell`}>Notes</th>
-            <th className={classes.width20}></th>
+            <th className={classes.width15}></th>
           </tr>
         </thead>
         <tbody>
-          {games?.map(game => (
-            <tr key={game.id}>
-              <td className={classes.textOverflow}>{game.title}</td>
+          {games?.map((game, index) => (
+            <tr key={game.id} className={index % 2 != 0 ? classes.clearRow : ""}>
+              <td className={classes.textOverflow}><b>{game.title}</b></td>
               <td>{game.year}</td>
               <td className={`${classes.textOverflow} d-none d-md-table-cell`}>{game.notes}</td>
               <td>

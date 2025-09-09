@@ -34,7 +34,7 @@ const Games = ({
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = (brand?.selected) ? brand.selected : JSON.parse(sessionStorage.getItem('brandData')); 
   const currentConsole = (console?.selected) ? console.selected : JSON.parse(sessionStorage.getItem('consoleData')); 
-  const totalGames = currentConsole?.totalGames || 0;
+  const totalGames = game?.total || 0;
 
   useEffect(() => {
     if(!currentBrand || !currentConsole) {

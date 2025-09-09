@@ -30,7 +30,7 @@ const GamesListContainer = ({
         getWishlistByConsole();
         break;
       case GAME_LIST_OPTIONS.SEARCH:
-        setGamesList([]);
+        setGamesList({...game, games: []});
         break;
       default:
         break;

@@ -167,6 +167,10 @@ a.danger-link {
   color: var(--white) !important;
 }
 
+.clear-row {
+  background-color: #2f3438;
+}
+
 /***************************************************/
 /* VIEW DETAILS                                    */
 /***************************************************/
@@ -187,7 +191,7 @@ a.danger-link {
 
 .data-text {
   color: var(--regent-grey);
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 /***************************************************/
