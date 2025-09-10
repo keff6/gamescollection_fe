@@ -26,6 +26,11 @@
   --falu-red: #771717;
   --monza: #C4081D;
   --black: #000;
+  --perano: #374563;
+  --jaguar: #0f0e2a;
+  --tropaz: #2b5592;
+  --lochinvar: #2b8992;
+  --kumera: #92682b;
 }
 
 /***************************************************/
@@ -144,7 +149,7 @@ tbody {
 /* FORM STYLES                                  */
 /***************************************************/
 .modal-header, .modal-footer {
-  background-color: var(--mirage);
+  background-color: var(--perano);
   color: var(--white);
   border-color: var(--mirage);
 }
@@ -181,7 +186,7 @@ tbody {
 }
 
 .modal-body, .accordion-body {
-  background-color: var(--fiord);
+  background-color: var(--jaguar);
   color: var(--white);
 }
 

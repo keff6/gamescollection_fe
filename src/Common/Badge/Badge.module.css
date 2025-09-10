@@ -1,0 +1,16 @@
+.custom-pill {
+  width: fit-content;
+  font-size: smaller !important;
+}
+
+.complete-background {
+  background-color: var(--lochinvar);
+}
+
+.new-background {
+  background-color: var(--tropaz);
+}
+
+.digital-background {
+  background-color: var(--kumera);
+}

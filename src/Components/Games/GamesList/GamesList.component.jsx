@@ -1,7 +1,7 @@
 import proptypes from 'prop-types';
 import { Table, Button, Dropdown } from 'react-bootstrap';
 import { PencilSquare, Trash, ListStars } from "react-bootstrap-icons";
-import { MoreButton, Tooltip } from '../../../Common';
+import { MoreButton, Tooltip, Badge } from '../../../Common';
 import { GAME_LIST_OPTIONS } from '../../../utils/constants';
 import useAppState from '../../../hooks/useAppState';
 import classes from '../Games.module.css';
@@ -10,6 +10,13 @@ const GamesList = ({ games, deleteGame, editGame, listOption, viewDetails }) => 
   const { user } = useAppState();
   const emptyListMessage = (listOption === GAME_LIST_OPTIONS.SEARCH) ? 'No results found' : 'Start adding games!';
 
+  const getBadge = (selected) => {
+    if(selected?.isNew == true) return <Badge type='NEW' isMini={true}/>
+    else if(selected?.isComplete == true) return <Badge type='COMPLETE' isMini={true}/>
+    else if(selected?.isDigital == true) return <Badge type='DIGITAL' isMini={true}/>
+    return null
+  }
+
   return (
     <>
       {(games?.length > 0) &&
@@ -17,6 +24,7 @@ const GamesList = ({ games, deleteGame, editGame, listOption, viewDetails }) => 
         <thead>
           <tr>
             <th>Title</th>
+            <th className={classes.width50px}></th>
             <th className={classes.width10}>Year</th>
             <th className={`${classes.width35} d-none d-md-table-cell`}>Notes</th>
             <th className={classes.width15}></th>
@@ -26,6 +34,7 @@ const GamesList = ({ games, deleteGame, editGame, listOption, viewDetails }) => 
           {games?.map((game, index) => (
             <tr key={game.id} className={index % 2 != 0 ? classes.clearRow : ""}>
               <td className={classes.textOverflow}><b>{game.title}</b></td>
+              <td>{getBadge(game)}</td>
               <td>{game.year}</td>
               <td className={`${classes.textOverflow} d-none d-md-table-cell`}>{game.notes}</td>
               <td>

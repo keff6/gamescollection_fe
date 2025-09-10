@@ -3,6 +3,7 @@ import proptypes from 'prop-types';
 import useAppState from '../../hooks/useAppState';
 import classes from './Games.module.css';
 import { NO_DATA } from "../../utils/constants";
+import { Badge } from '../../Common';
 
 
 const GameDetails = ({
@@ -23,6 +24,13 @@ const GameDetails = ({
   const closeForm = () => {
     onHide()
     setSelectedGame(null)
+  }
+
+  const getBadge = () => {
+    if(selected?.isNew == true) return <Badge type='NEW'/>
+    else if(selected?.isComplete == true) return <Badge type='COMPLETE'/>
+    else if(selected?.isDigital == true) return <Badge type='DIGITAL'/>
+    return null
   }
 
   return (
@@ -46,7 +54,7 @@ const GameDetails = ({
             <span className={classes.dataLabel}>Genre(s):</span>
             <span className={classes.dataLabel}>Developer:</span>
             <span className={classes.dataLabel}>Publisher:</span>
-            <span className={classes.dataLabel}>Is New:</span>
+            <span className={classes.dataLabel}>Notes:</span>
           </div>
           <div className={classes.rightLabels}>
             <span className={classes.dataText}>{consoleLabel}</span>
@@ -54,7 +62,10 @@ const GameDetails = ({
             <span className={classes.dataText}>{genresLabel}</span>
             <span className={classes.dataText}>{selected?.developer || NO_DATA}</span>
             <span className={classes.dataText}>{selected?.publisher || NO_DATA}</span>
-            <span className={classes.dataText}>{selected?.isNew || NO_DATA}</span>
+            <span className={classes.dataText}>{selected?.notes || NO_DATA}</span>
+          </div>
+          <div className={classes.badge}>
+            {getBadge()}
           </div>
         </div>
       </Modal.Body>

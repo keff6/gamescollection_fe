@@ -112,6 +112,10 @@ input:checked + .toggle-button {
   table-layout: fixed;
 }
 
+.width50px {
+  width: 50px;
+}
+
 .width10 {
   width: 10%;
 }
@@ -177,6 +181,7 @@ a.danger-link {
 
 .details-container {
   display: flex;
+  position: relative;
 }
 
 .left-labels, .right-labels {
@@ -224,4 +229,17 @@ a.danger-link {
 .letters-dropdown > div:first-of-type{
   max-height: 250px;
   overflow-y: scroll;
+}
+
+/***************************************************/
+/* BADGES                                         */
+/***************************************************/
+
+.badge {
+  position: absolute;
+  right: 0;
+}
+
+.header-container {
+display: flex;
 }
