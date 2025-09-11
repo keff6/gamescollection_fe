@@ -1,7 +1,7 @@
 import { OverlayTrigger, Tooltip as BSTooltip } from 'react-bootstrap';
 import proptypes from "prop-types";
 
-function Tooltip({ children, text, placement = "right" }) {
+function Tooltip({ children, text, placement = "left" }) {
   const renderTooltip = (props) => (
     <BSTooltip id="button-tooltip" {...props}>
       {text}

@@ -43,7 +43,13 @@ const GameDetails = ({
     >
       <Modal.Header closeButton={false}>
         <Modal.Title id="contained-modal-title-vcenter">
-          {selected?.title}
+          <div>
+            {selected?.title}
+            <div className={classes.customBadge}>
+              {getBadge()}
+            </div>
+          </div>
+          
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -63,9 +69,6 @@ const GameDetails = ({
             <span className={classes.dataText}>{selected?.developer || NO_DATA}</span>
             <span className={classes.dataText}>{selected?.publisher || NO_DATA}</span>
             <span className={classes.dataText}>{selected?.notes || NO_DATA}</span>
-          </div>
-          <div className={classes.badge}>
-            {getBadge()}
           </div>
         </div>
       </Modal.Body>

@@ -25,9 +25,9 @@ const GamesList = ({ games, deleteGame, editGame, listOption, viewDetails }) => 
           <tr>
             <th>Title</th>
             <th className={classes.width50px}></th>
-            <th className={classes.width10}>Year</th>
+            <th className={classes.width80px}>Year</th>
             <th className={`${classes.width35} d-none d-md-table-cell`}>Notes</th>
-            <th className={classes.width15}></th>
+            <th className={classes.width80px}></th>
           </tr>
         </thead>
         <tbody>

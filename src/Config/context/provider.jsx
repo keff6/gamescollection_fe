@@ -27,6 +27,9 @@ const APP_STATE = {
     initialLetter: '#',
     searchTerm: '',
   },
+  info: {
+    totalGames: 0
+  },
   snackbar: {
     message: '',
     type: '',
@@ -129,6 +132,12 @@ export const AppStateProvider = ({ children }) => {
         dispatch({
           type: actions.SET_AUTH_USER,
           payload: userData,
+        })
+      },
+      setInfoTotals: (totals) => {
+        dispatch({
+          type: actions.SET_INFO_TOTALS,
+          payload: totals,
         })
       }
     }),

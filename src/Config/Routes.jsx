@@ -11,6 +11,7 @@ import Games from "../Components/Games/Games.container";
 import Login from "../Components/Login/Login.container";
 import RequireAuth from "../Layout/RequireAuth";
 import PersistLogin from "../Components/Login/PersistLogin";
+import InfoGraphics from "../Components/InfoGraphics/InfoGraphics.container";
 
 
 const router = createBrowserRouter([
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
                   {
                     path: "/:consoleId/games",
                     element: <Games />
+                  },
+                  {
+                    path: "/infographics",
+                    element: <InfoGraphics />
                   }
                 ]
               },

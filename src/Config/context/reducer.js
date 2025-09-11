@@ -110,6 +110,14 @@ export const reducer = (state, action) => {
           show: false
         }
       };
+    case actions.SET_INFO_TOTALS:
+      return {
+        ...state,
+        info: {
+          ...state.info,
+          totalGames: action.payload.totalGames
+        }
+      }
     case actions.SET_IS_LOADING:
       return {
         ...state,

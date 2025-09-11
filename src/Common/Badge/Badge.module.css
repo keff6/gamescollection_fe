@@ -1,6 +1,8 @@
 .custom-pill {
   width: fit-content;
-  font-size: smaller !important;
+  font-size: 11px !important;
+  font-weight: lighter;
+  max-height: 18px;
 }
 
 .complete-background {

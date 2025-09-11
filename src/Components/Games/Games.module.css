@@ -116,6 +116,10 @@ input:checked + .toggle-button {
   width: 50px;
 }
 
+.width80px {
+  width: 80px;
+}
+
 .width10 {
   width: 10%;
 }
@@ -234,10 +238,8 @@ a.danger-link {
 /***************************************************/
 /* BADGES                                         */
 /***************************************************/
-
-.badge {
-  position: absolute;
-  right: 0;
+.custom-badge {
+  line-height: 0;
 }
 
 .header-container {
