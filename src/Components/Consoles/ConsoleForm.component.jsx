@@ -119,7 +119,7 @@ const ConsoleForm = ({
               required
             >
               <option value=''>Select a brand</option>
-              {brand?.list.map(b =>
+              {brand?.list?.map(b =>
                 <option key={b.id} value={b.id}>{b.name}</option>
               )}
             </Form.Select>

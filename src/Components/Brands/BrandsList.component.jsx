@@ -1,32 +1,29 @@
 import { Container, Row, Col } from "react-bootstrap";
-import proptypes from "prop-types";
 import useAppState from "../../hooks/useAppState";
 import Spinner from "../../Common/Spinner/Spinner.component";
 import BrandCard from "./BrandCard.component";
-import classes from './Brands.module.css';
+import classes from "./Brands.module.css";
 
-const BrandsList = ({brands}) => {
-  const { isLoading } = useAppState();
+const BrandsList = () => {
+  const { isLoading, brand } = useAppState();
 
-  if(isLoading) return <Spinner />
+  if (isLoading) return <Spinner />;
+
+  let brands = brand?.list || [];
 
   return (
     <Container className={classes.mainDashboardContainer}>
-        {(brands.length > 0) &&
+      {brands.length > 0 ? (
         <Row>
-          {brands.map(b => (
+          {brands.map((b) => (
             <Col key={b.id} lg={6} md={12} className={classes.customCol}>
               <BrandCard brandData={b} />
             </Col>
           ))}
-        </Row>}
-        {(brands.length === 0) && <h3 className="empty-list-text">There are no brands yet!</h3>}
-      </Container>
-)
-          }
-
-BrandsList.propTypes = {
-  brands: proptypes.array,
-}
+        </Row>
+      ) : <h3 className="empty-list-text">There are no brands yet!</h3>}
+    </Container>
+  );
+};
 
 export default BrandsList;

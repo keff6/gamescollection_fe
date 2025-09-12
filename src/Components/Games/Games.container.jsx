@@ -1,24 +1,21 @@
 import { useParams } from "react-router-dom";
 import useAppState from "../../hooks/useAppState";
-import { useGamesAPI, useConsolesAPI, useGenresAPI } from "../../hooks/api";
+import { useGamesAPI, useGenresAPI } from "../../hooks/api";
 import Games from "./Games.component";
 import { OPERATION_OUTCOME } from "../../utils/constants";
 
 const GamesContainer = () => {
-  const { setGamesList, openSnackbar, setConsolesList, setGenresList, setIsLoading, game: {initialLetter, searchTerm} } = useAppState();
+  const { setGamesList, openSnackbar, setGenresList, setIsLoading, game: {initialLetter, listOption, searchTerm} } = useAppState();
   const { consoleId } = useParams()
   const gamesAPI = useGamesAPI()
-  const consolesAPI = useConsolesAPI()
   const genresAPI = useGenresAPI()
 
   const getGamesByConsoleAndLetter = async () => {
     try {
       setIsLoading(true)
       const gamesResponse = await gamesAPI.getByParams({idConsole: consoleId, initialLetter});
-      const consolesResponse = await consolesAPI.getAll();
       const genresResponse = await genresAPI.getAll();
       setGamesList(gamesResponse.data || []);
-      setConsolesList(consolesResponse.data || []);
       setGenresList(genresResponse.data || []);
     }
     catch(e){
@@ -34,10 +31,8 @@ const GamesContainer = () => {
     try {
       setIsLoading(true)
       const gamesResponse = await gamesAPI.getByParams({idConsole: consoleId});
-      const consolesResponse = await consolesAPI.getAll();
       const genresResponse = await genresAPI.getAll();
       setGamesList(gamesResponse.data || []);
-      setConsolesList(consolesResponse.data || []);
       setGenresList(genresResponse.data || []);
     }
     catch(e){
@@ -53,10 +48,8 @@ const GamesContainer = () => {
     try {
       setIsLoading(true)
       const gamesResponse = await gamesAPI.getWishlistByConsole(consoleId);
-      const consolesResponse = await consolesAPI.getAll();
       const genresResponse = await genresAPI.getAll();
       setGamesList(gamesResponse.data || []);
-      setConsolesList(consolesResponse.data || []);
       setGenresList(genresResponse.data || []);
     }
     catch(e){
@@ -94,7 +87,8 @@ const GamesContainer = () => {
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
-      getGamesByConsole()
+      if(listOption === 'all') getGamesByConsole()
+      else getGamesByConsoleAndLetter()
     }
   }
 

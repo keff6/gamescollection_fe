@@ -10,6 +10,10 @@ const BrandsContainer = () => {
 
   useEffect(() => {
     getAllBrands();
+
+    return () => {
+      setBrandsList([])
+    }
   }, []);
 
   const getAllBrands = async () => {

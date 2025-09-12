@@ -11,7 +11,6 @@ const InfoContainer = () => {
     try {
       setIsLoading(true)
       const totalsResponse = await infoAPI.getTotals();
-      console.log({totalsResponse})
       setInfoTotals(totalsResponse.data || null);
     }
     catch(e){

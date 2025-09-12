@@ -95,7 +95,6 @@ const Consoles = ({
         </header>
       </div>
       <ConsolesList
-        consoles={console.list}
         editConsole={handleEditConsole}
         deleteConsole={handleDeleteConsole}
         viewDetails={handleViewDetails}

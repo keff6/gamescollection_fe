@@ -1,28 +1,29 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useAppState from "../../hooks/useAppState";
-import { useConsolesAPI, useBrandsAPI } from "../../hooks/api";
+import { useConsolesAPI } from "../../hooks/api";
 import Consoles from "./Consoles.component";
 import { OPERATION_OUTCOME } from "../../utils/constants";
 
 const ConsolesContainer = () => {
-  const { setConsolesList, openSnackbar, setBrandsList, setIsLoading, setInitialLetter } = useAppState();
+  const { setConsolesList, openSnackbar, setIsLoading, setInitialLetter } = useAppState();
   const { brandId } = useParams()
   const consolesAPI = useConsolesAPI()
-  const brandsAPI = useBrandsAPI()
 
   useEffect(() => {
     getConsolesByBrand()
     setInitialLetter('#')
+
+    return () => {
+      setConsolesList([])
+    }
   }, []);
 
   const getConsolesByBrand = async () => {
     try {
       setIsLoading(true)
       const consolesResponse = await consolesAPI.getByBrand(brandId);
-      const brandsResponse = await brandsAPI.getAll();
       setConsolesList(consolesResponse.data || []);
-      setBrandsList(brandsResponse.data || []);
     }
     catch(e){
       console.log(e)

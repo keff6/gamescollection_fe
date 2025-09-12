@@ -22,7 +22,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         brand: {
-          ...state.brand,
+          list: [],
           selected: action.payload.selectedBrand
         }
       };

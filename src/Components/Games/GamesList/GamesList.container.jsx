@@ -1,10 +1,8 @@
 import { useEffect } from "react";
-import proptypes from 'prop-types';
+import proptypes from "prop-types";
 import useAppState from "../../../hooks/useAppState";
 import GamesList from "./GamesList.component";
 import { GAME_LIST_OPTIONS } from "../../../utils/constants";
-import Spinner from "../../../Common/Spinner/Spinner.component";
-
 
 const GamesListContainer = ({
   editGame,
@@ -14,12 +12,19 @@ const GamesListContainer = ({
   getGamesByConsole,
   viewDetails,
 }) => {
-  const { game, isLoading, setGamesList } = useAppState();
+  const { game, setGamesList } = useAppState();
+
+  useEffect(
+    () => () => {
+      setGamesList([]);
+    },
+    []
+  );
 
   useEffect(() => {
     const { listOption } = game;
 
-    switch(listOption) {
+    switch (listOption) {
       case GAME_LIST_OPTIONS.ALPHABET:
         getGamesByConsoleAndLetter();
         break;
@@ -30,32 +35,30 @@ const GamesListContainer = ({
         getWishlistByConsole();
         break;
       case GAME_LIST_OPTIONS.SEARCH:
-        setGamesList({...game, games: []});
+        setGamesList({ ...game, games: [] });
         break;
       default:
         break;
     }
-    
   }, [game.listOption, game.initialLetter]);
 
-  return (isLoading ? <Spinner /> :
+  return (
     <GamesList
-      games={game.list}
       editGame={editGame}
       deleteGame={deleteGame}
       listOption={game.listOption}
       viewDetails={viewDetails}
     />
-    )
-}
+  );
+};
 
-GamesListContainer.propTypes ={
+GamesListContainer.propTypes = {
   editGame: proptypes.func,
   deleteGame: proptypes.func,
   getGamesByConsoleAndLetter: proptypes.func,
   getGamesByConsole: proptypes.func,
   getWishlistByConsole: proptypes.func,
   viewDetails: proptypes.func,
-}
+};
 
-export default GamesListContainer
+export default GamesListContainer;
