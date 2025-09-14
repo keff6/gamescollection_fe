@@ -42,3 +42,13 @@
 .brand-text {
   font-size: 40px
 }
+
+@media (max-width: 768px) {
+  .brand-text {
+    font-size: 25px;
+  }
+
+  .card {
+  min-height: 70px;
+}
+}

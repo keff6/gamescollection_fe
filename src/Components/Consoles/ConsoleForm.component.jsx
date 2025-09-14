@@ -22,7 +22,7 @@ const ConsoleForm = ({
   currentBrandId,
   ...rest
 }) => {
-  const { console: {selected}, setSelectedConsole, brand} = useAppState();
+  const { console: {selected}, setSelectedConsole, misc: { brands }} = useAppState();
   const [consoleObj, setConsoleObj] = useState(CONSOLE_DEFAULT);
   const [validated, setValidated] = useState(false);
 
@@ -119,7 +119,7 @@ const ConsoleForm = ({
               required
             >
               <option value=''>Select a brand</option>
-              {brand?.list?.map(b =>
+              {brands?.map(b =>
                 <option key={b.id} value={b.id}>{b.name}</option>
               )}
             </Form.Select>

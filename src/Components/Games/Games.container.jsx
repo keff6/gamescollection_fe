@@ -1,22 +1,34 @@
 import { useParams } from "react-router-dom";
 import useAppState from "../../hooks/useAppState";
-import { useGamesAPI, useGenresAPI } from "../../hooks/api";
+import { useGamesAPI, useGenresAPI, useConsolesAPI } from "../../hooks/api";
 import Games from "./Games.component";
 import { OPERATION_OUTCOME } from "../../utils/constants";
 
 const GamesContainer = () => {
-  const { setGamesList, openSnackbar, setGenresList, setIsLoading, game: {initialLetter, listOption, searchTerm} } = useAppState();
+  const {
+    setGamesList,
+    openSnackbar,
+    setGenresList,
+    setConsolesListMisc,
+    setIsLoading,
+    game: {initialLetter, listOption, searchTerm},
+    brand,
+  } = useAppState();
   const { consoleId } = useParams()
   const gamesAPI = useGamesAPI()
   const genresAPI = useGenresAPI()
+  const consolesAPI = useConsolesAPI()
 
   const getGamesByConsoleAndLetter = async () => {
     try {
       setIsLoading(true)
+      const currentBrand = brand?.selected || JSON.parse(sessionStorage.getItem("brandData"))
       const gamesResponse = await gamesAPI.getByParams({idConsole: consoleId, initialLetter});
       const genresResponse = await genresAPI.getAll();
+      const consolesResponse = await consolesAPI.getByBrand(currentBrand?.id);
       setGamesList(gamesResponse.data || []);
       setGenresList(genresResponse.data || []);
+      setConsolesListMisc(consolesResponse?.data || [])
     }
     catch(e){
       console.log(e)

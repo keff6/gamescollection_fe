@@ -6,13 +6,17 @@ const useRefreshToken = () => {
   const authAPI = useAuthAPI()
 
   const refresh = async () => {
-    const response = await authAPI.refreshToken();
-    const userData = user ? user : JSON.parse(sessionStorage.getItem('currentUser'))
-    setAuthUser({
-      ...userData,
-      accessToken: response.data.accessToken,
-    })
-    return response.data.accessToken
+    try {
+      const response = await authAPI.refreshToken();
+      const userData = user ? user : JSON.parse(sessionStorage.getItem('currentUser'))
+      setAuthUser({
+        ...userData,
+        accessToken: response.data.accessToken,
+      })
+      return response.data.accessToken
+    } catch (e) {
+      console.log({e})
+    }
   }
   return refresh
 }

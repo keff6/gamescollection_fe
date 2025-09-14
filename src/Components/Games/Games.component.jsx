@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
 import useAppState from '../../hooks/useAppState';
 import { DeleteAlertModal, Breadcrumb } from "../../Common"
+import { getAuthUser } from '../../utils/misc'
 import GamesListOptions from './GamesList/GamesListOptions.component';
 import GamesList from './GamesList/GamesList.container';
 import classes from './Games.module.css';
@@ -35,6 +36,7 @@ const Games = ({
   const currentBrand = (brand?.selected) ? brand.selected : JSON.parse(sessionStorage.getItem('brandData')); 
   const currentConsole = (console?.selected) ? console.selected : JSON.parse(sessionStorage.getItem('consoleData')); 
   const totalGames = game?.total || 0;
+  const currentUser = getAuthUser(user);
 
   useEffect(() => {
     if(!currentBrand || !currentConsole) {
@@ -96,7 +98,7 @@ const Games = ({
             <h6>{currentBrand?.name}</h6>
             <h5>{totalGames} {totalGames === 1 ? 'game' : 'games'}</h5>
           </div>
-          {user &&
+          {currentUser &&
           <>
             <Button className="d-none d-md-block" onClick={() => setShowForm(true)}>Add Game</Button>
             <Button className="d-block d-md-none" onClick={() => setShowForm(true)}>Add+</Button>

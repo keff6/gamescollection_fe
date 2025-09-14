@@ -11,6 +11,7 @@ const PersistLogin = () => {
 
   useEffect(() => {
     let isMounted = true;
+    const currentUser = user || JSON.parse(sessionStorage.getItem('currentUser'))
 
     const verifyRefreshToken = async () => {
       try {
@@ -24,7 +25,7 @@ const PersistLogin = () => {
       }
     }
 
-    !user?.accessToken ? verifyRefreshToken() : setIsLoading(false);
+    !currentUser?.accessToken ? verifyRefreshToken() : setIsLoading(false);
 
     return () => isMounted = false;
   }, [])

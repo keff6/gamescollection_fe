@@ -84,3 +84,11 @@ a.danger-link {
   color: var(--regent-grey);
   font-weight: bold;
 }
+
+
+@media (max-width: 768px) {
+  .brand-text {
+    font-size: 25px;
+  }
+
+}

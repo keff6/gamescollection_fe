@@ -34,6 +34,14 @@ export const reducer = (state, action) => {
           list: action.payload.brands
         }
       };
+    case actions.SET_BRANDS_LIST_MISC:
+      return {
+        ...state,
+        misc: {
+          ...state.misc,
+          brands: action.payload.brands
+        }
+      };
     case actions.SET_SELECTED_CONSOLE:
       return {
         ...state,
@@ -49,6 +57,14 @@ export const reducer = (state, action) => {
           ...state.console,
           list: action.payload.consoles,
           total: action.payload.total,
+        }
+      };
+    case actions.SET_CONSOLES_LIST_MISC:
+      return {
+        ...state,
+        misc: {
+          ...state.misc,
+          consoles: action.payload.consoles,
         }
       };
     case actions.SET_SELECTED_GAME:
@@ -124,6 +140,7 @@ export const reducer = (state, action) => {
         isLoading: action.payload,
       };
     case actions.SET_AUTH_USER:
+      console.log({action})
       return {
         ...state,
         user: action.payload,

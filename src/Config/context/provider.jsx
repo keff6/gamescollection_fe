@@ -35,6 +35,10 @@ const APP_STATE = {
     type: '',
     show: false,
   },
+  misc: {
+    brands: [],
+    consoles: [],
+  },
   isLoading: false,
   user: null,
 };
@@ -69,6 +73,12 @@ export const AppStateProvider = ({ children }) => {
           payload: brandsList
         });
       },
+      setBrandsListMisc: (brandsList) => {
+        dispatch({
+          type: actions.SET_BRANDS_LIST_MISC,
+          payload: brandsList
+        });
+      },
       setSelectedConsole: (selectedConsole) => {
         dispatch({
           type: actions.SET_SELECTED_CONSOLE,
@@ -78,6 +88,12 @@ export const AppStateProvider = ({ children }) => {
       setConsolesList: (consolesList) => {
         dispatch({
           type: actions.SET_CONSOLES_LIST,
+          payload: consolesList,
+        });
+      },
+      setConsolesListMisc: (consolesList) => {
+        dispatch({
+          type: actions.SET_CONSOLES_LIST_MISC,
           payload: consolesList,
         });
       },

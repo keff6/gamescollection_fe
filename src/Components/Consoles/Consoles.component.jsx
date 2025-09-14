@@ -4,7 +4,8 @@ import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
 import useAppState from '../../hooks/useAppState';
 import ConsolesList from "./ConsolesList.component";
-import { DeleteAlertModal,Breadcrumb } from "../../Common"
+import { DeleteAlertModal,Breadcrumb, Spinner } from "../../Common";
+import { getAuthUser } from '../../utils/misc'
 import ConsoleForm from './ConsoleForm.component';
 import ConsoleDetails from './ConsoleDetails.component';
 import classes from './Consoles.module.css';
@@ -20,14 +21,16 @@ const Consoles = ({
   updateConsole,
 }) => {
   const navigate = useNavigate();
-  const { console, setSelectedConsole, brand: { selected: selectedBrand }, user } = useAppState();
+  const { console, setSelectedConsole, brand: { selected: selectedBrand }, user, isLoading } = useAppState();
+
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = selectedBrand ? selectedBrand : JSON.parse(sessionStorage.getItem('brandData'));
   const totalConsoles = console?.total || 0;
-
+  const currentUser = getAuthUser(user);
+  
   useEffect(() => {
     if(!currentBrand) {
       navigate('/', { replace: true });
@@ -78,6 +81,10 @@ const Consoles = ({
     setShowConfirmDelete(false)
   }
 
+
+  if(isLoading) return <Spinner />
+
+
   return (
     <>
       <Breadcrumb items={NavigationItems} />
@@ -87,7 +94,7 @@ const Consoles = ({
             <h2>{currentBrand?.name}</h2>
             <h5>{totalConsoles} {totalConsoles === 1 ? 'console' : 'consoles'}</h5>
           </div>
-          {user &&
+          {currentUser &&
           <>
             <Button className="d-none d-md-block" onClick={() => setShowForm(true)}>Add Console</Button>
             <Button className="d-block d-md-none" onClick={() => setShowForm(true)}>Add+</Button>

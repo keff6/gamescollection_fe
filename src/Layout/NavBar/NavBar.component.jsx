@@ -3,16 +3,18 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Joystick } from "react-bootstrap-icons";
 import proptypes from "prop-types";
 import useAppState from '../../hooks/useAppState';
+import { getAuthUser } from '../../utils/misc'
 import classes from './NavBar.module.css';
 
 const NavBar = ({ logOut }) =>{
   const { user } = useAppState();
+  const currentUser = getAuthUser(user);
 
   const getInitialsCircle = () => (
     <div className={classes.circle}>
       <p className={classes.circleInner}>{
-        `${user?.name?.charAt(0).toUpperCase() || ''
-        }${user?.lastName?.charAt(0).toUpperCase() || ''}`
+        `${currentUser?.name?.charAt(0).toUpperCase() || ''
+        }${currentUser?.lastName?.charAt(0).toUpperCase() || ''}`
       }</p>
     </div>
   )
@@ -31,14 +33,14 @@ const NavBar = ({ logOut }) =>{
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Brands</Nav.Link>
             <Nav.Link as={Link} to="/infographics">Infographics</Nav.Link>
-            {user && <NavDropdown title="Admin" id="collasible-nav-dropdown">
+            {currentUser && <NavDropdown title="Admin" id="collasible-nav-dropdown">
               <NavDropdown.Item as={Link} to="/brands">Brands</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/genres">Genres</NavDropdown.Item>
             </NavDropdown>}
           </Nav>
           <div className={`${classes.divider} d-block d-md-none`} />
           <Nav>
-            {user ?
+            {currentUser ?
                 <NavDropdown
                   title={getInitialsCircle()}
                   id="user-logged-dropdown"
@@ -49,7 +51,7 @@ const NavBar = ({ logOut }) =>{
                     {getInitialsCircle()}
                     <div className={classes.labelContainer}>
                       <span className={classes.signedLabel}>Welcome!</span>
-                      <span className={classes.userName}>{`${user?.name} ${user?.lastName}`}</span>
+                      <span className={classes.userName}>{`${currentUser?.name} ${currentUser?.lastName}`}</span>
                     </div>
                   </div>
                   <NavDropdown.Divider />

@@ -36,7 +36,7 @@ const GameForm = ({
   validateTitle,
   ...rest
 }) => {
-  const { game: {selected, listOption}, setSelectedGame, console, genre } = useAppState();
+  const { game: {selected, listOption}, setSelectedGame, genre, misc: { consoles } } = useAppState();
   const [gameObj, setGameObj] = useState(GAME_DEFAULT);
   const [validated, setValidated] = useState(false);
   const [isValidTitle, setIsValidTitle] = useState(true);
@@ -233,7 +233,7 @@ const GameForm = ({
                         required
                       >
                         <option value=''>Select a console</option>
-                        {console?.list?.map(c =>
+                        {consoles?.map(c =>
                           <option key={c.id} value={c.id}>{c.name}</option>
                         )}
                       </Form.Select>
