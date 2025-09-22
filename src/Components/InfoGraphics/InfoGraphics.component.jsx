@@ -1,17 +1,14 @@
-import { useEffect } from "react";
+
 import proptypes from 'prop-types';
 import useAppState from "../../hooks/useAppState";
 
-const InfoGraphics = ({ getTotals }) => {
+const InfoGraphics = () => {
   const { info } = useAppState();
-
-  useEffect(() => {
-    getTotals();
-  },[])
 
   return (
     <div>
-      Total Games: {info.totalGames}
+      <p>Total Consoles: {info.totalConsoles || "--"}</p>
+      <p>Total Games: {info.totalGames || "--"}</p>
     </div>
   )
 }

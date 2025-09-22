@@ -6,12 +6,14 @@ import useAppState from "./useAppState";
 const useAxiosPrivate = () => {
   const refresh = useRefreshToken();
   const { user } = useAppState();
+  const userData = user ? user : JSON.parse(sessionStorage.getItem('currentUser'));
 
   useEffect(() => {
+    
     const requestIntercept = axiosPrivate.interceptors.request.use(
       config => {
         if (!config.headers['Authorization']) {
-          config.headers['Authorization'] = `Bearer ${user?.accessToken}`;
+          config.headers['Authorization'] = `Bearer ${userData?.accessToken}`;
         }
         return config;
       }, (error) => Promise.reject(error)
@@ -35,7 +37,7 @@ const useAxiosPrivate = () => {
       axiosPrivate.interceptors.request.eject(requestIntercept);
       axiosPrivate.interceptors.response.eject(responseIntercept);
     }
-  }, [user, refresh])
+  }, [userData, refresh])
 
   return axiosPrivate;
 }

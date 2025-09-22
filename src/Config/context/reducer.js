@@ -22,7 +22,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         brand: {
-          list: [],
+          ...state.brand,
           selected: action.payload.selectedBrand
         }
       };
@@ -131,7 +131,7 @@ export const reducer = (state, action) => {
         ...state,
         info: {
           ...state.info,
-          totalGames: action.payload.totalGames
+          ...action.payload
         }
       }
     case actions.SET_IS_LOADING:
@@ -140,7 +140,6 @@ export const reducer = (state, action) => {
         isLoading: action.payload,
       };
     case actions.SET_AUTH_USER:
-      console.log({action})
       return {
         ...state,
         user: action.payload,

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import useAppState from "../../hooks/useAppState";
 import { useInfoAPI } from "../../hooks/api";
 import InfoGraphics from "./InfoGraphics.component";
@@ -6,6 +7,10 @@ import { OPERATION_OUTCOME } from "../../utils/constants";
 const InfoContainer = () => {
   const { setInfoTotals, openSnackbar, setIsLoading } = useAppState();
   const infoAPI = useInfoAPI()
+
+  useEffect(() => {
+    getTotals();
+  },[])
 
   const getTotals = async () => {
     try {

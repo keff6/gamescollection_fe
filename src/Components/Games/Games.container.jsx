@@ -115,7 +115,8 @@ const GamesContainer = () => {
         openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
       }
       finally {
-        getGamesByConsoleAndLetter()
+        if(listOption === 'all') getGamesByConsole()
+        else getGamesByConsoleAndLetter()
       }
   }
 
