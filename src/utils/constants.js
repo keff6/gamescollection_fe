@@ -31,3 +31,7 @@ export const BADGE_TYPE = {
   COMPLETE: { label: 'Complete', miniLabel: 'C' },
   DIGITAL: { label: 'Digital', miniLabel: 'D' }
 }
+
+export const ERROR_CODES = {
+  DUPLICATED: 'ER_DUP_ENTRY'
+}

@@ -17,10 +17,6 @@ const Genres = ({
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
-  const handleAddNewGenre = async (genreName) => {
-    addGenre(genreName)
-  }
-
   const handleDeleteGenre = async (selectedGenre) => {
     setSelectedGenre({...selectedGenre})
     setShowConfirmDelete(true)
@@ -30,10 +26,6 @@ const Genres = ({
     setSelectedGenre({...selectedGenre})
     setIsEdit(true)
     setShowForm(true)
-  }
-
-  const handleUpdateGenre = async (genreId, name) => {
-    updateGenre(genreId, name)
   }
 
   const handleCloseFormModal = () => {
@@ -58,8 +50,8 @@ const Genres = ({
         show={showForm}
         onHide={handleCloseFormModal}
         isEdit={isEdit}
-        addNewGenre={handleAddNewGenre}
-        saveUpdatedChanges={handleUpdateGenre}
+        addNewGenre={addGenre}
+        saveUpdatedChanges={updateGenre}
       />
       <Container className={classes.container}>
         <header className={classes.header}>

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import useAppState from "../../../hooks/useAppState";
 import { useBrandsAPI } from "../../../hooks/api";
 import Brands from "./Brands.component";
-import { OPERATION_OUTCOME } from "../../../utils/constants";
+import { OPERATION_OUTCOME, ERROR_CODES } from "../../../utils/constants";
 
 const BrandsContainer = () => {
   const { setBrandsList, openSnackbar, setIsLoading } = useAppState();
@@ -34,7 +34,10 @@ const BrandsContainer = () => {
       openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
     }
     catch(e){
-      console.log(e)
+      const errorCode = e?.response?.data || "";
+      if(errorCode === ERROR_CODES.DUPLICATED) {
+        throw new Error("Brand already exists in database")
+      }
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
@@ -64,7 +67,10 @@ const BrandsContainer = () => {
         openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
       }
       catch(e){
-        console.log(e)
+        const errorCode = e?.response?.data || "";
+        if(errorCode === ERROR_CODES.DUPLICATED) {
+          throw new Error("Brand already exists in database")
+        }
         openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
       }
       finally {

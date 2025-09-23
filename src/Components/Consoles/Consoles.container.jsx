@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import useAppState from "../../hooks/useAppState";
 import { useConsolesAPI, useBrandsAPI } from "../../hooks/api";
 import Consoles from "./Consoles.component";
-import { OPERATION_OUTCOME } from "../../utils/constants";
+import { OPERATION_OUTCOME, ERROR_CODES } from "../../utils/constants";
 
 const ConsolesContainer = () => {
   const { setConsolesList, openSnackbar, setIsLoading, setInitialLetter, setBrandsListMisc } = useAppState();
@@ -44,7 +44,10 @@ const ConsolesContainer = () => {
       openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
     }
     catch(e){
-      console.log(e)
+      const errorCode = e?.response?.data || "";
+      if(errorCode === ERROR_CODES.DUPLICATED) {
+        throw new Error("Console already exists in database")
+      }
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
@@ -59,7 +62,10 @@ const ConsolesContainer = () => {
         openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
       }
       catch(e){
-        console.log(e)
+        const errorCode = e?.response?.data || "";
+        if(errorCode === ERROR_CODES.DUPLICATED) {
+          throw new Error("Console already exists in database")
+        }
         openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
       }
       finally {

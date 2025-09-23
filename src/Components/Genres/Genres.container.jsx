@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import useAppState from "../../hooks/useAppState";
 import Genres from "./Genres.component";
 import {useGenresAPI} from "../../hooks/api";
-import { OPERATION_OUTCOME } from "../../utils/constants";
+import { OPERATION_OUTCOME, ERROR_CODES } from "../../utils/constants";
 
 const GenresContainer = () => {
   const { setGenresList, openSnackbar, setIsLoading } = useAppState();
@@ -40,6 +40,10 @@ const GenresContainer = () => {
     }
     catch(e){
       console.log(e)
+      const errorCode = e?.response?.data || "";
+      if(errorCode === ERROR_CODES.DUPLICATED) {
+        throw new Error("Genre already exists in database")
+      }
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
@@ -70,6 +74,10 @@ const GenresContainer = () => {
       }
       catch(e){
         console.log(e)
+        const errorCode = e?.response?.data || "";
+        if(errorCode === ERROR_CODES.DUPLICATED) {
+          throw new Error("Genre already exists in database")
+        }
         openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
       }
       finally {

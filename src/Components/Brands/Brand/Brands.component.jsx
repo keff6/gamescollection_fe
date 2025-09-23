@@ -16,10 +16,6 @@ const Brands = ({
   const [showForm, setShowForm] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
- 
-  const handleAddNewBrand = async (brandObj) => {
-    addBrand(brandObj)
-  }
 
   const handleDeleteBrand = async (selectedBrand) => {
     setSelectedBrand({...selectedBrand})
@@ -30,10 +26,6 @@ const Brands = ({
     setSelectedBrand({...selectedBrand})
     setIsEdit(true)
     setShowForm(true)
-  }
-
-  const handleUpdateBrand = async (brandId, updatedBrandObj) => {
-    updateBrand(brandId, updatedBrandObj)
   }
 
   const handleCloseFormModal = () => {
@@ -58,8 +50,8 @@ const Brands = ({
         show={showForm}
         onHide={handleCloseFormModal}
         isEdit={isEdit}
-        addNewBrand={handleAddNewBrand}
-        saveUpdatedChanges={handleUpdateBrand}
+        addNewBrand={addBrand}
+        saveUpdatedChanges={updateBrand}
       />
       <Container className={classes.container}>
         <header className={classes.header}>

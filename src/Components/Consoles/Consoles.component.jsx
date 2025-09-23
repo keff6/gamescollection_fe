@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
 import useAppState from '../../hooks/useAppState';
 import ConsolesList from "./ConsolesList.component";
-import { DeleteAlertModal,Breadcrumb, Spinner } from "../../Common";
+import { DeleteAlertModal,Breadcrumb } from "../../Common";
 import { getAuthUser } from '../../utils/misc'
 import ConsoleForm from './ConsoleForm.component';
 import ConsoleDetails from './ConsoleDetails.component';
@@ -21,7 +21,7 @@ const Consoles = ({
   updateConsole,
 }) => {
   const navigate = useNavigate();
-  const { console, setSelectedConsole, brand: { selected: selectedBrand }, user, isLoading } = useAppState();
+  const { console, setSelectedConsole, brand: { selected: selectedBrand }, user } = useAppState();
 
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
@@ -37,10 +37,6 @@ const Consoles = ({
     }
   },[]);
 
-  const handleAddNewConsole = async (consoleObj) => {
-    addConsole(consoleObj)
-  }
-
   const handleDeleteConsole = async (selectedConsole) => {
     setSelectedConsole({...selectedConsole})
     setShowConfirmDelete(true)
@@ -55,10 +51,6 @@ const Consoles = ({
   const handleViewDetails = (selectedConsole) => {
     setSelectedConsole({...selectedConsole})
     setShowDetails(true)
-  }
-
-  const handleUpdateConsole = async (consoleId, updatedConsoleObj) => {
-    updateConsole(consoleId, updatedConsoleObj)
   }
 
   const handleCloseFormModal = () => {
@@ -81,13 +73,17 @@ const Consoles = ({
     setShowConfirmDelete(false)
   }
 
-
-  if(isLoading) return <Spinner />
-
-
   return (
     <>
       <Breadcrumb items={NavigationItems} />
+      <ConsoleForm
+        show={showForm}
+        onHide={handleCloseFormModal}
+        isEdit={isEdit}
+        addNewConsole={addConsole}
+        saveUpdatedChanges={updateConsole}
+        currentBrandId={currentBrand?.id}
+      />
       <div>
         <header className={classes.header}>
           <div className={classes.consolesHeader}>
@@ -106,14 +102,7 @@ const Consoles = ({
         deleteConsole={handleDeleteConsole}
         viewDetails={handleViewDetails}
       />
-      <ConsoleForm
-        show={showForm}
-        onHide={handleCloseFormModal}
-        isEdit={isEdit}
-        addNewConsole={handleAddNewConsole}
-        saveUpdatedChanges={handleUpdateConsole}
-        currentBrandId={currentBrand?.id}
-      />
+      
       <DeleteAlertModal
         show={showConfirmDelete}
         onCancel={handleCancelDelete}

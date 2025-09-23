@@ -31,6 +31,8 @@
   --tropaz: #2b5592;
   --lochinvar: #2b8992;
   --kumera: #92682b;
+  --cancan: #dba0a0;
+  --dark-tan: #711010;
 }
 
 /***************************************************/
@@ -155,6 +157,19 @@ tbody {
   border-color: var(--mirage);
 }
 
+.error-container {
+  border: 1px solid var(--dark-tan);
+  border-radius: 8px;
+  padding: 0.5rem;
+  background-color: var(--cancan);
+  margin-bottom: 16px;
+}
+
+.error-container p {
+  padding: 0;
+  margin: 0;
+  color: var(--dark-tan);
+}
 
 /***************************************************/
 /* ACCORDION STYLES                                  */

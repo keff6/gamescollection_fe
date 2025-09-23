@@ -25,6 +25,7 @@ const ConsoleForm = ({
   const { console: {selected}, setSelectedConsole, misc: { brands }} = useAppState();
   const [consoleObj, setConsoleObj] = useState(CONSOLE_DEFAULT);
   const [validated, setValidated] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     setConsoleObj({
@@ -56,18 +57,25 @@ const ConsoleForm = ({
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    setErrors([])
     const form = e.currentTarget;
 
     if(validateForm(form)) {
-      if(isEdit) await saveUpdatedChanges(selected.id, consoleObj)
-      else await addNewConsole(consoleObj)
-      closeForm()
+      try {
+        if(isEdit) await saveUpdatedChanges(selected.id, consoleObj)
+        else await addNewConsole(consoleObj)
+
+        closeForm()
+      } catch(e) {
+        setErrors(err => [...err, e])
+      }
     }
   }
 
   const closeForm = () => {
     setSelectedConsole(null)
+    setErrors([])
     onHide()
   }
 
@@ -95,6 +103,7 @@ const ConsoleForm = ({
       </Modal.Header>
       <Modal.Body>
         <Form id="consoleForm" noValidate validated={validated} onSubmit={handleSubmit}>
+          {errors.length > 0 && <div className="error-container">{errors.map((e, i) => <p key={i}>{e.message}</p>)}</div>}
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Name</Form.Label>
             <Form.Control

@@ -20,6 +20,7 @@ const BrandForm = ({
   const { brand: {selected}, setSelectedBrand} = useAppState();
   const [brandObj, setBrandObj] = useState(BRAND_DEFAULT);
   const [validated, setValidated] = useState(false);
+  const [errors, setErrors] = useState([]);
   const hasValidChanges = brandObj.name.length > 0 && (selected ? brandObj.name.length !== selected.name : true);
 
   useEffect(() => () => {
@@ -47,17 +48,23 @@ const BrandForm = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setErrors([])
     const form = e.currentTarget;
 
     if(validateForm(form)) {
-      if(isEdit) await saveUpdatedChanges(selected.id, brandObj)
-      else await addNewBrand(brandObj)
-      closeForm()
+      try {
+        if(isEdit) await saveUpdatedChanges(selected.id, brandObj)
+        else await addNewBrand(brandObj)
+        closeForm()
+      } catch(e) {
+        setErrors(err => [...err, e])
+      }
     }
   }
 
   const closeForm = () => {
     setSelectedBrand(null)
+    setErrors([])
     onHide()
   }
 
@@ -76,6 +83,7 @@ const BrandForm = ({
       </Modal.Header>
       <Modal.Body>
         <Form id="brandForm" noValidate validated={validated} onSubmit={handleSubmit}>
+          {errors.length > 0 && <div className="error-container">{errors.map((e, i) => <p key={i}>{e.message}</p>)}</div>}
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Name</Form.Label>
             <Form.Control

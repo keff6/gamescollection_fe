@@ -3,3 +3,8 @@ export const getAuthUser = (user = null) => {
   
   return JSON.parse(sessionStorage.getItem('currentUser')) || null
 }
+
+export const getErrorMessage = (error = null) => {
+  const message = error?.response?.data || error.message || "";
+  return message;
+}

@@ -14,6 +14,7 @@ const GenreForm = ({
   const { genre: {selected}, setSelectedGenre } = useAppState();
   const [genreName, setGenreName] = useState('');
   const [validated, setValidated] = useState(false);
+  const [errors, setErrors] = useState([]);
   const hasValidChanges = genreName.length > 0 && (selected ? genreName !== selected.name : true);
 
   useEffect(() => () => {
@@ -38,17 +39,23 @@ const GenreForm = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setErrors([])
     const form = e.currentTarget;
 
     if(validateForm(form)) {
-      if(isEdit) await saveUpdatedChanges(selected.id, genreName)
-      else await addNewGenre(genreName)
-      closeForm()
+      try {
+        if(isEdit) await saveUpdatedChanges(selected.id, genreName)
+        else await addNewGenre(genreName)
+        closeForm()
+      } catch(e) {
+        setErrors(err => [...err, e])
+      }
     }
   }
 
   const closeForm = () => {
     setSelectedGenre(null)
+    setErrors([])
     onHide()
   }
 
@@ -67,6 +74,7 @@ const GenreForm = ({
       </Modal.Header>
       <Modal.Body>
         <Form id="genreForm" noValidate validated={validated} onSubmit={handleSubmit}>
+          {errors.length > 0 && <div className="error-container">{errors.map((e, i) => <p key={i}>{e.message}</p>)}</div>}
           <Form.Group className="mb-3" controlId="genreName">
             <Form.Label>Name</Form.Label>
             <Form.Control
