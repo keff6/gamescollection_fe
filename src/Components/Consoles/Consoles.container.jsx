@@ -80,8 +80,12 @@ const ConsolesContainer = () => {
       openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
     }
     catch(e){
-      console.log(e)
-      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
+      const errorCode = e?.response?.data || "";
+      let message = e.message;
+      if(errorCode === ERROR_CODES.IS_REFERENCED) {
+        message = "Cannot delete this console because it has games"
+      }
+      openSnackbar({message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
       getConsolesByBrand()
