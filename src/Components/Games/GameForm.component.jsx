@@ -33,13 +33,12 @@ const GameForm = ({
   onHide,
   saveUpdatedChanges,
   show,
-  validateTitle,
   ...rest
 }) => {
   const { game: {selected, listOption}, setSelectedGame, genre, misc: { consoles } } = useAppState();
   const [gameObj, setGameObj] = useState(GAME_DEFAULT);
   const [validated, setValidated] = useState(false);
-  const [isValidTitle, setIsValidTitle] = useState(true);
+  const [errors, setErrors] = useState([]);
   const genreDictionary = genre?.list.reduce((acc, curr) => ({ ...acc, [curr.id]: curr.name }),{})
 
   useEffect(() => {
@@ -61,6 +60,7 @@ const GameForm = ({
     return () => {
       setGameObj({...GAME_DEFAULT, saga: [], genres: []})
       setValidated(false)
+      setErrors([])
     }
   },[show])
 
@@ -100,21 +100,26 @@ const GameForm = ({
 
   const validateForm = (formValues) => {
     let isValid = false;
-    if (isValidTitle && formValues.checkValidity()) isValid = true
+    if (formValues.checkValidity()) isValid = true
     setValidated(true)
     return isValid;
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setErrors([])
     const sanitizedGameObj = gameObjectSanitizer({...gameObj})
     
     const form = e.currentTarget;
 
     if(validateForm(form)) {
-      if(isEdit) await saveUpdatedChanges(selected.id, sanitizedGameObj)
-      else await addNewGame(sanitizedGameObj)
-      closeForm()
+      try {
+        if(isEdit) await saveUpdatedChanges(selected.id, sanitizedGameObj)
+        else await addNewGame(sanitizedGameObj)
+        closeForm()
+      } catch(e) {
+        setErrors(err => [...err, e])
+      }
     }
     
   }
@@ -123,6 +128,7 @@ const GameForm = ({
     setSelectedGame(null)
     setGameObj({...GAME_DEFAULT, saga: [], genres: []})
     setValidated(false)
+    setErrors([])
     onHide()
   }
 
@@ -174,13 +180,6 @@ const GameForm = ({
     }) 
   }
 
-  const handleValidateTitle = async (e) => {
-    e.preventDefault();
-    const { data: isValid} = await validateTitle(gameObj.title)
-    window.console.log('Validating title..', isValid)
-    setIsValidTitle(isValid)
-  }
-
   return (
     <Modal
       {...rest}
@@ -201,6 +200,7 @@ const GameForm = ({
             <Accordion.Item eventKey="0">
               <Accordion.Header>Game Data</Accordion.Header>
               <Accordion.Body>
+                {errors.length > 0 && <div className="error-container">{errors.map((e, i) => <p key={i}>{e.message}</p>)}</div>}
                 <Form.Group className="mb-3" controlId="title">
                   <Form.Label>Title</Form.Label>
                   <Form.Control
@@ -209,16 +209,9 @@ const GameForm = ({
                     placeholder="Enter game title"
                     value={gameObj.title}
                     onChange={(e) => handleChange("title", e.target.value)}
-                    onBlur={handleValidateTitle}
-                    isInvalid={!isValidTitle}
+                    isInvalid={errors.length > 0}
                     required
                   />
-                  <Form.Control.Feedback type="invalid">
-                    {!isValidTitle ? 
-                      'This game already exist on the database.' :
-                      'Please enter a valid text.'
-                    }
-                  </Form.Control.Feedback>
                 </Form.Group>
                 <Row className="form-row">
                   <Col md={6}>
@@ -456,7 +449,6 @@ GameForm.propTypes = {
   onHide: proptypes.func,
   saveUpdatedChanges: proptypes.func,
   show: proptypes.bool,
-  validateTitle: proptypes.func,
 }
 
 export default GameForm

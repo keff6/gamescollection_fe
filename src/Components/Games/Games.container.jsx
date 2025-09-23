@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import useAppState from "../../hooks/useAppState";
 import { useGamesAPI, useGenresAPI, useConsolesAPI } from "../../hooks/api";
 import Games from "./Games.component";
-import { OPERATION_OUTCOME } from "../../utils/constants";
+import { OPERATION_OUTCOME, ERROR_CODES } from "../../utils/constants";
 
 const GamesContainer = () => {
   const {
@@ -95,7 +95,10 @@ const GamesContainer = () => {
       openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
     }
     catch(e){
-      console.log(e)
+      const errorCode = e?.response?.data || "";
+      if(errorCode === ERROR_CODES.DUPLICATED) {
+        throw new Error("Game already exists in database")
+      }
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
@@ -111,7 +114,10 @@ const GamesContainer = () => {
         openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
       }
       catch(e){
-        console.log(e)
+        const errorCode = e?.response?.data || "";
+        if(errorCode === ERROR_CODES.DUPLICATED) {
+          throw new Error("Game already exists in database")
+        }
         openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
       }
       finally {
@@ -135,18 +141,6 @@ const GamesContainer = () => {
     }
   }
 
-  const validateTitle = async (title) => {
-    try {
-        setIsLoading(true)
-        const response = await gamesAPI.validateTitle(title, consoleId);
-        return response
-      }
-      catch(e){
-        console.log(e)
-        openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-      }
-  }
-
   return (
     <Games
       addGame={addGame}
@@ -156,7 +150,6 @@ const GamesContainer = () => {
       getGamesByConsole={getGamesByConsole}
       getWishlistByConsole={getWishlistByConsole}
       searchGames={searchGames}
-      validateTitle={validateTitle}
     />
     )
 }

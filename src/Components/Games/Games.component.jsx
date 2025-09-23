@@ -25,7 +25,6 @@ const Games = ({
   getGamesByConsole,
   getWishlistByConsole,
   searchGames,
-  validateTitle,
 }) => {
   const navigate = useNavigate();
   const { game, setSelectedGame, brand, console, user } = useAppState();
@@ -44,10 +43,6 @@ const Games = ({
     }
   }, []);
 
-  const handleAddNewGame = async (gameObj) => {
-    addGame(gameObj)
-  }
-
   const handleDeleteGame = async (selectedGame) => {
     setSelectedGame({...selectedGame})
     setShowConfirmDelete(true)
@@ -62,10 +57,6 @@ const Games = ({
   const handleViewDetails = (selectedGame) => {
     setSelectedGame({...selectedGame})
     setShowDetails(true)
-  }
-
-  const handleUpdateGame = async (gameId, updatedGameObj) => {
-    updateGame(gameId, updatedGameObj)
   }
 
   const handleCloseFormModal = () => {
@@ -118,10 +109,9 @@ const Games = ({
         show={showForm}
         onHide={handleCloseFormModal}
         isEdit={isEdit}
-        addNewGame={handleAddNewGame}
-        saveUpdatedChanges={handleUpdateGame}
+        addNewGame={addGame}
+        saveUpdatedChanges={updateGame}
         currentConsoleId={currentConsole?.id}
-        validateTitle={validateTitle}
       />
       <DeleteAlertModal
         show={showConfirmDelete}
@@ -144,7 +134,6 @@ Games.propTypes = {
   getWishlistByConsole: proptypes.func,
   searchGames: proptypes.func,
   updateGame: proptypes.func,
-  validateTitle: proptypes.func,
 }
 
 export default Games;
