@@ -21,7 +21,7 @@ const BrandForm = ({
   const [brandObj, setBrandObj] = useState(BRAND_DEFAULT);
   const [validated, setValidated] = useState(false);
   const [errors, setErrors] = useState([]);
-  const hasValidChanges = brandObj.name.length > 0 && (selected ? brandObj.name.length !== selected.name : true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => () => {
       setBrandObj(BRAND_DEFAULT)
@@ -48,6 +48,7 @@ const BrandForm = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsSubmitting(true)
     setErrors([])
     const form = e.currentTarget;
 
@@ -60,6 +61,7 @@ const BrandForm = ({
         setErrors(err => [...err, e])
       }
     }
+    setIsSubmitting(false)
   }
 
   const closeForm = () => {
@@ -89,6 +91,7 @@ const BrandForm = ({
             <Form.Control
               type="text"
               name="name"
+              maxLength={45}
               placeholder="Enter brand name"
               value={brandObj.name}
               onChange={(e) => handleChange("name", e.target.value)}
@@ -103,6 +106,7 @@ const BrandForm = ({
             <Form.Control
               type="text"
               placeholder="Enter brand origin"
+              maxLength={45}
               value={brandObj.origin}
               onChange={(e) => handleChange("origin", e.target.value)}
             />
@@ -113,6 +117,7 @@ const BrandForm = ({
               type="text"
               placeholder="Enter logo url"
               value={brandObj.logoUrl}
+              maxLength={255}
               onChange={(e) => handleChange("logoUrl", e.target.value)}
             />
           </Form.Group>
@@ -120,7 +125,7 @@ const BrandForm = ({
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={closeForm}>Cancel</Button>
-        <Button variant="primary" form="brandForm" type="submit" disabled={!hasValidChanges}>Save changes</Button>
+        <Button variant="primary" form="brandForm" type="submit" disabled={isSubmitting}>Save changes</Button>
       </Modal.Footer>
     </Modal>
   );

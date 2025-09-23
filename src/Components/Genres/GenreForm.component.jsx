@@ -15,7 +15,7 @@ const GenreForm = ({
   const [genreName, setGenreName] = useState('');
   const [validated, setValidated] = useState(false);
   const [errors, setErrors] = useState([]);
-  const hasValidChanges = genreName.length > 0 && (selected ? genreName !== selected.name : true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => () => {
       setGenreName('')
@@ -39,6 +39,7 @@ const GenreForm = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsSubmitting(true)
     setErrors([])
     const form = e.currentTarget;
 
@@ -51,6 +52,7 @@ const GenreForm = ({
         setErrors(err => [...err, e])
       }
     }
+    setIsSubmitting(false)
   }
 
   const closeForm = () => {
@@ -81,6 +83,7 @@ const GenreForm = ({
               type="text"
               placeholder="Enter genre name"
               value={genreName}
+              maxLength={45}
               onChange={handleGenreNameChange}
               required
             />
@@ -92,7 +95,7 @@ const GenreForm = ({
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={closeForm}>Cancel</Button>
-        <Button variant="primary" form="genreForm" type="submit" disabled={!hasValidChanges}>Save changes</Button>
+        <Button variant="primary" form="genreForm" type="submit" disabled={isSubmitting}>Save changes</Button>
       </Modal.Footer>
     </Modal>
   );

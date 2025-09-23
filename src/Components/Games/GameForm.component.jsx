@@ -39,6 +39,7 @@ const GameForm = ({
   const [gameObj, setGameObj] = useState(GAME_DEFAULT);
   const [validated, setValidated] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const genreDictionary = genre?.list.reduce((acc, curr) => ({ ...acc, [curr.id]: curr.name }),{})
 
   useEffect(() => {
@@ -107,6 +108,7 @@ const GameForm = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsSubmitting(true)
     setErrors([])
     const sanitizedGameObj = gameObjectSanitizer({...gameObj})
     
@@ -121,7 +123,7 @@ const GameForm = ({
         setErrors(err => [...err, e])
       }
     }
-    
+    setIsSubmitting(false)
   }
 
   const closeForm = () => {
@@ -207,6 +209,7 @@ const GameForm = ({
                     type="text"
                     name="title"
                     placeholder="Enter game title"
+                    maxLength={100}
                     value={gameObj.title}
                     onChange={(e) => handleChange("title", e.target.value)}
                     isInvalid={errors.length > 0}
@@ -258,6 +261,7 @@ const GameForm = ({
                         type="text"
                         name="developer"
                         placeholder="Enter game developer"
+                        maxLength={100}
                         value={gameObj.developer}
                         onChange={(e) => handleChange("developer", e.target.value)}
                       />
@@ -270,6 +274,7 @@ const GameForm = ({
                         type="text"
                         name="publisher"
                         placeholder="Enter game publisher"
+                        maxLength={100}
                         value={gameObj.publisher}
                         onChange={(e) => handleChange("publisher", e.target.value)}
                       />
@@ -324,6 +329,7 @@ const GameForm = ({
                   type="text"
                   name="coverUrl"
                   placeholder="Enter cover url"
+                  maxLength={255}
                   value={gameObj.coverUrl}
                   onChange={(e) => handleChange("coverUrl", e.target.value)}
                 />
@@ -334,6 +340,7 @@ const GameForm = ({
                   as="textarea"
                   rows={2}
                   name="notes"
+                  maxLength={255}
                   value={gameObj.notes}
                   onChange={(e) => handleChange("notes", e.target.value)}
                 />
@@ -436,7 +443,7 @@ const GameForm = ({
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={closeForm}>Cancel</Button>
-        <Button variant="primary" form="gameForm" type="submit">Save changes</Button>
+        <Button variant="primary" form="gameForm" type="submit" disabled={isSubmitting}>Save changes</Button>
       </Modal.Footer>
     </Modal>
   );

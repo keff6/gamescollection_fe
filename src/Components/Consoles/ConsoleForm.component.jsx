@@ -26,6 +26,7 @@ const ConsoleForm = ({
   const [consoleObj, setConsoleObj] = useState(CONSOLE_DEFAULT);
   const [validated, setValidated] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     setConsoleObj({
@@ -58,6 +59,7 @@ const ConsoleForm = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true)
     setErrors([])
     const form = e.currentTarget;
 
@@ -71,6 +73,7 @@ const ConsoleForm = ({
         setErrors(err => [...err, e])
       }
     }
+    setIsSubmitting(false)
   }
 
   const closeForm = () => {
@@ -109,6 +112,7 @@ const ConsoleForm = ({
             <Form.Control
               type="text"
               name="name"
+              maxLength={50}
               placeholder="Enter console name"
               value={consoleObj.name}
               onChange={(e) => handleChange("name", e.target.value)}
@@ -171,6 +175,7 @@ const ConsoleForm = ({
             <Form.Control
               type="text"
               placeholder="Enter logo url"
+              maxLength={255}
               value={consoleObj.logoUrl}
               onChange={(e) => handleChange("logoUrl", e.target.value)}
             />
@@ -180,6 +185,7 @@ const ConsoleForm = ({
             <Form.Control
               type="text"
               placeholder="Enter console image url"
+              maxLength={255}
               value={consoleObj.consoleUrl}
               onChange={(e) => handleChange("consoleUrl", e.target.value)}
             />
@@ -188,7 +194,7 @@ const ConsoleForm = ({
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={closeForm}>Cancel</Button>
-        <Button variant="primary" form="consoleForm" type="submit">Save changes</Button>
+        <Button variant="primary" form="consoleForm" type="submit" disabled={isSubmitting}>Save changes</Button>
       </Modal.Footer>
     </Modal>
   );
