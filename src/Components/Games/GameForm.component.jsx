@@ -81,7 +81,6 @@ const GameForm = ({
       setGameObj({
         ...gameObj,
         isNew: value,
-        isComplete: value,
       }) 
     } else if(field === 'isWishlist' && value) {
       setGameObj({

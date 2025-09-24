@@ -9,6 +9,7 @@ const CONSOLE_DEFAULT = {
   brandId: "",
   year: "",
   generation: "",
+  isPortable: 0,
   logoUrl: "",
   consoleUrl: "",
 };
@@ -88,6 +89,13 @@ const ConsoleForm = ({
       options.push(<option key={i} value={i}>{i}</option>)
     }
     return options
+  }
+
+  const handleCheckBoxChange = (field, value) => {
+    setConsoleObj({
+      ...consoleObj,
+      [field]: value
+    }) 
   }
 
   return (
@@ -170,6 +178,16 @@ const ConsoleForm = ({
               </Form.Group>
             </Col>
           </Row>
+          <Form.Group className="mb-3" controlId="name">
+            <Form.Check
+              type="checkbox"
+              id="isPortable"
+              name="isPortable"
+              label="Is Portable"
+              checked={consoleObj.isPortable}
+              onChange={(e) => handleCheckBoxChange("isPortable", e.target.checked)}
+            />
+          </Form.Group>
           <Form.Group className="mb-3" controlId="logoUrl">
             <Form.Label>Logo URL</Form.Label>
             <Form.Control
