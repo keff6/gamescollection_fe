@@ -20,6 +20,8 @@ const GAME_DEFAULT = {
   isComplete: 0,
   isWishlist: 0,
   isDigital: 0,
+  isFinished: 0,
+  isBacklog: 0,
   notes: "",
   coverUrl: "",
   genres: [],
@@ -89,6 +91,8 @@ const GameForm = ({
         isNew: !value,
         isComplete: !value,
         isDigital: !value,
+        isFinished: !value,
+        isBacklog: !value,
       }) 
     } else {
       setGameObj({
@@ -280,49 +284,72 @@ const GameForm = ({
                     </Form.Group>
                   </Col>
                 </Row>
-
-                <div className="mb-3">
-                  <Form.Check
-                    type="checkbox"
-                    id="isNew"
-                    name="isNew"
-                    label="Is New"
-                    checked={gameObj.isNew}
-                    disabled={gameObj.isWishlist}
-                    onChange={(e) => handleCheckBoxChange("isNew", e.target.checked)}
-                  />
-                  <div>
+                <Form.Group className="mb-3" controlId="coverUrl">
+                <Row className="form-row">
+                  <Col>
+                    <Form.Label>Game media status</Form.Label>
+                    <Form.Check
+                      type="checkbox"
+                      id="isNew"
+                      name="isNew"
+                      label="New"
+                      checked={gameObj.isNew}
+                      disabled={gameObj.isWishlist}
+                      onChange={(e) => handleCheckBoxChange("isNew", e.target.checked)}
+                    />
                     <Form.Check
                       inline
                       type="checkbox"
                       id="isComplete"
                       name="isComplete"
-                      label="Is Complete"
+                      label="Complete (CIB)"
                       checked={gameObj.isComplete}
                       disabled={gameObj.isWishlist}
                       onChange={(e) => handleCheckBoxChange("isComplete", e.target.checked)}
                     />
                     <InfoTooltip infoText='If a game contains box and manual is considered complete' />
-                  </div>
-                  <Form.Check
-                    type="checkbox"
-                    id="isDigital"
-                    name="isDigital"
-                    label="Is Digital"
-                    checked={gameObj.isDigital}
-                    disabled={gameObj.isWishlist}
-                    onChange={(e) => handleCheckBoxChange("isDigital", e.target.checked)}
-                  />
-                  <Form.Check
-                    type="checkbox"
-                    id="isWishlist"
-                    name="isWishlist"
-                    label="Is Wishlist"
-                    checked={gameObj.isWishlist}
-                    onChange={(e) => handleCheckBoxChange("isWishlist", e.target.checked)}
-                  />
-                </div>
-                <Form.Group className="mb-3" controlId="coverUrl">
+                    <Form.Check
+                      type="checkbox"
+                      id="isDigital"
+                      name="isDigital"
+                      label="Digital"
+                      checked={gameObj.isDigital}
+                      disabled={gameObj.isWishlist}
+                      onChange={(e) => handleCheckBoxChange("isDigital", e.target.checked)}
+                    />
+                  </Col>
+                  <Col>
+                    <Form.Label>Game playable status</Form.Label>
+                    <Form.Check
+                      type="checkbox"
+                      id="isWishlist"
+                      name="isWishlist"
+                      label="Wishlist (don't have game yet)"
+                      checked={gameObj.isWishlist}
+                      onChange={(e) => handleCheckBoxChange("isWishlist", e.target.checked)}
+                    />
+                    <Form.Check
+                      inline
+                      type="checkbox"
+                      id="isFinished"
+                      name="isFinished"
+                      label="Finished"
+                      checked={gameObj.isFinished}
+                      onChange={(e) => handleCheckBoxChange("isFinished", e.target.checked)}
+                    />
+                    <InfoTooltip infoText='A game is considered finished if was played until see the credits or a season was completed' />
+                    <Form.Check
+                      type="checkbox"
+                      id="isBacklog"
+                      name="isBacklog"
+                      label="Is on Backlog"
+                      checked={gameObj.isBacklog}
+                      onChange={(e) => handleCheckBoxChange("isBacklog", e.target.checked)}
+                    />
+                  </Col>
+                </Row>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="coverUrl">
                 <Form.Label>Cover URL</Form.Label>
                 <Form.Control
                   type="text"
