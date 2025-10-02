@@ -1,13 +1,22 @@
 import proptypes from "prop-types";
+import { useEffect } from "react";
 import { Table, Button, Dropdown } from "react-bootstrap";
-import { PencilSquare, Trash, ListStars } from "react-bootstrap-icons";
+import { PencilSquare, Trash, ListStars, ArrowDown, ArrowUp } from "react-bootstrap-icons";
 import { MoreButton, Tooltip, Badge, Spinner } from "../../../Common";
 import { GAME_LIST_OPTIONS } from "../../../utils/constants";
 import useAppState from "../../../hooks/useAppState";
 import classes from "../Games.module.css";
 
 const GamesList = ({ deleteGame, editGame, listOption, viewDetails, getGames }) => {
-  const { user, isLoading, game } = useAppState();
+  const { user, isLoading, game, setSortingKey, setSortingDirection, sorting: { sortKey, sortDirection} } = useAppState();
+
+  useEffect(() => {
+    const sortParams = sortKey === '' ? null : {
+      sortBy: sortKey,
+      sortDirection: sortDirection,
+    }
+    getGames(true, sortParams);
+  }, [sortKey, sortDirection])
 
   if (isLoading) return <Spinner />;
 
@@ -31,9 +40,29 @@ const GamesList = ({ deleteGame, editGame, listOption, viewDetails, getGames }) 
 
   const handleShowMore = (e) => {
     e.preventDefault();
-    getGames(false);
+    const sortParams = {
+      sortBy: sortKey,
+      sortDirection: sortDirection,
+    }
+    getGames(false, sortParams);
   };
+
+  const handleSorting = (key) => {
+    if(sortKey === key && sortDirection !== '') {
+      const next = sortDirection === 'asc' ? 'desc' : '';
+      setSortingDirection(next)
+      next === '' && setSortingKey('')
+    } else {
+      setSortingKey(key)
+      setSortingDirection('asc')
+    }
+  }
   
+  const getSortIcon = (key) => {
+    if (sortKey !== key || sortDirection === '') return null;
+    return sortDirection === 'asc' ? <ArrowUp /> : <ArrowDown />;
+  };
+
   return (
     <>
       {games.length > 0 ? (
@@ -41,9 +70,11 @@ const GamesList = ({ deleteGame, editGame, listOption, viewDetails, getGames }) 
           <Table className={classes.table}>
             <thead>
               <tr>
-                <th>Title</th>
+                <th onClick={() => handleSorting('title')}>
+                  Title {getSortIcon('title')}
+                </th>
                 <th className={classes.width50px}></th>
-                <th className={classes.width80px}>Year</th>
+                <th className={classes.width80px} onClick={() => handleSorting('year')}>Year {getSortIcon('year')}</th>
                 <th className={`${classes.width35} d-none d-md-table-cell`}>
                   Notes
                 </th>

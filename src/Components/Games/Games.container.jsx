@@ -37,7 +37,7 @@ const GamesContainer = () => {
       setIsLoading(true)
       const gamesResponse = await gamesAPI.getByParams({
         idConsole: consoleId,
-        currentPage: isFirstPage ? pagination?.currentPage :  (+pagination?.currentPage + 1).toString() ,
+        currentPage: isFirstPage ? "1" :  (+pagination?.currentPage + 1).toString() ,
         limit: MAX_ITEMS_PER_PAGE,
         ...(listOption === GAME_LIST_OPTIONS.ALPHABET && {initialLetter: initialLetter}),
         ...(params !== null && {...params}),

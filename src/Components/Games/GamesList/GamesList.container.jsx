@@ -11,7 +11,7 @@ const GamesListContainer = ({
   getGames,
   viewDetails,
 }) => {
-  const { game, setGamesList } = useAppState();
+  const { game, setGamesList, setSortingKey, setSortingDirection } = useAppState();
 
   useEffect(
     () => () => {
@@ -22,14 +22,15 @@ const GamesListContainer = ({
 
   useEffect(() => {
     handleGetGames();
+    setSortingKey('');
+    setSortingDirection('');
   }, [game.listOption, game.initialLetter]);
 
-  const handleGetGames = (isFirstPage = true) => {
+  const handleGetGames = (isFirstPage = true, params = null) => {
     const { listOption } = game;
 
     if(listOption === GAME_LIST_OPTIONS.SEARCH) setGamesList({ data: [], pagination: game?.pagination });
     else {
-      let params = null;
       if(listOption === GAME_LIST_OPTIONS.WISHLIST) params = {...params, isWishlist: 1}
       getGames(isFirstPage, params);
     }

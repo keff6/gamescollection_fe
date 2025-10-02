@@ -31,7 +31,7 @@ const APP_STATE = {
       totalPages: 0,
       currentPage: 1,
       pageSize: MAX_ITEMS_PER_PAGE,
-    }
+    },
   },
   info: {
     totalGames: 0
@@ -44,6 +44,10 @@ const APP_STATE = {
   misc: {
     brands: [],
     consoles: [],
+  },
+  sorting: {
+    sortKey: '',
+    sortDirection: '',
   },
   isLoading: false,
   user: null,
@@ -161,7 +165,19 @@ export const AppStateProvider = ({ children }) => {
           type: actions.SET_INFO_TOTALS,
           payload: totals,
         })
-      }
+      },
+      setSortingKey: (key) => {
+        dispatch({
+          type: actions.SET_SORTING_KEY,
+          payload: key,
+        })
+      },
+      setSortingDirection: (direction) => {
+        dispatch({
+          type: actions.SET_SORTING_DIRECTION,
+          payload: direction,
+        })
+      },
     }),
     [state, dispatch]
   );

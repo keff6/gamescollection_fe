@@ -152,6 +152,22 @@ export const reducer = (state, action) => {
         ...state,
         user: action.payload,
       }
+    case actions.SET_SORTING_KEY:
+      return {
+        ...state,
+        sorting: {
+          ...state.sorting,
+          sortKey: action.payload,
+        }
+      }
+    case actions.SET_SORTING_DIRECTION:
+      return {
+        ...state,
+        sorting: {
+          ...state.sorting,
+          sortDirection: action.payload,
+        }
+      }
     default:
       return state;
   }
