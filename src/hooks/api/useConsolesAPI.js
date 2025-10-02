@@ -11,6 +11,10 @@ const useConsolesAPI = () => {
   const getByBrand = (brandId) => {
     return axios.get(`/consoles/brand/${brandId}`)
   }
+
+  const getById = (consoleId) => {
+    return axios.get(`/consoles/${consoleId}`)
+  }
   
   const add = data => {
     return axiosPrivate.post("/consoles/add", data);
@@ -27,6 +31,7 @@ const useConsolesAPI = () => {
   return {
     getAll,
     getByBrand,
+    getById,
     add,
     remove,
     update

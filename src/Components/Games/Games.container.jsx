@@ -10,6 +10,7 @@ const GamesContainer = () => {
     setGamesList,
     openSnackbar,
     setGenresList,
+    setSelectedConsole,
     setConsolesListMisc,
     setIsLoading,
     game: {initialLetter, listOption, pagination, list },
@@ -29,7 +30,7 @@ const GamesContainer = () => {
       setConsolesListMisc(consolesResponse?.data || [])
     }
     fetchMiscData();
-  }, [])
+  }, []);
 
   const getGames = async (isFirstPage = true, params = null) => {
     try {
@@ -70,6 +71,8 @@ const GamesContainer = () => {
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
+      const currentConsole = await consolesAPI.getById(consoleId);
+      setSelectedConsole(currentConsole?.data || {})
       getGames()
     }
   }
@@ -103,6 +106,8 @@ const GamesContainer = () => {
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
+      const currentConsole = await consolesAPI.getById(consoleId);
+      setSelectedConsole(currentConsole?.data || {})
       getGames()
     }
   }
