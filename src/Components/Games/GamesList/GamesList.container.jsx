@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import proptypes from "prop-types";
 import useAppState from "../../../hooks/useAppState";
@@ -7,40 +8,32 @@ import { GAME_LIST_OPTIONS } from "../../../utils/constants";
 const GamesListContainer = ({
   editGame,
   deleteGame,
-  getWishlistByConsole,
-  getGamesByConsoleAndLetter,
-  getGamesByConsole,
+  getGames,
   viewDetails,
 }) => {
   const { game, setGamesList } = useAppState();
 
   useEffect(
     () => () => {
-      setGamesList([]);
+      setGamesList({ data: [], pagination: game?.pagination });
     },
     []
   );
 
   useEffect(() => {
+    handleGetGames();
+  }, [game.listOption, game.initialLetter]);
+
+  const handleGetGames = (isFirstPage = true) => {
     const { listOption } = game;
 
-    switch (listOption) {
-      case GAME_LIST_OPTIONS.ALPHABET:
-        getGamesByConsoleAndLetter();
-        break;
-      case GAME_LIST_OPTIONS.ALL:
-        getGamesByConsole();
-        break;
-      case GAME_LIST_OPTIONS.WISHLIST:
-        getWishlistByConsole();
-        break;
-      case GAME_LIST_OPTIONS.SEARCH:
-        setGamesList({ ...game, games: [] });
-        break;
-      default:
-        break;
+    if(listOption === GAME_LIST_OPTIONS.SEARCH) setGamesList({ data: [], pagination: game?.pagination });
+    else {
+      let params = null;
+      if(listOption === GAME_LIST_OPTIONS.WISHLIST) params = {...params, isWishlist: 1}
+      getGames(isFirstPage, params);
     }
-  }, [game.listOption, game.initialLetter]);
+  };
 
   return (
     <GamesList
@@ -48,6 +41,7 @@ const GamesListContainer = ({
       deleteGame={deleteGame}
       listOption={game.listOption}
       viewDetails={viewDetails}
+      getGames={handleGetGames}
     />
   );
 };
@@ -55,9 +49,7 @@ const GamesListContainer = ({
 GamesListContainer.propTypes = {
   editGame: proptypes.func,
   deleteGame: proptypes.func,
-  getGamesByConsoleAndLetter: proptypes.func,
-  getGamesByConsole: proptypes.func,
-  getWishlistByConsole: proptypes.func,
+  getGames: proptypes.func,
   viewDetails: proptypes.func,
 };
 

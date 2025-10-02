@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import useAppState from "../../hooks/useAppState";
 import { useGamesAPI, useGenresAPI, useConsolesAPI } from "../../hooks/api";
 import Games from "./Games.component";
-import { OPERATION_OUTCOME, ERROR_CODES } from "../../utils/constants";
+import { OPERATION_OUTCOME, ERROR_CODES, MAX_ITEMS_PER_PAGE, GAME_LIST_OPTIONS } from "../../utils/constants";
 
 const GamesContainer = () => {
   const {
@@ -11,7 +12,7 @@ const GamesContainer = () => {
     setGenresList,
     setConsolesListMisc,
     setIsLoading,
-    game: {initialLetter, listOption, searchTerm},
+    game: {initialLetter, listOption, pagination, list },
     brand,
   } = useAppState();
   const { consoleId } = useParams()
@@ -19,71 +20,38 @@ const GamesContainer = () => {
   const genresAPI = useGenresAPI()
   const consolesAPI = useConsolesAPI()
 
-  const getGamesByConsoleAndLetter = async () => {
-    try {
-      setIsLoading(true)
+  useEffect(() => {
+    const fetchMiscData = async () => {
       const currentBrand = brand?.selected || JSON.parse(sessionStorage.getItem("brandData"))
-      const gamesResponse = await gamesAPI.getByParams({idConsole: consoleId, initialLetter});
       const genresResponse = await genresAPI.getAll();
       const consolesResponse = await consolesAPI.getByBrand(currentBrand?.id);
-      setGamesList(gamesResponse.data || []);
       setGenresList(genresResponse.data || []);
       setConsolesListMisc(consolesResponse?.data || [])
     }
-    catch(e){
-      console.log(e)
-      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-    }
-    finally {
-      setIsLoading(false)
-    }
-  }
+    fetchMiscData();
+  }, [])
 
-  const getGamesByConsole = async () => {
+  const getGames = async (isFirstPage = true, params = null) => {
     try {
       setIsLoading(true)
-      const gamesResponse = await gamesAPI.getByParams({idConsole: consoleId});
-      const genresResponse = await genresAPI.getAll();
-      setGamesList(gamesResponse.data || []);
-      setGenresList(genresResponse.data || []);
-    }
-    catch(e){
-      console.log(e)
-      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-    }
-    finally {
-      setIsLoading(false)
-    }
-  }
+      const gamesResponse = await gamesAPI.getByParams({
+        idConsole: consoleId,
+        currentPage: isFirstPage ? pagination?.currentPage :  (+pagination?.currentPage + 1).toString() ,
+        limit: MAX_ITEMS_PER_PAGE,
+        ...(listOption === GAME_LIST_OPTIONS.ALPHABET && {initialLetter: initialLetter}),
+        ...(params !== null && {...params}),
+      });
 
-  const getWishlistByConsole = async () => {
-    try {
-      setIsLoading(true)
-      const gamesResponse = await gamesAPI.getWishlistByConsole(consoleId);
-      const genresResponse = await genresAPI.getAll();
-      setGamesList(gamesResponse.data || []);
-      setGenresList(genresResponse.data || []);
-    }
-    catch(e){
-      console.log(e)
-      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-    }
-    finally {
-      setIsLoading(false)
-    }
-  }
+      const { data: {data, pagination: updatedPagination} } = gamesResponse;
+      const { currentPage } = updatedPagination
+      const updatedList = (+currentPage === 1) ? data : [...list, ...data]
+      const updatedPayload = { data: updatedList, pagination: updatedPagination} 
 
-  const searchGames = async () => {
-    try {
-      setIsLoading(true)
-      const gamesResponse = await gamesAPI.search(searchTerm, consoleId);
-      setGamesList(gamesResponse.data || []);
-    }
-    catch(e){
+      setGamesList(updatedPayload || { data: [], pagination: pagination });
+    } catch(e) {
       console.log(e)
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-    }
-    finally {
+    } finally {
       setIsLoading(false)
     }
   }
@@ -102,8 +70,7 @@ const GamesContainer = () => {
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
-      if(listOption === 'all') getGamesByConsole()
-      else getGamesByConsoleAndLetter()
+      getGames()
     }
   }
 
@@ -121,8 +88,7 @@ const GamesContainer = () => {
         openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
       }
       finally {
-        if(listOption === 'all') getGamesByConsole()
-        else getGamesByConsoleAndLetter()
+        getGames()
       }
   }
 
@@ -137,7 +103,7 @@ const GamesContainer = () => {
       openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
     }
     finally {
-      getGamesByConsoleAndLetter()
+      getGames()
     }
   }
 
@@ -146,10 +112,7 @@ const GamesContainer = () => {
       addGame={addGame}
       updateGame={updateGame}
       deleteGame={deleteGame}
-      getGamesByConsoleAndLetter={getGamesByConsoleAndLetter}
-      getGamesByConsole={getGamesByConsole}
-      getWishlistByConsole={getWishlistByConsole}
-      searchGames={searchGames}
+      getGames={getGames}
     />
     )
 }

@@ -21,10 +21,7 @@ const Games = ({
   addGame,
   deleteGame,
   updateGame,
-  getGamesByConsoleAndLetter,
-  getGamesByConsole,
-  getWishlistByConsole,
-  searchGames,
+  getGames,
 }) => {
   const navigate = useNavigate();
   const { game, setSelectedGame, brand, console, user } = useAppState();
@@ -34,7 +31,7 @@ const Games = ({
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = (brand?.selected) ? brand.selected : JSON.parse(sessionStorage.getItem('brandData')); 
   const currentConsole = (console?.selected) ? console.selected : JSON.parse(sessionStorage.getItem('consoleData')); 
-  const totalGames = game?.total || 0;
+  const totalGames = currentConsole?.totalGames || 0;
   const currentUser = getAuthUser(user);
 
   useEffect(() => {
@@ -96,13 +93,11 @@ const Games = ({
           </>}
         </header>
       </div>
-      <GamesListOptions searchGames={searchGames}/>
+      <GamesListOptions getGames={getGames}/>
       <GamesList
         editGame={handleEditGame}
         deleteGame={handleDeleteGame}
-        getGamesByConsoleAndLetter={getGamesByConsoleAndLetter}
-        getGamesByConsole={getGamesByConsole}
-        getWishlistByConsole={getWishlistByConsole}
+        getGames={getGames}
         viewDetails={handleViewDetails}
       />
       <GameForm
@@ -129,10 +124,7 @@ const Games = ({
 Games.propTypes = {
   addGame: proptypes.func,
   deleteGame: proptypes.func,
-  getGamesByConsoleAndLetter: proptypes.func,
-  getGamesByConsole: proptypes.func,
-  getWishlistByConsole: proptypes.func,
-  searchGames: proptypes.func,
+  getGames: proptypes.func,
   updateGame: proptypes.func,
 }
 

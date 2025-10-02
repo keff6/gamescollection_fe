@@ -13,6 +13,7 @@ const useGamesAPI = () => {
   }
   
   const getByParams = (paramsObj) => {
+
     let paramsString = '?';
     const params = Object.keys(paramsObj)
     for(let param of params) {

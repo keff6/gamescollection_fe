@@ -4,7 +4,7 @@ import { Search } from "react-bootstrap-icons";
 import proptypes from "prop-types";
 import useAppState from "../../../hooks/useAppState";
 
-const SearchGames = ({ searchGames }) => {
+const SearchGames = ({ getGames }) => {
   const { game: { searchTerm }, setSearchTerm } = useAppState();
   const [isValid, setIsValid] = useState(false)
 
@@ -18,7 +18,7 @@ const SearchGames = ({ searchGames }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(isValid) searchGames();
+    if(isValid) getGames(true, { searchTerm });
   }
 
   return (
@@ -42,7 +42,7 @@ const SearchGames = ({ searchGames }) => {
 }
 
 SearchGames.propTypes = {
-  searchGames: proptypes.func,
+  getGames: proptypes.func,
 }
 
 export default SearchGames;

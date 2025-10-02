@@ -7,7 +7,7 @@ import AlphabetButtons from './AlphabetButtons.component';
 import SearchGames from './SearchGames.component';
 import classes from '../Games.module.css';
 
-const GamesListOptions = ({ searchGames }) => {
+const GamesListOptions = ({ getGames }) => {
   const { game: { listOption }, setGamesListOption, setInitialLetter } = useAppState();
 
   useEffect(() => () => {
@@ -76,7 +76,7 @@ const GamesListOptions = ({ searchGames }) => {
         {listOption === GAME_LIST_OPTIONS.ALPHABET ?
           <AlphabetButtons />
           : listOption === GAME_LIST_OPTIONS.SEARCH ?
-          <SearchGames searchGames={searchGames}/>
+          <SearchGames getGames={getGames}/>
           : null
         }
       </Container>
@@ -85,7 +85,7 @@ const GamesListOptions = ({ searchGames }) => {
 }
 
 GamesListOptions.propTypes = {
-  searchGames: proptypes.func,
+  getGames: proptypes.func,
 }
 
 export default GamesListOptions;

@@ -12,7 +12,7 @@ const BrandsTable = ({ brands, deleteBrand, editBrand }) => {
 
   return (
     <>
-      {(brands.length > 0) &&
+      {(brands?.length > 0) &&
       <Table className={classes.table}>
         <thead>
           <tr>
@@ -51,7 +51,7 @@ const BrandsTable = ({ brands, deleteBrand, editBrand }) => {
           )}
         </tbody>
       </Table>}
-      {(brands.length === 0) && <h3 className="empty-list-text">Start adding brands</h3>}
+      {(brands?.length === 0) && <h3 className="empty-list-text">Start adding brands</h3>}
     </>
   )
 }

@@ -2,7 +2,7 @@ import { useMemo, useReducer } from "react";
 import proptypes from 'prop-types';
 import { reducer } from "./reducer";
 import { actionTypes as actions } from "./actions";
-import { GAME_LIST_OPTIONS } from "../../utils/constants";
+import { GAME_LIST_OPTIONS, MAX_ITEMS_PER_PAGE } from "../../utils/constants";
 import { AppState } from "./state";
 
 const APP_STATE = {
@@ -26,6 +26,12 @@ const APP_STATE = {
     listOption: GAME_LIST_OPTIONS.ALPHABET,
     initialLetter: '#',
     searchTerm: '',
+    pagination: {
+      totalItems: 0,
+      totalPages: 0,
+      currentPage: 1,
+      pageSize: MAX_ITEMS_PER_PAGE,
+    }
   },
   info: {
     totalGames: 0

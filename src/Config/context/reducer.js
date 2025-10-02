@@ -80,8 +80,8 @@ export const reducer = (state, action) => {
         ...state,
         game: {
           ...state.game,
-          list: action.payload.games,
-          total: action.payload.total
+          list: action.payload.data,
+          pagination: action.payload.pagination
         }
       };
     case actions.SET_GAMES_LIST_OPTION:
@@ -90,6 +90,10 @@ export const reducer = (state, action) => {
         game: {
           ...state.game,
           listOption: action.payload,
+          pagination: {
+            ...state.game.pagination,
+            currentPage: 1,
+          }
         }
       };
     case actions.SET_INITIAL_LETTER:
@@ -98,6 +102,10 @@ export const reducer = (state, action) => {
         game: {
           ...state.game,
           initialLetter: action.payload,
+          pagination: {
+            ...state.game.pagination,
+            currentPage: 1,
+          }
         }
       };
     case actions.SET_SEARCH_TERM:
