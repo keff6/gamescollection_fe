@@ -245,3 +245,9 @@ a.danger-link {
 .header-container {
 display: flex;
 }
+
+.results-text {
+  font-size: 14px;
+  text-align: end;
+  color: aqua;
+}

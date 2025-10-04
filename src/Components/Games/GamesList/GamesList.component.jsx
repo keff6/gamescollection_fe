@@ -67,6 +67,7 @@ const GamesList = ({ deleteGame, editGame, listOption, viewDetails, getGames }) 
     <>
       {games.length > 0 ? (
         <div>
+          <div className={classes.resultsText}>Showing results {games.length || '--'}/ {game?.pagination?.totalItems || '--'}</div>
           <Table className={classes.table}>
             <thead>
               <tr>
