@@ -3,7 +3,8 @@ import routes from './Config/Routes';
 import { AppStateProvider } from './Config/context/provider';
 import ScrollToTop from "react-scroll-to-top";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '@fontsource/roboto';
+// import '@fontsource/roboto';
+import '@fontsource/quicksand';
 import './App.css'
 
 function App() {

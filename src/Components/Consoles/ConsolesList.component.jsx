@@ -15,9 +15,9 @@ const ConsolesList = ({ editConsole, deleteConsole, viewDetails }) => {
   return (
     <Container className={classes.mainDashboardContainer}>
       {consoles.length > 0 ? (
-        <Row className={`justify-content-md-center`}>
+        <Row>
           {consoles.map((c) => (
-            <Col key={c.id} lg={12} className={classes.customCol}>
+            <Col key={c.id} lg={6} md={12} className={classes.customCol}>
               <ConsoleCard
                 consoleData={c}
                 editConsole={editConsole}

@@ -4,10 +4,11 @@ import proptypes from 'prop-types';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
 import useAppState from '../../hooks/useAppState';
 import { MoreButton, Tooltip } from '../../Common';
+import { CONSOLE_GENERATIONS} from '../../utils/constants';
 import classes from './Consoles.module.css';
 
 
-const ConsoleCard = ({ consoleData, editConsole, deleteConsole, viewDetails }) => {
+const ConsoleCard = ({ consoleData, editConsole, deleteConsole }) => {
   const { setSelectedConsole, user } = useAppState();
   const navigate = useNavigate();
 
@@ -18,17 +19,16 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole, viewDetails }) =
   }
 
   return (
-    <Card className={classes.card}>
-      <Card.Body className="card-body-console">
+    <Card border="none">
+      <Card.Body className={classes.consoleCard}>
         <Card.Title>
           <div>
             {consoleData.logoUrl ?
             <img className={classes.logoImg} src={consoleData.logoUrl} alt={consoleData.name} />
-            : <span className={classes.brandText}>{consoleData.name}</span>}
+            : <span className={classes.consoleTitle}>{consoleData.name}</span>}
             <p className={classes.consoleYearLabel}>{consoleData?.year || ""}</p>
+            <p>Generation: {consoleData?.generation ? CONSOLE_GENERATIONS[consoleData?.generation - 1].text : ''}</p>  
           </div>
-        </Card.Title>
-        <footer className={classes.cardFooter}>
           {user &&
           <div className={classes.tableButtonsContainer}>
             <Tooltip text="See more options">
@@ -46,20 +46,15 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole, viewDetails }) =
               </Dropdown>
             </Tooltip>
           </div>}
+        </Card.Title>
+        <footer className={classes.cardFooter}>
           <div className={classes.navButtons}>
-            <Button
-              type="button"
-              variant="info"
-              onClick={() => viewDetails(consoleData)}
-            >
-              Details
-            </Button>
             <Button
               type="button"
               variant="primary"
               onClick={navigateToGamesHandler}
             >
-              Games
+              View {consoleData?.totalGames || ''} Games
             </Button>  
           </div>
         </footer>

@@ -33,6 +33,26 @@
   --kumera: #92682b;
   --cancan: #dba0a0;
   --dark-tan: #711010;
+  --cello: #1F4761;
+  --elephant: #163c55;
+  /* revamping */
+  --background-main-dark: #000d1af5;
+  --background-secondary-dark: #1d2e43; /* #122235; */
+  --main-dark-1: #010917;
+  --main-button: #29698c; /*#144b82;*/
+  --main-button-contrast: #215978; /*#0c3157;*/
+  --secondary-button: #659db8; /*#3f738c;*/
+  --secondary-button-contrast: #568da8; /*#3f738c;*/
+  --main-border: #3d92a8;
+  --white-1: #C9CED8;
+  --white-2: #78818E;
+  --light-blue-contrast: #0e7084;
+  --light-blue-contrast-2: #5ab5c1;
+  /* --modal-backgound: 1a3c4f; */
+  --modal-header: #1a3c4f;
+  --control-background: #1f2d3b; 
+  --control-border: #474747;
+  --checked-green: #0d9e3a;
 }
 
 /***************************************************/
@@ -40,7 +60,7 @@
 /***************************************************/
 html, body, #app, #app>div, root {
   height: 100%;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 body {
@@ -54,7 +74,7 @@ h5 {
 
 main {
   min-height: calc(100vh - 56px);
-  background-color: var(--shark);
+  background-color: var(--background-main-dark);
   color: var(--white);
 }
 
@@ -79,7 +99,7 @@ main a svg {
 
 th {
   background-color: var(--st-tropaz) !important;
-  color: var(--portage);
+  color: var(--light-blue-contrast-2);
   letter-spacing: 1px;
 }
 
@@ -127,22 +147,27 @@ tbody {
   text-align: left!important;
 }
 
+.form-control, .form-control:focus,
+.form-select, .form-select:focus,
+.form-select:disabled,
+.form-check-input {
+  background-color: var(--control-background);
+  border-color: var(--control-border);
+  color: var(--white)
+}
+
+.form-check-input:checked {
+  background-color: var(--checked-green);
+}
+
 /***************************************************/
 /* CARD STYLES                                     */
 /***************************************************/
 .card {
-  border-color: var(--black-pearl);
-  border-radius: 5px;
+  border: none;
 }
 
 .card-title {
-  color: var(--white);
-}
-
-.card-body,
-.card-body-console {
-  border-radius: 4px;
-  background-color: var(--blue-bayoux);
   display: flex;
   justify-content: space-between;
 }
@@ -152,7 +177,7 @@ tbody {
 /* FORM STYLES                                  */
 /***************************************************/
 .modal-header, .modal-footer {
-  background-color: var(--perano);
+  background-color: var(--modal-header);
   color: var(--white);
   border-color: var(--mirage);
 }
@@ -202,8 +227,8 @@ tbody {
 }
 
 .modal-body, .accordion-body {
-  background-color: var(--jaguar);
-  color: var(--white);
+  background-color: var(--background-main-dark);
+  color: var(--white-1);
 }
 
 
@@ -214,28 +239,28 @@ tbody {
   max-height: 38px;
 }
 .btn-primary {
-  background-color: var(--medium-purple);
-  border-color: var(--medium-purple);
+  background-color: var(--main-button);
+  border-color: var(--main-button);
 }
 
 .btn-primary:focus,
 .btn-primary:hover,
 .btn-primary:active {
-  background-color: var(--daisy-bush) !important;
-  border-color: var(--daisy-bush) !important;
+  background-color: var(--main-button-contrast) !important;
+  border-color: var(--main-button-contrast) !important;
 }
 
 .btn-info {
-  background-color: var(--portage);
-  border-color: var(--portage);
+  background-color: var(--secondary-button);
+  border-color: var(--secondary-button);
   color: var(--white);
 }
 
 .btn-info:focus,
 .btn-info:hover,
 .btn-info:active {
-  background-color: var(--moody-blue) !important;
-  border-color: var(--moody-blue)  !important;
+  background-color: var(--secondary-button-contrast) !important;
+  border-color: var(--secondary-button-contrast)  !important;
   color: var(--white) !important;
 }
 
