@@ -22,6 +22,12 @@ export const GAME_LIST_OPTIONS = {
     ALL: 'all'
   };
 
+export const CONSOLE_FILTER_OPTIONS = {
+  ALL: 'all',
+  HOME: 'home',
+  PORTABLE: 'portable',
+}
+
 export const ALPHABET = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 export const NO_DATA = 'N/A';

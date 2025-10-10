@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom";
 import useAppState from "../../hooks/useAppState";
 import { useConsolesAPI, useBrandsAPI } from "../../hooks/api";
 import Consoles from "./Consoles.component";
-import { OPERATION_OUTCOME, ERROR_CODES } from "../../utils/constants";
+import { OPERATION_OUTCOME, ERROR_CODES, CONSOLE_FILTER_OPTIONS } from "../../utils/constants";
 
 const ConsolesContainer = () => {
-  const { setConsolesList, openSnackbar, setIsLoading, setInitialLetter, setBrandsListMisc } = useAppState();
+  const { setConsolesList, openSnackbar, setIsLoading, setInitialLetter, setBrandsListMisc, console } = useAppState();
   const { brandId } = useParams()
   const consolesAPI = useConsolesAPI()
   const brandsAPI = useBrandsAPI()
@@ -20,10 +20,19 @@ const ConsolesContainer = () => {
     }
   }, []);
 
-  const getConsolesByBrand = async () => {
+  useEffect(() => {
+    handleFilterConsoles();
+  }, [console.listFilter]);
+  
+  const handleFilterConsoles = () => {
+    const { listFilter } = console;
+    getConsolesByBrand(listFilter);
+  };
+
+  const getConsolesByBrand = async (typeFilter = CONSOLE_FILTER_OPTIONS.AL) => {
     try {
       setIsLoading(true)
-      const consolesResponse = await consolesAPI.getByBrand(brandId);
+      const consolesResponse = await consolesAPI.getByBrand(brandId, typeFilter);
       const brandsResponse = await brandsAPI.getAll();
       setConsolesList(consolesResponse.data || []);
       setBrandsListMisc(brandsResponse.data || [])

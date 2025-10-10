@@ -9,6 +9,7 @@ import { getAuthUser } from '../../utils/misc'
 import ConsoleForm from './ConsoleForm.component';
 import ConsoleDetails from './ConsoleDetails.component';
 import classes from './Consoles.module.css';
+import ConsoleFilterOptions from './ConsoleFilterOptions';
 
 const NavigationItems = [
   { text: 'Brands', href:"/" },
@@ -97,6 +98,7 @@ const Consoles = ({
           </>}
         </header>
       </div>
+      <ConsoleFilterOptions />
       <ConsolesList
         editConsole={handleEditConsole}
         deleteConsole={handleDeleteConsole}

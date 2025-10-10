@@ -1,4 +1,5 @@
 import axios from "../../utils/axios";
+import { CONSOLE_FILTER_OPTIONS } from "../../utils/constants";
 import useAxiosPrivate from '../useAxiosPrivate'
 
 const useConsolesAPI = () => {
@@ -8,8 +9,11 @@ const useConsolesAPI = () => {
     return axios.get("/consoles");
   };
   
-  const getByBrand = (brandId) => {
-    return axios.get(`/consoles/brand/${brandId}`)
+  const getByBrand = (brandId, filter) => {
+    let typeFilter = '';
+    if(filter === CONSOLE_FILTER_OPTIONS.HOME) typeFilter = '?type=0'
+    if(filter === CONSOLE_FILTER_OPTIONS.PORTABLE) typeFilter = '?type=1'
+    return axios.get(`/consoles/brand/${brandId}${typeFilter}`)
   }
 
   const getById = (consoleId) => {

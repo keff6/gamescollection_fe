@@ -59,6 +59,14 @@ export const reducer = (state, action) => {
           total: action.payload.total,
         }
       };
+    case actions.SET_CONSOLES_LIST_FILTER:
+      return {
+        ...state,
+        console: {
+          ...state.console,
+          listFilter: action.payload,
+        }
+      };
     case actions.SET_CONSOLES_LIST_MISC:
       return {
         ...state,

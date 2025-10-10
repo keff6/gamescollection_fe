@@ -61,8 +61,8 @@
 .options-buttons > label, 
 .options-buttons > label:hover, 
 .options-buttons > label:active {
-  border-color: var(--main-button) !important;
-  color: var(--main-button) !important;
+  border-color: var(--light-blue-contrast) !important;
+  color: var(--light-blue-contrast) !important;
 }
 
 
@@ -83,10 +83,10 @@ input:checked + .toggle-button {
 }
 
 .custom-list {
-  border: 1px solid var(--sirocco);
+  border: 1px solid var(--control-border);
   height: 100%;
   border-radius: 5px;
-  background-color: var(--white);
+  background-color: var(--control-background);
   padding: 10px;
   min-height: 50px;
 }

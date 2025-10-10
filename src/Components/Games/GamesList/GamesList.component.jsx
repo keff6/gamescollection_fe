@@ -18,7 +18,8 @@ const GamesList = ({ deleteGame, editGame, listOption, viewDetails, getGames }) 
     getGames(true, sortParams);
   }, [sortKey, sortDirection])
 
-  if (isLoading) return <Spinner />;
+  const isFirstPage = game?.pagination?.currentPage === 1;
+  if (isLoading && isFirstPage) return <Spinner />;
 
   const { list = [], pagination: {totalPages = 1, currentPage = "1"}} = game;
   const showMoreButton = (totalPages === 1 || currentPage === totalPages.toString()) ? false : true;
@@ -40,6 +41,7 @@ const GamesList = ({ deleteGame, editGame, listOption, viewDetails, getGames }) 
 
   const handleShowMore = (e) => {
     e.preventDefault();
+    
     const sortParams = {
       sortBy: sortKey,
       sortDirection: sortDirection,
@@ -135,7 +137,7 @@ const GamesList = ({ deleteGame, editGame, listOption, viewDetails, getGames }) 
               ))}
             </tbody>
           </Table>
-          {showMoreButton && <div className="text-center mt-3">
+          {showMoreButton && <div className="text-center mt-3 mb-3">
             <Button variant="primary" onClick={(e) =>handleShowMore(e)}>
               Show More
             </Button>

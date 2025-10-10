@@ -6,6 +6,8 @@ import useAppState from '../../hooks/useAppState';
 import { MoreButton, Tooltip } from '../../Common';
 import { CONSOLE_GENERATIONS} from '../../utils/constants';
 import classes from './Consoles.module.css';
+import HomeConsoleIcon from '../../assets/icons/home-console.png';
+import PortableConsoleIcon from '../../assets/icons/portable-console.png';
 
 
 const ConsoleCard = ({ consoleData, editConsole, deleteConsole }) => {
@@ -25,10 +27,14 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole }) => {
           <div>
             {consoleData.logoUrl ?
             <img className={classes.logoImg} src={consoleData.logoUrl} alt={consoleData.name} />
-            : <span className={classes.consoleTitle}>{consoleData.name}</span>}
+            : <div className={classes.consoleName}>
+                <img src={consoleData?.isPortable ? PortableConsoleIcon : HomeConsoleIcon} className={classes.consoleTypeIcon}/>
+                <span className={classes.consoleTitle}>{consoleData.name}</span>
+              </div>}
             <p className={classes.consoleYearLabel}>{consoleData?.year || ""}</p>
             <p>Generation: {consoleData?.generation ? CONSOLE_GENERATIONS[consoleData?.generation - 1].text : ''}</p>  
           </div>
+          
           {user &&
           <div className={classes.tableButtonsContainer}>
             <Tooltip text="See more options">

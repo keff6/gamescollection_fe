@@ -11,13 +11,26 @@ const GamesListOptions = ({ getGames }) => {
   const { game: { listOption }, setGamesListOption, setInitialLetter } = useAppState();
 
   useEffect(() => () => {
-    setGamesListOption(GAME_LIST_OPTIONS.ALPHABET);
+    setGamesListOption(GAME_LIST_OPTIONS.ALL);
     setInitialLetter('#');
   },[])
 
   return (
     <div>
       <ButtonGroup className={classes.optionsButtons}>
+        <ToggleButton
+          className={classes.toggleButton} 
+          key="all"
+          id="radio-all"
+          type="radio"
+          name="radio-all"
+          variant="outline-primary"
+          value={GAME_LIST_OPTIONS.ALL}
+          checked={listOption === GAME_LIST_OPTIONS.ALL}
+          onChange={(e) => setGamesListOption(e.currentTarget.value)}
+        >
+          All
+        </ToggleButton>
         <ToggleButton
           className={classes.toggleButton}
           key="alphabetic"
@@ -43,19 +56,6 @@ const GamesListOptions = ({ getGames }) => {
           onChange={(e) => setGamesListOption(e.currentTarget.value)}
         >
           Wishlist
-        </ToggleButton>
-        <ToggleButton
-          className={classes.toggleButton} 
-          key="all"
-          id="radio-all"
-          type="radio"
-          name="radio-all"
-          variant="outline-primary"
-          value={GAME_LIST_OPTIONS.ALL}
-          checked={listOption === GAME_LIST_OPTIONS.ALL}
-          onChange={(e) => setGamesListOption(e.currentTarget.value)}
-        >
-          All
         </ToggleButton>
         <ToggleButton
           className={classes.toggleButton}

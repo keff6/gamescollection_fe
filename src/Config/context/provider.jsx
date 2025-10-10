@@ -2,7 +2,7 @@ import { useMemo, useReducer } from "react";
 import proptypes from 'prop-types';
 import { reducer } from "./reducer";
 import { actionTypes as actions } from "./actions";
-import { GAME_LIST_OPTIONS, MAX_ITEMS_PER_PAGE } from "../../utils/constants";
+import { GAME_LIST_OPTIONS, MAX_ITEMS_PER_PAGE, CONSOLE_FILTER_OPTIONS } from "../../utils/constants";
 import { AppState } from "./state";
 
 const APP_STATE = {
@@ -16,6 +16,7 @@ const APP_STATE = {
   },
   console: {
     list: [],
+    listFilter: CONSOLE_FILTER_OPTIONS.ALL,
     total: 0,
     selected: null,
   },
@@ -23,7 +24,7 @@ const APP_STATE = {
     list: [],
     total: 0,
     selected: null,
-    listOption: GAME_LIST_OPTIONS.ALPHABET,
+    listOption: GAME_LIST_OPTIONS.ALL,
     initialLetter: '#',
     searchTerm: '',
     pagination: {
@@ -100,6 +101,12 @@ export const AppStateProvider = ({ children }) => {
           type: actions.SET_CONSOLES_LIST,
           payload: consolesList,
         });
+      },
+      setConsolesFilter: (filter) => {
+        dispatch({
+          type: actions.SET_CONSOLES_LIST_FILTER,
+          payload: filter,
+        })
       },
       setConsolesListMisc: (consolesList) => {
         dispatch({
