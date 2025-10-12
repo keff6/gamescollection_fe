@@ -22,8 +22,8 @@ const GamesListContainer = ({
 
   useEffect(() => {
     handleGetGames();
-    setSortingKey('');
-    setSortingDirection('');
+    setSortingKey('title');
+    setSortingDirection('asc');
   }, [game.listOption, game.initialLetter]);
 
   const handleGetGames = (isFirstPage = true, params = null) => {

@@ -36,7 +36,7 @@
   --cello: #1F4761;
   --elephant: #163c55;
   /* revamping */
-  --background-main-dark: #000d1af5;
+  --background-main-dark: #000e1d;
   --background-secondary-dark: #1d2e43; /* #122235; */
   --main-dark-1: #010917;
   --main-button: #29698c; /*#144b82;*/
@@ -46,13 +46,16 @@
   --main-border: #3d92a8;
   --white-1: #C9CED8;
   --white-2: #78818E;
-  --light-blue-contrast: #0e7084;
+  --light-blue-contrast: #1087a0;
   --light-blue-contrast-2: #5ab5c1;
   /* --modal-backgound: 1a3c4f; */
   --modal-header: #1a3c4f;
   --control-background: #1f2d3b; 
   --control-border: #474747;
   --checked-green: #0d9e3a;
+  --card-background-1: #0f232f;
+  --dropdown-options-background: #004c63;
+  --outline-button-background: #1087a02b;
 }
 
 /***************************************************/
@@ -114,13 +117,13 @@ tbody {
 }
 
 .dropdown-menu.show {
-  background-color: var(--regent-grey);
+  background-color: var(--dropdown-options-background);
   max-height: 250px;
   overflow-y: hidden;
 }
 
 .dropdown-item {
-  color: var(--black-pearl) !important;
+  color: var(--white-1) !important;
 }
 
 .dropdown-item:hover,
@@ -248,6 +251,24 @@ tbody {
 .btn-primary:active {
   background-color: var(--main-button-contrast) !important;
   border-color: var(--main-button-contrast) !important;
+}
+
+.btn-outline-primary {
+  border-color: var(--light-blue-contrast);
+  color: var(--light-blue-contrast);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--outline-button-background) !important;
+  border-color: var(--light-blue-contrast);
+  color: var(--light-blue-contrast);
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+background-color: var(--outline-button-background) !important;
+border-color: var(--light-blue-contrast) !important;
+  color: var(--light-blue-contrast) !important;
 }
 
 .btn-info {

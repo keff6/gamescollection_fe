@@ -1,0 +1,9 @@
+.dropdown-button {
+  border: 1px solid var(--light-blue-contrast);
+  color: var(--light-blue-contrast);
+}
+
+.button-label svg{
+  height: 18px;
+  width: 18px;
+}

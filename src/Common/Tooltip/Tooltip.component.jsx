@@ -11,7 +11,7 @@ function Tooltip({ children, text, placement = "left" }) {
   return (
     <OverlayTrigger
       placement={placement}
-      delay={{ show: 250, hide: 200 }}
+      delay={{ show: 250, hide: 20 }}
       overlay={renderTooltip}
     >
       {children}

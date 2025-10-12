@@ -7,3 +7,4 @@ export { default as MoreButton } from './MoreButton/MoreButton.component';
 export { default as Tooltip } from './Tooltip/Tooltip.component';
 export { default as InfoTooltip } from './InfoTooltip/InfoTooltip.component';
 export { default as Badge } from './Badge/Badge.component';
+export { default as MiniLabel } from './MiniLabel/MiniLabel.component';
