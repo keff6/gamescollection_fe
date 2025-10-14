@@ -22,6 +22,7 @@ const GAME_DEFAULT = {
   isDigital: 0,
   isFinished: 0,
   isBacklog: 0,
+  isPlaying: 0,
   notes: "",
   coverUrl: "",
   genres: [],
@@ -92,6 +93,7 @@ const GameForm = ({
         isComplete: !value,
         isDigital: !value,
         isFinished: !value,
+        isPlaying: !value,
         isBacklog: !value,
       }) 
     } else {
@@ -329,6 +331,22 @@ const GameForm = ({
                       onChange={(e) => handleCheckBoxChange("isWishlist", e.target.checked)}
                     />
                     <Form.Check
+                      type="checkbox"
+                      id="isBacklog"
+                      name="isBacklog"
+                      label="Is on Backlog"
+                      checked={gameObj.isBacklog}
+                      onChange={(e) => handleCheckBoxChange("isBacklog", e.target.checked)}
+                    />
+                    <Form.Check
+                      type="checkbox"
+                      id="isPlaying"
+                      name="isPlaying"
+                      label="Currently Playing"
+                      checked={gameObj.isPlaying}
+                      onChange={(e) => handleCheckBoxChange("isPlaying", e.target.checked)}
+                    />
+                    <Form.Check
                       inline
                       type="checkbox"
                       id="isFinished"
@@ -338,14 +356,6 @@ const GameForm = ({
                       onChange={(e) => handleCheckBoxChange("isFinished", e.target.checked)}
                     />
                     <InfoTooltip infoText='A game is considered finished if was played until see the credits or a season was completed' />
-                    <Form.Check
-                      type="checkbox"
-                      id="isBacklog"
-                      name="isBacklog"
-                      label="Is on Backlog"
-                      checked={gameObj.isBacklog}
-                      onChange={(e) => handleCheckBoxChange("isBacklog", e.target.checked)}
-                    />
                   </Col>
                 </Row>
               </Form.Group>

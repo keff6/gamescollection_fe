@@ -36,6 +36,8 @@ export const BADGE_TYPE = {
   NEW: { label: 'New', miniLabel: 'N' },
   COMPLETE: { label: 'Complete', miniLabel: 'C' },
   DIGITAL: { label: 'Digital', miniLabel: 'D' },
+  BACKLOG: { label: 'Backlog', miniLabel: 'B' },
+  PLAYING: { label: 'Playing', miniLabel: 'P' },
   FINISHED: { label: 'Finished', miniLabel: 'F' },
 }
 

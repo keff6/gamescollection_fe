@@ -22,8 +22,8 @@ const GameItem = ({ gameData, deleteGame, editGame }) => {
   }
 
   const getStatusBadge = () => {
-    const { isBacklog, isFinished } = gameData;
-    const badgeType = (isBacklog && 'BACKLOG') || (isFinished && 'FINISHED') || null
+    const { isBacklog, isFinished, isPlaying } = gameData;
+    const badgeType = (isBacklog && 'BACKLOG') || (isFinished && 'FINISHED') || (isPlaying && 'PLAYING') || null
 
     return badgeType ? <MiniLabel labelText="Status"><Badge type={badgeType}/></MiniLabel> : null
   }

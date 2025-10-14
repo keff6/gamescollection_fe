@@ -20,3 +20,11 @@
 .finished-background {
   background-color: var(--finished-badge-background);
 }
+
+.backlog-background {
+  background-color: var(--backlog-badge-background);
+}
+
+.playing-background {
+  background-color: var(--playing-badge-background);
+}

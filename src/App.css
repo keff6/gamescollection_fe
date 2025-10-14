@@ -56,7 +56,9 @@
   --card-background-1: #0f232f;
   --dropdown-options-background: #004c63;
   --outline-button-background: #1087a02b;
-  --finished-badge-background: #20b43b;
+  --backlog-badge-background: #a6bd43;
+  --playing-badge-background: #e26613;
+  --finished-badge-background: #42b623;
 }
 
 /***************************************************/
