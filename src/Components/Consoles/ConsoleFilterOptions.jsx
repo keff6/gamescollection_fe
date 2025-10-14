@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { ButtonGroup, ToggleButton } from "react-bootstrap";
 // import proptypes from 'prop-types';
+// import HomeConsoleIcon from '../../assets/icons/home-console.png';
+// import PortableConsoleIcon from '../../assets/icons/portable-console.png';
 import useAppState from '../../hooks/useAppState';
 import { CONSOLE_FILTER_OPTIONS } from '../../utils/constants';
 import classes from './Consoles.module.css';
@@ -39,7 +41,7 @@ const ConsoleFilterOptions = () => {
           checked={listFilter === CONSOLE_FILTER_OPTIONS.HOME}
           onChange={(e) => setConsolesFilter(e.currentTarget.value)}
         >
-          Home Consoles
+          Home
         </ToggleButton>
         <ToggleButton
           className={classes.toggleButton} 
@@ -52,7 +54,7 @@ const ConsoleFilterOptions = () => {
           checked={listFilter === CONSOLE_FILTER_OPTIONS.PORTABLE}
           onChange={(e) => setConsolesFilter(e.currentTarget.value)}
         >
-          Portable Consoles
+          Portable
         </ToggleButton>
       </ButtonGroup>
     </div>

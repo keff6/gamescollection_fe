@@ -273,6 +273,12 @@ display: flex;
   padding: 8px;
 }
 
+.game-item-row:hover {
+  border: 1px solid #19f7fb;
+}
+
+
+
 .game-item-container h1 {
   font-size: 18px;
   font-weight: bold;
@@ -295,7 +301,13 @@ display: flex;
 
 .small-column {
   display: flex;
-  justify-content: right;
+  justify-content: space-between;
+}
+
+.badges-column {
+    display: flex;
+    gap:2px;
+    flex-direction: column;
 }
 
 .buttons-column {

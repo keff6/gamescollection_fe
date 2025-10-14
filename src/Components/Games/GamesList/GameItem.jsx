@@ -14,14 +14,18 @@ const GameItem = ({ gameData, deleteGame, editGame }) => {
   const selectedGenres = genresList.filter(g => gameData?.genres?.includes(g.id));
   const genresLabel = selectedGenres.length > 0 ? selectedGenres.map(g => g.name).join(', ') : NO_DATA;
 
-  const getBadge = () => {
-    const result = [];
-    if(gameData?.isNew == true) result.push(<Badge type='NEW'/>)
-    else if(gameData?.isComplete == true) result.push(<Badge type='COMPLETE'/>)
-    else if(gameData?.isDigital == true) result.push(<Badge type='DIGITAL'/>)
+  const getConditionBadge = () => {
+    const { isNew, isComplete, isDigital } = gameData;
+    const badgeType = (isNew && 'NEW') || (isComplete && 'COMPLETE') || (isDigital && 'DIGITAL') || null
 
-    if(gameData?.isFinished) result.push(<Badge type='FINISHED'/>)
-    return result
+    return badgeType ? <MiniLabel labelText="Condition"><Badge type={badgeType}/></MiniLabel> : null
+  }
+
+  const getStatusBadge = () => {
+    const { isBacklog, isFinished } = gameData;
+    const badgeType = (isBacklog && 'BACKLOG') || (isFinished && 'FINISHED') || null
+
+    return badgeType ? <MiniLabel labelText="Status"><Badge type={badgeType}/></MiniLabel> : null
   }
 
   return (
@@ -45,7 +49,8 @@ const GameItem = ({ gameData, deleteGame, editGame }) => {
         <Col lg={2}>
         <div className={classes.smallColumn}>
           <div className={classes.badgesColumn}>
-            {getBadge()}
+            {getConditionBadge()}
+            {getStatusBadge()}
           </div>
           <div className={classes.buttonsColumn}>
             {gameData?.notes && <Tooltip text={gameData?.notes}>
