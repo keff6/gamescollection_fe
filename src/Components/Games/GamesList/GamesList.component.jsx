@@ -7,7 +7,7 @@ import useAppState from "../../../hooks/useAppState";
 import GameItem from "./GameItem";
 import classes from "../Games.module.css";
 
-const GamesList = ({ deleteGame, editGame, listOption, getGames }) => {
+const GamesList = ({ deleteGame, editGame, listOption, getGames, updateGame }) => {
   const { isLoading, game, sorting: { sortKey, sortDirection} } = useAppState();
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const GamesList = ({ deleteGame, editGame, listOption, getGames }) => {
           <div className={classes.resultsText}>Showing results {games.length || '--'}/ {game?.pagination?.totalItems || '--'}</div>
           <ul className={classes.gameItemsList}>
             {games.map((game, index) => (
-              <GameItem key={index} gameData={game} deleteGame={deleteGame} editGame={editGame}/>
+              <GameItem key={index} gameData={game} deleteGame={deleteGame} editGame={editGame} updateGame={updateGame}/>
             ))}
           </ul>
           {showMoreButton && <div className="text-center mt-3 mb-3">
@@ -69,6 +69,7 @@ GamesList.propTypes = {
   listOption: proptypes.string,
   viewDetails: proptypes.func,
   getGames: proptypes.func,
+  updateGame: proptypes.func,
 };
 
 export default GamesList;

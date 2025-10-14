@@ -10,6 +10,7 @@ const GamesListContainer = ({
   deleteGame,
   getGames,
   viewDetails,
+  saveUpdatedChanges,
 }) => {
   const { game, setGamesList, setSortingKey, setSortingDirection } = useAppState();
 
@@ -43,6 +44,7 @@ const GamesListContainer = ({
       listOption={game.listOption}
       viewDetails={viewDetails}
       getGames={handleGetGames}
+      updateGame={saveUpdatedChanges}
     />
   );
 };
@@ -52,6 +54,7 @@ GamesListContainer.propTypes = {
   deleteGame: proptypes.func,
   getGames: proptypes.func,
   viewDetails: proptypes.func,
+  saveUpdatedChanges: proptypes.func,
 };
 
 export default GamesListContainer;

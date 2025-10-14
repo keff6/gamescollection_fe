@@ -99,6 +99,7 @@ const Games = ({
         deleteGame={handleDeleteGame}
         getGames={getGames}
         viewDetails={handleViewDetails}
+        saveUpdatedChanges={updateGame}
       />
       <GameForm
         show={showForm}

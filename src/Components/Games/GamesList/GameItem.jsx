@@ -1,12 +1,12 @@
 import proptypes from "prop-types";
 import { Col, Row, Dropdown } from "react-bootstrap";
-import { PencilSquare, Trash, ChatRightText } from 'react-bootstrap-icons';
+import { PencilSquare, Trash, ChatRightText, Bookmark, BookmarkStarFill } from 'react-bootstrap-icons';
 import useAppState from '../../../hooks/useAppState';
 import { NO_DATA } from "../../../utils/constants";
 import { Badge, MoreButton, Tooltip, MiniLabel } from "../../../Common";
 import classes from '../Games.module.css';
 
-const GameItem = ({ gameData, deleteGame, editGame }) => {
+const GameItem = ({ gameData, deleteGame, editGame, updateGame }) => {
   const { 
       user,
       genre: { list: genresList }
@@ -26,6 +26,20 @@ const GameItem = ({ gameData, deleteGame, editGame }) => {
     const badgeType = (isBacklog && 'BACKLOG') || (isFinished && 'FINISHED') || (isPlaying && 'PLAYING') || null
 
     return badgeType ? <MiniLabel labelText="Status"><Badge type={badgeType}/></MiniLabel> : null
+  }
+
+  const handleUpdateGame = (status = '') => {
+    const updatedGame = {
+      ...gameData,
+      ...(status && {
+        isBacklog: 0,
+        isPlaying: 0,
+        isFinished: 0,
+        [status]: +!gameData[status]
+      })
+    }
+
+    updateGame(gameData.id, updatedGame)
   }
 
   return (
@@ -61,6 +75,16 @@ const GameItem = ({ gameData, deleteGame, editGame }) => {
                 <Dropdown>
                   <Dropdown.Toggle as={MoreButton} />
                   <Dropdown.Menu size="sm" title="">
+                    <Dropdown.Item onClick={() => handleUpdateGame('isBacklog')}>
+                      {gameData?.isBacklog ? <><BookmarkStarFill />Remove from backlog</> : <><Bookmark/>Add to backlog</> }
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleUpdateGame('isPlaying')}>
+                      {gameData?.isPlaying ? <><BookmarkStarFill />Remove from playing</> : <><Bookmark/>Mark as playing</>}
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleUpdateGame('isFinished')}>
+                      {gameData?.isFinished ? <><BookmarkStarFill />Remove from finished</> : <><Bookmark/>Mark as finished</>}
+                    </Dropdown.Item>
+                    <br />
                     <Dropdown.Item onClick={() => editGame(gameData)}>
                       <PencilSquare />
                       Edit
@@ -88,6 +112,7 @@ GameItem.propTypes = {
   gameData: proptypes.object,
   deleteGame: proptypes.func,
   editGame: proptypes.func,
+  updateGame: proptypes.func,
 }
 
 export default GameItem;
