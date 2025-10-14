@@ -2,7 +2,7 @@
 import proptypes from 'prop-types';
 import useAppState from "../../hooks/useAppState";
 
-const InfoGraphics = () => {
+const Stats = () => {
   const { info } = useAppState();
 
   return (
@@ -13,8 +13,8 @@ const InfoGraphics = () => {
   )
 }
 
-InfoGraphics.propTypes = {
+Stats.propTypes = {
   getTotals: proptypes.func,
 }
 
-export default InfoGraphics;
+export default Stats;

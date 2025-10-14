@@ -3,11 +3,12 @@ import { ButtonGroup, ToggleButton, Container, Dropdown } from "react-bootstrap"
 import proptypes from 'prop-types';
 import { SortAlphaDown, SortAlphaDownAlt, SortNumericDown, SortNumericDownAlt  } from 'react-bootstrap-icons';
 import useAppState from '../../../hooks/useAppState';
+
 import { GAME_LIST_OPTIONS } from '../../../utils/constants';
 import AlphabetButtons from './AlphabetButtons.component';
 import SearchGames from './SearchGames.component';
 import classes from '../Games.module.css';
-import SortButton from '../../../Common/SortButton/SortButton.component';
+import { SortButton } from '../../../Common';
 
 const GamesListOptions = ({ getGames }) => {
   const { game: { listOption }, setGamesListOption, setInitialLetter, setSortingKey, setSortingDirection } = useAppState();
@@ -52,7 +53,7 @@ const GamesListOptions = ({ getGames }) => {
           >
             A-Z
           </ToggleButton>
-          <ToggleButton
+          {/* <ToggleButton
             className={classes.toggleButton} 
             key="wishlist"
             id="radio-wishlist"
@@ -64,7 +65,7 @@ const GamesListOptions = ({ getGames }) => {
             onChange={(e) => setGamesListOption(e.currentTarget.value)}
           >
             Wishlist
-          </ToggleButton>
+          </ToggleButton> */}
           <ToggleButton
             className={classes.toggleButton}
             key="search"

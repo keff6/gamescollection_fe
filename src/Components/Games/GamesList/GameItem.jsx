@@ -1,6 +1,6 @@
 import proptypes from "prop-types";
 import { Col, Row, Dropdown } from "react-bootstrap";
-import { PencilSquare, Trash } from 'react-bootstrap-icons';
+import { PencilSquare, Trash, ChatRightText } from 'react-bootstrap-icons';
 import useAppState from '../../../hooks/useAppState';
 import { NO_DATA } from "../../../utils/constants";
 import { Badge, MoreButton, Tooltip, MiniLabel } from "../../../Common";
@@ -15,10 +15,13 @@ const GameItem = ({ gameData, deleteGame, editGame }) => {
   const genresLabel = selectedGenres.length > 0 ? selectedGenres.map(g => g.name).join(', ') : NO_DATA;
 
   const getBadge = () => {
-    if(gameData?.isNew == true) return <Badge type='NEW'/>
-    else if(gameData?.isComplete == true) return <Badge type='COMPLETE'/>
-    else if(gameData?.isDigital == true) return <Badge type='DIGITAL'/>
-    return null
+    const result = [];
+    if(gameData?.isNew == true) result.push(<Badge type='NEW'/>)
+    else if(gameData?.isComplete == true) result.push(<Badge type='COMPLETE'/>)
+    else if(gameData?.isDigital == true) result.push(<Badge type='DIGITAL'/>)
+
+    if(gameData?.isFinished) result.push(<Badge type='FINISHED'/>)
+    return result
   }
 
   return (
@@ -45,26 +48,29 @@ const GameItem = ({ gameData, deleteGame, editGame }) => {
             {getBadge()}
           </div>
           <div className={classes.buttonsColumn}>
-          {user && (
-            <Tooltip text="See more options">
-              <Dropdown>
-                <Dropdown.Toggle as={MoreButton} />
-                <Dropdown.Menu size="sm" title="">
-                  <Dropdown.Item onClick={() => editGame(gameData)}>
-                    <PencilSquare />
-                    Edit
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    onClick={() => deleteGame(gameData)}
-                    className={classes.dangerLink}
-                  >
-                    <Trash />
-                    Delete
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </Tooltip>
-          )}  
+            {gameData?.notes && <Tooltip text={gameData?.notes}>
+              <ChatRightText className={classes.noteIcon}/>
+            </Tooltip>}
+            {user && (
+              <Tooltip text="See more options">
+                <Dropdown>
+                  <Dropdown.Toggle as={MoreButton} />
+                  <Dropdown.Menu size="sm" title="">
+                    <Dropdown.Item onClick={() => editGame(gameData)}>
+                      <PencilSquare />
+                      Edit
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      onClick={() => deleteGame(gameData)}
+                      className={classes.dangerLink}
+                    >
+                      <Trash />
+                      Delete
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </Tooltip>
+            )}
           </div>
         </div>
         </Col>

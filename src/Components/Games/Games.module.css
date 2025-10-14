@@ -166,9 +166,9 @@ input:checked + .toggle-button {
   font-weight: 700;
 }
 
-a.danger-link {
+/* a.danger-link {
   color: var(--falu-red) !important;
-}
+} */
 
 .danger-link:hover {
   background-color: var(--falu-red) !important;
@@ -295,11 +295,24 @@ display: flex;
 
 .small-column {
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
+}
+
+.buttons-column {
+  width: 40px;
+  text-align: end;
 }
 
 
 .options-buttons-container {
   display: flex;
   justify-content: space-between;
+}
+
+.note-icon {
+  color: var(--teal);
+}
+
+.note-icon:hover {
+  color: var(--secondary-button);
 }

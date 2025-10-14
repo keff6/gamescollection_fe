@@ -32,7 +32,7 @@ const NavBar = ({ logOut }) =>{
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Brands</Nav.Link>
-            <Nav.Link as={Link} to="/infographics">Infographics</Nav.Link>
+            <Nav.Link as={Link} to="/stats">Stats</Nav.Link>
             {currentUser && <NavDropdown title="Admin" id="collasible-nav-dropdown">
               <NavDropdown.Item as={Link} to="/brands">Brands</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/genres">Genres</NavDropdown.Item>

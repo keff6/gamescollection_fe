@@ -16,3 +16,7 @@
 .digital-background {
   background-color: var(--kumera);
 }
+
+.finished-background {
+  background-color: var(--finished-badge-background);
+}

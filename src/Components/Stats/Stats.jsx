@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import useAppState from "../../hooks/useAppState";
 import { useInfoAPI } from "../../hooks/api";
-import InfoGraphics from "./InfoGraphics.component";
+import Stats from "./Stats.component";
 import { OPERATION_OUTCOME } from "../../utils/constants";
 
 const InfoContainer = () => {
@@ -28,7 +28,7 @@ const InfoContainer = () => {
   }
 
   return (
-    <InfoGraphics
+    <Stats
       getTotals={getTotals}
     />
     )

@@ -50,9 +50,9 @@
   margin: 0;
 }
 
-a.danger-link {
+/* a.danger-link {
   color: var(--falu-red) !important;
-}
+} */
 
 .danger-link:hover {
   background-color: var(--falu-red) !important;

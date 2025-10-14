@@ -35,7 +35,8 @@ export const NO_DATA = 'N/A';
 export const BADGE_TYPE = {
   NEW: { label: 'New', miniLabel: 'N' },
   COMPLETE: { label: 'Complete', miniLabel: 'C' },
-  DIGITAL: { label: 'Digital', miniLabel: 'D' }
+  DIGITAL: { label: 'Digital', miniLabel: 'D' },
+  FINISHED: { label: 'Finished', miniLabel: 'F' },
 }
 
 export const ERROR_CODES = {
