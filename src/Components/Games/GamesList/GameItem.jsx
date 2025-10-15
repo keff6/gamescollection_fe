@@ -4,6 +4,7 @@ import { PencilSquare, Trash, ChatRightText, Bookmark, BookmarkStarFill } from '
 import useAppState from '../../../hooks/useAppState';
 import { NO_DATA } from "../../../utils/constants";
 import { Badge, MoreButton, Tooltip, MiniLabel } from "../../../Common";
+import { gameObjectSanitizer } from "../../../utils/requestSanitizer";
 import classes from '../Games.module.css';
 
 const GameItem = ({ gameData, deleteGame, editGame, updateGame }) => {
@@ -39,7 +40,7 @@ const GameItem = ({ gameData, deleteGame, editGame, updateGame }) => {
       })
     }
 
-    updateGame(gameData.id, updatedGame)
+    updateGame(gameData.id, gameObjectSanitizer(updatedGame))
   }
 
   return (

@@ -328,3 +328,18 @@ display: flex;
 .note-icon:hover {
   color: var(--secondary-button);
 }
+
+@media (max-width: 768px) {
+  .badges-column {
+    gap:8px;
+    flex-direction: row;
+  }
+
+  .buttons-column {
+    display: inline-flex;
+    gap: 12px;
+    align-items: end;
+    justify-content: end;
+    width:auto;
+  }
+}
