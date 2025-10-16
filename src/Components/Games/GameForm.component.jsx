@@ -387,7 +387,7 @@ const GameForm = ({
               <Accordion.Header>Sagas and Genres</Accordion.Header>
               <Accordion.Body>
                 <Row className={classes.customContainer}>
-                  <Col md={4}>
+                  <Col md={5}>
                     <Form.Group className="mb-3" controlId="sagaText">
                       <Form.Label>Saga</Form.Label>
                       <InputGroup className="mb-3">
@@ -409,7 +409,7 @@ const GameForm = ({
                     </Form.Group>
                     
                   </Col>
-                  <Col md={8}>
+                  <Col md={7}>
                     <div className={classes.customList}>
                       {gameObj?.saga?.length > 0 &&
                         gameObj?.saga?.map(s => 
@@ -426,7 +426,7 @@ const GameForm = ({
                   </Col>
                 </Row>
                 <Row className={classes.customContainer}>
-                  <Col md={4}>
+                  <Col md={5}>
                     <Form.Group className="mb-3" controlId="selectedGenre">
                       <Form.Label>Genre</Form.Label>
                       <InputGroup className="mb-3">
@@ -452,7 +452,7 @@ const GameForm = ({
                     </Form.Group>
                     
                   </Col>
-                  <Col md={8}>
+                  <Col md={7}>
                     <div className={classes.customList}>
                       {gameObj?.genres?.length > 0 &&
                         gameObj.genres.map(s => 

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import proptypes from 'prop-types';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
 import useAppState from '../../hooks/useAppState';
-import { MoreButton, Tooltip } from '../../Common';
+import { MoreButton, Tooltip, MiniLabel } from '../../Common';
 import { CONSOLE_GENERATIONS} from '../../utils/constants';
 import classes from './Consoles.module.css';
 import HomeConsoleIcon from '../../assets/icons/home-console.png';
@@ -31,8 +31,10 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole }) => {
                 <img src={consoleData?.isPortable ? PortableConsoleIcon : HomeConsoleIcon} className={classes.consoleTypeIcon}/>
                 <span className={classes.consoleTitle}>{consoleData.name}</span>
               </div>}
-            <p className={classes.consoleYearLabel}>{consoleData?.year || ""}</p>
-            <p>Generation: {consoleData?.generation ? CONSOLE_GENERATIONS[consoleData?.generation - 1].text : ''}</p>  
+            <div className={classes.subLabelsContainer}>
+              <MiniLabel labelText="Year"><p className={classes.consoleYearLabel}>{consoleData?.year || ""}</p></MiniLabel>
+              <MiniLabel labelText="Generation"><p>{consoleData?.generation ? CONSOLE_GENERATIONS[consoleData?.generation - 1].text : ''}</p></MiniLabel>  
+            </div>
           </div>
           
           {user &&
