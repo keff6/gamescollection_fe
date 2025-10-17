@@ -46,8 +46,8 @@ const GamesList = ({ deleteGame, editGame, listOption, getGames, updateGame }) =
         <div>
           <div className={classes.resultsText}>Showing results {games.length || '--'}/ {game?.pagination?.totalItems || '--'}</div>
           <ul className={classes.gameItemsList}>
-            {games.map((game, index) => (
-              <GameItem key={index} gameData={game} deleteGame={deleteGame} editGame={editGame} updateGame={updateGame}/>
+            {games.map((game) => (
+              <GameItem key={game.id} gameData={game} deleteGame={deleteGame} editGame={editGame} updateGame={updateGame}/>
             ))}
           </ul>
           {showMoreButton && <div className="text-center mt-3 mb-3">
