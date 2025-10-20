@@ -3,15 +3,18 @@ import { useState, useEffect } from "react";
 import { Spinner } from "react-bootstrap";
 import useRefreshToken from '../../hooks/useRefreshToken';
 import useAppState from '../../hooks/useAppState';
+import useSessionStorage from "../../hooks/useSessionStorage";
+import { SESSION_STORAGE } from "../../utils/constants";
 
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
   const refresh = useRefreshToken();
   const { user } = useAppState();
+  const [storedUser] = useSessionStorage(SESSION_STORAGE.USER, null)
 
   useEffect(() => {
     let isMounted = true;
-    const currentUser = user || JSON.parse(sessionStorage.getItem('currentUser'));
+    const currentUser = user || storedUser;
 
     const verifyRefreshToken = async () => {
       try {

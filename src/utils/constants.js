@@ -47,3 +47,9 @@ export const ERROR_CODES = {
 }
 
 export const MAX_ITEMS_PER_PAGE = 25;
+
+export const SESSION_STORAGE = {
+  USER: 'user',
+  BRAND: 'brand',
+  CONSOLE: 'console',
+}

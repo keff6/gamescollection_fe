@@ -1,9 +1,11 @@
-import { useMemo, useReducer } from "react";
+import { useMemo, useReducer, useEffect } from "react";
 import proptypes from 'prop-types';
 import { reducer } from "./reducer";
 import { actionTypes as actions } from "./actions";
-import { GAME_LIST_OPTIONS, MAX_ITEMS_PER_PAGE, CONSOLE_FILTER_OPTIONS } from "../../utils/constants";
+import { GAME_LIST_OPTIONS, MAX_ITEMS_PER_PAGE, CONSOLE_FILTER_OPTIONS, SESSION_STORAGE } from "../../utils/constants";
 import { AppState } from "./state";
+import useSessionStorage from "../../hooks/useSessionStorage";
+
 
 const APP_STATE = {
   genre: {
@@ -56,6 +58,11 @@ const APP_STATE = {
 
 export const AppStateProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, APP_STATE);
+  const [, setStoredUser] = useSessionStorage(SESSION_STORAGE.USER, null);
+
+  useEffect(() => {
+    setStoredUser(state.user)
+  }, [state.user, setStoredUser])
 
   const value = useMemo(
     () => ({

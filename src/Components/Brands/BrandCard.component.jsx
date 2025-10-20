@@ -11,7 +11,6 @@ const BrandCard = ({brandData}) => {
 
   const navigateToConsoleHandler = () => {
     setSelectedBrand({...brandData})
-    sessionStorage.setItem("brandData", JSON.stringify(brandData))
     navigate(`/${brandData.id}/consoles`)
   }
 

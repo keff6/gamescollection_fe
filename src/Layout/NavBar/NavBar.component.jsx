@@ -3,12 +3,11 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Joystick } from "react-bootstrap-icons";
 import proptypes from "prop-types";
 import useAppState from '../../hooks/useAppState';
-import { getAuthUser } from '../../utils/misc'
 import classes from './NavBar.module.css';
 
 const NavBar = ({ logOut }) =>{
   const { user } = useAppState();
-  const currentUser = getAuthUser(user);
+  const currentUser = user || null;
 
   const getInitialsCircle = () => (
     <div className={classes.circle}>
@@ -45,7 +44,6 @@ const NavBar = ({ logOut }) =>{
                   title={getInitialsCircle()}
                   id="user-logged-dropdown"
                   className={classes.userDropDown}
-
                 >
                   <div className={classes.userSigned}>
                     {getInitialsCircle()}

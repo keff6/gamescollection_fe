@@ -17,7 +17,6 @@ const LoginContainer = () => {
       if(response?.data) {
         const { accessToken, ...currentUser } = response.data;
         setAuthUser({ ...currentUser, accessToken})
-        sessionStorage.setItem('currentUser', JSON.stringify({...currentUser, accessToken}))
       }
       
       navigate('/')

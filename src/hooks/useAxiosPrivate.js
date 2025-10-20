@@ -2,14 +2,16 @@ import { axiosPrivate } from "../utils/axios";
 import { useEffect } from "react";
 import useRefreshToken from "./useRefreshToken";
 import useAppState from "./useAppState";
+import useSessionStorage from "./useSessionStorage";
+import { SESSION_STORAGE } from "../utils/constants";
 
 const useAxiosPrivate = () => {
   const refresh = useRefreshToken();
   const { user } = useAppState();
-  const userData = user ? user : JSON.parse(sessionStorage.getItem('currentUser'));
+  const [storedUser] = useSessionStorage(SESSION_STORAGE.USER, null);
+  const userData = user ? user : storedUser;
 
   useEffect(() => {
-    
     const requestIntercept = axiosPrivate.interceptors.request.use(
       config => {
         if (!config.headers['Authorization']) {

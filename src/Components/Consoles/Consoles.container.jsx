@@ -4,16 +4,19 @@ import useAppState from "../../hooks/useAppState";
 import { useConsolesAPI, useBrandsAPI } from "../../hooks/api";
 import Consoles from "./Consoles.component";
 import { OPERATION_OUTCOME, ERROR_CODES, CONSOLE_FILTER_OPTIONS } from "../../utils/constants";
+import useSessionStorage from "../../hooks/useSessionStorage";
 
 const ConsolesContainer = () => {
-  const { setConsolesList, openSnackbar, setIsLoading, setInitialLetter, setBrandsListMisc, console } = useAppState();
+  const { setConsolesList, openSnackbar, setIsLoading, setInitialLetter, setBrandsListMisc, console, brand: { selected: selectedBrand } } = useAppState();
   const { brandId } = useParams()
   const consolesAPI = useConsolesAPI()
   const brandsAPI = useBrandsAPI()
+  const [, setStoredBrand] = useSessionStorage("brandData", null)
 
   useEffect(() => {
     getConsolesByBrand()
     setInitialLetter('#')
+    selectedBrand && setStoredBrand({...selectedBrand})
 
     return () => {
       setConsolesList([])

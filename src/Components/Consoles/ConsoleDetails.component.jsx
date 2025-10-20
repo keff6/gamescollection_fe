@@ -3,7 +3,7 @@ import proptypes from 'prop-types';
 import useAppState from '../../hooks/useAppState';
 import classes from './Consoles.module.css';
 import { CONSOLE_GENERATIONS, NO_DATA } from "../../utils/constants";
-
+import useSessionStorage from '../../hooks/useSessionStorage';
 
 const ConsoleDetails = ({
   onHide,
@@ -11,9 +11,10 @@ const ConsoleDetails = ({
   ...rest
 }) => {
   const { console: {selected}, setSelectedConsole, brand: {selected : selectedBrand}} = useAppState();
+  const [storedBrand] = useSessionStorage("brandData", null)
   const selectedGeneration = CONSOLE_GENERATIONS.find(c => c.value.toString() === selected?.generation);
   const generationLabel = selectedGeneration ? selectedGeneration.text : NO_DATA;
-  const currentBrand = selectedBrand ? selectedBrand : JSON.parse(sessionStorage.getItem('brandData'));
+  const currentBrand = selectedBrand ? selectedBrand : storedBrand;
   const brandLabel = currentBrand ? currentBrand.name : NO_DATA;
 
 

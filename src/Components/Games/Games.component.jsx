@@ -4,12 +4,13 @@ import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
 import useAppState from '../../hooks/useAppState';
 import { DeleteAlertModal, Breadcrumb } from "../../Common"
-import { getAuthUser } from '../../utils/misc'
 import GamesListOptions from './GamesList/GamesListOptions.component';
 import GamesList from './GamesList/GamesList.container';
 import classes from './Games.module.css';
 import GameForm from './GameForm.component';
 import GameDetails from './GameDetails.component';
+import useSessionStorage from '../../hooks/useSessionStorage';
+import { SESSION_STORAGE } from '../../utils/constants';
 
 const NavigationItems = (brandId) => [
   { text: 'Brands', href:"/" },
@@ -29,10 +30,13 @@ const Games = ({
   const [showDetails, setShowDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const currentBrand = (brand?.selected) ? brand.selected : JSON.parse(sessionStorage.getItem('brandData')); 
-  const currentConsole = (console?.selected) ? console.selected : JSON.parse(sessionStorage.getItem('consoleData')); 
+  const [storedUser] = useSessionStorage(SESSION_STORAGE.USER, null);
+  const [storedBrand] = useSessionStorage(SESSION_STORAGE.BRAND, null);
+  const [storedConsole] = useSessionStorage(SESSION_STORAGE.CONSOLE, null);
+  const currentBrand = (brand?.selected) ? brand.selected : storedBrand; 
+  const currentConsole = (console?.selected) ? console.selected : storedConsole; 
   const totalGames = currentConsole?.totalGames || 0;
-  const currentUser = getAuthUser(user);
+  const currentUser = user || storedUser || null;
 
   useEffect(() => {
     if(!currentBrand || !currentConsole) {

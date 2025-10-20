@@ -16,7 +16,6 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole }) => {
 
   const navigateToGamesHandler = () => {
     setSelectedConsole({...consoleData})
-    sessionStorage.setItem("consoleData", JSON.stringify(consoleData))
     navigate(`/${consoleData.id}/games`)
   }
 

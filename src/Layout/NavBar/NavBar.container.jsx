@@ -14,7 +14,6 @@ const NavBarContainer = () => {
       setIsLoading(true);
       await authAPI.logOut();
       setAuthUser(null);
-      sessionStorage.removeItem('currentUser');
       navigate('/')
     }
     catch(e){

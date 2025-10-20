@@ -5,11 +5,11 @@ import proptypes from 'prop-types';
 import useAppState from '../../hooks/useAppState';
 import ConsolesList from "./ConsolesList.component";
 import { DeleteAlertModal,Breadcrumb } from "../../Common";
-import { getAuthUser } from '../../utils/misc'
 import ConsoleForm from './ConsoleForm.component';
 import ConsoleDetails from './ConsoleDetails.component';
 import classes from './Consoles.module.css';
 import ConsoleFilterOptions from './ConsoleFilterOptions';
+import useSessionStorage from '../../hooks/useSessionStorage';
 
 const NavigationItems = [
   { text: 'Brands', href:"/" },
@@ -23,14 +23,16 @@ const Consoles = ({
 }) => {
   const navigate = useNavigate();
   const { console, setSelectedConsole, brand: { selected: selectedBrand }, user } = useAppState();
+  const [storedUser] = useSessionStorage("currentUser", null)
+  const [storedBrand] = useSessionStorage("brandData", null)
 
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const currentBrand = selectedBrand ? selectedBrand : JSON.parse(sessionStorage.getItem('brandData'));
+  const currentBrand = selectedBrand ? selectedBrand : storedBrand;
   const totalConsoles = console?.total || 0;
-  const currentUser = getAuthUser(user);
+  const currentUser = user || storedUser || null;
   
   useEffect(() => {
     if(!currentBrand) {

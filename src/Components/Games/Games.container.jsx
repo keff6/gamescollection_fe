@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import useAppState from "../../hooks/useAppState";
 import { useGamesAPI, useGenresAPI, useConsolesAPI } from "../../hooks/api";
 import Games from "./Games.component";
-import { OPERATION_OUTCOME, ERROR_CODES, MAX_ITEMS_PER_PAGE, GAME_LIST_OPTIONS } from "../../utils/constants";
+import { OPERATION_OUTCOME, ERROR_CODES, MAX_ITEMS_PER_PAGE, GAME_LIST_OPTIONS, SESSION_STORAGE } from "../../utils/constants";
+import useSessionStorage from "../../hooks/useSessionStorage";
 
 const GamesContainer = () => {
   const {
@@ -15,19 +16,23 @@ const GamesContainer = () => {
     setIsLoading,
     game: {initialLetter, listOption, pagination, list },
     brand,
+    console: { selected: selectedCosnole }
   } = useAppState();
   const { consoleId } = useParams()
   const gamesAPI = useGamesAPI()
   const genresAPI = useGenresAPI()
   const consolesAPI = useConsolesAPI()
+  const [storedBrand] = useSessionStorage(SESSION_STORAGE.BRAND, null)
+  const [,setStoredConsole] = useSessionStorage(SESSION_STORAGE.CONSOLE, null)
 
   useEffect(() => {
     const fetchMiscData = async () => {
-      const currentBrand = brand?.selected || JSON.parse(sessionStorage.getItem("brandData"))
+      const currentBrand = brand?.selected || storedBrand;
       const genresResponse = await genresAPI.getAll();
       const consolesResponse = await consolesAPI.getByBrand(currentBrand?.id);
       setGenresList(genresResponse.data || []);
       setConsolesListMisc(consolesResponse?.data || [])
+      selectedCosnole && setStoredConsole(selectedCosnole)
     }
     fetchMiscData();
   }, []);

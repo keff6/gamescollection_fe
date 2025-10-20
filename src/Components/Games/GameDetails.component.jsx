@@ -4,7 +4,7 @@ import useAppState from '../../hooks/useAppState';
 import classes from './Games.module.css';
 import { NO_DATA } from "../../utils/constants";
 import { Badge } from '../../Common';
-
+import useSessionStorage from '../../hooks/useSessionStorage';
 
 const GameDetails = ({
   onHide,
@@ -16,7 +16,8 @@ const GameDetails = ({
     console: {selected : selectedConsole},
     genre: { list: genresList }
   } = useAppState();
-  const currentConsole = selectedConsole ? selectedConsole : JSON.parse(sessionStorage.getItem('consoleData'));
+  const [storedConsole] = useSessionStorage("consoleData", null)
+  const currentConsole = selectedConsole ? selectedConsole : storedConsole;
   const consoleLabel = currentConsole ? currentConsole.name : NO_DATA;
   const selectedGenres = genresList.filter(g => selected?.genres?.includes(g.id));
   const genresLabel = selectedGenres.length > 0 ? selectedGenres.map(g => g.name).join(', ') : NO_DATA;
