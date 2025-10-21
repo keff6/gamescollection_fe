@@ -59,6 +59,7 @@
   --backlog-badge-background: #a6bd43;
   --playing-badge-background: #e26613;
   --finished-badge-background: #42b623;
+  --high-contrast-green: #00ffb1;
 }
 
 /***************************************************/
@@ -293,6 +294,30 @@ border-color: var(--light-blue-contrast) !important;
   border-color: var(--sirocco);
 }
 
+.results-text {
+  font-size: 14px;
+  text-align: end;
+  color: aqua;
+}
+
+/***************************************************/
+/* GLOBAL SPINNER                   */
+/***************************************************/
+
+.global-spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(3 23 38 / 60%); 
+  z-index: 1050;
+}
+
+.spinner-border {
+  border-color: var(--high-contrast-green);
+  border-right-color: transparent;
+}
 /***************************************************/
 /* MEDIA QUERIES FOR SM AND XS                     */
 /***************************************************/

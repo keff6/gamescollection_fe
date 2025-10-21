@@ -1,18 +1,13 @@
 import proptypes from 'prop-types';
 import { Table, Button } from 'react-bootstrap';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
-import useAppState from '../../hooks/useAppState';
-import Spinner from "../../Common/Spinner/Spinner.component";
 import classes from './Genres.module.css';
 
-const GenresTable = ({ genres, deleteGenre, editGenre }) => {
-  const { isLoading } = useAppState();
-
-  if(isLoading) return <Spinner />
-
-  return (
+const GenresTable = ({ genres, deleteGenre, editGenre }) => (
+  <>
+    {(genres.length > 0) &&
     <>
-      {(genres.length > 0) &&
+      <div className="results-text">{genres.length || '--'} results</div>
       <Table>
         <thead>
           <tr>
@@ -46,11 +41,11 @@ const GenresTable = ({ genres, deleteGenre, editGenre }) => {
             )
           )}
         </tbody>
-      </Table>}
-      {(genres.length === 0) && <h3 className="empty-list-text">Start adding genres</h3>}
-    </>
-  )
-}
+      </Table>
+    </>}
+    {(genres.length === 0) && <h3 className="empty-list-text">Start adding genres</h3>}
+  </>
+)
 
 GenresTable.propTypes = {
   deleteGenre: proptypes.func,

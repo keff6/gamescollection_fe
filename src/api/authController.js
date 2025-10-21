@@ -1,32 +1,26 @@
-import axios from "../../utils/axios";
+import axios from "./axios";
 
-const useAuthAPI = () => {
-  const authenticate = user => {
+const authController = {
+  authenticate: (user) => {
     return axios.post("/auth",
       user, 
       {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true,
       });
-  };
+  },
   
-  const refreshToken = () => {
+  refreshToken: () => {
     return axios.get('/refresh', {
       withCredentials: true,
     })
-  }
+  },
 
-  const logOut = () => {
+  logOut: () => {
     return axios.get('/logout', {
       withCredentials: true,
     })
   }
-
-  return {
-    authenticate,
-    refreshToken,
-    logOut,
-  }
 }
 
-export default useAuthAPI
+export default authController

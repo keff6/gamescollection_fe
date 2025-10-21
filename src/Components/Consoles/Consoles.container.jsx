@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import useAppState from "../../hooks/useAppState";
 import { useConsolesAPI, useBrandsAPI } from "../../hooks/api";
 import Consoles from "./Consoles.component";
-import { OPERATION_OUTCOME, ERROR_CODES, CONSOLE_FILTER_OPTIONS } from "../../utils/constants";
+import { OPERATION_OUTCOME, ERROR_CODES, CONSOLE_FILTER_OPTIONS, SESSION_STORAGE } from "../../utils/constants";
 import useSessionStorage from "../../hooks/useSessionStorage";
 
 const ConsolesContainer = () => {
@@ -11,7 +11,7 @@ const ConsolesContainer = () => {
   const { brandId } = useParams()
   const consolesAPI = useConsolesAPI()
   const brandsAPI = useBrandsAPI()
-  const [, setStoredBrand] = useSessionStorage("brandData", null)
+  const [, setStoredBrand] = useSessionStorage(SESSION_STORAGE.BRAND, null)
 
   useEffect(() => {
     getConsolesByBrand()

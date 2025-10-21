@@ -1,12 +1,11 @@
-import { axiosPrivate } from "../utils/axios";
+import { axiosPrivate } from "../api/axios";
 import { useEffect } from "react";
-import useRefreshToken from "./useRefreshToken";
+import refreshToken from "../utils/refreshToken";
 import useAppState from "./useAppState";
 import useSessionStorage from "./useSessionStorage";
 import { SESSION_STORAGE } from "../utils/constants";
 
 const useAxiosPrivate = () => {
-  const refresh = useRefreshToken();
   const { user } = useAppState();
   const [storedUser] = useSessionStorage(SESSION_STORAGE.USER, null);
   const userData = user ? user : storedUser;
@@ -27,7 +26,7 @@ const useAxiosPrivate = () => {
         const prevRequest = error?.config;
         if (error?.response?.status === 403 && !prevRequest?.sent) {
           prevRequest.sent = true;
-          const newAccessToken = await refresh();
+          const newAccessToken = await refreshToken();
           prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
           return axiosPrivate(prevRequest);
         }
@@ -39,7 +38,7 @@ const useAxiosPrivate = () => {
       axiosPrivate.interceptors.request.eject(requestIntercept);
       axiosPrivate.interceptors.response.eject(responseIntercept);
     }
-  }, [userData, refresh])
+  }, [userData, refreshToken])
 
   return axiosPrivate;
 }

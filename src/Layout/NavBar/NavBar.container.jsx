@@ -1,18 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import { useAuthAPI } from "../../hooks/api";
+import authController from "../../api/authController";
 import useAppState from "../../hooks/useAppState";
 import { OPERATION_OUTCOME } from "../../utils/constants";
 import NavBar from "./NavBar.component";
 
 const NavBarContainer = () => {
-  const authAPI = useAuthAPI()
   const navigate = useNavigate()
   const { setIsLoading, openSnackbar, setAuthUser } = useAppState()
 
   const logOut = async () => {
     try {
       setIsLoading(true);
-      await authAPI.logOut();
+      await authController.logOut();
       setAuthUser(null);
       navigate('/')
     }

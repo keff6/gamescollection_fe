@@ -53,3 +53,10 @@ export const SESSION_STORAGE = {
   BRAND: 'brand',
   CONSOLE: 'console',
 }
+
+export const ENTITIES = {
+  GENRE: 'Genre',
+  BRAND: 'Brand',
+  CONSOLE: 'Console',
+  GAME: 'Game'
+}

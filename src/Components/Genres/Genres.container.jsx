@@ -1,92 +1,47 @@
-import { useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useCallback } from "react";
 import useAppState from "../../hooks/useAppState";
 import Genres from "./Genres.component";
-import {useGenresAPI} from "../../hooks/api";
-import { OPERATION_OUTCOME, ERROR_CODES } from "../../utils/constants";
+import { OPERATION_OUTCOME, ERROR_CODES, ENTITIES } from "../../utils/constants";
+import useAPI from "../../hooks/useAPI";
 
 const GenresContainer = () => {
-  const { setGenresList, openSnackbar, setIsLoading } = useAppState();
-  const genresAPI = useGenresAPI()
+  const { setGenresList, openSnackbar } = useAppState();
+  const { get, post, del, put, error } = useAPI(true, ENTITIES.GENRE); 
 
-  const navigate = useNavigate();
-  const location = useLocation();
+  const getAllGenres = useCallback(async () => {
+    const genres = await get('/genres');
+    setGenresList(genres);
+  }, [])
+
+  useEffect(() => { getAllGenres() }, []);
 
   useEffect(() => {
-    getAllGenres();
-  }, []);
+    if(error) {
+      const errorCode = error?.response?.data || "";
+      let message = errorCode === ERROR_CODES.IS_REFERENCED ? "Cannot delete! It is assigned to a game" : error.message;
 
-  const getAllGenres = async () => {
-    try {
-      setIsLoading(true)
-      const response = await genresAPI.getAll();
-      setGenresList(response.data)
+      openSnackbar({message, type: OPERATION_OUTCOME.FAILED});
+      getAllGenres();
     }
-    catch(e){
-      console.log(e)
-      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-      navigate('/', { state: { from: location }, replace: true });
-    }
-    finally {
-      setIsLoading(false)
-    }
-  }
+    
+  }, [error, openSnackbar, getAllGenres]);
 
   const addGenre = async (genreName) => {
-    try {
-      setIsLoading(true)
-      const response = await genresAPI.add({name: genreName});
-      openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
-    }
-    catch(e){
-      console.log(e)
-      const errorCode = e?.response?.data || "";
-      if(errorCode === ERROR_CODES.DUPLICATED) {
-        throw new Error("Genre already exists in database")
-      }
-      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-    }
-    finally {
-      getAllGenres()
-    }
+      const responseMessage = await post("/genres/add", {name: genreName})
+      openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
+      getAllGenres();
   }
 
   const deleteGenre = async (selectedGenre) => {
-    try {
-      setIsLoading(true)
-      const response = await genresAPI.remove(selectedGenre.id);
-      openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
-    }
-    catch(e){
-      const errorCode = e?.response?.data || "";
-      let message = e.message;
-      if(errorCode === ERROR_CODES.IS_REFERENCED) {
-        message = "Cannot delete this genre because it's assigned to a game"
-      }
-      openSnackbar({message, type: OPERATION_OUTCOME.FAILED})
-    }
-    finally {
+    const responseMessage = await del(`/genres/remove/${selectedGenre.id}`);
+      openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
       getAllGenres()
-    }
   }
 
   const updateGenre = async (genreId, name) => {
-    try {
-        setIsLoading(true)
-        const response = await genresAPI.update(genreId, {name});
-        openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
-      }
-      catch(e){
-        console.log(e)
-        const errorCode = e?.response?.data || "";
-        if(errorCode === ERROR_CODES.DUPLICATED) {
-          throw new Error("Genre already exists in database")
-        }
-        openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-      }
-      finally {
+    const responseMessage = await put(`/genres/edit/${genreId}`, {name});
+        openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
         getAllGenres()
-      }
   }
 
   return (

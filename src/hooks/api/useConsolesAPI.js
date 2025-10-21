@@ -1,4 +1,4 @@
-import axios from "../../utils/axios";
+import axios from "../../api/axios";
 import { CONSOLE_FILTER_OPTIONS } from "../../utils/constants";
 import useAxiosPrivate from '../useAxiosPrivate'
 

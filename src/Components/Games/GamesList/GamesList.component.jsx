@@ -44,7 +44,7 @@ const GamesList = ({ deleteGame, editGame, listOption, getGames, updateGame }) =
     <>
       {games.length > 0 ? (
         <div>
-          <div className={classes.resultsText}>Showing results {games.length || '--'}/ {game?.pagination?.totalItems || '--'}</div>
+          <div className="results-text">Showing results {games.length || '--'}/ {game?.pagination?.totalItems || '--'}</div>
           <ul className={classes.gameItemsList}>
             {games.map((game) => (
               <GameItem key={game.id} gameData={game} deleteGame={deleteGame} editGame={editGame} updateGame={updateGame}/>

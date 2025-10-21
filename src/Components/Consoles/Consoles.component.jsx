@@ -10,6 +10,8 @@ import ConsoleDetails from './ConsoleDetails.component';
 import classes from './Consoles.module.css';
 import ConsoleFilterOptions from './ConsoleFilterOptions';
 import useSessionStorage from '../../hooks/useSessionStorage';
+import { SESSION_STORAGE } from '../../utils/constants';
+
 
 const NavigationItems = [
   { text: 'Brands', href:"/" },
@@ -23,8 +25,8 @@ const Consoles = ({
 }) => {
   const navigate = useNavigate();
   const { console, setSelectedConsole, brand: { selected: selectedBrand }, user } = useAppState();
-  const [storedUser] = useSessionStorage("currentUser", null)
-  const [storedBrand] = useSessionStorage("brandData", null)
+  const [storedUser] = useSessionStorage(SESSION_STORAGE.USER, null)
+  const [storedBrand] = useSessionStorage(SESSION_STORAGE.BRAND, null)
 
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
