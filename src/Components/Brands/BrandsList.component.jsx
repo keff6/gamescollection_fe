@@ -1,13 +1,10 @@
 import { Container, Row, Col } from "react-bootstrap";
 import useAppState from "../../hooks/useAppState";
-import Spinner from "../../Common/Spinner/Spinner.component";
 import BrandCard from "./BrandCard.component";
 import classes from "./Brands.module.css";
 
 const BrandsList = () => {
-  const { isLoading, brand } = useAppState();
-
-  if (isLoading) return <Spinner />;
+  const { brand } = useAppState();
 
   let brands = brand?.list || [];
 

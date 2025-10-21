@@ -1,12 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import useAppState from "../../hooks/useAppState";
-import { useBrandsAPI } from "../../hooks/api";
-import { OPERATION_OUTCOME } from "../../utils/constants";
+import { OPERATION_OUTCOME, ENTITIES, API_ROUTES } from "../../utils/constants";
 import Brands from "./Brands.component";
+import useAPI from "../../hooks/useAPI";
 
 const BrandsContainer = () => {
-  const { setBrandsList, openSnackbar, setIsLoading } = useAppState();
-  const brandsAPI = useBrandsAPI()
+  const { setBrandsList, openSnackbar } = useAppState();
+  const { get, error } = useAPI(true, ENTITIES.BRAND); 
+
+  const getAllBrands = useCallback(async () => {
+      const brands = await get(API_ROUTES.BRANDS.GET_ALL);
+      setBrandsList(brands)
+    }, [])
 
   useEffect(() => {
     getAllBrands();
@@ -16,20 +21,12 @@ const BrandsContainer = () => {
     }
   }, []);
 
-  const getAllBrands = async () => {
-    try {
-      setIsLoading(true)
-      const response = await brandsAPI.getAll();
-      setBrandsList(response.data)
+  useEffect(() => {
+    if(error) {
+      openSnackbar({message: error?.message, type: OPERATION_OUTCOME.FAILED});
     }
-    catch(e){
-      console.log(e)
-      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-    }
-    finally {
-      setIsLoading(false)
-    }
-  }
+    
+  }, [error, openSnackbar, getAllBrands]);
 
   return (
     <Brands />

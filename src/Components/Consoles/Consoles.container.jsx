@@ -1,17 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import useAppState from "../../hooks/useAppState";
-import { useConsolesAPI, useBrandsAPI } from "../../hooks/api";
 import Consoles from "./Consoles.component";
-import { OPERATION_OUTCOME, ERROR_CODES, CONSOLE_FILTER_OPTIONS, SESSION_STORAGE } from "../../utils/constants";
+import { OPERATION_OUTCOME, ERROR_CODES, SESSION_STORAGE, ENTITIES, API_ROUTES, CONSOLE_FILTER_OPTIONS } from "../../utils/constants";
 import useSessionStorage from "../../hooks/useSessionStorage";
+import useAPI from "../../hooks/useAPI";
 
 const ConsolesContainer = () => {
-  const { setConsolesList, openSnackbar, setIsLoading, setInitialLetter, setBrandsListMisc, console, brand: { selected: selectedBrand } } = useAppState();
-  const { brandId } = useParams()
-  const consolesAPI = useConsolesAPI()
-  const brandsAPI = useBrandsAPI()
+  const { setConsolesList, openSnackbar, setInitialLetter, setBrandsListMisc, console, brand: { selected: selectedBrand } } = useAppState();
+  const { brandId } = useParams();
+  const { get, post, del, put, error } = useAPI(true, ENTITIES.CONSOLE);
+  const { get: getBrands, error: errorBrands } = useAPI(true, ENTITIES.BRAND);
   const [, setStoredBrand] = useSessionStorage(SESSION_STORAGE.BRAND, null)
+
+  const getConsolesByBrand = useCallback(async (typeFilter = CONSOLE_FILTER_OPTIONS.ALL) => {
+      const consoles = await get(API_ROUTES.CONSOLES.GET_BY_BRAND(brandId, typeFilter));
+      const brands = await getBrands(API_ROUTES.BRANDS.GET_ALL);
+      setConsolesList(consoles || []);
+      setBrandsListMisc(brands)
+    }, [])
 
   useEffect(() => {
     getConsolesByBrand()
@@ -24,84 +31,42 @@ const ConsolesContainer = () => {
   }, []);
 
   useEffect(() => {
+    const hasError = error || errorBrands
+    if(hasError) {
+      const errorCode = hasError?.response?.data || "";
+      let message = errorCode === ERROR_CODES.IS_REFERENCED ? "Cannot delete! It has games" : hasError.message;
+
+      openSnackbar({message, type: OPERATION_OUTCOME.FAILED});
+      getConsolesByBrand();
+    }
+    
+  }, [error, errorBrands, openSnackbar, getConsolesByBrand]);
+
+  useEffect(() => {
     handleFilterConsoles();
   }, [console.listFilter]);
-  
+
   const handleFilterConsoles = () => {
     const { listFilter } = console;
     getConsolesByBrand(listFilter);
-  };
-
-  const getConsolesByBrand = async (typeFilter = CONSOLE_FILTER_OPTIONS.AL) => {
-    try {
-      setIsLoading(true)
-      const consolesResponse = await consolesAPI.getByBrand(brandId, typeFilter);
-      const brandsResponse = await brandsAPI.getAll();
-      setConsolesList(consolesResponse.data || []);
-      setBrandsListMisc(brandsResponse.data || [])
-    }
-    catch(e){
-      console.log(e)
-      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-    }
-    finally {
-      setIsLoading(false)
-    }
   }
 
   const addConsole = async (consoleObj) => {
-    try {
-      setIsLoading(true)
-      const response = await consolesAPI.add(consoleObj);
-      openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
-    }
-    catch(e){
-      const errorCode = e?.response?.data || "";
-      if(errorCode === ERROR_CODES.DUPLICATED) {
-        throw new Error("Console already exists in database")
-      }
-      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-    }
-    finally {
-      getConsolesByBrand()
-    }
+    const responseMessage = await post(API_ROUTES.CONSOLES.ADD, consoleObj)
+    openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
+    getConsolesByBrand();
   }
 
   const updateConsole = async (consoleId, consoleObj) => {
-    try {
-        setIsLoading(true)
-        const response = await consolesAPI.update(consoleId, consoleObj);
-        openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
-      }
-      catch(e){
-        const errorCode = e?.response?.data || "";
-        if(errorCode === ERROR_CODES.DUPLICATED) {
-          throw new Error("Console already exists in database")
-        }
-        openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-      }
-      finally {
-        getConsolesByBrand()
-      }
+    const responseMessage = await put(API_ROUTES.CONSOLES.UPDATE(consoleId), consoleObj);
+    openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
+    getConsolesByBrand()
   }
 
   const deleteConsole = async (selectedConsole) => {
-    try {
-      setIsLoading(true)
-      const response = await consolesAPI.remove(selectedConsole.id);
-      openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
-    }
-    catch(e){
-      const errorCode = e?.response?.data || "";
-      let message = e.message;
-      if(errorCode === ERROR_CODES.IS_REFERENCED) {
-        message = "Cannot delete this console because it has games"
-      }
-      openSnackbar({message, type: OPERATION_OUTCOME.FAILED})
-    }
-    finally {
-      getConsolesByBrand()
-    }
+    const responseMessage = await del(API_ROUTES.CONSOLES.DELETE(selectedConsole.id));
+    openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
+    getConsolesByBrand()
   }
 
   return (

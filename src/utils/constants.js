@@ -79,4 +79,16 @@ export const API_ROUTES = {
     UPDATE: (id) => `/brands/edit/${id}`,
     DELETE: (id) => `/brands/remove/${id}`
   },
+  CONSOLES: {
+    GET_ALL: '/consoles',
+    GET_BY_ID: (id) => `/consoles/${id}`,
+    GET_BY_BRAND: (id, filter) => `/consoles/brand/${id}${
+      (filter === CONSOLE_FILTER_OPTIONS.ALL) ? '' :
+      (filter === CONSOLE_FILTER_OPTIONS.HOME) ? '?type=0 ' : '?type=1'
+    }`,
+    ADD: '/consoles/add',
+    UPDATE: (id) => `/consoles/edit/${id}`,
+    DELETE: (id) => `/consoles/remove/${id}`,
+
+  }
 };
