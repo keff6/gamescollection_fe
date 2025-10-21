@@ -1,85 +1,47 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import useAppState from "../../../hooks/useAppState";
-import { useBrandsAPI } from "../../../hooks/api";
 import Brands from "./Brands.component";
-import { OPERATION_OUTCOME, ERROR_CODES } from "../../../utils/constants";
+import { OPERATION_OUTCOME, ERROR_CODES, ENTITIES, API_ROUTES } from "../../../utils/constants";
+import useAPI from "../../../hooks/useAPI";
 
 const BrandsContainer = () => {
-  const { setBrandsList, openSnackbar, setIsLoading } = useAppState();
-  const brandsAPI = useBrandsAPI()
+  const { setBrandsList, openSnackbar } = useAppState();
+  const { get, post, del, put, error } = useAPI(true, ENTITIES.BRAND); 
+
+  const getAllBrands = useCallback(async () => {
+    const brands = await get(API_ROUTES.BRANDS.GET_ALL);
+    setBrandsList(brands)
+  }, [])
+
+  useEffect(() => { getAllBrands() }, []);
 
   useEffect(() => {
-    getAllBrands();
-  }, []);
+    if(error) {
+      const errorCode = error?.response?.data || "";
+      let message = errorCode === ERROR_CODES.IS_REFERENCED ? "Cannot delete! It has consoles" : error.message;
 
-  const getAllBrands = async () => {
-    try {
-      setIsLoading(true)
-      const response = await brandsAPI.getAll();
-      setBrandsList(response.data)
+      openSnackbar({message, type: OPERATION_OUTCOME.FAILED});
+      getAllBrands();
     }
-    catch(e){
-      console.log(e)
-      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-    }
-    finally {
-      setIsLoading(false)
-    }
-  }
+    
+  }, [error, openSnackbar, getAllBrands]);
 
   const addBrand = async (brandObj) => {
-    try {
-      setIsLoading(true)
-      const response = await brandsAPI.add(brandObj);
-      openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
-    }
-    catch(e){
-      const errorCode = e?.response?.data || "";
-      if(errorCode === ERROR_CODES.DUPLICATED) {
-        throw new Error("Brand already exists in database")
-      }
-      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-    }
-    finally {
-      getAllBrands()
-    }
+    const responseMessage = await post(API_ROUTES.BRANDS.ADD, brandObj)
+    openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
+    getAllBrands();
   }
 
   const deleteBrand = async (selectedBrand) => {
-    try {
-      setIsLoading(true)
-      const response = await brandsAPI.remove(selectedBrand.id);
-      openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
-    }
-    catch(e){
-      const errorCode = e?.response?.data || "";
-      let message = e.message;
-      if(errorCode === ERROR_CODES.IS_REFERENCED) {
-        message = "Cannot delete this brand because it has consoles"
-      }
-      openSnackbar({message, type: OPERATION_OUTCOME.FAILED})
-    }
-    finally {
-      getAllBrands()
-    }
+    const responseMessage = await del(API_ROUTES.BRANDS.DELETE(selectedBrand.id));
+    openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
+    getAllBrands()
   }
 
   const updateBrand = async (brandId, brandObj) => {
-    try {
-        setIsLoading(true)
-        const response = await brandsAPI.update(brandId, brandObj);
-        openSnackbar({message: response.data, type: OPERATION_OUTCOME.SUCCESS})
-      }
-      catch(e){
-        const errorCode = e?.response?.data || "";
-        if(errorCode === ERROR_CODES.DUPLICATED) {
-          throw new Error("Brand already exists in database")
-        }
-        openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-      }
-      finally {
-        getAllBrands()
-      }
+    const responseMessage = await put(API_ROUTES.BRANDS.UPDATE(brandId), brandObj);
+    openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
+    getAllBrands()
   }
 
   return (

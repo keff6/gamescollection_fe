@@ -60,3 +60,23 @@ export const ENTITIES = {
   CONSOLE: 'Console',
   GAME: 'Game'
 }
+
+export const API_ROUTES = {
+  AUTH: {
+    LOGIN: '/auth',
+    LOGOUT: '/logout',
+    REFRESH: '/refresh',
+  },
+  GENRES: {
+    GET_ALL: '/genres',
+    ADD: '/genres/add',
+    UPDATE: (id) => `/genres/edit/${id}`,
+    DELETE: (id) => `/genres/remove/${id}`
+  },
+  BRANDS: {
+    GET_ALL: '/brands',
+    ADD: '/brands/add',
+    UPDATE: (id) => `/brands/edit/${id}`,
+    DELETE: (id) => `/brands/remove/${id}`
+  },
+};

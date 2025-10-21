@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from "react";
 import useAppState from "../../hooks/useAppState";
 import Genres from "./Genres.component";
-import { OPERATION_OUTCOME, ERROR_CODES, ENTITIES } from "../../utils/constants";
+import { OPERATION_OUTCOME, ERROR_CODES, ENTITIES, API_ROUTES } from "../../utils/constants";
 import useAPI from "../../hooks/useAPI";
 
 const GenresContainer = () => {
@@ -9,7 +9,7 @@ const GenresContainer = () => {
   const { get, post, del, put, error } = useAPI(true, ENTITIES.GENRE); 
 
   const getAllGenres = useCallback(async () => {
-    const genres = await get('/genres');
+    const genres = await get(API_ROUTES.GENRES.GET_ALL);
     setGenresList(genres);
   }, [])
 
@@ -27,21 +27,21 @@ const GenresContainer = () => {
   }, [error, openSnackbar, getAllGenres]);
 
   const addGenre = async (genreName) => {
-      const responseMessage = await post("/genres/add", {name: genreName})
-      openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
-      getAllGenres();
+    const responseMessage = await post(API_ROUTES.GENRES.ADD, {name: genreName})
+    openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
+    getAllGenres();
   }
 
   const deleteGenre = async (selectedGenre) => {
-    const responseMessage = await del(`/genres/remove/${selectedGenre.id}`);
-      openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
-      getAllGenres()
+    const responseMessage = await del(API_ROUTES.GENRES.DELETE(selectedGenre.id));
+    openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
+    getAllGenres()
   }
 
   const updateGenre = async (genreId, name) => {
-    const responseMessage = await put(`/genres/edit/${genreId}`, {name});
-        openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
-        getAllGenres()
+    const responseMessage = await put(API_ROUTES.GENRES.UPDATE(genreId), {name});
+    openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
+    getAllGenres()
   }
 
   return (

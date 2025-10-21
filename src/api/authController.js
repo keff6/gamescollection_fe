@@ -1,8 +1,9 @@
 import axios from "./axios";
+import { API_ROUTES } from "../utils/constants";
 
 const authController = {
   authenticate: (user) => {
-    return axios.post("/auth",
+    return axios.post(API_ROUTES.AUTH.LOGIN,
       user, 
       {
         headers: { 'Content-Type': 'application/json' },
@@ -11,13 +12,13 @@ const authController = {
   },
   
   refreshToken: () => {
-    return axios.get('/refresh', {
+    return axios.get(API_ROUTES.AUTH.REFRESH, {
       withCredentials: true,
     })
   },
 
   logOut: () => {
-    return axios.get('/logout', {
+    return axios.get(API_ROUTES.AUTH.LOGOUT, {
       withCredentials: true,
     })
   }

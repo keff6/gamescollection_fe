@@ -1,18 +1,13 @@
 import proptypes from 'prop-types';
 import { Table, Button } from 'react-bootstrap';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
-import useAppState from '../../../hooks/useAppState';
-import Spinner from "../../../Common/Spinner/Spinner.component";
 import classes from './Brands.module.css';
 
-const BrandsTable = ({ brands, deleteBrand, editBrand }) => {
-  const { isLoading } = useAppState();
-
-  if(isLoading) return <Spinner />
-
-  return (
+const BrandsTable = ({ brands, deleteBrand, editBrand }) => (
+  <>
+    {(brands?.length > 0) &&
     <>
-      {(brands?.length > 0) &&
+      <div className="results-text">{brands.length || '--'} results</div>
       <Table className={classes.table}>
         <thead>
           <tr>
@@ -50,11 +45,11 @@ const BrandsTable = ({ brands, deleteBrand, editBrand }) => {
             )
           )}
         </tbody>
-      </Table>}
-      {(brands?.length === 0) && <h3 className="empty-list-text">Start adding brands</h3>}
-    </>
-  )
-}
+      </Table>
+    </>}
+    {(brands?.length === 0) && <h3 className="empty-list-text">Start adding brands</h3>}
+  </>
+)
 
 BrandsTable.propTypes = {
   deleteBrand: proptypes.func,
