@@ -11,7 +11,7 @@ import Games from "../Components/Games/Games.container";
 import Login from "../Components/Login/Login.container";
 import RequireAuth from "../Layout/RequireAuth";
 import PersistLogin from "../Components/Login/PersistLogin";
-import Stats from "../Components/Stats/Stats";
+import Stats from "../Components/Stats/Stats.container";
 
 
 const router = createBrowserRouter([

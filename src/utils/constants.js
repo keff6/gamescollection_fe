@@ -98,6 +98,8 @@ export const API_ROUTES = {
     DELETE: (id) => `/games/remove/${id}`,
     SEARCH: '/games/search',
     GET_BY_PARAMS: (paramsString) => `/games/get${paramsString}`
+  },
+  STATS: {
+    GET_TOTALS: '/stats/getTotals',
   }
-
 };
