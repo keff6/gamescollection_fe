@@ -3,7 +3,6 @@ import { ButtonGroup, ToggleButton, Container, Dropdown } from "react-bootstrap"
 import proptypes from 'prop-types';
 import { SortAlphaDown, SortAlphaDownAlt, SortNumericDown, SortNumericDownAlt  } from 'react-bootstrap-icons';
 import useAppState from '../../../hooks/useAppState';
-
 import { GAME_LIST_OPTIONS } from '../../../utils/constants';
 import AlphabetButtons from './AlphabetButtons.component';
 import SearchGames from './SearchGames.component';
@@ -19,8 +18,8 @@ const GamesListOptions = ({ getGames }) => {
   },[])
 
   const handleSorting = (key, direction) => {
-      setSortingDirection(direction)
-      setSortingKey(key)
+    setSortingDirection(direction)
+    setSortingKey(key)
   }
 
   return (

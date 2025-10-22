@@ -1,14 +1,13 @@
 import proptypes from "prop-types";
 import { useEffect } from "react";
 import { Button } from "react-bootstrap";
-import { Spinner } from "../../../Common";
 import { GAME_LIST_OPTIONS } from "../../../utils/constants";
 import useAppState from "../../../hooks/useAppState";
 import GameItem from "./GameItem";
 import classes from "../Games.module.css";
 
 const GamesList = ({ deleteGame, editGame, listOption, getGames, updateGame }) => {
-  const { isLoading, game, sorting: { sortKey, sortDirection} } = useAppState();
+  const {  game, sorting: { sortKey, sortDirection} } = useAppState();
 
   useEffect(() => {
     const sortParams = sortKey === '' ? null : {
@@ -17,9 +16,6 @@ const GamesList = ({ deleteGame, editGame, listOption, getGames, updateGame }) =
     }
     getGames(true, sortParams);
   }, [sortKey, sortDirection])
-
-  const isFirstPage = game?.pagination?.currentPage === 1;
-  if (isLoading && isFirstPage) return <Spinner />;
 
   const { list = [], pagination: {totalPages = 1, currentPage = "1"}} = game;
   const showMoreButton = (totalPages === 1 || currentPage === totalPages.toString()) ? false : true;

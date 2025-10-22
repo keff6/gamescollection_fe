@@ -25,7 +25,7 @@ const Games = ({
   getGames,
 }) => {
   const navigate = useNavigate();
-  const { game, setSelectedGame, brand, console, user } = useAppState();
+  const { game, setSelectedGame, brand, console: gameConsole, user } = useAppState();
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
@@ -34,7 +34,7 @@ const Games = ({
   const [storedBrand] = useSessionStorage(SESSION_STORAGE.BRAND, null);
   const [storedConsole] = useSessionStorage(SESSION_STORAGE.CONSOLE, null);
   const currentBrand = (brand?.selected) ? brand.selected : storedBrand; 
-  const currentConsole = (console?.selected) ? console.selected : storedConsole; 
+  const currentConsole = (gameConsole?.selected) ? gameConsole.selected : storedConsole; 
   const totalGames = currentConsole?.totalGames || 0;
   const currentUser = user || storedUser || null;
 

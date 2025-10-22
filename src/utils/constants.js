@@ -89,6 +89,15 @@ export const API_ROUTES = {
     ADD: '/consoles/add',
     UPDATE: (id) => `/consoles/edit/${id}`,
     DELETE: (id) => `/consoles/remove/${id}`,
-
+  },
+  GAMES: {
+    GET_ALL: '/games',
+    GET_WISHLIST_BY_CONSOLE: (id) => `/games/wishlist/${id}`,
+    ADD: '/games/add',
+    UPDATE: (id) => `/games/edit/${id}`,
+    DELETE: (id) => `/games/remove/${id}`,
+    SEARCH: '/games/search',
+    GET_BY_PARAMS: (paramsString) => `/games/get${paramsString}`
   }
+
 };

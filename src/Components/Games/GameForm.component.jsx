@@ -69,7 +69,9 @@ const GameForm = ({
   },[show])
 
   useEffect(() => {
-    setGameObj(isEdit ? selected : {...GAME_DEFAULT, saga: [], genres: []}) 
+    if(isEdit) {
+      setGameObj(selected)
+    }
   },[isEdit])
 
   const handleChange = (field, value) => {
