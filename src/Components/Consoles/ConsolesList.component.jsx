@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import proptypes from "prop-types";
-import useAppState from "../../hooks/useAppState";
+import { useAppState } from "../../hooks";
 import ConsoleCard from "./ConsoleCard.component";
 import classes from "./Consoles.module.css";
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button, Modal, Form, Row, Col } from 'react-bootstrap';
 import proptypes from 'prop-types';
-import useAppState from '../../hooks/useAppState';
+import { useAppState } from '../../hooks';
 import { CONSOLE_GENERATIONS } from "../../utils/constants";
 
 const CONSOLE_DEFAULT = {

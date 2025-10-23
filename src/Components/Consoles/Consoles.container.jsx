@@ -1,17 +1,17 @@
 import { useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import useAppState from "../../hooks/useAppState";
+import { useAppState, useAPI, useApiErrorHandler} from "../../hooks";
 import Consoles from "./Consoles.component";
-import { OPERATION_OUTCOME, ERROR_CODES, SESSION_STORAGE, ENTITIES, API_ROUTES, CONSOLE_FILTER_OPTIONS } from "../../utils/constants";
+import { OPERATION_OUTCOME, SESSION_STORAGE, ENTITIES, API_ROUTES, CONSOLE_FILTER_OPTIONS } from "../../utils/constants";
 import useSessionStorage from "../../hooks/useSessionStorage";
-import useAPI from "../../hooks/useAPI";
 
 const ConsolesContainer = () => {
   const { setConsolesList, openSnackbar, setInitialLetter, setBrandsListMisc, console, brand: { selected: selectedBrand } } = useAppState();
   const { brandId } = useParams();
   const { get, post, del, put, error } = useAPI(true, ENTITIES.CONSOLE);
   const { get: getBrands, error: errorBrands } = useAPI(true, ENTITIES.BRAND);
-  const [, setStoredBrand] = useSessionStorage(SESSION_STORAGE.BRAND, null)
+  const [, setStoredBrand] = useSessionStorage(SESSION_STORAGE.BRAND, null);
+  useApiErrorHandler(error || errorBrands);
 
   const getConsolesByBrand = useCallback(async (typeFilter = CONSOLE_FILTER_OPTIONS.ALL) => {
       const consoles = await get(API_ROUTES.CONSOLES.GET_BY_BRAND(brandId, typeFilter));
@@ -29,18 +29,6 @@ const ConsolesContainer = () => {
       setConsolesList([])
     }
   }, []);
-
-  useEffect(() => {
-    const hasError = error || errorBrands
-    if(hasError) {
-      const errorCode = hasError?.response?.data || "";
-      let message = errorCode === ERROR_CODES.IS_REFERENCED ? "Cannot delete! It has games" : hasError.message;
-
-      openSnackbar({message, type: OPERATION_OUTCOME.FAILED});
-      getConsolesByBrand();
-    }
-    
-  }, [error, errorBrands, openSnackbar, getConsolesByBrand]);
 
   useEffect(() => {
     handleFilterConsoles();

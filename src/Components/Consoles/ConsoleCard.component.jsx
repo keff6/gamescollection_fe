@@ -2,12 +2,12 @@ import { Card, Button, Dropdown } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import proptypes from 'prop-types';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
-import useAppState from '../../hooks/useAppState';
+import { useAppState } from '../../hooks';
 import { MoreButton, Tooltip, MiniLabel } from '../../Common';
 import { CONSOLE_GENERATIONS} from '../../utils/constants';
-import classes from './Consoles.module.css';
 import HomeConsoleIcon from '../../assets/icons/home-console.png';
 import PortableConsoleIcon from '../../assets/icons/portable-console.png';
+import classes from './Consoles.module.css';
 
 
 const ConsoleCard = ({ consoleData, editConsole, deleteConsole }) => {

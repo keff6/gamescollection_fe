@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
 import { ButtonGroup, ToggleButton } from "react-bootstrap";
-// import proptypes from 'prop-types';
-// import HomeConsoleIcon from '../../assets/icons/home-console.png';
-// import PortableConsoleIcon from '../../assets/icons/portable-console.png';
-import useAppState from '../../hooks/useAppState';
+import { useAppState } from '../../hooks';
 import { CONSOLE_FILTER_OPTIONS } from '../../utils/constants';
 import classes from './Consoles.module.css';
 
@@ -60,9 +57,5 @@ const ConsoleFilterOptions = () => {
     </div>
   )
 }
-
-// ConsoleFilterOptions.propTypes = {
-//   getGames: proptypes.func,
-// }
 
 export default ConsoleFilterOptions;

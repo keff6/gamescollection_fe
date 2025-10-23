@@ -2,14 +2,13 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
-import useAppState from '../../hooks/useAppState';
+import { useAppState, useSessionStorage } from '../../hooks';
 import ConsolesList from "./ConsolesList.component";
 import { DeleteAlertModal,Breadcrumb } from "../../Common";
 import ConsoleForm from './ConsoleForm.component';
-import classes from './Consoles.module.css';
 import ConsoleFilterOptions from './ConsoleFilterOptions';
-import useSessionStorage from '../../hooks/useSessionStorage';
 import { SESSION_STORAGE } from '../../utils/constants';
+import classes from './Consoles.module.css';
 
 
 const NavigationItems = [
