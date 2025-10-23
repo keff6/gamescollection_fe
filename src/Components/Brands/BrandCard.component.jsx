@@ -1,7 +1,7 @@
 import { ChevronDoubleRight } from "react-bootstrap-icons";
 import { useNavigate } from 'react-router-dom';
 import proptypes from 'prop-types';
-import useAppState from '../../hooks/useAppState';
+import { useAppState } from '../../hooks';
 import classes from './Brands.module.css';
 import { Link } from "react-router-dom";
 

@@ -1,12 +1,12 @@
 import { useEffect, useCallback } from "react";
-import useAppState from "../../../hooks/useAppState";
+import { useAppState, useAPI, useApiErrorHandler } from "../../../hooks";
+import { OPERATION_OUTCOME, ENTITIES, API_ROUTES } from "../../../utils/constants";
 import Brands from "./Brands.component";
-import { OPERATION_OUTCOME, ERROR_CODES, ENTITIES, API_ROUTES } from "../../../utils/constants";
-import useAPI from "../../../hooks/useAPI";
 
 const BrandsContainer = () => {
   const { setBrandsList, openSnackbar } = useAppState();
   const { get, post, del, put, error } = useAPI(true, ENTITIES.BRAND); 
+  useApiErrorHandler(error)
 
   const getAllBrands = useCallback(async () => {
     const brands = await get(API_ROUTES.BRANDS.GET_ALL);
@@ -14,17 +14,6 @@ const BrandsContainer = () => {
   }, [])
 
   useEffect(() => { getAllBrands() }, []);
-
-  useEffect(() => {
-    if(error) {
-      const errorCode = error?.response?.data || "";
-      let message = errorCode === ERROR_CODES.IS_REFERENCED ? "Cannot delete! It has consoles" : error.message;
-
-      openSnackbar({message, type: OPERATION_OUTCOME.FAILED});
-      getAllBrands();
-    }
-    
-  }, [error, openSnackbar, getAllBrands]);
 
   const addBrand = async (brandObj) => {
     const responseMessage = await post(API_ROUTES.BRANDS.ADD, brandObj)

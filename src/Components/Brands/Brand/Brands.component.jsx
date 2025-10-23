@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import proptypes from 'prop-types';
-import useAppState from '../../../hooks/useAppState';
+import { useAppState } from '../../../hooks';
 import BrandsTable from './BrandsTable.component';
 import BrandForm from './BrandForm.component';
 import DeleteAlertModal from '../../../Common/DeleteAlertModal/DeleteAlertModal.component';

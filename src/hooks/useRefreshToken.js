@@ -6,7 +6,7 @@ import useAPI from './useAPI';
 const useRefreshToken = () => {
   const { setAuthUser, user } = useAppState()
   const [storedUser] = useSessionStorage(SESSION_STORAGE.USER, null);
-  const { get } = useAPI(false);
+  const { get } = useAPI(true);
 
   const refresh = async () => {
     try {

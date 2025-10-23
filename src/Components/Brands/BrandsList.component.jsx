@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import useAppState from "../../hooks/useAppState";
+import { useAppState } from "../../hooks";
 import BrandCard from "./BrandCard.component";
 import classes from "./Brands.module.css";
 
