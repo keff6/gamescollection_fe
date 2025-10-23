@@ -2,14 +2,13 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import proptypes from 'prop-types';
-import useAppState from '../../hooks/useAppState';
+import { useAppState, useSessionStorage } from '../../hooks';
 import { DeleteAlertModal, Breadcrumb } from "../../Common"
 import GamesListOptions from './GamesList/GamesListOptions.component';
 import GamesList from './GamesList/GamesList.container';
-import classes from './Games.module.css';
 import GameForm from './GameForm.component';
-import useSessionStorage from '../../hooks/useSessionStorage';
 import { SESSION_STORAGE } from '../../utils/constants';
+import classes from './Games.module.css';
 
 const NavigationItems = (brandId) => [
   { text: 'Brands', href:"/" },

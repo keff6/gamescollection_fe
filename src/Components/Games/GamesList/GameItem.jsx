@@ -1,7 +1,7 @@
 import proptypes from "prop-types";
 import { Col, Row, Dropdown } from "react-bootstrap";
 import { PencilSquare, Trash, ChatRightText, Bookmark, BookmarkStarFill } from 'react-bootstrap-icons';
-import useAppState from '../../../hooks/useAppState';
+import { useAppState } from '../../../hooks';
 import { NO_DATA } from "../../../utils/constants";
 import { Badge, MoreButton, Tooltip, MiniLabel } from "../../../Common";
 import { gameObjectSanitizer } from "../../../utils/requestSanitizer";

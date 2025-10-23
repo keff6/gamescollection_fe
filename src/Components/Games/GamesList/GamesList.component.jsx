@@ -2,7 +2,7 @@ import proptypes from "prop-types";
 import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { GAME_LIST_OPTIONS } from "../../../utils/constants";
-import useAppState from "../../../hooks/useAppState";
+import { useAppState } from "../../../hooks";
 import GameItem from "./GameItem";
 import classes from "../Games.module.css";
 

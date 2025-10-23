@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { InputGroup, Form, Button } from "react-bootstrap";
 import { Search } from "react-bootstrap-icons";
 import proptypes from "prop-types";
-import useAppState from "../../../hooks/useAppState";
+import { useAppState } from "../../../hooks";
 
 const SearchGames = ({ getGames }) => {
   const { game: { searchTerm }, setSearchTerm } = useAppState();

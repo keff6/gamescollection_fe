@@ -4,7 +4,7 @@ import proptypes from 'prop-types';
 import { XCircle } from "react-bootstrap-icons";
 import { InfoTooltip } from '../../Common';
 import { GAME_LIST_OPTIONS } from '../../utils/constants';
-import useAppState from '../../hooks/useAppState';
+import { useAppState } from '../../hooks';
 import { gameObjectSanitizer } from '../../utils/requestSanitizer';
 import classes from './Games.module.css';
 

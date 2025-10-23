@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import proptypes from "prop-types";
-import useAppState from "../../../hooks/useAppState";
+import { useAppState } from "../../../hooks";
 import GamesList from "./GamesList.component";
 import { GAME_LIST_OPTIONS } from "../../../utils/constants";
 

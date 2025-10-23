@@ -1,5 +1,5 @@
 import { Nav, Dropdown, DropdownButton } from 'react-bootstrap';
-import useAppState from '../../../hooks/useAppState'
+import { useAppState } from '../../../hooks'
 import { ALPHABET } from '../../../utils/constants';
 import classes from '../Games.module.css';
 
