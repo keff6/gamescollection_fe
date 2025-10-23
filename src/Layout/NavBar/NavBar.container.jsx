@@ -1,27 +1,25 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import authController from "../../api/authController";
 import useAppState from "../../hooks/useAppState";
-import { OPERATION_OUTCOME } from "../../utils/constants";
+import { OPERATION_OUTCOME, API_ROUTES } from "../../utils/constants";
 import NavBar from "./NavBar.component";
+import useAPI from "../../hooks/useAPI";
 
 const NavBarContainer = () => {
   const navigate = useNavigate()
-  const { setIsLoading, openSnackbar, setAuthUser } = useAppState()
+  const { openSnackbar, setAuthUser } = useAppState()
+  const { get, error } = useAPI(false)
+
+  useEffect(() => {
+      if(error) {
+        openSnackbar({message: error.message, type: OPERATION_OUTCOME.FAILED})
+      }
+    }, [error, openSnackbar])
 
   const logOut = async () => {
-    try {
-      setIsLoading(true);
-      await authController.logOut();
-      setAuthUser(null);
-      navigate('/')
-    }
-    catch(e){
-      console.log(e)
-      openSnackbar({message: e.message, type: OPERATION_OUTCOME.FAILED})
-    }
-    finally {
-      setIsLoading(false)
-    }
+    await get(API_ROUTES.AUTH.LOGOUT, { withCredentials: true });
+    setAuthUser(null);
+    navigate('/');
   }
 
   return (

@@ -20,7 +20,7 @@ const useAPI = (isPrivate = false, entityName = 'Record') => {
         method,
         url,
         ...(data && {data}),
-        params,
+        ...(params && {params}),
       });
       return response.data;
     } catch (err) {
@@ -38,7 +38,7 @@ const useAPI = (isPrivate = false, entityName = 'Record') => {
   return {
     request, // generic request
     get: (url, params) => request({ method: 'GET', url, params }),
-    post: (url, data) => request({ method: 'POST', url, data }),
+    post: (url, data, params) => request({ method: 'POST', url, data, params }),
     put: (url, data) => request({ method: 'PUT', url, data }),
     del: (url) => request({ method: 'DELETE', url }),
     error
