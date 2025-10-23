@@ -52,7 +52,6 @@ const APP_STATE = {
     sortKey: '',
     sortDirection: '',
   },
-  isLoading: false,
   user: null,
 };
 
@@ -160,12 +159,6 @@ export const AppStateProvider = ({ children }) => {
         dispatch({
           type: actions.SET_SEARCH_TERM,
           payload: searchTerm,
-        })
-      },
-      setIsLoading: (isLoading) => {
-        dispatch({
-          type: actions.SET_IS_LOADING,
-          payload: isLoading,
         })
       },
       setAuthUser: (userData) => {
