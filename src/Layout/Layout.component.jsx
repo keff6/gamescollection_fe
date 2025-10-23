@@ -4,8 +4,7 @@ import Content from "./Content/Content.component";
 import { SnackBar } from "../Common";
 import NavBar from "./NavBar/NavBar.container";
 import { useEffect } from "react";
-import useAppState  from "../hooks/useAppState"
-import useSessionStorage from "../hooks/useSessionStorage";
+import { useAppState, useSessionStorage}   from "../hooks"
 import { SESSION_STORAGE } from "../utils/constants";
 
 const Layout = ({ children }) => {

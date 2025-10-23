@@ -11,7 +11,7 @@ const useApiErrorHandler = (error) => {
       const errorCode = error?.response?.data || "";
       let message = errorCode === ERROR_CODES.IS_REFERENCED ? "Cannot delete! It has dependencies" : error.message;
       
-      openSnackbar({message, type: OPERATION_OUTCOME.FAILED});
+      openSnackbar({message: message || "Something went wrong!", type: OPERATION_OUTCOME.FAILED});
     }
   }, [error]);
 }

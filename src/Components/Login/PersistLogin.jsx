@@ -1,9 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Spinner } from "react-bootstrap";
-import useRefreshToken from '../../hooks/useRefreshToken';
-import useAppState from '../../hooks/useAppState';
-import useSessionStorage from "../../hooks/useSessionStorage";
+import { useAppState, useRefreshToken, useSessionStorage } from '../../hooks';
 import { SESSION_STORAGE } from "../../utils/constants";
 
 const PersistLogin = () => {

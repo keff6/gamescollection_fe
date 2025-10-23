@@ -1,21 +1,13 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAppState from '../../hooks/useAppState';
-import { OPERATION_OUTCOME, API_ROUTES } from "../../utils/constants";
+import { useAppState, useAPI, useApiErrorHandler } from '../../hooks';
+import { API_ROUTES } from "../../utils/constants";
 import Login from "./Login.component";
-import useAPI from '../../hooks/useAPI';
 
 const LoginContainer = () => {
-  const { openSnackbar, setAuthUser } = useAppState();
-  const { post, error } = useAPI(false);
+  const { setAuthUser } = useAppState();
+  const { post, error } = useAPI(true);
+  useApiErrorHandler(error);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if(error) {
-      const responseMessage = error?.response?.data || "Something went wrong!";
-      openSnackbar({message: responseMessage || error.message, type: OPERATION_OUTCOME.FAILED})
-    }
-  }, [error, openSnackbar])
 
   const authenticateUser = async (user) => {
     const response = await post(

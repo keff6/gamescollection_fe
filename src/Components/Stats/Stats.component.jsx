@@ -1,6 +1,6 @@
 
 import proptypes from 'prop-types';
-import useAppState from "../../hooks/useAppState";
+import { useAppState } from "../../hooks";
 
 const Stats = () => {
   const { stats } = useAppState();

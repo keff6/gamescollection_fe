@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Joystick } from "react-bootstrap-icons";
 import proptypes from "prop-types";
-import useAppState from '../../hooks/useAppState';
+import { useAppState } from '../../hooks';
 import classes from './NavBar.module.css';
 
 const NavBar = ({ logOut }) =>{

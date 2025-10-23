@@ -1,23 +1,16 @@
 import { useEffect } from "react";
-import useAppState from "../../hooks/useAppState";
+import { useAppState, useAPI, useApiErrorHandler } from "../../hooks";
 import Stats from "./Stats.component";
-import { OPERATION_OUTCOME, API_ROUTES } from "../../utils/constants";
-import useAPI from "../../hooks/useAPI";
+import { API_ROUTES } from "../../utils/constants";
 
 const StatsContainer = () => {
-  const { setStatsTotals, openSnackbar } = useAppState();
+  const { setStatsTotals } = useAppState();
   const { get, error } = useAPI(false);
+  useApiErrorHandler(error);
 
   useEffect(() => {
     getTotals();
   },[])
-
-  useEffect(() => {
-    if(error) {
-      openSnackbar({message: error?.message, type: OPERATION_OUTCOME.FAILED});
-    }
-    
-  }, [error, openSnackbar]);
 
   const getTotals = async () => {
     const totalsResponse = await get(API_ROUTES.STATS.GET_TOTALS);
