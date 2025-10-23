@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import axiosPublicInstance from '../api/axios';
+import axiosPublicInstance from '../utils/axios';
 import useAxiosPrivate from './useAxiosPrivate';
 import { useLoading } from '../Config/context/LoadingContext';
 import { ERROR_CODES } from '../utils/constants';
 
 const useAPI = (isPrivate = false, entityName = 'Record') => {
   const axiosPrivateInstance = useAxiosPrivate()
-    const { startLoading, stopLoading } = useLoading();
-    const [error, setError] = useState(null)
+  const { startLoading, stopLoading } = useLoading();
+  const [error, setError] = useState(null)
 
   const instance = isPrivate ? axiosPrivateInstance : axiosPublicInstance;
 
