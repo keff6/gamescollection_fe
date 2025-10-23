@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import proptypes from 'prop-types';
-import useAppState from '../../hooks/useAppState';
+import { useAppState } from '../../hooks';
 import GenresTable from './GenresTable.component';
 import GenreForm from './GenreForm.component';
 import DeleteAlertModal from '../../Common/DeleteAlertModal/DeleteAlertModal.component';
