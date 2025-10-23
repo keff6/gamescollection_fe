@@ -63,7 +63,6 @@ GamesList.propTypes = {
   deleteGame: proptypes.func,
   editGame: proptypes.func,
   listOption: proptypes.string,
-  viewDetails: proptypes.func,
   getGames: proptypes.func,
   updateGame: proptypes.func,
 };

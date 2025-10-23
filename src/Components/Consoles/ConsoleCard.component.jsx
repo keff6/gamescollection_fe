@@ -74,7 +74,6 @@ ConsoleCard.propTypes = {
   consoleData: proptypes.object,
   deleteConsole: proptypes.func,
   editConsole: proptypes.func,
-  viewDetails: proptypes.func,
 }
 
 export default ConsoleCard;

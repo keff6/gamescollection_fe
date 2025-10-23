@@ -4,7 +4,7 @@ import useAppState from "../../hooks/useAppState";
 import ConsoleCard from "./ConsoleCard.component";
 import classes from "./Consoles.module.css";
 
-const ConsolesList = ({ editConsole, deleteConsole, viewDetails }) => {
+const ConsolesList = ({ editConsole, deleteConsole }) => {
   const { console } = useAppState();
   let consoles = console?.list || [];
 
@@ -18,7 +18,6 @@ const ConsolesList = ({ editConsole, deleteConsole, viewDetails }) => {
                 consoleData={c}
                 editConsole={editConsole}
                 deleteConsole={deleteConsole}
-                viewDetails={viewDetails}
               />
             </Col>
           ))}
@@ -33,7 +32,6 @@ const ConsolesList = ({ editConsole, deleteConsole, viewDetails }) => {
 ConsolesList.propTypes = {
   deleteConsole: proptypes.func,
   editConsole: proptypes.func,
-  viewDetails: proptypes.func,
 };
 
 export default ConsolesList;

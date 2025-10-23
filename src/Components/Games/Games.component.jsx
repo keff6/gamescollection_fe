@@ -8,7 +8,6 @@ import GamesListOptions from './GamesList/GamesListOptions.component';
 import GamesList from './GamesList/GamesList.container';
 import classes from './Games.module.css';
 import GameForm from './GameForm.component';
-import GameDetails from './GameDetails.component';
 import useSessionStorage from '../../hooks/useSessionStorage';
 import { SESSION_STORAGE } from '../../utils/constants';
 
@@ -27,7 +26,6 @@ const Games = ({
   const navigate = useNavigate();
   const { game, setSelectedGame, brand, console: gameConsole, user } = useAppState();
   const [showForm, setShowForm] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [storedUser] = useSessionStorage(SESSION_STORAGE.USER, null);
@@ -55,18 +53,9 @@ const Games = ({
     setShowForm(true)
   }
 
-  const handleViewDetails = (selectedGame) => {
-    setSelectedGame({...selectedGame})
-    setShowDetails(true)
-  }
-
   const handleCloseFormModal = () => {
     setIsEdit(false)
     setShowForm(false)
-  }
-
-  const handleCloseDetailsModal = () => {
-    setShowDetails(false)
   }
 
   const handleCancelDelete = () => {
@@ -102,7 +91,6 @@ const Games = ({
         editGame={handleEditGame}
         deleteGame={handleDeleteGame}
         getGames={getGames}
-        viewDetails={handleViewDetails}
         saveUpdatedChanges={updateGame}
       />
       <GameForm
@@ -117,10 +105,6 @@ const Games = ({
         show={showConfirmDelete}
         onCancel={handleCancelDelete}
         onConfirm={handleConfirmDelete}
-      />
-      <GameDetails
-        show={showDetails}
-        onHide={handleCloseDetailsModal}
       />
     </>
   )

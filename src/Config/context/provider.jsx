@@ -36,7 +36,7 @@ const APP_STATE = {
       pageSize: MAX_ITEMS_PER_PAGE,
     },
   },
-  info: {
+  stats: {
     totalGames: 0
   },
   snackbar: {
@@ -174,9 +174,9 @@ export const AppStateProvider = ({ children }) => {
           payload: userData,
         })
       },
-      setInfoTotals: (totals) => {
+      setStatsTotals: (totals) => {
         dispatch({
-          type: actions.SET_INFO_TOTALS,
+          type: actions.SET_STATS_TOTALS,
           payload: totals,
         })
       },

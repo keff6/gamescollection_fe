@@ -3,12 +3,12 @@ import proptypes from 'prop-types';
 import useAppState from "../../hooks/useAppState";
 
 const Stats = () => {
-  const { info } = useAppState();
+  const { stats } = useAppState();
 
   return (
     <div>
-      <p>Total Consoles: {info.totalConsoles || "--"}</p>
-      <p>Total Games: {info.totalGames || "--"}</p>
+      <p>Total Consoles: {stats.totalConsoles || "--"}</p>
+      <p>Total Games: {stats.totalGames || "--"}</p>
     </div>
   )
 }

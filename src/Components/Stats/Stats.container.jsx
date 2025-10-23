@@ -4,8 +4,8 @@ import Stats from "./Stats.component";
 import { OPERATION_OUTCOME, API_ROUTES } from "../../utils/constants";
 import useAPI from "../../hooks/useAPI";
 
-const InfoContainer = () => {
-  const { setInfoTotals, openSnackbar } = useAppState();
+const StatsContainer = () => {
+  const { setStatsTotals, openSnackbar } = useAppState();
   const { get, error } = useAPI(false);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const InfoContainer = () => {
 
   const getTotals = async () => {
     const totalsResponse = await get(API_ROUTES.STATS.GET_TOTALS);
-    setInfoTotals(totalsResponse || null);
+    setStatsTotals(totalsResponse || null);
   }
 
   return (
@@ -31,4 +31,4 @@ const InfoContainer = () => {
     )
 }
 
-export default InfoContainer
+export default StatsContainer

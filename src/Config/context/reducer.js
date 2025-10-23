@@ -142,11 +142,11 @@ export const reducer = (state, action) => {
           show: false
         }
       };
-    case actions.SET_INFO_TOTALS:
+    case actions.SET_STATS_TOTALS:
       return {
         ...state,
-        info: {
-          ...state.info,
+        stats: {
+          ...state.stats,
           ...action.payload
         }
       }

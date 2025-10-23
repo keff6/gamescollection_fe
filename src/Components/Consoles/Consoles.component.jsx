@@ -6,7 +6,6 @@ import useAppState from '../../hooks/useAppState';
 import ConsolesList from "./ConsolesList.component";
 import { DeleteAlertModal,Breadcrumb } from "../../Common";
 import ConsoleForm from './ConsoleForm.component';
-import ConsoleDetails from './ConsoleDetails.component';
 import classes from './Consoles.module.css';
 import ConsoleFilterOptions from './ConsoleFilterOptions';
 import useSessionStorage from '../../hooks/useSessionStorage';
@@ -29,7 +28,6 @@ const Consoles = ({
   const [storedBrand] = useSessionStorage(SESSION_STORAGE.BRAND, null)
 
   const [showForm, setShowForm] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const currentBrand = selectedBrand ? selectedBrand : storedBrand;
@@ -53,18 +51,9 @@ const Consoles = ({
     setShowForm(true)
   }
 
-  const handleViewDetails = (selectedConsole) => {
-    setSelectedConsole({...selectedConsole})
-    setShowDetails(true)
-  }
-
   const handleCloseFormModal = () => {
     setIsEdit(false)
     setShowForm(false)
-  }
-
-  const handleCloseDetailsModal = () => {
-    setShowDetails(false)
   }
 
   const handleCancelDelete = () => {
@@ -106,17 +95,12 @@ const Consoles = ({
       <ConsolesList
         editConsole={handleEditConsole}
         deleteConsole={handleDeleteConsole}
-        viewDetails={handleViewDetails}
       />
       
       <DeleteAlertModal
         show={showConfirmDelete}
         onCancel={handleCancelDelete}
         onConfirm={handleConfirmDelete}
-      />
-      <ConsoleDetails
-        show={showDetails}
-        onHide={handleCloseDetailsModal}
       />
     </>
   )
