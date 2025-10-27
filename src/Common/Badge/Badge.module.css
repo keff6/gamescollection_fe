@@ -6,15 +6,15 @@
 }
 
 .complete-background {
-  background-color: var(--lochinvar);
+  background-color: var(--complete-game);
 }
 
 .new-background {
-  background-color: var(--tropaz);
+  background-color: var(--new-game);
 }
 
 .digital-background {
-  background-color: var(--kumera);
+  background-color: var(--digital-game);
 }
 
 .finished-background {

@@ -101,5 +101,31 @@ export const API_ROUTES = {
   },
   STATS: {
     GET_TOTALS: '/stats/getTotals',
+    GET_BY_CONDITION: '/stats/byCondition',
+    GET_TOTAL_GAMES_BY_CONSOLE: '/stats/getTotalGamesByConsole',
+    GET_GENRES_DISTRIBUTION: '/stats/genresDist',
+    GET_TOP_5_CONSOLES: '/stats/topConsoles',
+    GET_LATEST_ADDITIONS: '/stats/latestAdditions',
+    GET_NOW_PLAYING: '/stats/nowPlaying'
   }
 };
+
+export const CONDITION_GRAPH_COLORS = [
+  '#0088FE',
+  '#00C49F',
+  '#FFBB28',
+  '#FF8042' 
+]
+
+export const GRAPH_COLORS = [
+    "#8884d8",
+    "#82ca9d",
+    "#ffc658",
+    "#ff8042",
+    "#8dd1e1",
+    "#a4de6c",
+    "#d0ed57",
+    "#d88884",
+    "#84d8b0",
+    "#c884d8",
+  ];

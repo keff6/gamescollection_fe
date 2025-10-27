@@ -6,6 +6,7 @@ import { CONSOLE_GENERATIONS } from "../../utils/constants";
 
 const CONSOLE_DEFAULT = {
   name: "",
+  shortName: "",
   brandId: "",
   year: "",
   generation: "",
@@ -129,6 +130,17 @@ const ConsoleForm = ({
             <Form.Control.Feedback type="invalid">
               Please enter a valid text.
             </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="name">
+            <Form.Label>Short Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="shortName"
+              maxLength={50}
+              placeholder="Enter console short name or acronym"
+              value={consoleObj.shortName}
+              onChange={(e) => handleChange("shortName", e.target.value)}
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="brand">
             <Form.Label>Brand</Form.Label>

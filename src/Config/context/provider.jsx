@@ -36,9 +36,6 @@ const APP_STATE = {
       pageSize: MAX_ITEMS_PER_PAGE,
     },
   },
-  stats: {
-    totalGames: 0
-  },
   snackbar: {
     message: '',
     type: '',

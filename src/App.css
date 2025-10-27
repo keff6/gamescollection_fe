@@ -60,6 +60,12 @@
   --playing-badge-background: #e26613;
   --finished-badge-background: #42b623;
   --high-contrast-green: #00ffb1;
+  --light-green-label: #55e1e0;
+  /* game conditions */
+  --complete-game: #00C49F;
+  --new-game: #0088FE;
+  --digital-game: #FFBB28;
+
 }
 
 /***************************************************/

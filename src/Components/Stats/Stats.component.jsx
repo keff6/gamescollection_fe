@@ -1,20 +1,60 @@
 
 import proptypes from 'prop-types';
-import { useAppState } from "../../hooks";
+import { Col, Row, Container } from 'react-bootstrap';
+import ConditionGraph from './graphs/ConditionGraph.component';
+import TimelineGraph from './graphs/TimelineGraph.component';
+import GenresDistribution from './graphs/GenresDistribuition';
+import TopConsolesByGames from './graphs/TopConsolesByGames.component';
+import GeneralStats from './graphs/GeneralStats.component';
+import LatestAdditions from './graphs/LatestAdditions.component';
+import NowPlaying from './graphs/PlayingStatus';
 
-const Stats = () => {
-  const { stats } = useAppState();
+const Stats = ({ totals, byCondition, totalByConsole, top5Consoles, genresDist, latestAdditions, nowPlaying }) => {
+
+  console.log({totalByConsole})
 
   return (
-    <div>
-      <p>Total Consoles: {stats.totalConsoles || "--"}</p>
-      <p>Total Games: {stats.totalGames || "--"}</p>
-    </div>
+    <Container>
+      <Row>
+        <Col md={12} lg={3}>
+          {totals && <GeneralStats data={totals}/>}
+        </Col>
+        <Col md={12} lg={5}>
+          <ConditionGraph data={byCondition}/>
+        </Col>
+        <Col md={12} lg={4}>
+          <TopConsolesByGames data={top5Consoles}/>
+        </Col>
+      </Row>
+      <Row>
+        <Col sm={12}>
+          <TimelineGraph data={totalByConsole}/>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12} lg={4}>
+          <GenresDistribution data={genresDist}/>
+        </Col>
+        <Col md={12} lg={4}>
+          <LatestAdditions data={latestAdditions}/>
+        </Col>
+        <Col md={12} lg={4}>
+          <NowPlaying data={nowPlaying}/>
+        </Col>
+      </Row>
+    </Container>
+    
   )
 }
 
 Stats.propTypes = {
-  getTotals: proptypes.func,
+  totals: proptypes.object,
+  byCondition: proptypes.array,
+  totalByConsole: proptypes.array,
+  top5Consoles: proptypes.array,
+  genresDist: proptypes.array,
+  latestAdditions: proptypes.array,
+  nowPlaying: proptypes.array,
 }
 
 export default Stats;

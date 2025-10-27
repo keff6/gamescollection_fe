@@ -142,14 +142,6 @@ export const reducer = (state, action) => {
           show: false
         }
       };
-    case actions.SET_STATS_TOTALS:
-      return {
-        ...state,
-        stats: {
-          ...state.stats,
-          ...action.payload
-        }
-      }
     case actions.SET_AUTH_USER:
       return {
         ...state,

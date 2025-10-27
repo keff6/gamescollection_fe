@@ -1,0 +1,74 @@
+.section-container {
+  text-align: center;
+  /* max-height: 250px; */
+}
+
+.section-container h5 {
+  color: var(--light-green-label);
+  font-weight: bold;
+}
+
+.section-container h6 {
+  color: var(--light-green-label);
+  font-weight: 200;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+
+.graph-labels-container {
+  display: inline-flex;
+  width: 100%;
+}
+
+.graph-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+.labels-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.chart-styles {
+  height: calc(100% - 20px);
+  width: 33%;
+  flex: 1 1 100px;
+  aspect-ratio: 1; 
+}
+
+.totals-container {
+  margin-top: 16px;
+}
+
+.games-list {
+  /* list-style: none; */
+  font-size: 12px;
+  text-align: left;
+}
+
+.small-text {
+  font-size: small;
+}
+
+.main-text {
+  font-size: xx-large;
+  line-height: normal;
+}
+
+@media (max-width: 768px) {
+  .totals-container {
+    margin-bottom: 20px;
+  }
+  .section-container h5 {
+    border-bottom: 1px solid var(--perano);
+    padding-bottom: 5px;
+  }
+}
