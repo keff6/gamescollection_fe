@@ -1,0 +1,5 @@
+.export-container {
+  border: 1px solid var(--light-blue-contrast);
+  border-radius: 10px;
+  padding: 1rem;
+}

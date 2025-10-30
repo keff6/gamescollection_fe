@@ -107,6 +107,10 @@ export const API_ROUTES = {
     GET_TOP_5_CONSOLES: '/stats/topConsoles',
     GET_LATEST_ADDITIONS: '/stats/latestAdditions',
     GET_NOW_PLAYING: '/stats/nowPlaying'
+  },
+  EXPORT: {
+    EXPORT_DATA: '/export/data',
+    // EXPORT_DB_DUMP: '/export/dump' Disabled for security reasons
   }
 };
 

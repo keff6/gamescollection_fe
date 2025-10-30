@@ -32,9 +32,11 @@ const NavBar = ({ logOut }) =>{
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Brands</Nav.Link>
             <Nav.Link as={Link} to="/stats">Stats</Nav.Link>
+            <Nav.Link as={Link} to="/export">Export</Nav.Link>
             {currentUser && <NavDropdown title="Admin" id="collasible-nav-dropdown">
               <NavDropdown.Item as={Link} to="/brands">Brands</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/genres">Genres</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/export">Export</NavDropdown.Item>
             </NavDropdown>}
           </Nav>
           <div className={`${classes.divider} d-block d-md-none`} />

@@ -7,7 +7,7 @@ import GenresDistribution from './graphs/GenresDistribuition';
 import TopConsolesByGames from './graphs/TopConsolesByGames.component';
 import GeneralStats from './graphs/GeneralStats.component';
 import LatestAdditions from './graphs/LatestAdditions.component';
-import NowPlaying from './graphs/PlayingStatus';
+import PlayingStatus from './graphs/PlayingStatus';
 
 const Stats = ({ totals, byCondition, totalByConsole, top5Consoles, genresDist, latestAdditions, nowPlaying }) => {
 
@@ -39,7 +39,7 @@ const Stats = ({ totals, byCondition, totalByConsole, top5Consoles, genresDist, 
           <LatestAdditions data={latestAdditions}/>
         </Col>
         <Col md={12} lg={4}>
-          <NowPlaying data={nowPlaying}/>
+          <PlayingStatus data={nowPlaying}/>
         </Col>
       </Row>
     </Container>
