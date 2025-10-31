@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Spinner } from "react-bootstrap";
 import { useAppState, useRefreshToken, useSessionStorage } from '../../hooks';
 import { SESSION_STORAGE } from "../../utils/constants";
 
@@ -33,7 +32,7 @@ const PersistLogin = () => {
 
   return (
     <>
-      {isLoading ? <Spinner />: <Outlet />}
+      {!isLoading && <Outlet />}
     </>
   )
 }

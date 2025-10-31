@@ -53,14 +53,15 @@ const router = createBrowserRouter([
                 ]
               },
               {
+                path: "admin",
                 element: <RequireAuth />,
                 children: [
                   {
-                    path: "/brands",
+                    path: "brands",
                     element: <BrandsContainer />,
                   },
                   {
-                    path: "/genres",
+                    path: "genres",
                     element: <GenresContainer />,
                   },
                 ],

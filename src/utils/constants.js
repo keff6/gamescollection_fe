@@ -68,19 +68,19 @@ export const API_ROUTES = {
     REFRESH: '/refresh',
   },
   GENRES: {
-    GET_ALL: '/genres',
+    GET_ALL: '/genres/all',
     ADD: '/genres/add',
     UPDATE: (id) => `/genres/edit/${id}`,
     DELETE: (id) => `/genres/remove/${id}`
   },
   BRANDS: {
-    GET_ALL: '/brands',
+    GET_ALL: '/brands/all',
     ADD: '/brands/add',
     UPDATE: (id) => `/brands/edit/${id}`,
     DELETE: (id) => `/brands/remove/${id}`
   },
   CONSOLES: {
-    GET_ALL: '/consoles',
+    GET_ALL: '/consoles/all',
     GET_BY_ID: (id) => `/consoles/${id}`,
     GET_BY_BRAND: (id, filter) => `/consoles/brand/${id}${
       (filter === CONSOLE_FILTER_OPTIONS.ALL) ? '' :
@@ -91,7 +91,7 @@ export const API_ROUTES = {
     DELETE: (id) => `/consoles/remove/${id}`,
   },
   GAMES: {
-    GET_ALL: '/games',
+    GET_ALL: '/games/all',
     GET_WISHLIST_BY_CONSOLE: (id) => `/games/wishlist/${id}`,
     ADD: '/games/add',
     UPDATE: (id) => `/games/edit/${id}`,

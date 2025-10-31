@@ -8,7 +8,7 @@ const Content = ({children}) => {
   return (
       <main >
         <Container>
-          <Row className="d-flex justify-content-center">
+          <Row className="d-flex justify-content-center pb-4">
             <Col lg={10}>{children}</Col>
           </Row>
         </Container>

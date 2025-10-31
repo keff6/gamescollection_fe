@@ -7,6 +7,7 @@ import Footer from "./Footer/Footer.component";
 import { useEffect } from "react";
 import { useAppState, useSessionStorage}   from "../hooks"
 import { SESSION_STORAGE } from "../utils/constants";
+import ScrollToTop from "./ScrollToTop";
 
 const Layout = ({ children }) => {
   const { setAuthUser, setSelectedBrand, setSelectedConsole } = useAppState();
@@ -25,6 +26,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <ScrollToTop />
       <NavBar />
       <Content>
         <Outlet>{children}</Outlet>

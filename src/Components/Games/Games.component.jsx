@@ -11,7 +11,7 @@ import { SESSION_STORAGE } from '../../utils/constants';
 import classes from './Games.module.css';
 
 const NavigationItems = (brandId) => [
-  { text: 'Brands', href:"/" },
+  { text: 'Brands', href:"/brands" },
   { text: 'Consoles', href:`/${brandId}/consoles` },
   { text: 'Games', href:"id:/games", active: true },
 ];

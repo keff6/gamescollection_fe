@@ -56,9 +56,8 @@ const NavBar = ({ logOut }) =>{
             <Nav.Link as={Link} to="/brands" onClick={() => setIsExpanded(false)}>Brands</Nav.Link>
             <Nav.Link as={Link} to="/export" onClick={() => setIsExpanded(false)}>Export</Nav.Link>
             {currentUser && <NavDropdown title="Admin" id="collasible-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/brands" onClick={() => setIsExpanded(false)}>Brands</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/genres" onClick={() => setIsExpanded(false)}>Genres</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/export" onClick={() => setIsExpanded(false)}>Export</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/admin/brands" onClick={() => setIsExpanded(false)}>Brands</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/admin/genres" onClick={() => setIsExpanded(false)}>Genres</NavDropdown.Item>
             </NavDropdown>}
           </Nav>
           <div className={`${classes.divider} d-block d-md-none`} />

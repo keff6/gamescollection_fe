@@ -12,7 +12,7 @@ import classes from './Consoles.module.css';
 
 
 const NavigationItems = [
-  { text: 'Brands', href:"/" },
+  { text: 'Brands', href:"/brands" },
   { text: 'Consoles', href:"id:/consoles", active: true}
 ];
 
