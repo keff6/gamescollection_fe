@@ -1,0 +1,35 @@
+.footer-container {
+  height: 50px;
+  background-color: var(--main-dark-1);
+  color: var(--white-1);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+}
+
+.name-label {
+  font-size: 14px;
+}
+
+.divider {
+  width: 1px; /* Adjust thickness as needed */
+  height: 18px; /* Adjust height as needed */
+  background-color: #ccc; /* Set desired color */
+  margin: 0 10px; /* Add spacing on either side */
+}
+
+.icons-container {
+  display: flex;
+  gap: 10px;
+  line-height: 16px;
+}
+
+.icons-container svg:hover{
+  color: var(--picton-blue);
+}

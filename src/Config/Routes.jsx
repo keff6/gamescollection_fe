@@ -32,6 +32,10 @@ const router = createBrowserRouter([
                 children: [
                   {
                     path: "/",
+                    element: <Stats />
+                  },
+                  {
+                    path: "/brands",
                     element: <Brands />,
                   },
                   {
@@ -41,10 +45,6 @@ const router = createBrowserRouter([
                   {
                     path: "/:consoleId/games",
                     element: <Games />
-                  },
-                  {
-                    path: "/stats",
-                    element: <Stats />
                   },
                   {
                     path: "/export",

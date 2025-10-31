@@ -70,28 +70,6 @@
   font-weight: 400;
 }
 
-/***************************************************/
-/* VIEW DETAILS                                    */
-/***************************************************/
-
-.details-container {
-  display: flex;
-}
-
-.left-labels, .right-labels {
-  display: grid;
-}
-
-.data-label {
-  color: var(--silver-sand);
-  margin-right: 16px;
-  font-weight: bold;
-}
-
-.data-text {
-  color: var(--regent-grey);
-  font-weight: bold;
-}
 
 /***************************************************/
 /* CARD                                   */
@@ -104,7 +82,7 @@
   padding: 8px 16px !important;
   background-color: var(--background-main-dark);
   border-radius: 5px;
-  border: 1px solid var(--light-blue-contrast);
+  border: 2px solid var(--slightly-visible-contrast);
   /* height: 175px; */
 }
 

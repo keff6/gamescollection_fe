@@ -41,8 +41,8 @@
   --main-dark-1: #010917;
   --main-button: #29698c; /*#144b82;*/
   --main-button-contrast: #215978; /*#0c3157;*/
-  --secondary-button: #659db8; /*#3f738c;*/
-  --secondary-button-contrast: #568da8; /*#3f738c;*/
+  --secondary-button: #00bcd4; /*#3f738c;*/
+  --secondary-button-contrast: #00bcd4; /*#3f738c;*/
   --main-border: #3d92a8;
   --white-1: #C9CED8;
   --white-2: #78818E;
@@ -65,6 +65,8 @@
   --complete-game: #00C49F;
   --new-game: #0088FE;
   --digital-game: #FFBB28;
+  --slightly-visible-contrast: #052f38;
+  --dark-background: #021d2c;
 
 }
 
@@ -86,7 +88,7 @@ h5 {
 }
 
 main {
-  min-height: calc(100vh - 56px);
+  min-height: calc(100vh - 106px);
   background-color: var(--background-main-dark);
   color: var(--white);
 }
@@ -171,6 +173,10 @@ tbody {
 
 .form-check-input:checked {
   background-color: var(--checked-green);
+}
+
+.nav-tabs {
+  border-color: var(--slightly-visible-contrast);
 }
 
 /***************************************************/
@@ -264,8 +270,8 @@ tbody {
 }
 
 .btn-outline-primary {
-  border-color: var(--light-blue-contrast);
-  color: var(--light-blue-contrast);
+  border-color: var(--secondary-button);
+  color: var(--secondary-button);
 }
 
 .btn-outline-primary:hover {

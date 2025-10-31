@@ -30,8 +30,8 @@ const NavBar = ({ logOut }) =>{
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/">Brands</Nav.Link>
-            <Nav.Link as={Link} to="/stats">Stats</Nav.Link>
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/brands">Brands</Nav.Link>
             <Nav.Link as={Link} to="/export">Export</Nav.Link>
             {currentUser && <NavDropdown title="Admin" id="collasible-nav-dropdown">
               <NavDropdown.Item as={Link} to="/brands">Brands</NavDropdown.Item>

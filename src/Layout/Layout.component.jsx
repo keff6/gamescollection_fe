@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import Content from "./Content/Content.component";
 import { SnackBar } from "../Common";
 import NavBar from "./NavBar/NavBar.container";
+import Footer from "./Footer/Footer.component";
 import { useEffect } from "react";
 import { useAppState, useSessionStorage}   from "../hooks"
 import { SESSION_STORAGE } from "../utils/constants";
@@ -29,6 +30,7 @@ const Layout = ({ children }) => {
         <Outlet>{children}</Outlet>
       </Content>
       <SnackBar />
+      <Footer />
     </>
   );
 };

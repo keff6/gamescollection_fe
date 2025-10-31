@@ -41,6 +41,7 @@
   min-height: 80px;
   width: 100%;
   /* border: none; */
+  
   margin: 0;
   padding: 0;
   border-color: var(--main-border);
@@ -58,7 +59,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 8px 16px;
-  background-color: var(--background-secondary-dark);
+  border: 1px solid var(--slightly-visible-contrast);
+  background-color: var(--dark-background);
   border-radius: 5px;
 }
 

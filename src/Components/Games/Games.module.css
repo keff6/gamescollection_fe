@@ -52,17 +52,17 @@
 
 .custom-nav-link-active {
   padding: 0.5rem 4px !important;
-  background-color: var(--black) !important;
-  border-color: var(--regent-grey) !important;
+  background-color: var(--main-dark-background) !important;
+  border-color: var(--secondary-button) !important;
   font-weight: 900 !important;
-  color: var(--picton-blue) !important;
+  color: var(--secondary-button) !important;
 }
 
 .options-buttons > label, 
 .options-buttons > label:hover, 
 .options-buttons > label:active {
-  border-color: var(--light-blue-contrast) !important;
-  color: var(--light-blue-contrast) !important;
+  border-color: var(--secondary-button) !important;
+  color: var(--secondary-button) !important;
 }
 
 
@@ -179,29 +179,6 @@ input:checked + .toggle-button {
   background-color: #17252f;
 }
 
-/***************************************************/
-/* VIEW DETAILS                                    */
-/***************************************************/
-
-.details-container {
-  display: flex;
-  position: relative;
-}
-
-.left-labels, .right-labels {
-  display: grid;
-}
-
-.data-label {
-  color: var(--silver-sand);
-  margin-right: 16px;
-  font-weight: bold;
-}
-
-.data-text {
-  color: var(--regent-grey);
-  /* font-weight: bold; */
-}
 
 /***************************************************/
 /* LETTERS DROPDOWN                                   */
@@ -260,15 +237,15 @@ display: flex;
 }
 
 .game-item-row {
-  border: 1px solid var(--light-blue-contrast);
-  background-color: var(--card-background-1);
+  border: 2px solid var(--slightly-visible-contrast);
+  background-color: var(--background-main-dark);
   border-radius: 4px;
   margin-bottom: 10px;
   padding: 8px;
 }
 
 .game-item-row:hover {
-  border: 1px solid #19f7fb;
+  border: 2px solid #03696b;
 }
 
 
