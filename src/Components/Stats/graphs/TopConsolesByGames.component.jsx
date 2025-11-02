@@ -53,7 +53,7 @@ const TopConsolesByGames = ({ data = []}) => {
               backgroundColor: "#000e1d",
               borderRadius: "6px",
               color: "#fff",
-              border: "1px solid #8884d8",
+              border: "1px solid #388a81",
             }}
           />
           <Bar dataKey="value" stackId="a">

@@ -79,7 +79,7 @@ const BrandForm = ({
       centered
     >
       <Modal.Header closeButton={false}>
-        <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Title id="contained-modal-title-vcenter" className='main-title'>
           {isEdit ? 'Edit' : 'Add'} Brand
         </Modal.Title>
       </Modal.Header>

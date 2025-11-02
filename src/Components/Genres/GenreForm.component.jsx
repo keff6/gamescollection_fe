@@ -70,7 +70,7 @@ const GenreForm = ({
       centered
     >
       <Modal.Header closeButton={false}>
-        <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Title id="contained-modal-title-vcenter" className='main-title'>
           {isEdit ? 'Edit' : 'Add'} Genre
         </Modal.Title>
       </Modal.Header>

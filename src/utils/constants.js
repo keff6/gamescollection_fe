@@ -115,8 +115,8 @@ export const API_ROUTES = {
 };
 
 export const CONDITION_GRAPH_COLORS = [
-  '#0088FE',
-  '#00C49F',
+  '#204a83',
+  '#03886f',
   '#FFBB28',
   '#FF8042' 
 ]

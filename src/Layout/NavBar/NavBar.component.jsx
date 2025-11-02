@@ -63,21 +63,37 @@ const NavBar = ({ logOut }) =>{
           <div className={`${classes.divider} d-block d-md-none`} />
           <Nav>
             {currentUser ?
-                <NavDropdown
-                  title={getInitialsCircle()}
-                  id="user-logged-dropdown"
-                  className={classes.userDropDown}
-                >
-                  <div className={classes.userSigned}>
-                    {getInitialsCircle()}
-                    <div className={classes.labelContainer}>
-                      <span className={classes.signedLabel}>Welcome!</span>
-                      <span className={classes.userName}>{`${currentUser?.name} ${currentUser?.lastName}`}</span>
-                    </div>
+                <>
+                  <div className="d-none d-lg-block">
+                    <NavDropdown
+                      title={getInitialsCircle()}
+                      id="user-logged-dropdown"
+                      className={classes.userDropDown}
+                    >
+                      <div className={classes.userSigned}>
+                        {getInitialsCircle()}
+                        <div className={classes.labelContainer}>
+                          <span className={classes.signedLabel}>Welcome!</span>
+                          <span className={classes.userName}>{`${currentUser?.name} ${currentUser?.lastName}`}</span>
+                        </div>
+                      </div>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item onClick={logOut}>Log out</NavDropdown.Item>
+                    </NavDropdown>
                   </div>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item onClick={logOut}>Log out</NavDropdown.Item>
-                </NavDropdown>
+                  <div className="d-lg-none">
+                    <div className={classes.userSignedMobile}>
+                      {getInitialsCircle()}
+                      <div className={classes.labelContainer}>
+                        <span className={classes.signedLabel}>Welcome!</span>
+                        <span className={classes.userName}>{`${currentUser?.name} ${currentUser?.lastName}`}</span>
+                      </div>
+                      <hr />
+                      <NavDropdown.Item onClick={logOut}>Log out</NavDropdown.Item>
+                    </div>
+                    
+                  </div>
+                </>
               :
               <Nav.Link as={Link} to="/login" onClick={() => setIsExpanded(false)}>Log In</Nav.Link>
             }

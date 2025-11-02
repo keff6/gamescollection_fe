@@ -13,8 +13,8 @@ const DeleteAlertModal = ({
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Confirm delete</Modal.Title>
+        <Modal.Header closeButton={false}>
+          <Modal.Title className='main-title'>Confirm delete</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>

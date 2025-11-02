@@ -8,7 +8,7 @@ const GenresTable = ({ genres, deleteGenre, editGenre }) => (
     {(genres.length > 0) &&
     <>
       <div className="results-text">{genres.length || '--'} results</div>
-      <Table>
+      <Table className={classes.table}>
         <thead>
           <tr>
             <th className="w-75">Genre</th>

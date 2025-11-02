@@ -2,53 +2,22 @@
 /* THEME COLORS                                    */
 /***************************************************/
 :root {
-  --portage: #97a4eb;
-  --moody-blue: #7785d2;
-  --medium-purple: #844bec;
-  --daisy-bush: #52278a;
-  --shark: #252529;
   --black-pearl: #061c32;
   --picton-blue: #35eaea;
-  --teal: #008080;
-  --st-tropaz: #27489230;
   --tuna: #353639;
-  --sirocco: #7a7f7f;
-  --edward: #a2a9a9;
-  --silver-sand: #bac2c2;
-  --waikawa-grey: #2b426dba;
-  --regent-grey: #7d8d9d;
+  --text-grey-3: #7a7f7f;
   --lynch: #5D7389;
-  --blue-bayoux: #192633d6;
-  --mirage: #1e2637;
   --deep-cove: #06204652;
-  --white: #fff;
-  --fiord: #424a65;
   --falu-red: #771717;
-  --monza: #C4081D;
-  --black: #000;
   --perano: #374563;
-  --jaguar: #0f0e2a;
-  --tropaz: #2b5592;
-  --lochinvar: #2b8992;
-  --kumera: #92682b;
   --cancan: #dba0a0;
   --dark-tan: #711010;
-  --cello: #1F4761;
   --elephant: #163c55;
-  /* revamping */
-  --background-main-dark: #000e1d;
-  --background-secondary-dark: #1d2e43; /* #122235; */
-  --main-dark-1: #010917;
-  --main-button: #29698c; /*#144b82;*/
-  --main-button-contrast: #215978; /*#0c3157;*/
-  --secondary-button: #00bcd4; /*#3f738c;*/
-  --secondary-button-contrast: #00bcd4; /*#3f738c;*/
-  --main-border: #3d92a8;
-  --white-1: #C9CED8;
-  --white-2: #78818E;
+  --main-button: #29698c;
+  --main-button-contrast: #215978;
+  --secondary-button-contrast: #00bcd4;
   --light-blue-contrast: #1087a0;
   --light-blue-contrast-2: #5ab5c1;
-  /* --modal-backgound: 1a3c4f; */
   --modal-header: #1a3c4f;
   --control-background: #1f2d3b; 
   --control-border: #474747;
@@ -58,16 +27,28 @@
   --outline-button-background: #1087a02b;
   --backlog-badge-background: #a6bd43;
   --playing-badge-background: #e26613;
-  --finished-badge-background: #42b623;
-  --high-contrast-green: #00ffb1;
   --light-green-label: #55e1e0;
-  /* game conditions */
   --complete-game: #00C49F;
   --new-game: #0088FE;
   --digital-game: #FFBB28;
-  --slightly-visible-contrast: #052f38;
-  --dark-background: #021d2c;
-
+  --background-main-dark: #0f1f2e; 
+  --dark-background: #182b3c; 
+  --main-dark-1: #040f19;
+  --secondary-button: #1f818e;
+  --complete-game: #03886f;
+  --new-game: #204a83;
+  --finished-badge-background: #217f08;
+  --playing-badge-background: #bf7405;
+  --text-light-green: #4f9a9c;
+  --hover-option-background: #388a81;
+  --hover-card: #1d354b;
+  --text-white-2: #C9CED8;
+  --text-white-1: #d3d9dc;
+  --text-clear-blue-1: #a7c4db;
+  --text-clear-blue-2: #6d9bc1;
+  --text-grey-2: #69808c;
+  --text-grey-1: #9ea8ae;
+  --text-green-contrast-1: #55e1e0;
 }
 
 /***************************************************/
@@ -90,12 +71,12 @@ h5 {
 main {
   min-height: calc(100vh - 106px);
   background-color: var(--background-main-dark);
-  color: var(--white);
+  color: var(--text-white-1);
 }
 
 main a,
 main a:visited {
-  color: var(--teal) !important;
+  color: var(--secondary-button) !important;
   text-decoration: none !important;
 }
 
@@ -109,11 +90,11 @@ main a svg {
 }
 
 .table {
-  color: var(--white);
+  color: var(--text-white-1);
 }
 
 th {
-  background-color: var(--st-tropaz) !important;
+  background-color: var(--dark-background) !important;
   color: var(--light-blue-contrast-2);
   letter-spacing: 1px;
 }
@@ -124,7 +105,7 @@ tbody {
 
 .empty-list-text {
   text-align: center;
-  color: var(--sirocco);
+  color: var(--text-grey-1);
   padding-top: 30px;
 }
 
@@ -135,13 +116,17 @@ tbody {
 }
 
 .dropdown-item {
-  color: var(--white-1) !important;
+  color: var(--text-white-1) !important;
 }
 
 .dropdown-item:hover,
 .dropdown-item:active {
-  color: var(--white) !important;
-  background-color: var(--black-pearl);
+  color: var(--text-white-1) !important;
+  background-color: var(--hover-option-background);
+}
+
+.form-label {
+  color: var(--text-grey-1)
 }
 
 .form-check-input {
@@ -168,7 +153,7 @@ tbody {
 .form-check-input {
   background-color: var(--control-background);
   border-color: var(--control-border);
-  color: var(--white)
+  color: var(--text-white-1)
 }
 
 .form-check-input:checked {
@@ -176,7 +161,20 @@ tbody {
 }
 
 .nav-tabs {
-  border-color: var(--slightly-visible-contrast);
+  border-color: var(--tuna);
+}
+
+.main-title {
+  color: var(--text-white-2);
+  font-size: 26px;
+}
+
+.sub-title-1 {
+  color: var(--text-grey-2);
+}
+
+.sub-title-2 {
+  color: var(--text-clear-blue-1);
 }
 
 /***************************************************/
@@ -197,7 +195,7 @@ tbody {
 /***************************************************/
 .modal-header, .modal-footer {
   background-color: var(--modal-header);
-  color: var(--white);
+  color: var(--text-white-1);
   border-color: var(--mirage);
 }
 
@@ -228,14 +226,14 @@ tbody {
 }
 
 .accordion-button, .accordion-item {
-  background-color: var(--regent-grey);
+  background-color: var(--text-grey-1);
   color: var(--black-pearl);
   border: none;
   border-radius: 0%;
 }
 .accordion-button:not(.collapsed) {
   background-color: var(--lynch);
-  color: var(--white);
+  color: var(--text-white-1);
   border: none;
   border-radius: 0%;
   box-shadow: none;
@@ -247,7 +245,7 @@ tbody {
 
 .modal-body, .accordion-body {
   background-color: var(--background-main-dark);
-  color: var(--white-1);
+  color: var(--text-white-1);
 }
 
 
@@ -287,10 +285,11 @@ border-color: var(--light-blue-contrast) !important;
   color: var(--light-blue-contrast) !important;
 }
 
+
 .btn-info {
   background-color: var(--secondary-button);
   border-color: var(--secondary-button);
-  color: var(--white);
+  color: var(--text-white-1);
 }
 
 .btn-info:focus,
@@ -298,18 +297,18 @@ border-color: var(--light-blue-contrast) !important;
 .btn-info:active {
   background-color: var(--secondary-button-contrast) !important;
   border-color: var(--secondary-button-contrast)  !important;
-  color: var(--white) !important;
+  color: var(--text-white-1) !important;
 }
 
 .btn:disabled {
-  background-color: var(--sirocco);
-  border-color: var(--sirocco);
+  background-color: var(--text-grey-1);
+  border-color: var(--text-grey-1);
 }
 
 .results-text {
   font-size: 14px;
   text-align: end;
-  color: aqua;
+  color: var(--text-grey-1);
 }
 
 /***************************************************/
@@ -327,7 +326,7 @@ border-color: var(--light-blue-contrast) !important;
 }
 
 .spinner-border {
-  border-color: var(--high-contrast-green);
+  border-color: var(--secondary-button-contrast);
   border-right-color: transparent;
 }
 /***************************************************/
@@ -358,6 +357,10 @@ border-color: var(--light-blue-contrast) !important;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .main-title {
+    font-size: 22px;
   }
 }
 

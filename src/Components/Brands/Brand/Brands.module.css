@@ -11,6 +11,14 @@
 .table {
   table-layout: fixed;
   width: 100%;
+  color: var(--text-white-2);
+}
+
+.table th {
+  color: var(--text-clear-blue-2);
+}
+.table td {
+  color: var(--text-white-2);
 }
 
 .width15 {

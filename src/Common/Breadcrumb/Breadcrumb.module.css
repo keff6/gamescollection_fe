@@ -13,11 +13,11 @@
 
 .breadcrumb-extended svg {
   display: flex;
-  color: var(--edward)
+  color: var(--text-grey-1)
 }
 
 .breadcrumb-extended svg:hover {
   display: flex;
-  color: var(--white)
+  color: var(--text-white-1)
 }
 

@@ -3,7 +3,7 @@
 }
 
 .grey-text {
-  color: var(--sirocco);
+  color: var(--text-grey-1);
 }
 
 .mainDashboardContainer {
@@ -44,9 +44,7 @@
   
   margin: 0;
   padding: 0;
-  border-color: var(--main-border);
   border-radius: 5px;
-  background-color: var(--background-secondary-dark);
 }
 
 .brand-main-container:hover {
@@ -59,18 +57,19 @@
   align-items: center;
   justify-content: space-between;
   padding: 8px 16px;
-  border: 1px solid var(--slightly-visible-contrast);
   background-color: var(--dark-background);
-  border-radius: 5px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(8 11 13 / 50%);
 }
 
 .brand-text {
-  color: var(--white);
+  color: var(--text-white-2);
   font-size: 30px;
+  font-weight: 600;
 }
 
 .card-text p {
-  color: var(--white-1);
+  color: var(--text-grey-2);
   margin: 0 0 6px 0;
 }
 

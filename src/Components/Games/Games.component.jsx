@@ -74,9 +74,9 @@ const Games = ({
       <div>
         <header className={classes.header}>
           <div className={classes.gamesHeader}>
-            <h2>{currentConsole?.name}</h2>
+            <h2 className='main-title'>{currentConsole?.name}</h2>
             <h6>{currentBrand?.name}</h6>
-            <h5>{totalGames} {totalGames === 1 ? 'game' : 'games'}</h5>
+            <h5 className='sub-title-2 '>{totalGames} {totalGames === 1 ? 'game' : 'games'}</h5>
           </div>
           {currentUser &&
           <>

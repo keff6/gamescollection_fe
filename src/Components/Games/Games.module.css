@@ -69,14 +69,14 @@
 input:checked + .toggle-button {
   border-color: var(--main-button) !important;
   background-color: var(--secondary-button) !important;
-  color: var(--white) !important;
+  color: var(--text-white-1) !important;
 }
 
 /***************************************************/
 /* FORMS                                   */
 /***************************************************/
 .custom-container {
-  border: 1px solid var(--sirocco);
+  border: 1px solid var(--text-grey-3);
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 20px;
@@ -104,47 +104,6 @@ input:checked + .toggle-button {
   font-size: medium;
 }
 
-/***************************************************/
-/* TABLE LIST                                 */
-/***************************************************/
-.table {
-  width: 100%;
-  table-layout: fixed;
-}
-
-.width50px {
-  width: 50px;
-}
-
-.width80px {
-  width: 80px;
-}
-
-.width10 {
-  width: 10%;
-}
-
-.width15 {
-  width: 15%;
-}
-
-.width20 {
-  width: 20%;
-}
-
-.width35 {
-  width: 35%;
-}
-
-.table-buttons-container {
-  display: flex;
-  justify-content: end;
-  text-align: right;
-}
-
-.table-buttons-container button {
-  margin-right: 10px;
-}
 
 .text-overflow {
   white-space: nowrap;
@@ -161,18 +120,14 @@ input:checked + .toggle-button {
 }
 
 .games-header h6 {
-  color: var(--sirocco);
+  color: var(--text-grey-2);
   font-style: italic;
   font-weight: 700;
 }
 
-/* a.danger-link {
-  color: var(--falu-red) !important;
-} */
-
 .danger-link:hover {
   background-color: var(--falu-red) !important;
-  color: var(--white) !important;
+  color: var(--text-white-1) !important;
 }
 
 .clear-row {
@@ -196,8 +151,8 @@ input:checked + .toggle-button {
 .letters-dropdown button:hover,
 .letters-dropdown button:active,
 .letters-dropdown button:focus {
-  background-color: var(--black) !important;
-  border-color: var(--edward) !important;
+  background-color: var(--dark-background) !important;
+  border-color: var(--text-grey-3) !important;
   font-weight: 900 !important;
   color: var(--picton-blue) !important;
   width: 50px;
@@ -237,15 +192,15 @@ display: flex;
 }
 
 .game-item-row {
-  border: 2px solid var(--slightly-visible-contrast);
-  background-color: var(--background-main-dark);
-  border-radius: 4px;
+  background-color: var(--dark-background);
+  border-radius: 8px;
   margin-bottom: 10px;
-  padding: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgb(8 11 13 / 50%);
 }
 
 .game-item-row:hover {
-  border: 2px solid #03696b;
+  background-color: var(--hover-card);
 }
 
 
@@ -257,17 +212,19 @@ display: flex;
   border-image: linear-gradient(0.25turn, rgb(14 109 121), rgb(17 108 124), rgba(56, 2, 155, 0));
   border-image-slice: 1;
   width: 100%;
+  color: var(--text-white-1);
 }
 
 .game-item-container h3 {
   font-size: 16px;
-  color: var(--white);
+  color: var(--text-white-2);
   margin-bottom: 0px;
 }
 
 .game-item-container p {
   margin: 0;
   font-size: 14px;
+  color: var(--text-white-2);
 }
 
 .small-column {
@@ -293,7 +250,7 @@ display: flex;
 }
 
 .note-icon {
-  color: var(--teal);
+  color: var(--text-light-green);
 }
 
 .note-icon:hover {

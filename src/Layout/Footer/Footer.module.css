@@ -1,7 +1,7 @@
 .footer-container {
   height: 50px;
   background-color: var(--main-dark-1);
-  color: var(--white-1);
+  color: var(--text-white-1);
   text-align: center;
   display: flex;
   align-items: center;

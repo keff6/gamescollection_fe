@@ -20,11 +20,11 @@ const ExportData = ({ brands = [], consoles = [], getConsolesByBrand, exportData
 
   return (
     <div className={classes.exportContainer}>
-      <h2>Export Data</h2>
+      <h2 className='main-title'>Export Data</h2>
       <Container>
         <Row>
           <Col md={12} lg={6}>
-            <h6>Export all or specific games to Excel</h6>
+            <h6 className='sub-title-2'>Export all or specific games to Excel</h6>
             <Form id="exportForm" noValidate onSubmit={handleExport}>
               <Form.Group className="mb-3" controlId="brand">
                 <Form.Label>Brand</Form.Label>

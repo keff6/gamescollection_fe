@@ -14,7 +14,7 @@ const Stats = ({ totals, byCondition, totalByConsole, top5Consoles, genresDist, 
 
   return (
     <>
-      <h2 className={classes.welcomeLabel}>Welcome back, Visitor!</h2>
+      <h2 className={classes.welcomeLabel}>Welcome back, Kevin!</h2>
       <Container>
         <Row>
           <Col md={12} lg={3}>

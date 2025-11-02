@@ -1,12 +1,12 @@
 .login-container {
-  background-color: var(--black);
-  border-color: var(--black-pearl);
-  border-style: solid;
+  overflow: hidden;
+  border-radius: 8px;
   display: flex;
   margin: 50px auto;
   height: 370px;
-  box-sizing: content-box;
   max-width: 780px;
+  box-shadow: 0 2px 8px rgb(8 11 13 / 50%);
+  background-color: var(--dark-background);
 }
 
 .login-container .left-half,
@@ -37,7 +37,6 @@
 
 .login-form-container {
   padding: 1rem 1.3rem;
-  box-sizing: border-box;
 }
 
 .login-form-container header {

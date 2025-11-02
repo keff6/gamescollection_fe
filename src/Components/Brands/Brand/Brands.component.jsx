@@ -55,7 +55,7 @@ const Brands = ({
       />
       <Container className={classes.container}>
         <header className={classes.header}>
-          <h2>Brands</h2>
+          <h2 className='main-title'>Brands</h2>
           <Button className="d-none d-md-block" onClick={() => setShowForm(true)}>Add Brand</Button>
           <Button className="d-block d-md-none" onClick={() => setShowForm(true)}>Add+</Button>
         </header>

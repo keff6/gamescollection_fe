@@ -80,8 +80,8 @@ const Consoles = ({
       <div>
         <header className={classes.header}>
           <div className={classes.consolesHeader}>
-            <h2>{currentBrand?.name}</h2>
-            <h5>{totalConsoles} {totalConsoles === 1 ? 'console' : 'consoles'}</h5>
+            <h2 className='main-title'>{currentBrand?.name}</h2>
+            <h5 className='sub-title-1'>{totalConsoles} {totalConsoles === 1 ? 'console' : 'consoles'}</h5>
           </div>
           {currentUser &&
           <>

@@ -39,7 +39,7 @@ const GenresDistribution = ({ data = [] }) => {
               backgroundColor: "#000e1d",
               borderRadius: "6px",
               color: "#fff",
-              border: "1px solid #8884d8",
+              border: "1px solid #388a81",
             }}
             formatter={(value, name) => [
               `${value} games (${((value / total) * 100).toFixed(1)}%)`,

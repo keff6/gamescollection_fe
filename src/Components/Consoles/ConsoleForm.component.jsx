@@ -109,7 +109,7 @@ const ConsoleForm = ({
       centered
     >
       <Modal.Header closeButton={false}>
-        <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Title id="contained-modal-title-vcenter" className='main-title'>
           {isEdit ? 'Edit' : 'Add'} Console
         </Modal.Title>
       </Modal.Header>

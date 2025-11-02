@@ -52,7 +52,7 @@ const Login = ({authenticateUser}) => {
           <div className={classes.loginFormContainer}>
             <header>
               <h3><Joystick /><span>Games Collection</span></h3>
-              <h6>Sign in to your account</h6>
+              <h6 className='sub-title-2'>Sign in to your account</h6>
             </header>
             <Form id="loginForm" validated={validated} noValidate onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="username">

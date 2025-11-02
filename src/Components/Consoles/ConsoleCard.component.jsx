@@ -20,8 +20,8 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole }) => {
   }
 
   return (
-    <Card border="none">
-      <Card.Body className={classes.consoleCard}>
+    <Card className={classes.consoleCard}>
+      <Card.Body >
         <Card.Title>
           <div>
             {consoleData.logoUrl ?
