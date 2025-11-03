@@ -110,14 +110,13 @@ export const API_ROUTES = {
   },
   EXPORT: {
     EXPORT_DATA: '/export/data',
-    // EXPORT_DB_DUMP: '/export/dump' Disabled for security reasons
   }
 };
 
 export const CONDITION_GRAPH_COLORS = [
   '#204a83',
   '#03886f',
-  '#FFBB28',
+  '#962bd3',
   '#FF8042' 
 ]
 

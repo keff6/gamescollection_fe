@@ -16,6 +16,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "dotenv": "^16.1.4",
+    "formik": "^2.4.6",
     "proptypes": "^1.1.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
@@ -23,7 +24,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.1",
     "react-scroll-to-top": "^3.1.0",
-    "recharts": "^3.3.0"
+    "recharts": "^3.3.0",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

@@ -50,7 +50,7 @@ const GameItem = ({ gameData, deleteGame, editGame, updateGame }) => {
           <div>
             <h1>{gameData?.title || '--'}</h1>
             <MiniLabel labelText="Year">
-            <h3>{gameData?.year || '--'}</h3>
+            <h3>{gameData?.year || NO_DATA}</h3>
             </MiniLabel>
           </div>
         </Col>

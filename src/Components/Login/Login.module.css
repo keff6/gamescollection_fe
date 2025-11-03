@@ -3,7 +3,7 @@
   border-radius: 8px;
   display: flex;
   margin: 50px auto;
-  height: 370px;
+  max-height: 370px;
   max-width: 780px;
   box-shadow: 0 2px 8px rgb(8 11 13 / 50%);
   background-color: var(--dark-background);

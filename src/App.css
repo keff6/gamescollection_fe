@@ -25,12 +25,12 @@
   --card-background-1: #0f232f;
   --dropdown-options-background: #004c63;
   --outline-button-background: #1087a02b;
-  --backlog-badge-background: #a6bd43;
-  --playing-badge-background: #e26613;
+  --backlog-badge-background: #6e8509;
+  --playing-badge-background: #b17927;
   --light-green-label: #55e1e0;
   --complete-game: #00C49F;
   --new-game: #0088FE;
-  --digital-game: #FFBB28;
+  --digital-game: #962bd3;
   --background-main-dark: #0f1f2e; 
   --dark-background: #182b3c; 
   --main-dark-1: #040f19;
@@ -196,7 +196,7 @@ tbody {
 .modal-header, .modal-footer {
   background-color: var(--modal-header);
   color: var(--text-white-1);
-  border-color: var(--mirage);
+  border: none;
 }
 
 .error-container {

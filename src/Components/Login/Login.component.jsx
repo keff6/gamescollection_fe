@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { Formik } from "formik";
+import * as Yup from "yup";
 import { Form, Button } from 'react-bootstrap';
 import { Joystick } from 'react-bootstrap-icons';
 import proptypes from 'prop-types';
@@ -10,63 +11,64 @@ const USER_DEFAULT = {
   password: ''
 }
 
-const Login = ({authenticateUser}) => {
-  const [userObj, setUserObj] = useState(USER_DEFAULT);
-  const [validated, setValidated] = useState(false);
+const validationSchema = Yup.object().shape({
+  username: Yup.string()
+    .required("Please enter a valid username"),
+  password: Yup.string()
+    .required("Password is required"),
+});
 
-
-  const handleChange = ({target}) => {
-    const {name, value} = target;
-    setUserObj({
-      ...userObj,
-      [name]: value,
-    })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-
-    if(validateForm(form)) {
-      console.warn("Valida data submitted")
-      authenticateUser(userObj)
-    }  
-  }
-
-  const validateForm = (formValues) => {
-    let isValid = false;
-    if (formValues.checkValidity()) isValid = true
-    setValidated(true)
-    return isValid;
-  }
-
-  return (
-    <div className={classes.loginContainer}>
-        <div className={`${classes.leftHalf} d-none d-md-block`}>
-          <div className={classes.outerImage}>
-            <img src={ControllerImage} alt="Img" />
-            <div className={classes.overlay}></div>
-          </div>
-        </div>
-        <div className={classes.rightHalf}>
-          <div className={classes.loginFormContainer}>
-            <header>
-              <h3><Joystick /><span>Games Collection</span></h3>
-              <h6 className='sub-title-2'>Sign in to your account</h6>
-            </header>
-            <Form id="loginForm" validated={validated} noValidate onSubmit={handleSubmit}>
+const Login = ({ authenticateUser }) => (
+  <div className={classes.loginContainer}>
+    <div className={`${classes.leftHalf} d-none d-md-block`}>
+      <div className={classes.outerImage}>
+        <img src={ControllerImage} alt="Img" />
+        <div className={classes.overlay}></div>
+      </div>
+    </div>
+    <div className={classes.rightHalf}>
+      <div className={classes.loginFormContainer}>
+        <header>
+          <h3><Joystick /><span>Games Collection</span></h3>
+          <h6 className='sub-title-2'>Sign in to your account</h6>
+        </header>
+        <Formik
+          initialValues={USER_DEFAULT}
+          validationSchema={validationSchema}
+          onSubmit={async (values, { setSubmitting, resetForm }) => {
+            try {
+              await authenticateUser(values);
+              resetForm();
+            } catch(err) {
+              console.log({err})
+            } finally {
+              setSubmitting(false);
+            }
+          }}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+          }) => (
+            <Form id="loginForm" noValidate onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="username">
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   type="text"
                   name="username"
                   placeholder="Enter username"
-                  value={userObj.username}
                   onChange={handleChange}
-                  required
+                  value={values.username}
+                  onBlur={handleBlur}
+                  isInvalid={touched.username && !!errors.username}
                 />
                 <Form.Control.Feedback type="invalid">
-                  Please enter a valid username.
+                  {errors.username}
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mb-3" controlId="password">
@@ -75,23 +77,25 @@ const Login = ({authenticateUser}) => {
                   type="password"
                   name="password"
                   placeholder="Enter password"
-                  value={userObj.password}
+                  value={values.password}
                   onChange={handleChange}
-                  required
+                  onBlur={handleBlur}
+                  isInvalid={touched.password && !!errors.password}
                 />
                 <Form.Control.Feedback type="invalid">
-                  Please enter a valid password.
+                  {errors.password}
                 </Form.Control.Feedback>
               </Form.Group>
-              <Button variant="primary" form="loginForm" type="submit">Log In</Button>
+              <Button variant="primary" form="loginForm" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Submitting..." : "Log In"}
+              </Button>
             </Form>
-          </div>
-          <p className={classes.version}>{`ver. ${import.meta.env.PACKAGE_VERSION}`}</p>
-        </div>
-
+            )}
+        </Formik>
+      </div>
     </div>
-  )
-}
+</div>
+)
 
 Login.propTypes = {
   authenticateUser: proptypes.func,

@@ -4,7 +4,7 @@ import proptypes from 'prop-types';
 import { PencilSquare, Trash } from "react-bootstrap-icons";
 import { useAppState } from '../../hooks';
 import { MoreButton, Tooltip, MiniLabel } from '../../Common';
-import { CONSOLE_GENERATIONS} from '../../utils/constants';
+import { CONSOLE_GENERATIONS, NO_DATA } from '../../utils/constants';
 import HomeConsoleIcon from '../../assets/icons/home-console.png';
 import PortableConsoleIcon from '../../assets/icons/portable-console.png';
 import classes from './Consoles.module.css';
@@ -31,8 +31,8 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole }) => {
                 <span className={classes.consoleTitle}>{consoleData.name}</span>
               </div>}
             <div className={classes.subLabelsContainer}>
-              <MiniLabel labelText="Year"><p className={classes.consoleYearLabel}>{consoleData?.year || ""}</p></MiniLabel>
-              <MiniLabel labelText="Generation"><p>{consoleData?.generation ? CONSOLE_GENERATIONS[consoleData?.generation - 1].text : ''}</p></MiniLabel>  
+              <MiniLabel labelText="Year"><p className={classes.consoleYearLabel}>{consoleData?.year || NO_DATA}</p></MiniLabel>
+              <MiniLabel labelText="Generation"><p>{consoleData?.generation ? CONSOLE_GENERATIONS[consoleData?.generation - 1].text : NO_DATA}</p></MiniLabel>  
             </div>
           </div>
           

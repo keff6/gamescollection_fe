@@ -15,8 +15,8 @@ const GenresContainer = () => {
 
   useEffect(() => { getAllGenres() }, []);
 
-  const addGenre = async (genreName) => {
-    const responseMessage = await post(API_ROUTES.GENRES.ADD, {name: genreName})
+  const addGenre = async (genreObj) => {
+    const responseMessage = await post(API_ROUTES.GENRES.ADD, genreObj)
     openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
     getAllGenres();
   }
@@ -27,8 +27,8 @@ const GenresContainer = () => {
     getAllGenres()
   }
 
-  const updateGenre = async (genreId, name) => {
-    const responseMessage = await put(API_ROUTES.GENRES.UPDATE(genreId), {name});
+  const updateGenre = async (genreId, genreObj) => {
+    const responseMessage = await put(API_ROUTES.GENRES.UPDATE(genreId), genreObj);
     openSnackbar({message: responseMessage, type: OPERATION_OUTCOME.SUCCESS})
     getAllGenres()
   }

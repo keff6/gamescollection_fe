@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { Formik } from "formik";
+import * as Yup from "yup";
 import { Button, Modal, Form } from 'react-bootstrap';
 import proptypes from 'prop-types';
 import { useAppState } from '../../../hooks';
@@ -9,6 +11,11 @@ const BRAND_DEFAULT = {
   logoUrl: "",
 };
 
+const validationSchema = Yup.object().shape({
+  name: Yup.string()
+    .required("Please enter a valid text"),
+});
+
 const BrandForm = ({
   addNewBrand,
   isEdit,
@@ -18,55 +25,11 @@ const BrandForm = ({
   ...rest
 }) => {
   const { brand: {selected}, setSelectedBrand} = useAppState();
-  const [brandObj, setBrandObj] = useState(BRAND_DEFAULT);
-  const [validated, setValidated] = useState(false);
-  const [errors, setErrors] = useState([]);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => () => {
-      setBrandObj(BRAND_DEFAULT)
-      setValidated(false)
-  },[show])
-
-  useEffect(() => {
-    if(isEdit) setBrandObj(selected)
-  },[isEdit])
-
-  const handleChange = (field, value) => {
-    setBrandObj({
-      ...brandObj,
-      [field]: value
-    }) 
-  }
-
-  const validateForm = (formValues) => {
-    let isValid = false;
-    if (formValues.checkValidity()) isValid = true
-    setValidated(true)
-    return isValid;
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setErrors([])
-    const form = e.currentTarget;
-
-    if(validateForm(form)) {
-      try {
-        if(isEdit) await saveUpdatedChanges(selected.id, brandObj)
-        else await addNewBrand(brandObj)
-        closeForm()
-      } catch(e) {
-        setErrors(err => [...err, e])
-      }
-    }
-    setIsSubmitting(false)
-  }
-
+  const [serverErrors, setServerErrors] = useState([]);
+  
   const closeForm = () => {
     setSelectedBrand(null)
-    setErrors([])
+    setServerErrors([])
     onHide()
   }
 
@@ -78,55 +41,92 @@ const BrandForm = ({
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton={false}>
-        <Modal.Title id="contained-modal-title-vcenter" className='main-title'>
-          {isEdit ? 'Edit' : 'Add'} Brand
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form id="brandForm" noValidate validated={validated} onSubmit={handleSubmit}>
-          {errors.length > 0 && <div className="error-container">{errors.map((e, i) => <p key={i}>{e.message}</p>)}</div>}
-          <Form.Group className="mb-3" controlId="name">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="name"
-              maxLength={45}
-              placeholder="Enter brand name"
-              value={brandObj.name}
-              onChange={(e) => handleChange("name", e.target.value)}
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              Please enter a valid text.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="brandOrigin">
-            <Form.Label>Origin</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter brand origin"
-              maxLength={45}
-              value={brandObj.origin}
-              onChange={(e) => handleChange("origin", e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="brandLogoUrl">
-            <Form.Label>Logo URL</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter logo url"
-              value={brandObj.logoUrl}
-              maxLength={255}
-              onChange={(e) => handleChange("logoUrl", e.target.value)}
-            />
-          </Form.Group>
-        </Form>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={closeForm}>Cancel</Button>
-        <Button variant="primary" form="brandForm" type="submit" disabled={isSubmitting}>Save changes</Button>
-      </Modal.Footer>
+      <Formik
+        initialValues={isEdit ? selected : BRAND_DEFAULT}
+        validationSchema={validationSchema}
+        onSubmit={async (values, { setSubmitting, resetForm }) => {
+          try {
+            if(isEdit) await saveUpdatedChanges(selected.id, values)
+            else await addNewBrand(values)
+            closeForm()
+            resetForm();
+          } catch(e) {
+            setServerErrors(err => [...err, e])
+          } finally {
+            setSubmitting(false);
+          }
+        }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
+          <>
+            <Modal.Header closeButton={false}>
+              <Modal.Title id="contained-modal-title-vcenter" className='main-title'>
+                {isEdit ? 'Edit' : 'Add'} Brand
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form id="brandForm" noValidate onSubmit={handleSubmit}>
+                {serverErrors.length > 0 && <div className="error-container">{serverErrors.map((e, i) => <p key={i}>{e.message}</p>)}</div>}
+                <Form.Group className="mb-3" controlId="name">
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="name"
+                    maxLength={45}
+                    placeholder="Enter brand name"
+                    value={values.name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    isInvalid={touched.name && !!errors.name}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.name}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="origin">
+                  <Form.Label>Origin</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter brand origin"
+                    maxLength={45}
+                    value={values.origin}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    isInvalid={touched.origin && !!errors.origin}
+                  />
+                </Form.Group>
+                {/*  TODO: If using images is not viable then remove
+                <Form.Group className="mb-3" controlId="logoUrl">
+                  <Form.Label>Logo URL</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter logo url"
+                    value={values.logoUrl}
+                    maxLength={255}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    isInvalid={touched.logoUrl && !!errors.logoUrl}
+                  />
+                </Form.Group> */}
+              </Form>  
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={closeForm}>Cancel</Button>
+              <Button variant="primary" form="brandForm" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? '...Submitting' : 'Save changes'}
+              </Button>
+            </Modal.Footer>
+          </>
+        )}
+      </Formik>
     </Modal>
   );
 }
