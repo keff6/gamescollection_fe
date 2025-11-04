@@ -10,8 +10,8 @@
   --deep-cove: #06204652;
   --falu-red: #771717;
   --perano: #374563;
-  --cancan: #dba0a0;
-  --dark-tan: #711010;
+  --cancan: #f0bebe;
+  --dark-tan: #d10404;
   --elephant: #163c55;
   --main-button: #29698c;
   --main-button-contrast: #215978;
@@ -202,7 +202,7 @@ tbody {
 .error-container {
   border: 1px solid var(--dark-tan);
   border-radius: 8px;
-  padding: 0.5rem;
+  padding: 0.5rem 16px;
   background-color: var(--cancan);
   margin-bottom: 16px;
 }
@@ -305,10 +305,18 @@ border-color: var(--light-blue-contrast) !important;
   border-color: var(--text-grey-1);
 }
 
+.bg-secondary {
+  background-color: var(--secondary-button) !important;
+}
+
 .results-text {
   font-size: 14px;
   text-align: end;
   color: var(--text-grey-1);
+}
+
+.lh-18 {
+  line-height: 18px !important;
 }
 
 /***************************************************/

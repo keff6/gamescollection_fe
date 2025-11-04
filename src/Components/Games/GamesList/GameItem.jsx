@@ -4,7 +4,6 @@ import { PencilSquare, Trash, ChatRightText, Bookmark, BookmarkStarFill } from '
 import { useAppState } from '../../../hooks';
 import { NO_DATA } from "../../../utils/constants";
 import { Badge, MoreButton, Tooltip, MiniLabel } from "../../../Common";
-import { gameObjectSanitizer } from "../../../utils/requestSanitizer";
 import classes from '../Games.module.css';
 
 const GameItem = ({ gameData, deleteGame, editGame, updateGame }) => {
@@ -24,7 +23,7 @@ const GameItem = ({ gameData, deleteGame, editGame, updateGame }) => {
 
   const getStatusBadge = () => {
     const { isBacklog, isFinished, isPlaying } = gameData;
-    const badgeType = (isBacklog && 'BACKLOG') || (isFinished && 'FINISHED') || (isPlaying && 'PLAYING') || null
+    const badgeType = (isPlaying && 'PLAYING') || (isFinished && 'FINISHED') || (isBacklog && 'BACKLOG') || null
 
     return badgeType ? <MiniLabel labelText="Status"><Badge type={badgeType}/></MiniLabel> : null
   }
@@ -33,14 +32,11 @@ const GameItem = ({ gameData, deleteGame, editGame, updateGame }) => {
     const updatedGame = {
       ...gameData,
       ...(status && {
-        isBacklog: 0,
-        isPlaying: 0,
-        isFinished: 0,
         [status]: +!gameData[status]
       })
     }
 
-    updateGame(gameData.id, gameObjectSanitizer(updatedGame))
+    updateGame(gameData.id, {...updatedGame, saga: JSON.stringify(updatedGame.saga)})
   }
 
   return (

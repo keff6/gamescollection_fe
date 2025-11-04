@@ -111,10 +111,6 @@ input:checked + .toggle-button {
   text-overflow: ellipsis;
 }
 
-.custom-modal-body {
-  padding: 0 !important;
-}
-
 .games-header > * {
   margin: 0;
 }
@@ -132,6 +128,15 @@ input:checked + .toggle-button {
 
 .clear-row {
   background-color: #17252f;
+}
+
+.media-status-container,
+.playing-status-container {
+  display: flex;
+  gap: 20px;
+  padding: 6px 16px;
+  border-radius: 5px;
+  border: 1px solid var(--control-border)
 }
 
 
@@ -269,5 +274,10 @@ display: flex;
     align-items: end;
     justify-content: end;
     width:auto;
+  }
+
+  .media-status-container,
+  .playing-status-container {
+    display: block;
   }
 }
