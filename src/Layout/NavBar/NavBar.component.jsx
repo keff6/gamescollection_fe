@@ -3,14 +3,27 @@ import { Link } from "react-router-dom";
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Joystick } from "react-bootstrap-icons";
 import proptypes from "prop-types";
-import { useAppState } from '../../hooks';
+import { SESSION_STORAGE } from "../../utils/constants";
+import { useAppState, useSessionStorage } from '../../hooks';
 import classes from './NavBar.module.css';
 
 const NavBar = ({ logOut }) =>{
   const [isExpanded, setIsExpanded] = useState(false);
   const menuRef = useRef();
   const { user } = useAppState();
-  const currentUser = user || null;
+  const [storedUser] = useSessionStorage(SESSION_STORAGE.USER, null)
+  const currentUser = user || storedUser || null;
+
+  useEffect(() => {
+    document.addEventListener('scroll', function() {
+      const navbar = document.getElementById('main-nav');
+      if (window.scrollY > 56) {
+        navbar.classList.add('navbar-shadow');
+      } else {
+        navbar.classList.remove('navbar-shadow');
+      }
+    });
+  }, [])
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -34,6 +47,7 @@ const NavBar = ({ logOut }) =>{
   return (
     <Navbar
       ref={menuRef}
+      id="main-nav"
       collapseOnSelect
       expand="lg"
       variant="dark"
@@ -55,6 +69,7 @@ const NavBar = ({ logOut }) =>{
             <Nav.Link as={Link} to="/" onClick={() => setIsExpanded(false)}>Home</Nav.Link>
             <Nav.Link as={Link} to="/brands" onClick={() => setIsExpanded(false)}>Brands</Nav.Link>
             <Nav.Link as={Link} to="/export" onClick={() => setIsExpanded(false)}>Export</Nav.Link>
+            <Nav.Link as={Link} to="/about" onClick={() => setIsExpanded(false)}>About</Nav.Link>
             {currentUser && <NavDropdown title="Admin" id="collasible-nav-dropdown">
               <NavDropdown.Item as={Link} to="/admin/brands" onClick={() => setIsExpanded(false)}>Brands</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/admin/genres" onClick={() => setIsExpanded(false)}>Genres</NavDropdown.Item>

@@ -201,12 +201,12 @@ display: flex;
   border-radius: 8px;
   margin-bottom: 10px;
   padding: 10px;
-  box-shadow: 0 2px 8px rgb(8 11 13 / 50%);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
-.game-item-row:hover {
+/* .game-item-row:hover {
   background-color: var(--hover-card);
-}
+} */
 
 
 

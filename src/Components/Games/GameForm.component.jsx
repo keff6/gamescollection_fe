@@ -336,53 +336,6 @@ const GameForm = ({
                   </Form.Group>
                   <Row className="form-row mb-3">
                     <Col md={5}>
-                      <Form.Group className="mb-3" controlId="sagaText">
-                        <Form.Label>Sagas / Tags</Form.Label>
-                        <InputGroup className="mb-3">
-                          <Form.Control
-                            type="text"
-                            placeholder="Add a saga"
-                            name="sagaText"
-                            value={values.sagaText || ""}
-                            onChange={handleChange}
-                          />
-                          <Button
-                            variant="primary"
-                            onClick={() => {
-                              const sagasArr = [...values.saga, values.sagaText];
-                              setFieldValue('saga', sagasArr)
-                            }}
-                            disabled={values.sagaText?.length === 0}
-                          >
-                            <div className='lh-18'>
-                              Add <BoxArrowInRight className='d-none d-md-inline' /><BoxArrowInDown className='d-inline d-md-none'/>
-                            </div>
-                          </Button>
-                        </InputGroup>
-                      </Form.Group>
-                    </Col>
-                    <Col md={7}>
-                      <div className={classes.customList}>
-                        {values?.saga?.length > 0 &&
-                          values?.saga?.map(s => 
-                            <Badge key={s} pill bg="secondary" className={classes.badge}>
-                              <span className={classes.badgeText}>{s}</span>
-                              <XCircle
-                                className={classes.badgeButton}
-                                onClick={() => {
-                                  const updatedSagas = values.saga.filter(sagaDel => sagaDel !== s)
-                                  setFieldValue('saga', updatedSagas)
-                                  setFieldValue('sagaText', "")
-                                }}
-                              />
-                            </Badge>
-                          )
-                        }
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row className="form-row">
-                    <Col md={5}>
                       <Form.Group className="mb-3" controlId="selectedGenre">
                         <Form.Label>Genre(s)</Form.Label>
                         <InputGroup className="mb-3">
@@ -427,6 +380,54 @@ const GameForm = ({
                                 onClick={() => {
                                   const updatedGenres = values.genres.filter(genDel => genDel !== g)
                                   setFieldValue('genres', updatedGenres)
+                                }}
+                              />
+                            </Badge>
+                          )
+                        }
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row className="form-row">
+                    <Col md={5}>
+                      <Form.Group className="mb-3" controlId="sagaText">
+                        <Form.Label>Sagas / Tags</Form.Label>
+                        <InputGroup className="mb-3">
+                          <Form.Control
+                            type="text"
+                            placeholder="Add a saga"
+                            name="sagaText"
+                            value={values.sagaText || ""}
+                            onChange={handleChange}
+                          />
+                          <Button
+                            variant="primary"
+                            onClick={() => {
+                              const sagasArr = [...values.saga, values.sagaText];
+                              setFieldValue('saga', sagasArr)
+                              setFieldValue('sagaText', '')
+                            }}
+                            disabled={values.sagaText?.length === 0}
+                          >
+                            <div className='lh-18'>
+                              Add <BoxArrowInRight className='d-none d-md-inline' /><BoxArrowInDown className='d-inline d-md-none'/>
+                            </div>
+                          </Button>
+                        </InputGroup>
+                      </Form.Group>
+                    </Col>
+                    <Col md={7}>
+                      <div className={classes.customList}>
+                        {values?.saga?.length > 0 &&
+                          values?.saga?.map(s => 
+                            <Badge key={s} pill bg="secondary" className={classes.badge}>
+                              <span className={classes.badgeText}>{s}</span>
+                              <XCircle
+                                className={classes.badgeButton}
+                                onClick={() => {
+                                  const updatedSagas = values.saga.filter(sagaDel => sagaDel !== s)
+                                  setFieldValue('saga', updatedSagas)
+                                  setFieldValue('sagaText', "")
                                 }}
                               />
                             </Badge>

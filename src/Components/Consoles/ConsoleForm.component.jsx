@@ -159,7 +159,7 @@ const ConsoleForm = ({
                     </Form.Group>
                   </Col>
                   <Col md={6}>
-                    <Form.Group className="mb-3" controlId="consoleGeneration">
+                    <Form.Group className="mb-3" controlId="generation">
                       <Form.Label>Generation</Form.Label>
                       <Form.Select
                         aria-label="generation"

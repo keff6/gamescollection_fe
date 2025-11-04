@@ -1,0 +1,51 @@
+.about-project-container {
+  background-color: var(--dark-background);
+  padding: 16px;
+}
+
+.about-me-container {
+  background-color: #0d243b8c;
+  padding: 16px;
+  color: var(--text-white-1);
+}
+
+.title-container {
+  color: var(--text-white-2);
+  font-size: 26px;
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(0.25turn, rgb(14 109 121), rgb(17 108 124), rgba(56, 2, 155, 0));
+  border-image-slice: 1;
+  display: flex;
+  align-items: anchor-center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.profile-image {
+width: 35px;
+  height: 35px;
+  border-radius: 50%;   /* Makes it a perfect circle */
+  object-fit: cover;    /* Ensures the image fills the circle */
+  display: block;       /* Removes inline spacing issues */
+}
+
+.icons-container {
+  display: block;
+  width: fit-content;
+  font-size: 24px;
+  color: var(--text-white-1);
+}
+
+.link-container {
+  color: var(--text-white-1);
+  display: flex;
+}
+
+.icons-container span {
+  /* color: var(--text-white-1); */
+  font-size: 16px;
+} 
+
+.link-container svg {
+  color: var(--text-white-1);
+}

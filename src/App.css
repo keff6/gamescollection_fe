@@ -31,7 +31,7 @@
   --complete-game: #00C49F;
   --new-game: #0088FE;
   --digital-game: #962bd3;
-  --background-main-dark: #0f1f2e; 
+  --background-main-dark: #0d1c2a; /*#0f1f2e; */
   --dark-background: #182b3c; 
   --main-dark-1: #040f19;
   --secondary-button: #1f818e;
@@ -164,9 +164,20 @@ tbody {
   border-color: var(--tuna);
 }
 
+.navbar-shadow {
+  box-shadow: 0px 6px 5px rgb(3 23 33 / 70%);
+  transition: box-shadow 0.3s ease-in-out; 
+}
+
 .main-title {
   color: var(--text-white-2);
   font-size: 26px;
+}
+
+.main-border-bottom {
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(0.25turn, rgb(14 109 121), rgb(17 108 124), rgba(56, 2, 155, 0));
+  border-image-slice: 1;
 }
 
 .sub-title-1 {

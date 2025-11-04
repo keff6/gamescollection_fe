@@ -11,9 +11,9 @@ const useRefreshToken = () => {
   const refresh = async () => {
     try {
       const response = await get(API_ROUTES.AUTH.REFRESH, { withCredentials: true });
-      const userData = user ? user : storedUser;
       setAuthUser({
-        ...userData,
+        ...user,
+        ...storedUser,
         accessToken: response.accessToken,
       })
       return response.accessToken

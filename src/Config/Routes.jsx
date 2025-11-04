@@ -13,6 +13,7 @@ import RequireAuth from "../Layout/RequireAuth";
 import PersistLogin from "../Components/Login/PersistLogin";
 import Stats from "../Components/Stats/Stats.container";
 import ExportData from "../Components/ExportData/ExportData.container";
+import About from "../Components/About/About.component";
 
 
 const router = createBrowserRouter([
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
                   {
                     path: "/export",
                     element: <ExportData />
+                  },
+                  {
+                    path: "/about",
+                    element: <About />
                   }
                 ]
               },

@@ -85,7 +85,7 @@
   justify-content: space-between;
   background-color: var(--dark-background) !important;
   border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgb(8 11 13 / 50%);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   /* height: 175px; */
 }
 
