@@ -232,16 +232,16 @@ display: flex;
   color: var(--text-white-2);
 }
 
-.small-column {
+/* .small-column {
   display: flex;
   justify-content: space-between;
-}
+} */
 
-.badges-column {
+/* .badges-column {
     display: flex;
     gap:2px;
     flex-direction: column;
-}
+} */
 
 .buttons-column {
   width: 40px;

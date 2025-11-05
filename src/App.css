@@ -225,42 +225,6 @@ tbody {
 }
 
 /***************************************************/
-/* ACCORDION STYLES                                  */
-/***************************************************/
-
-.accordion-item:first-of-type,
-.accordion-item:last-of-type,
-.accordion-item:first-of-type .accordion-button,
-.accordion-item:last-of-type .accordion-button {
-  border: none;
-  border-radius: 0%;
-}
-
-.accordion-button, .accordion-item {
-  background-color: var(--text-grey-1);
-  color: var(--black-pearl);
-  border: none;
-  border-radius: 0%;
-}
-.accordion-button:not(.collapsed) {
-  background-color: var(--lynch);
-  color: var(--text-white-1);
-  border: none;
-  border-radius: 0%;
-  box-shadow: none;
-}
-
-.accordion-button:not(.collapsed):after {
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
-}
-
-.modal-body, .accordion-body {
-  background-color: var(--background-main-dark);
-  color: var(--text-white-1);
-}
-
-
-/***************************************************/
 /* BUTTON STYLES                                  */
 /***************************************************/
 .btn {
@@ -348,6 +312,15 @@ border-color: var(--light-blue-contrast) !important;
   border-color: var(--secondary-button-contrast);
   border-right-color: transparent;
 }
+
+/***************************************************/
+/* MOBILE BADGES                 */
+/***************************************************/
+.mobile-badges {
+  display: flex;
+  justify-content: space-between;
+}
+
 /***************************************************/
 /* MEDIA QUERIES FOR SM AND XS                     */
 /***************************************************/

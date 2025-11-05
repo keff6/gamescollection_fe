@@ -39,65 +39,80 @@ const GameItem = ({ gameData, deleteGame, editGame, updateGame }) => {
     updateGame(gameData.id, {...updatedGame, saga: JSON.stringify(updatedGame.saga)})
   }
 
+  const ButtonsColumn = () => (
+    <div className={classes.buttonsColumn}>
+      {gameData?.notes && <Tooltip text={gameData?.notes}>
+        <ChatRightText className={classes.noteIcon}/>
+      </Tooltip>}
+      {user && (
+        <Tooltip text="See more options">
+          <Dropdown>
+            <Dropdown.Toggle as={MoreButton} />
+            <Dropdown.Menu size="sm" title="">
+              <Dropdown.Item onClick={() => handleUpdateGame('isBacklog')}>
+                {gameData?.isBacklog ? <><BookmarkStarFill />Remove from backlog</> : <><Bookmark/>Add to backlog</> }
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => handleUpdateGame('isPlaying')}>
+                {gameData?.isPlaying ? <><BookmarkStarFill />Remove from playing</> : <><Bookmark/>Mark as playing</>}
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => handleUpdateGame('isFinished')}>
+                {gameData?.isFinished ? <><BookmarkStarFill />Remove from finished</> : <><Bookmark/>Mark as finished</>}
+              </Dropdown.Item>
+              <br />
+              <Dropdown.Item onClick={() => editGame(gameData)}>
+                <PencilSquare />
+                Edit
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => deleteGame(gameData)}
+                className={classes.dangerLink}
+              >
+                <Trash />
+                Delete
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Tooltip>
+      )}
+    </div>
+  )
+
   return (
     <li className={classes.gameItemContainer}>
       <Row className={classes.gameItemRow}>
         <Col lg={6}>
           <div>
             <h1>{gameData?.title || '--'}</h1>
-            <MiniLabel labelText="Year">
-            <h3>{gameData?.year || NO_DATA}</h3>
-            </MiniLabel>
+            <div className="d-flex justify-content-between">
+              <MiniLabel labelText="Year">
+                <h3>{gameData?.year || NO_DATA}</h3>
+              </MiniLabel>
+              <div className='d-flex d-lg-none justify-content-between gap-2'>
+                {getConditionBadge()}
+                {getStatusBadge()}
+              </div>
+            </div>
           </div>
         </Col>
         
         <Col lg={4}>
         <MiniLabel labelText="Genre"><p>{genresLabel}</p></MiniLabel>
-        <MiniLabel labelText="Developer / Publisher">
-          <p>{gameData?.developer || NO_DATA} / {gameData?.publisher || NO_DATA}</p>
-        </MiniLabel>
+        <div className="d-flex justify-content-between">
+          <MiniLabel labelText="Developer / Publisher">
+            <p>{gameData?.developer || NO_DATA} / {gameData?.publisher || NO_DATA}</p>
+          </MiniLabel>
+          <div className="d-flex d-lg-none">
+            <ButtonsColumn />
+          </div>
+        </div>
         </Col>
         <Col lg={2}>
-        <div className={classes.smallColumn}>
-          <div className={classes.badgesColumn}>
+        <div className="d-none d-lg-flex justify-content-between">
+          <div className="d-none d-lg-flex flex-column gap-1">
             {getConditionBadge()}
             {getStatusBadge()}
           </div>
-          <div className={classes.buttonsColumn}>
-            {gameData?.notes && <Tooltip text={gameData?.notes}>
-              <ChatRightText className={classes.noteIcon}/>
-            </Tooltip>}
-            {user && (
-              <Tooltip text="See more options">
-                <Dropdown>
-                  <Dropdown.Toggle as={MoreButton} />
-                  <Dropdown.Menu size="sm" title="">
-                    <Dropdown.Item onClick={() => handleUpdateGame('isBacklog')}>
-                      {gameData?.isBacklog ? <><BookmarkStarFill />Remove from backlog</> : <><Bookmark/>Add to backlog</> }
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleUpdateGame('isPlaying')}>
-                      {gameData?.isPlaying ? <><BookmarkStarFill />Remove from playing</> : <><Bookmark/>Mark as playing</>}
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleUpdateGame('isFinished')}>
-                      {gameData?.isFinished ? <><BookmarkStarFill />Remove from finished</> : <><Bookmark/>Mark as finished</>}
-                    </Dropdown.Item>
-                    <br />
-                    <Dropdown.Item onClick={() => editGame(gameData)}>
-                      <PencilSquare />
-                      Edit
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      onClick={() => deleteGame(gameData)}
-                      className={classes.dangerLink}
-                    >
-                      <Trash />
-                      Delete
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </Tooltip>
-            )}
-          </div>
+          <ButtonsColumn />
         </div>
         </Col>
       </Row>

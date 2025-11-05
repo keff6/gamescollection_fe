@@ -1,12 +1,16 @@
 .about-project-container {
   background-color: var(--dark-background);
   padding: 16px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
 }
 
 .about-me-container {
   background-color: #0d243b8c;
   padding: 16px;
   color: var(--text-white-1);
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
 .title-container {
