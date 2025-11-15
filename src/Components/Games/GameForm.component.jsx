@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Button, Modal, Form, Row, Col, InputGroup, Badge } from 'react-bootstrap';
@@ -75,15 +75,14 @@ const GameForm = ({
     onHide()
   }
 
-  const renderYearsSelect = () => {
+  const years = useMemo(() => {
     let options = []
     for(let i = 1970; i<=2020; i++) {
       options.push(<option key={i} value={i}>{i}</option>)
     }
     return options
-  }
+  }, [])
 
- 
   return (
     <Modal
       {...rest}
@@ -179,7 +178,7 @@ const GameForm = ({
                           onBlur={handleBlur}
                         >
                           <option value=''>Enter release year (America)</option>
-                          {renderYearsSelect()}
+                          {years}
                         </Form.Select>
                       </Form.Group>
                     </Col>
