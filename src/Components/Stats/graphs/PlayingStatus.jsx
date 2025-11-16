@@ -3,7 +3,7 @@ import { MiniLabel } from '../../../Common';
 import classes from './Graphs.module.css';
 
 const PlayingStatus = ({ data }) => {
-  const { finishedGames, playingGames } = data;
+  const { finishedGames = 0, playingGames = [] } = data;
 
   return (
     <section className={classes.sectionContainer}>

@@ -77,7 +77,8 @@ const GameForm = ({
 
   const years = useMemo(() => {
     let options = []
-    for(let i = 1970; i<=2020; i++) {
+    const currentYear = new Date().getFullYear();
+    for(let i = 1970; i<=currentYear; i++) {
       options.push(<option key={i} value={i}>{i}</option>)
     }
     return options

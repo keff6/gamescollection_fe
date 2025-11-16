@@ -11,8 +11,7 @@ const StatsContainer = () => {
   const [genresDist, setGenresDist] = useState([])
   const [totals, setTotals] = useState(null)
   const [latestAdditions, setLatestAdditions] = useState([])
-  const [nowPlaying, setNowPlaying] = useState([])
-  // const { setStatsTotals } = useAppState();
+  const [nowPlaying, setNowPlaying] = useState({})
   const { get, error } = useAPI(false);
   useApiErrorHandler(error);
 

@@ -51,12 +51,10 @@ const ConsoleCard = ({ consoleData, editConsole, deleteConsole }) => {
             </Tooltip>
           </div>}
         </Card.Title>
-        <Card.Text>
-          <div className={classes.subLabelsContainer}>
-              <MiniLabel labelText="Year"><p className={classes.consoleYearLabel}>{consoleData?.year || NO_DATA}</p></MiniLabel>
-              <MiniLabel labelText="Generation"><p>{consoleData?.generation ? CONSOLE_GENERATIONS[consoleData?.generation - 1].text : NO_DATA}</p></MiniLabel>  
-            </div>
-        </Card.Text>
+        <div className={classes.subLabelsContainer}>
+          <MiniLabel labelText="Year"><p className={classes.consoleYearLabel}>{consoleData?.year || NO_DATA}</p></MiniLabel>
+          <MiniLabel labelText="Generation"><p>{consoleData?.generation ? CONSOLE_GENERATIONS[consoleData?.generation - 1].text : NO_DATA}</p></MiniLabel>  
+        </div>
         <footer className={classes.cardFooter}>
           <div className={classes.navButtons}>
             <Button

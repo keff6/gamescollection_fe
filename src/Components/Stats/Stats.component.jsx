@@ -55,7 +55,7 @@ Stats.propTypes = {
   top5Consoles: proptypes.array,
   genresDist: proptypes.array,
   latestAdditions: proptypes.array,
-  nowPlaying: proptypes.array,
+  nowPlaying: proptypes.object,
 }
 
 export default Stats;
