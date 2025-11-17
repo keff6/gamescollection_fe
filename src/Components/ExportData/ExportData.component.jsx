@@ -1,21 +1,26 @@
 import { useState, useEffect } from 'react'
 import proptypes from 'prop-types';
 import { Container, Col, Row, Button, Form } from 'react-bootstrap';
+import { Select } from '../../Common';
 import classes from './ExportData.module.css';
 
 const ExportData = ({ brands = [], consoles = [], getConsolesByBrand, exportData }) => {
-  const [selectedConsole, setSelectedConsole] = useState('all');
-  const [selectedBrand, setSelectedBrand] = useState('all');
+  const brandOptions = [{ value: 'all', label: 'All Brands' }, ...brands]
+  const defaultBrand = brandOptions.find(opt => opt.value === 'all');
+  const consoleOptions = [{ value: 'all', label: 'All Consoles' }, ...consoles]
+  const defaultConsole = consoleOptions.find(opt => opt.value === 'all');
+
+  const [selectedConsole, setSelectedConsole] = useState(defaultConsole);
+  const [selectedBrand, setSelectedBrand] = useState(defaultBrand);
 
   useEffect(() => {
-    setSelectedConsole('all')
-    getConsolesByBrand(selectedBrand)
+    setSelectedConsole(defaultConsole)
+    getConsolesByBrand(selectedBrand.value)
   }, [selectedBrand, getConsolesByBrand])
 
   const handleExport = (e) => {
     e.preventDefault();
-    console.log('exported', selectedBrand, selectedConsole)
-    exportData(selectedBrand, selectedConsole)
+    exportData(selectedBrand.value, selectedConsole.value)
   }
 
   return (
@@ -28,33 +33,24 @@ const ExportData = ({ brands = [], consoles = [], getConsolesByBrand, exportData
             <Form id="exportForm" noValidate onSubmit={handleExport}>
               <Form.Group className="mb-3" controlId="brand">
                 <Form.Label>Brand</Form.Label>
-                <Form.Select
-                  aria-label="brand"
+                <Select
                   name="brand"
+                  options={brandOptions}
+                  defaultValue={defaultBrand}
                   value={selectedBrand}
-                  onChange={(e) => setSelectedBrand(e.target.value)}
-                >
-                  <option value='all'>All Brands</option>
-                  {brands && brands?.map(c =>
-                    <option key={c.id} value={c.id}>{c.name}</option>
-                  )}
-                </Form.Select>
+                  onChange={setSelectedBrand}
+                />
               </Form.Group>
               <Form.Group className="mb-3" controlId="console">
                 <Form.Label>Console</Form.Label>
-                <Form.Select
-                  aria-label="console"
+                <Select
                   name="console"
-                  value={selectedConsole || ''}
-                  onChange={(e) => setSelectedConsole(e.target.value)}
-                  disabled={selectedBrand === 'all'}
-                  required
-                >
-                  <option value='all'>All Consoles</option>
-                  {consoles && consoles?.map(c =>
-                    <option key={c.id} value={c.id}>{c.name}</option>
-                  )}
-                </Form.Select>
+                  options={consoleOptions}
+                  defaultValue={defaultConsole}
+                  value={selectedConsole}
+                  onChange={setSelectedConsole}
+                  isDisabled={defaultBrand.value === selectedBrand.value}
+                />
               </Form.Group>
               <Button
                 variant="primary"

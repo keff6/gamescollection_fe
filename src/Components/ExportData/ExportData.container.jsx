@@ -1,6 +1,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useAPI, useApiErrorHandler } from "../../hooks";
+import { parseOptions } from "../../utils/parseOptions";
 import { ENTITIES, API_ROUTES, CONSOLE_FILTER_OPTIONS } from "../../utils/constants";
 import axios from "../../utils/axios";
 import ExportData from "./ExportData.component";
@@ -21,12 +22,12 @@ const ExportDataContainer = () => {
 
   const getBrandsData = async () => {
     const {brands} = await getBrands(API_ROUTES.BRANDS.GET_ALL);
-    setBrands(brands || [])
+    setBrands(parseOptions(brands, "id", "name") || [])
   }
 
   const handleGetConsolesByBrand = useCallback(async (brandId) => {
     const {consoles} = await getConsoles(API_ROUTES.CONSOLES.GET_BY_BRAND(brandId, CONSOLE_FILTER_OPTIONS.ALL));
-    setConsoles(consoles || [])
+    setConsoles(parseOptions(consoles, "id", "name") || [])
   }, []);
 
   const handleExportData = async (brandId, consoleId) => {

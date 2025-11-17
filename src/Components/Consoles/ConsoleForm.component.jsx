@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Button, Modal, Form, Row, Col } from 'react-bootstrap';
 import proptypes from 'prop-types';
 import { useAppState } from '../../hooks';
+import { FormikSelect } from '../../Common';
+import { parseOptions } from '../../utils/parseOptions';
 import { CONSOLE_GENERATIONS } from "../../utils/constants";
 
 const CONSOLE_DEFAULT = {
@@ -42,13 +44,14 @@ const ConsoleForm = ({
     onHide()
   }
 
-  const renderYearsSelect = () => {
-    let options = []
-    for(let i = 1970; i<=2020; i++) {
-      options.push(<option key={i} value={i}>{i}</option>)
-    }
-    return options
-  }
+  const years = useMemo(() => {
+      let options = []
+      const currentYear = new Date().getFullYear();
+      for(let i = 1970; i<=currentYear; i++) {
+        options.push({ value: i.toString(), label: i})
+      }
+      return options
+    }, [])
 
   return (
     <Modal
@@ -60,8 +63,9 @@ const ConsoleForm = ({
       centered
     >
       <Formik
-        initialValues={isEdit ? selected : { ...CONSOLE_DEFAULT, brandId: currentBrandId || ''}}
+        initialValues={isEdit ? selected : {...CONSOLE_DEFAULT, brandId: currentBrandId}}
         validationSchema={validationSchema}
+        enableReinitialize={true}
         onSubmit={async (values, { setSubmitting, resetForm }) => {
           try {
             if(isEdit) await saveUpdatedChanges(selected.id, values)
@@ -84,6 +88,7 @@ const ConsoleForm = ({
           handleSubmit,
           isSubmitting,
           setFieldValue,
+          setFieldTouched,
         }) => (
           <>
             <Modal.Header closeButton={false}>
@@ -125,19 +130,15 @@ const ConsoleForm = ({
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="brandId">
                   <Form.Label>Brand</Form.Label>
-                  <Form.Select
-                    aria-label="brand"
-                    value={values.brandId || ''}
-                    onChange={handleChange}
-                    disabled={values.brandId}
-                    onBlur={handleBlur}
-                    isInvalid={touched.brandId && !!errors.brandId}
-                  >
-                    <option value=''>Select a brand</option>
-                    {brands?.map(b =>
-                      <option key={b.id} value={b.id}>{b.name}</option>
-                    )}
-                  </Form.Select>
+                  <FormikSelect
+                    name="brandId"
+                    options={parseOptions(brands, "id", "name")}
+                    placeholder='Select a brand'
+                    values={values}
+                    setFieldValue={setFieldValue}
+                    setFieldTouched={setFieldTouched}
+                    isDisabled={!!values.brandId}
+                  />
                   <Form.Control.Feedback type="invalid">
                     {errors.brandId}
                   </Form.Control.Feedback>
@@ -146,33 +147,30 @@ const ConsoleForm = ({
                   <Col md={6}>
                     <Form.Group className="mb-3" controlId="year">
                       <Form.Label>Year</Form.Label>
-                      <Form.Select
-                        aria-label="year"
-                        value={values.year || ''}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        isInvalid={touched.year && !!errors.year}
-                      >
-                        <option value=''>Enter console release year (America)</option>
-                        {renderYearsSelect()}
-                      </Form.Select>
+                      <FormikSelect
+                        name="year"
+                        options={years}
+                        placeholder='Enter console release year (America)'
+                        values={values}
+                        setFieldValue={setFieldValue}
+                        setFieldTouched={setFieldTouched}
+                      />
                     </Form.Group>
                   </Col>
                   <Col md={6}>
                     <Form.Group className="mb-3" controlId="generation">
                       <Form.Label>Generation</Form.Label>
-                      <Form.Select
-                        aria-label="generation"
-                        value={values.generation || ''}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        isInvalid={touched.generation && !!errors.generation}
-                      >
-                        <option value=''>Select console generation</option>
-                        {CONSOLE_GENERATIONS.map(c => 
-                          <option key={c.value} value={c.value}>{c.text}</option>    
-                          )}
-                      </Form.Select>
+                      <FormikSelect
+                        name="generation"
+                        options={CONSOLE_GENERATIONS.map(c => ({
+                          value: c.value,
+                          label: c.text
+                        }))}
+                        placeholder='Select console generation'
+                        values={values}
+                        setFieldValue={setFieldValue}
+                        setFieldTouched={setFieldTouched}
+                      />
                     </Form.Group>
                   </Col>
                 </Row>

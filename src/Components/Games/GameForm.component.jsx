@@ -4,8 +4,9 @@ import * as Yup from "yup";
 import { Button, Modal, Form, Row, Col, InputGroup, Badge } from 'react-bootstrap';
 import proptypes from 'prop-types';
 import { XCircle, BoxArrowInRight, BoxArrowInDown } from "react-bootstrap-icons";
-import { InfoTooltip } from '../../Common';
+import { InfoTooltip, FormikSelect } from '../../Common';
 import { useAppState } from '../../hooks';
+import { parseOptions } from '../../utils/parseOptions';
 import { gameObjectSanitizer } from '../../utils/requestSanitizer';
 import classes from './Games.module.css';
 
@@ -51,7 +52,6 @@ const GameForm = ({
 }) => {
   const { game: {selected }, setSelectedGame, genre, misc: { consoles } } = useAppState();
   const [serverErrors, setServerErrors] = useState([]);
-  const genreDictionary = genre?.list.reduce((acc, curr) => ({ ...acc, [curr.id]: curr.name }),{})
 
   function getStatusGroup({ isNew, isWishlist, isComplete, isDigital }) {
     if (isNew) return 'isNew';
@@ -76,13 +76,13 @@ const GameForm = ({
   }
 
   const years = useMemo(() => {
-    let options = []
-    const currentYear = new Date().getFullYear();
-    for(let i = 1970; i<=currentYear; i++) {
-      options.push(<option key={i} value={i}>{i}</option>)
-    }
-    return options
-  }, [])
+      let options = []
+      const currentYear = new Date().getFullYear();
+      for(let i = 1970; i<=currentYear; i++) {
+        options.push({ value: i.toString(), label: i})
+      }
+      return options
+    }, [])
 
   return (
     <Modal
@@ -119,6 +119,7 @@ const GameForm = ({
           handleSubmit,
           isSubmitting,
           setFieldValue,
+          setFieldTouched,
         }) => (
           <>
             <Modal.Header closeButton={false}>
@@ -149,38 +150,29 @@ const GameForm = ({
                     <Col md={6}>
                       <Form.Group className="mb-3" controlId="consoleId">
                         <Form.Label>Console</Form.Label>
-                        <Form.Select
-                          aria-label="consoleId"
+                        <FormikSelect
                           name="consoleId"
-                          value={values.consoleId || ''}
-                          onChange={handleChange}
-                          disabled={values.consoleId}
-                          onBlur={handleBlur}
-                          isInvalid={touched.consoleId && !!errors.consoleId}
-                        >
-                          <option value=''>Select a console</option>
-                          {consoles?.map(c =>
-                            <option key={c.id} value={c.id}>{c.name}</option>
-                          )}
-                        </Form.Select>
-                        <Form.Control.Feedback type="invalid">
-                          {errors.consoleId}
-                        </Form.Control.Feedback>
+                          options={parseOptions(consoles, "id", "name")}
+                          placeholder='Select a console'
+                          values={values}
+                          setFieldValue={setFieldValue}
+                          setFieldTouched={setFieldTouched}
+                          showError={errors.consoleId}
+                          isDisabled={!!values.consoleId}
+                        />
                       </Form.Group>
                     </Col>
                     <Col md={6}>
                     <Form.Group className="mb-3" controlId="year">
                       <Form.Label>Year</Form.Label>
-                        <Form.Select
-                          aria-label="year"
-                          name="year"
-                          value={values.year || ''}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                        >
-                          <option value=''>Enter release year (America)</option>
-                          {years}
-                        </Form.Select>
+                      <FormikSelect
+                        name="year"
+                        options={years}
+                        placeholder='Enter release year (America)'
+                        values={values}
+                        setFieldValue={setFieldValue}
+                        setFieldTouched={setFieldTouched}
+                      />
                       </Form.Group>
                     </Col>
                   </Row>
@@ -334,60 +326,18 @@ const GameForm = ({
                       onBlur={handleBlur}
                     />
                   </Form.Group>
-                  <Row className="form-row mb-3">
-                    <Col md={5}>
-                      <Form.Group className="mb-3" controlId="selectedGenre">
-                        <Form.Label>Genre(s)</Form.Label>
-                        <InputGroup className="mb-3">
-                          <Form.Select
-                            aria-label="selectedGenre"
-                            name="selectedGenre"
-                            value={values.selectedGenre || ""}
-                            onChange={handleChange}
-                          >
-                            <option value=''>Add a genre</option>
-                            {genre?.list.map(g =>
-                              <option key={g.id} value={g.id}>{g.name}</option>
-                            )}
-                          </Form.Select>
-                          <Button
-                            variant="primary"
-                            onClick={() => {
-                              const genresArr = [...values.genres, values.selectedGenre]
-                              setFieldValue('genres', genresArr)
-                              setFieldValue('selectedGenre', "")
-                            }}
-                            disabled={values.selectedGenre === ''}
-                          >
-                            <div className='lh-18'>
-                              Add <BoxArrowInRight className='d-none d-md-inline' /><BoxArrowInDown className='d-inline d-md-none'/>
-                            </div>
-                          </Button>
-                        </InputGroup>
-                      </Form.Group>
-                      
-                    </Col>
-                    <Col md={7}>
-                      <div className={classes.customList}>
-                        {values?.genres?.length > 0 &&
-                          values.genres.map(g => 
-                            <Badge key={g} pill bg="secondary" className={classes.badge}>
-                              <span className={classes.badgeText}>
-                                {genreDictionary[g]}
-                              </span>
-                              <XCircle
-                                className={classes.badgeButton}
-                                onClick={() => {
-                                  const updatedGenres = values.genres.filter(genDel => genDel !== g)
-                                  setFieldValue('genres', updatedGenres)
-                                }}
-                              />
-                            </Badge>
-                          )
-                        }
-                      </div>
-                    </Col>
-                  </Row>
+                  <Form.Group className="mb-3" controlId="genres">
+                    <Form.Label>Genre(s)</Form.Label>
+                    <FormikSelect
+                      name="genres"
+                      isMulti={true}
+                      options={parseOptions(genre?.list, "id", "name")}
+                      placeholder='Add genre(s)'
+                      values={values}
+                      setFieldValue={setFieldValue}
+                      setFieldTouched={setFieldTouched}
+                    />
+                  </Form.Group>
                   <Row className="form-row">
                     <Col md={5}>
                       <Form.Group className="mb-3" controlId="sagaText">

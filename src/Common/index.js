@@ -9,3 +9,5 @@ export { default as InfoTooltip } from './InfoTooltip/InfoTooltip.component';
 export { default as Badge } from './Badge/Badge.component';
 export { default as MiniLabel } from './MiniLabel/MiniLabel.component';
 export { default as SortButton } from './SortButton/SortButton.component';
+export { default as Select } from './Select/Select.component';
+export { default as FormikSelect } from './Select/FormikSelect.component';

@@ -326,6 +326,14 @@ border-color: var(--light-blue-contrast) !important;
   justify-content: space-between;
 }
 
+
+/***************************************************/
+/* REACT SELECT                */
+/***************************************************/
+.select .rs__option:active {
+  background: #123869ff !important;
+}
+
 /***************************************************/
 /* MEDIA QUERIES FOR SM AND XS                     */
 /***************************************************/
