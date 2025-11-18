@@ -31,7 +31,17 @@ const customStyles = {
       ? "#4679c2ff"
       : "#1f2d3b",
     color: "#d3d9dc",
-    cursor: "pointer"
+    cursor: "pointer",
+  }),
+
+  menu: (provided) => ({
+    ...provided,
+    zIndex: 9999,     // raise menu above everything
+  }),
+  
+  menuPortal: (provided) => ({
+    ...provided,
+    zIndex: 9999,     // if you use menuPortalTarget
   }),
 
   menuList: (base) => ({
