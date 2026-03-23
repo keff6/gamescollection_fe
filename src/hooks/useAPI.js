@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axiosPublicInstance from '../utils/axios';
 import useAxiosPrivate from './useAxiosPrivate';
 import { useLoading } from '../Config/context/LoadingContext';
-import { ERROR_CODES } from '../utils/constants';
+import { ERROR_CODES, LONG_LOADING_THRESHOLD } from '../utils/constants';
 
 const useAPI = (isPrivate = false, entityName = 'Record') => {
   const axiosPrivateInstance = useAxiosPrivate()
@@ -13,7 +13,7 @@ const useAPI = (isPrivate = false, entityName = 'Record') => {
 
   const request = async ({ method, url, data = null, params = null }) => {
     setError(null);
-    startLoading();
+    const timeout = setTimeout(() => startLoading(), LONG_LOADING_THRESHOLD);
     
     try {
       const response = await instance({
@@ -31,6 +31,7 @@ const useAPI = (isPrivate = false, entityName = 'Record') => {
       setError(err)
       throw err;
     } finally {
+      clearTimeout(timeout);
       stopLoading();
     }
   };

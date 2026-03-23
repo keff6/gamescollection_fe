@@ -1,3 +1,5 @@
+export const LONG_LOADING_THRESHOLD = 10000; // 10 seconds
+
 export const OPERATION_OUTCOME = {
   SUCCESS: 'success',
   FAILED: 'danger',
