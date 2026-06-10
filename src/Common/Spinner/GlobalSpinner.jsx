@@ -27,7 +27,7 @@ const GlobalSpinner = () => {
       <Spinner animation="border" variant="primary" role="status">
         <span className="visually-hidden">Loading...</span>
       </Spinner>
-          {isSlow && <LoadingBanner />}
+      {isSlow && <LoadingBanner />}
       </div>
   );
 };

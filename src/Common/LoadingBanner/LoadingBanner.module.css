@@ -1,14 +1,25 @@
 .loading-banner {
     position: fixed;
-    top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #f9c74f;
-    color: black;
-    padding: 10px 20px;
-    font-size: 16px;
     font-weight: bold;
-    border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     z-index: 9999;
+
+    font-size: 22px;
+    color: aqua;
+    background-color: #008080;
+    padding: 12px;
+    border-radius: 5px;
+    margin-left: 8px;
+    display: flex;
+    gap: 8px;
+}
+
+@media (max-width: 768px) {
+    .loading-banner {
+        font-size: 18px;
+        padding: 10px;
+        width: max-content;
+    }
 }

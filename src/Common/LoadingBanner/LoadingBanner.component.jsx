@@ -1,9 +1,12 @@
-import React from 'react';
-import './LoadingBanner.module.css';
+import { Spinner } from "react-bootstrap";
+import classes from './LoadingBanner.module.css';
 
 const LoadingBanner = () => (
-  <div className="loading-banner">
-    Database is launching! Please wait a little more.
+  <div className={classes.loadingBanner}>
+    <Spinner animation="border" variant="primary" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>
+    Database is launching! Please wait...
   </div>
 );
 
